@@ -1,0 +1,1 @@
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\InfiniteRechargeMetrics.UWP.csproj;x86
