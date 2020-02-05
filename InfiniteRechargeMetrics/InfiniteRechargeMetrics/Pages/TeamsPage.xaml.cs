@@ -15,23 +15,19 @@ namespace InfiniteRechargeMetrics.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TeamsPage : ContentPage
     {
-        private ObservableCollection<Team> teams = new ObservableCollection<Team>();
-        public ObservableCollection<Team> Teams 
-        { 
-            get => teams; 
-            set 
-            {
-                teams = value;
-            } 
-        }
+        /// <summary>
+        ///     Collection of all the Teams in the local database.
+        /// </summary>
+        public ObservableCollection<Team> Teams { get; set; }
 
         public TeamsPage()
         {
-            InitializeComponent();            
+            InitializeComponent();               
         }
 
         protected async override void OnAppearing()
         {
+            TeamsListView.IsEnabled = true;
             base.OnAppearing();
 
             await Task.Run(() =>
@@ -50,28 +46,24 @@ namespace InfiniteRechargeMetrics.Pages
             TeamsListView.ItemsSource = Teams;
         }
 
-        //private Task LoadLocalDataAsync()
-        //{
-        //    // Creating a connection to the db
-        //    using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseFilePath))
-        //    {
-        //        // Creates a table if it doesn't already exist
-        //        connection.CreateTable<Team>();
-        //        // Returns all the Teams from the db
-        //        Teams = new ObservableCollection<Team>(connection.Table<Team>().ToList());
-        //    }
-        //    // Showing this does run asynchronously
-        //    System.Threading.Thread.Sleep(2000);
-
-        //    // Applying changes on main thread
-        //    Device.BeginInvokeOnMainThread(() => TeamsListView.ItemsSource = Teams);
-
-        //    return 
-        //}
-
         private void OnNewTeam(object sender, EventArgs e)
         {
-            DataService.SaveToDatabase(new Team() { Name = "Test" }, InfiniteRechargeType.Team);
+            //DataService.SaveToDatabase(new Team() { Name = "Test" }, InfiniteRechargeType.Team);
+        }
+
+        /// <summary>
+        ///     Event handler for the TeamsListView's items being tapped.
+        /// </summary>
+        private void OnTeamTapped(object sender, ItemTappedEventArgs e)
+        {           
+            if (e.Item == null) return;
+            // Prevent the clicking of multiple items
+            TeamsListView.IsEnabled = false;
+
+            Shell.Current.Navigation.PushAsync(new TeamDetails()
+            {
+                BindingContext = (Team)e.Item
+            });
         }
     }
 }

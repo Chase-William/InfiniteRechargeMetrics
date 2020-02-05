@@ -11,11 +11,12 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout>
-        <ListView x:Name          ="TeamsListView">
+        <ListView x:Name     ="TeamsListView"
+                  ItemTapped ="OnTeamTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <!-- Custom cell --> 
+                        <!-- Cell that models Team (class, table) --> 
                         <StackLayout Orientation="Horizontal" HeightRequest="100">
                             <Frame Padding="5"
                                    Margin="10"

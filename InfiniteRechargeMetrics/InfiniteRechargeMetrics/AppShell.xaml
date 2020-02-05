@@ -22,6 +22,16 @@
         </ResourceDictionary>
     </Shell.Resources>-->
 
+    <Shell.FlyoutHeader>
+        <StackLayout HeightRequest="200">
+            <Label Text="Animals"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center" />
+        </StackLayout>
+    </Shell.FlyoutHeader>
+    
     <!-- The clickable items inside our drawer (master detail or flyout nav) -->
     <FlyoutItem Title="Home">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>

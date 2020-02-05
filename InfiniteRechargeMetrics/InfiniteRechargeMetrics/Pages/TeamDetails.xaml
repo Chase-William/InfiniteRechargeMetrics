@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.TeamDetails">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New Team" Priority="0" Clicked="OnNewTeam"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Name:"/>
+            <Label Text="{Binding Name}"/>
+
+            <ListView x:Name="PerformancesListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <!-- Cell that models Performance (class, table) -->
+                            <StackLayout Orientation="Horizontal" 
+                                         HeightRequest="100">
+                                <Frame Padding="5"
+                                       Margin="10"
+                                       HasShadow="True"
+                                       CornerRadius="50">
+                                    <Image Source="red_rebel_icon.png"/>
+                                </Frame>
+                                <Label Text="{Binding AutoLowPoint}"/>
+                                <Label Text="{Binding AutoMedPoint}"/>
+                                <Label Text="{Binding AutoHighPoint}"/>
+                                
+                                <Label Text="{Binding ManualLowPoint}"/>
+                                <Label Text="{Binding ManualMedPoint}"/>
+                                <Label Text="{Binding ManualHighPoint}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

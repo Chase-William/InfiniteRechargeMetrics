@@ -51,7 +51,7 @@ namespace InfiniteRechargeMetrics.Pages
 
         private void OnNewMatch(object sender, EventArgs e)
         {
-            DataService.SaveToDatabase(new Match() { Name = "Match" }, InfiniteRechargeType.Match);
+            DataService.SaveToDatabase(new Match() { Title = "Match" }, InfiniteRechargeType.Match);
         }
     }
 }

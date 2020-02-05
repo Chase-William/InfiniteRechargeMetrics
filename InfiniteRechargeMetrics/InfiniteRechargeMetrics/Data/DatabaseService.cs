@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace InfiniteRechargeMetrics.Data
 {
@@ -6,8 +7,6 @@ namespace InfiniteRechargeMetrics.Data
     {
         public static void SaveToDatabase(object _record, InfiniteRechargeType _type)
         {
-            
-
             switch (_type)
             {
                 case InfiniteRechargeType.Team:
@@ -22,9 +21,15 @@ namespace InfiniteRechargeMetrics.Data
                 case InfiniteRechargeType.Match:
                     using (SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath))
                     {
-                        //Creates a table based off our entity
                         cn.CreateTable<Match>();
-                        //Inserts an instance into the newly created table
+                        cn.Insert(_record);
+                        cn.Close();
+                    }
+                    break;
+                case InfiniteRechargeType.Performance:
+                    using (SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath))
+                    {
+                        cn.CreateTable<Performance>();
                         cn.Insert(_record);
                         cn.Close();
                     }
@@ -32,11 +37,6 @@ namespace InfiniteRechargeMetrics.Data
                 default:
                     break;
             }            
-        }
-
-        static SQLiteConnection ConnectLocalDatabase()
-        {
-            return new SQLiteConnection(App.DatabaseFilePath);
         }
 
        // Creates a table based off our entity
@@ -48,5 +48,5 @@ namespace InfiniteRechargeMetrics.Data
        //         connection.Close();
     }
 
-    public enum InfiniteRechargeType { Team, Match }
+    public enum InfiniteRechargeType { Team, Match, Performance }
 }
