@@ -12,7 +12,7 @@ namespace InfiniteRechargeMetrics
         /// <summary>
         ///     Location of our database (changes based off OS).
         /// </summary>
-        public static string FilePath;
+        public static string DatabaseFilePath;
 
         public App()
         {
@@ -24,7 +24,7 @@ namespace InfiniteRechargeMetrics
         {
             InitializeComponent();
             MainPage = new AppShell();
-            FilePath = _filePath;
+            DatabaseFilePath = _filePath;
         }
 
         protected override void OnStart()

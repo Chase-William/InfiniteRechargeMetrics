@@ -4,27 +4,33 @@
         xmlns:d="http://xamarin.com/schemas/2014/forms/design"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InfiniteRechargeMetrics"
-        mc:Ignorable="d"    
+        xmlns:local_pages="clr-namespace:InfiniteRechargeMetrics.Pages"
+        mc:Ignorable="d"   
+        BackgroundColor="#175878"
+        FlyoutBackgroundColor="#175878"
         x:Class="InfiniteRechargeMetrics.AppShell">
 
-    <!-- Styles for the shell nav -->
-    <Shell.Resources>
+    <!-- Styles for the shell  -->
+    <!--<Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource BackgroundColor}" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
-                <Setter Property="Shell.FlyoutBackgroundColor" Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="Shell.BackgroundColor" Value="White" />
+                <Setter Property="Shell.ForegroundColor" Value="#EFE170" />
+                <Setter Property="Shell.FlyoutBackgroundColor" Value="#EFE170"/>
             </Style>
             <Style TargetType="local:AppShell" BasedOn="{StaticResource BaseStyle}"/>
         </ResourceDictionary>
-    </Shell.Resources>
+    </Shell.Resources>-->
 
     <!-- The clickable items inside our drawer (master detail or flyout nav) -->
     <FlyoutItem Title="Home">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
     </FlyoutItem>
     <FlyoutItem Title="Matches">
-        <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+        <ShellContent ContentTemplate="{DataTemplate local_pages:MatchesPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Teams">
+        <ShellContent ContentTemplate="{DataTemplate local_pages:TeamsPage}"/>
     </FlyoutItem>
     <FlyoutItem Title="Metrics">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>

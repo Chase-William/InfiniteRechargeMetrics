@@ -4,6 +4,7 @@ public class MonoPackageManager_Resources {
 		/* We need to ensure that "InfiniteRechargeMetrics.Android.dll" comes first in this list. */
 		"InfiniteRechargeMetrics.Android.dll",
 		"FormsViewGroup.dll",
+		"InfiniteRechargeMetrics.dll",
 		"SQLite-net.dll",
 		"SQLitePCLRaw.batteries_green.dll",
 		"SQLitePCLRaw.batteries_v2.dll",
@@ -52,7 +53,6 @@ public class MonoPackageManager_Resources {
 		"Xamarin.Forms.Platform.Android.dll",
 		"Xamarin.Forms.Platform.dll",
 		"Xamarin.Forms.Xaml.dll",
-		"InfiniteRechargeMetrics.dll",
 	};
 	public static String[] Dependencies = new String[]{
 	};

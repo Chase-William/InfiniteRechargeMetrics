@@ -15,7 +15,6 @@ namespace InfiniteRechargeMetrics
         public AppShell()
         {
             InitializeComponent();
-            BackgroundColor = Color.Red;
         }
     }
 }

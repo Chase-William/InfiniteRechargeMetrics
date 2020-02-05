@@ -10,6 +10,12 @@
             <!-- Custom color codes -->
             <Color x:Key="BackgroundColor">#175878</Color>
             <Color x:Key="HighLightColor">#EFE170</Color>
+
+
+            <Style TargetType="ListView">
+                <Setter Property="HasUnevenRows" Value="True"/>
+                <Setter Property="Margin" Value="5,5,5,0"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.MatchesPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New Match" Priority="0" Clicked="OnNewMatch"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <ListView x:Name ="MatchesListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!-- Custom cell -->
+                        <Frame Margin="10" Padding="5">
+                            <StackLayout Orientation="Horizontal" 
+                                     HeightRequest="100">
+                                <Frame Padding="5"
+                                   Margin="10"
+                                   HasShadow="True"
+                                   CornerRadius="50">
+                                    <Image Source="blue_rebel_icon.png" />
+                                </Frame>
+                                <Label Text="{Binding Name}"
+                                   VerticalOptions="Center"
+                                   BackgroundColor="MistyRose"/>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

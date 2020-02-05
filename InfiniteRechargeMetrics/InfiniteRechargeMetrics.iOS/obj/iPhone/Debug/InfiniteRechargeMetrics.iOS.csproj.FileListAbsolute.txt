@@ -56,3 +56,8 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.i
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\obj\iPhone\Debug\InfiniteRechargeMetrics.iOS.csproj.CopyComplete
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\obj\iPhone\Debug\InfiniteRechargeMetrics.iOS.exe
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\obj\iPhone\Debug\InfiniteRechargeMetrics.iOS.pdb
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\SQLite-net.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\SQLitePCLRaw.batteries_green.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\SQLitePCLRaw.batteries_v2.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\SQLitePCLRaw.core.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\SQLitePCLRaw.provider.sqlite3.dll

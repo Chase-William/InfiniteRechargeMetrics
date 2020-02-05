@@ -6,6 +6,6 @@ namespace InfiniteRechargeMetrics.Data
 {
     public struct Config
     {
-        public const string DATABASE_NAME = "";
+        public const string DATABASE_NAME = "IRMDatabase.db3";
     }
 }
