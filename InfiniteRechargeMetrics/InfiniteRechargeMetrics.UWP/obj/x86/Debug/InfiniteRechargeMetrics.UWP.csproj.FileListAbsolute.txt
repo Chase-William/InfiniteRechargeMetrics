@@ -174,6 +174,12 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.U
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\WindowsBase.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\mscorlib.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\netstandard.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLite-net.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLitePCLRaw.batteries_green.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLitePCLRaw.batteries_v2.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLitePCLRaw.core.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\e_sqlite3.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLitePCLRaw.provider.e_sqlite3.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Microsoft.Graphics.Canvas.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Microsoft.Graphics.Canvas.winmd
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Xamarin.Essentials.dll
@@ -187,7 +193,6 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.U
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Xamarin.Forms.Xaml.pdb
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\InfiniteRechargeMetrics.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\InfiniteRechargeMetrics.pdb
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\InfiniteRechargeMetrics.UWP.csprojAssemblyReference.cache
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\App.g.i.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\App.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\MainPage.g.i.cs
@@ -310,9 +315,4 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.U
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\ProjectArchitectures.txt
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\.winmd_cache\$Microsoft.Graphics.Canvas.winmd_636160895180000000.json
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLite-net.dll
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLitePCLRaw.batteries_green.dll
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLitePCLRaw.batteries_v2.dll
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLitePCLRaw.core.dll
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\e_sqlite3.dll
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLitePCLRaw.provider.e_sqlite3.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\InfiniteRechargeMetrics.UWP.csprojAssemblyReference.cache

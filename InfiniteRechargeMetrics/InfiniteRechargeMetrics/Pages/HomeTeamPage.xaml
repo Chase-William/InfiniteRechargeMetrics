@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.HomeTeamPage">
+
+
+    <RelativeLayout>
+
+        <!-- The banner at the top of the page -->
+        <Image x:Name="MainBanner" Source="banner_2020.jpg" HeightRequest="140"/>
+
+        <!-- Frame that holds the main content area -->
+        <Frame BackgroundColor="{StaticResource BackgroundColor}" 
+               CornerRadius="0"
+               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}"
+               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=140}">
+
+            <!-- The main content area for this page -->
+            <StackLayout Margin="0,40,0,0">
+
+                <Label Text="Team Name Here" TextColor="White" FontSize="Large"/>
+
+            </StackLayout>
+        </Frame>
+
+        <!-- The icon for the team, place below the stacklayout so this will easily render on top, without needing to using z-index or anything -->
+        <Frame CornerRadius="100" 
+               Padding="5"              
+               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0, Constant=40}"
+               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=95}">
+            <Image Source="blue_rebel_icon.png"                
+               WidthRequest="80"/>
+        </Frame>
+
+    </RelativeLayout>
+</ContentPage>

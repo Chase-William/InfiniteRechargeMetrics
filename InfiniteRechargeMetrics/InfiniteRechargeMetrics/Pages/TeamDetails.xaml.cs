@@ -28,15 +28,15 @@ namespace InfiniteRechargeMetrics.Pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            //await Task.Run(() =>
-            //{
-            //    using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseFilePath))
-            //    {
-            //        connection.CreateTable<Team>();
-            //        Performances = new ObservableCollection<Performance>(connection.Table<Performance>().ToList());
-            //    }     
-            //});
-            //PerformancesListView.ItemsSource = Performances;
+            await Task.Run(() =>
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseFilePath))
+                {
+                    connection.CreateTable<Team>();
+                    Performances = new ObservableCollection<Performance>(connection.Table<Performance>().ToList());
+                }
+            });
+            PerformancesListView.ItemsSource = Performances;
         }
 
         private void OnNewTeam(object sender, EventArgs e)

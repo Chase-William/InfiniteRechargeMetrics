@@ -25,7 +25,7 @@
                                    CornerRadius="50">
                                     <Image Source="blue_rebel_icon.png" />
                                 </Frame>
-                                <Label Text="{Binding Name}"
+                                <Label Text="{Binding Title}"
                                    VerticalOptions="Center"
                                    BackgroundColor="MistyRose"/>
                             </StackLayout>

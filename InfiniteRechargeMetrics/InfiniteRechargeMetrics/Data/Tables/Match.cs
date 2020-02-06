@@ -22,12 +22,12 @@ namespace InfiniteRechargeMetrics.Data
         /// <summary>
         ///     The identifer of the first team that took part in this match
         /// </summary>
-        [Column("team_one_id"), NotNull]
-        public int TeamOneId_FK { get; set; }
+        [Column("team_one_performance_fk")]
+        public int TeamOnePerformance_FK { get; set; }
         /// <summary>
         ///     The identifer of the second team that took part in this match
         /// </summary>
-        [Column("team_two_id"), NotNull]
-        public int TeamTwoId_FK { get; set; }
+        [Column("team_two_performance_fk")]
+        public int TeamTwoPerformance_FK { get; set; }
     }
 }

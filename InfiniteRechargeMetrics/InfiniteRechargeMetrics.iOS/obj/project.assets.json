@@ -1313,7 +1313,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Chase Roth\\.nuget\\packages\\": {},
+    "C:\\Users\\cxr69\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
@@ -1322,7 +1322,7 @@
       "projectUniqueName": "C:\\Dev\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics.iOS\\InfiniteRechargeMetrics.iOS.csproj",
       "projectName": "InfiniteRechargeMetrics.iOS",
       "projectPath": "C:\\Dev\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics.iOS\\InfiniteRechargeMetrics.iOS.csproj",
-      "packagesPath": "C:\\Users\\Chase Roth\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\cxr69\\.nuget\\packages\\",
       "outputPath": "C:\\Dev\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
@@ -1330,7 +1330,7 @@
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Chase Roth\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cxr69\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],

@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using System.IO;
+using Xamarin.Forms;
 
 namespace InfiniteRechargeMetrics.Droid
 {
@@ -17,7 +18,7 @@ namespace InfiniteRechargeMetrics.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            //Forms.SetFlags("CollectionView_Experimental");
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
