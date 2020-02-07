@@ -10,6 +10,7 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.U
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Core\AppxManifest.xml
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Core\InfiniteRechargeMetrics.UWP.exe
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\InfiniteRechargeMetrics.UWP.build.appxrecipe
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Plugin.GoogleClient.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\clrcompression.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Microsoft.CSharp.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Microsoft.VisualBasic.dll
@@ -193,6 +194,7 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.U
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Xamarin.Forms.Xaml.pdb
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\InfiniteRechargeMetrics.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\InfiniteRechargeMetrics.pdb
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\InfiniteRechargeMetrics.UWP.csprojAssemblyReference.cache
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\App.g.i.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\App.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\MainPage.g.i.cs
@@ -315,4 +317,3 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.U
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\ProjectArchitectures.txt
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\.winmd_cache\$Microsoft.Graphics.Canvas.winmd_636160895180000000.json
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\InfiniteRechargeMetrics.UWP.csprojAssemblyReference.cache

@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using InfiniteRechargeMetrics.Pages;
+using InfiniteRechargeMetrics.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 /// <summary>
@@ -10,8 +12,9 @@ using Xamarin.Forms.Xaml;
 ///         versions is in mind. 
 ///         
 ///     
-///     Packages:
-///         - https://github.com/praeclarum/sqlite-net ()
+///     Plugins:
+///         - https://github.com/praeclarum/sqlite-net
+///         - https://github.com/xamarin/GooglePlayServicesComponents (Auth & Basement *ONLY*)
 /// 
 /// </summary>
 namespace InfiniteRechargeMetrics
@@ -26,9 +29,10 @@ namespace InfiniteRechargeMetrics
         /// </summary>
         public static string DatabaseFilePath;
 
+        public static LoginPageViewModel LoginPageViewModel { get; set; } = new LoginPageViewModel();
+
         public App()
         {
-
             InitializeComponent();
             MainPage = new MainPage();         
         }
@@ -36,9 +40,12 @@ namespace InfiniteRechargeMetrics
         public App(string _filePath)
         {
             InitializeComponent();
+            
             MainPage = new MainPage();
             DatabaseFilePath = _filePath;
         }
+
+
 
         protected override void OnStart()
         {

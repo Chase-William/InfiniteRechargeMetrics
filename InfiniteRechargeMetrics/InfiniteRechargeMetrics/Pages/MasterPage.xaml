@@ -3,23 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="using:InfiniteRechargeMetrics"
+             xmlns:local_pages="clr-namespace:InfiniteRechargeMetrics.Pages"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.MasterPage"
              Title="MasterPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource HighLightColor}"/>
+                
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>    
     
-    <ContentPage.Content>
-        <StackLayout>
-            <ListView>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout>
-                                <Label Text="Herro"/>
-                            </StackLayout>
-                        </ViewCell>                            
-                    </DataTemplate>                        
-                </ListView.ItemTemplate>
-            </ListView>
+    <!-- This is the content for the drawer nav -->
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+
+        <!-- Header that displays information IF THE USER IS LOGGED IN -->
+        <StackLayout HeightRequest="200" BackgroundColor="White" IsVisible="{Binding IsLoggedIn}">
+            <Frame CornerRadius="50" Padding="5" Margin="5" HorizontalOptions="Start">
+                <Image Source="blue_rebel_icon.png" WidthRequest="80"/>
+            </Frame>
+            <Label Text="{Binding Name}"/>
         </StackLayout>
-    </ContentPage.Content>
+
+        <!-- Header that prompts the user to login (DISPLAYS ONLY WHEN USER NOT LOGGED IN) -->
+        <Frame CornerRadius="5" Padding="5" Margin="5"  BackgroundColor="White" IsVisible="{Binding IsLoggedIn, Converter={StaticResource BoolVisibilityConverter}}">
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Login" HorizontalOptions="FillAndExpand" Clicked="OnLoginBtnClicked"/>
+                <Button Text="Why?" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+        </Frame>
+
+
+
+        <ListView>
+            <!-- Our item source is static and therefore we can define the array here of our MasterPageImageItem type -->
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type local:MasterPageImageItem}">
+                    <local:MasterPageImageItem Title="Home" Source="red_rebel_icon.png" TargetType="{x:Type local_pages:HomeTeamPage}"/>
+                    <local:MasterPageImageItem Title="Teams" Source="red_rebel_icon.png" TargetType="{x:Type local_pages:TeamsPage}"/>
+                    <local:MasterPageImageItem Title="Matches" Source="red_rebel_icon.png" TargetType="{x:Type local_pages:MatchesPage}"/>
+                </x:Array>
+            </ListView.ItemsSource>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <!-- Cell for the menu items -->
+                    <ViewCell>
+                        <Frame BorderColor="Red" CornerRadius="5" BackgroundColor="White">
+                            <StackLayout Margin="20" Orientation="Horizontal">
+
+                                <Image Source="{Binding Source}" WidthRequest="30"/>
+                                <Label Text="{Binding Title}" Margin="15,0,0,0" VerticalOptions="Center"/>
+
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

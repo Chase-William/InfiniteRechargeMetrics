@@ -10,7 +10,7 @@
         "projectUniqueName": "C:\\Dev\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics.csproj",
         "projectName": "InfiniteRechargeMetrics",
         "projectPath": "C:\\Dev\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics.csproj",
-        "packagesPath": "C:\\Users\\cxr69\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Chase Roth\\.nuget\\packages\\",
         "outputPath": "C:\\Dev\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
@@ -18,7 +18,7 @@
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\cxr69\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Chase Roth\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -49,6 +49,10 @@
               "version": "[2.0.3, )",
               "autoReferenced": true
             },
+            "Plugin.GoogleClient": {
+              "target": "Package",
+              "version": "[1.1.1, )"
+            },
             "Xamarin.Essentials": {
               "target": "Package",
               "version": "[1.3.1, )"
@@ -72,7 +76,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

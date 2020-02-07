@@ -225,6 +225,15 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
+      "Plugin.GoogleClient/1.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
+        }
+      },
       "runtime.win10-arm.Microsoft.Net.Native.Compiler/2.1.8": {
         "type": "package",
         "dependencies": {
@@ -444,6 +453,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Plugin.GoogleClient": "1.1.1",
           "Xamarin.Essentials": "1.3.1",
           "Xamarin.Forms": "4.3.0.908675",
           "sqlite-net-pcl": "1.6.292"
@@ -679,6 +689,15 @@
         },
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
+        }
+      },
+      "Plugin.GoogleClient/1.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
         }
       },
       "runtime.win10-arm.Microsoft.Net.Native.Compiler/2.1.8": {
@@ -1052,6 +1071,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Plugin.GoogleClient": "1.1.1",
           "Xamarin.Essentials": "1.3.1",
           "Xamarin.Forms": "4.3.0.908675",
           "sqlite-net-pcl": "1.6.292"
@@ -1287,6 +1307,15 @@
         },
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
+        }
+      },
+      "Plugin.GoogleClient/1.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
         }
       },
       "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
@@ -1661,6 +1690,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Plugin.GoogleClient": "1.1.1",
           "Xamarin.Essentials": "1.3.1",
           "Xamarin.Forms": "4.3.0.908675",
           "sqlite-net-pcl": "1.6.292"
@@ -1897,6 +1927,15 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
+      "Plugin.GoogleClient/1.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
+        }
+      },
       "runtime.win10-arm.Microsoft.Net.Native.Compiler/2.1.8": {
         "type": "package",
         "dependencies": {
@@ -2088,6 +2127,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Plugin.GoogleClient": "1.1.1",
           "Xamarin.Essentials": "1.3.1",
           "Xamarin.Forms": "4.3.0.908675",
           "sqlite-net-pcl": "1.6.292"
@@ -2323,6 +2363,15 @@
         },
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
+        }
+      },
+      "Plugin.GoogleClient/1.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
         }
       },
       "runtime.win10-arm.Microsoft.Net.Native.Compiler/2.1.8": {
@@ -2696,6 +2745,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Plugin.GoogleClient": "1.1.1",
           "Xamarin.Essentials": "1.3.1",
           "Xamarin.Forms": "4.3.0.908675",
           "sqlite-net-pcl": "1.6.292"
@@ -2931,6 +2981,15 @@
         },
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
+        }
+      },
+      "Plugin.GoogleClient/1.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
         }
       },
       "runtime.win10-arm.Microsoft.Net.Native.Compiler/2.1.8": {
@@ -3305,6 +3364,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Plugin.GoogleClient": "1.1.1",
           "Xamarin.Essentials": "1.3.1",
           "Xamarin.Forms": "4.3.0.908675",
           "sqlite-net-pcl": "1.6.292"
@@ -3540,6 +3600,15 @@
         },
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
+        }
+      },
+      "Plugin.GoogleClient/1.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
         }
       },
       "runtime.win10-arm.Microsoft.Net.Native.Compiler/2.1.8": {
@@ -3913,6 +3982,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Plugin.GoogleClient": "1.1.1",
           "Xamarin.Essentials": "1.3.1",
           "Xamarin.Forms": "4.3.0.908675",
           "sqlite-net-pcl": "1.6.292"
@@ -4148,6 +4218,15 @@
         },
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
+        }
+      },
+      "Plugin.GoogleClient/1.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Plugin.GoogleClient.dll": {}
         }
       },
       "runtime.win10-arm.Microsoft.Net.Native.Compiler/2.1.8": {
@@ -4522,6 +4601,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Plugin.GoogleClient": "1.1.1",
           "Xamarin.Essentials": "1.3.1",
           "Xamarin.Forms": "4.3.0.908675",
           "sqlite-net-pcl": "1.6.292"
@@ -4944,7 +5024,7 @@
       ]
     },
     "NETStandard.Library/2.0.3": {
-      "sha512": "548M6mnBSJWxsIlkQHfbzoYxpiYFXZZSL00p4GHYv8PkiqFBnnT68mW5mGEsA/ch9fDO9GkPgkFQpWiXZN7mAQ==",
+      "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "type": "package",
       "path": "netstandard.library/2.0.3",
       "files": [
@@ -5070,6 +5150,21 @@
         "lib/netstandard1.0/_._",
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
+      ]
+    },
+    "Plugin.GoogleClient/1.1.1": {
+      "sha512": "VMexp923Ovx4rNOW77GRbc06rfe1hNl2fY7+oRfDaTxH3q3NkV2NXTvUB39txO6HYBXzVFHbp49POrq6+sFQzw==",
+      "type": "package",
+      "path": "plugin.googleclient/1.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/monoandroid80/Plugin.GoogleClient.dll",
+        "lib/netstandard1.0/Plugin.GoogleClient.dll",
+        "lib/netstandard2.0/Plugin.GoogleClient.dll",
+        "lib/xamarinios10/Plugin.GoogleClient.dll",
+        "plugin.googleclient.1.1.1.nupkg.sha512",
+        "plugin.googleclient.nuspec"
       ]
     },
     "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
@@ -8768,7 +8863,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cxr69\\.nuget\\packages\\": {},
+    "C:\\Users\\Chase Roth\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\": {}
   },
@@ -8778,7 +8873,7 @@
       "projectUniqueName": "C:\\Dev\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics.UWP\\InfiniteRechargeMetrics.UWP.csproj",
       "projectName": "InfiniteRechargeMetrics.UWP",
       "projectPath": "C:\\Dev\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics.UWP\\InfiniteRechargeMetrics.UWP.csproj",
-      "packagesPath": "C:\\Users\\cxr69\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Chase Roth\\.nuget\\packages\\",
       "outputPath": "C:\\Dev\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics\\InfiniteRechargeMetrics.UWP\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
@@ -8787,7 +8882,7 @@
         "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\cxr69\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Chase Roth\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],

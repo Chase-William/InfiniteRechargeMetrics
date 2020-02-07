@@ -11,7 +11,7 @@
     <item name="windowActionBar">false</item>
      <!--Set theme colors from https://aka.ms/material-colors 
      colorPrimary is used for the default action bar background--> 
-    <item name="colorPrimary">#FFF</item>
+    <item name="colorPrimary">#175878</item>
      <!--colorPrimaryDark is used for the status bar--> 
     <item name="colorPrimaryDark">#175878</item>
      <!--colorAccent is used as the default value for colorControlActivated

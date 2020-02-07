@@ -5,6 +5,7 @@ public class MonoPackageManager_Resources {
 		"InfiniteRechargeMetrics.Android.dll",
 		"FormsViewGroup.dll",
 		"InfiniteRechargeMetrics.dll",
+		"Plugin.GoogleClient.dll",
 		"SQLite-net.dll",
 		"SQLitePCLRaw.batteries_green.dll",
 		"SQLitePCLRaw.batteries_v2.dll",
@@ -53,6 +54,12 @@ public class MonoPackageManager_Resources {
 		"Xamarin.Forms.Platform.Android.dll",
 		"Xamarin.Forms.Platform.dll",
 		"Xamarin.Forms.Xaml.dll",
+		"Xamarin.GooglePlayServices.Auth.Api.Phone.dll",
+		"Xamarin.GooglePlayServices.Auth.Base.dll",
+		"Xamarin.GooglePlayServices.Auth.dll",
+		"Xamarin.GooglePlayServices.Base.dll",
+		"Xamarin.GooglePlayServices.Basement.dll",
+		"Xamarin.GooglePlayServices.Tasks.dll",
 	};
 	public static String[] Dependencies = new String[]{
 	};

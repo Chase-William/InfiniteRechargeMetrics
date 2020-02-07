@@ -23,7 +23,7 @@
 	.section	.rodata..L.str.1,"aMS",%progbits,1
 	.type	.L.str.1, %object
 .L.str.1:
-	.asciz	"com.companyname.infiniterechargemetrics01"
+	.asciz	"com.companyname.infiniterechargemetrics02"
 	.size	.L.str.1, 42
 	.section	.data.application_config,"aw",%progbits
 	.type	application_config, %object
@@ -82,7 +82,7 @@ mono_aot_mode_name:
 	.section	.rodata..L.str.8,"aMS",%progbits,1
 	.type	.L.str.8, %object
 .L.str.8:
-	.asciz	"6ff6269c-17e9-4566-b714-f38e4787b81c"
+	.asciz	"d43331b5-18e6-44a6-8c33-e650d4297579"
 	.size	.L.str.8, 37
 	.section	.rodata..L.str.9,"aMS",%progbits,1
 	.type	.L.str.9, %object

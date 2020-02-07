@@ -4,14 +4,15 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:converter="clr-namespace:InfiniteRechargeMetrics.Pages.Converters"
              x:Class="InfiniteRechargeMetrics.App">
     <Application.Resources>
         <ResourceDictionary>
+
+            <converter:InvertBooleanConverter x:Key="BoolVisibilityConverter"/>
             <!-- Custom color codes -->
             <Color x:Key="BackgroundColor">#175878</Color>
             <Color x:Key="HighLightColor">#EFE170</Color>
-
-
             <Style TargetType="ListView">
                 <Setter Property="HasUnevenRows" Value="True"/>
                 <Setter Property="Margin" Value="5,5,5,0"/>

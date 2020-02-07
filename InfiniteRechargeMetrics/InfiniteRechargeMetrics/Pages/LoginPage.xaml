@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BindingContext="{Binding LoginPageViewModel}"
+             x:Class="InfiniteRechargeMetrics.Pages.LoginPage">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <!-- Button that is visible when the user is logged out and triggers the login process -->
+        <Button x:Name="LoginBtn"
+                Text="Login"
+                VerticalOptions="EndAndExpand"
+                Command="{Binding LoginCommand}"
+                IsVisible="{Binding IsLoggedIn, Converter={StaticResource BoolVisibilityConverter}}"
+                BackgroundColor="{StaticResource HighLightColor}">
+        </Button>
+
+        <!-- Button that is visible when the user is logged in and triggers the logout process -->
+        <Button x:Name="LogoutBtn"
+                Text="Logout"                
+                VerticalOptions="EndAndExpand"
+                IsVisible="{Binding IsLoggedIn}"
+                Command="{Binding LogoutCommand}"
+                BackgroundColor="{StaticResource HighLightColor}">
+        </Button>
+    </StackLayout>
+
+</ContentPage>
