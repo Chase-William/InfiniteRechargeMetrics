@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InfiniteRechargeMetrics.Pages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,11 +17,18 @@ namespace InfiniteRechargeMetrics
         public MainPage()
         {
             InitializeComponent();
+            masterPage.MasterPageNavListView.ItemTapped += OnMasterPageNavListviewItemTapped;       
         }
 
-        //private async void Example()
-        //{
-        //    await Shell.Current.Navigation.PushAsync(Page);
-        //}
+        void OnMasterPageNavListviewItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var item = e.Item as MasterPageImageItem;
+            if (item != null)
+            {
+                Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
+                masterPage.MasterPageNavListView.SelectedItem = null;
+                IsPresented = false;
+            }
+        }
     }
 }

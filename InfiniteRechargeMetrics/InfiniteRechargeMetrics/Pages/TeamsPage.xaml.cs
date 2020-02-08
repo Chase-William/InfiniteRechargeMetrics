@@ -39,9 +39,7 @@ namespace InfiniteRechargeMetrics.Pages
                     connection.CreateTable<Team>();
                     // Returns all the Teams from the db
                     Teams = new ObservableCollection<Team>(connection.Table<Team>().ToList());
-                }
-                // Showing this does run asynchronously
-                System.Threading.Thread.Sleep(2500);    // ---------------------------------------------------------------  remove later           
+                }       
             });
             TeamsListView.ItemsSource = Teams;
         }
@@ -60,7 +58,7 @@ namespace InfiniteRechargeMetrics.Pages
             // Prevent the clicking of multiple items
             TeamsListView.IsEnabled = false;
 
-            Shell.Current.Navigation.PushAsync(new TeamDetails()
+            App.Current.MainPage.Navigation.PushModalAsync(new TeamDetails()
             {
                 BindingContext = (Team)e.Item
             });

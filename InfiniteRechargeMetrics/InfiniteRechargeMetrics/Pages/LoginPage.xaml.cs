@@ -21,5 +21,14 @@ namespace InfiniteRechargeMetrics.Pages
 
             this.Title = "Home";
         }
+
+        /// <summary>
+        ///     Handler for when the user pressed the cancel button.
+        ///         Should remove the login page from view.
+        /// </summary>
+        private void OnCancelBtnClicked(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PopModalAsync();
+        }
     }
 }

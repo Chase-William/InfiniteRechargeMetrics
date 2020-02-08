@@ -1,52 +1,45 @@
 ﻿using SQLite;
-using System;
+using System.Collections.Generic;
 
 namespace InfiniteRechargeMetrics.Data
 {
-    public static class DataService
+    public static class DatabaseService
     {
-        public static void SaveToDatabase(object _record, InfiniteRechargeType _type)
+        public static void SaveToDatabase(object _record)
         {
-            switch (_type)
+            using (SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath))
             {
-                case InfiniteRechargeType.Team:
-                   using (SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath)) {
-                        //Creates a table based off our entity
-                        cn.CreateTable<Team>();
-                        //Inserts an instance into the newly created table
-                        cn.Insert(_record);
-                        cn.Close();
-                   }                        
-                    break;
-                case InfiniteRechargeType.Match:
-                    using (SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath))
-                    {
-                        cn.CreateTable<Match>();
-                        cn.Insert(_record);
-                        cn.Close();
-                    }
-                    break;
-                case InfiniteRechargeType.Performance:
-                    using (SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath))
-                    {
-                        cn.CreateTable<Performance>();
-                        cn.Insert(_record);
-                        cn.Close();
-                    }
-                    break;
-                default:
-                    break;
-            }            
+                if (typeof(Team) == _record.GetType())
+                {
+                    //Creates a table based off our entity
+                    cn.CreateTable<Team>();
+                    //Inserts an instance into the newly created table
+                    cn.Insert(_record);
+                }
+                else if (typeof(Performance) == _record.GetType())
+                {
+                    cn.CreateTable<Performance>();
+                    cn.Insert(_record);
+                }
+                else if (typeof(Match) == _record.GetType())
+                {
+                    cn.CreateTable<Match>();
+                    cn.Insert(_record);
+                }
+                cn.Close();
+            }
         }
 
-       // Creates a table based off our entity
-       //connection.CreateTable<Team>();
-
-       // Inserts an instance into the newly created table
-       //         connection.Insert(_team);
-
-       //         connection.Close();
+        /// <summary>
+        ///     Gets all the performances a team has and returns them in a list.
+        /// </summary>
+        public static List<Performance> GetPerformancesForTeam(Team _team)
+        {
+            using (SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath))
+            {
+                cn.CreateTable<Performance>();
+                return cn.Query<Performance>("SELECT * FROM Performance WHERE team_id_fk = ?", _team.Name);                
+            }
+        }
     }
-
-    public enum InfiniteRechargeType { Team, Match, Performance }
 }

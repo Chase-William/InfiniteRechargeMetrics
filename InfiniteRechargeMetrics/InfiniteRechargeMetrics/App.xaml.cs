@@ -1,4 +1,5 @@
-﻿using InfiniteRechargeMetrics.Pages;
+﻿using InfiniteRechargeMetrics.Data;
+using InfiniteRechargeMetrics.Pages;
 using InfiniteRechargeMetrics.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,6 +16,7 @@ using Xamarin.Forms.Xaml;
 ///     Plugins:
 ///         - https://github.com/praeclarum/sqlite-net
 ///         - https://github.com/xamarin/GooglePlayServicesComponents (Auth & Basement *ONLY*)
+///         - https://github.com/roubachof/Sharpnado.Presentation.Forms
 /// 
 /// </summary>
 namespace InfiniteRechargeMetrics
@@ -49,17 +51,17 @@ namespace InfiniteRechargeMetrics
 
         protected override void OnStart()
         {
-            //DataService.SaveToDatabase(new Team { Name = "Name 1" }, InfiniteRechargeType.Team);
-            //DataService.SaveToDatabase(new Team { Name = "Name 2" }, InfiniteRechargeType.Team);
-            //DataService.SaveToDatabase(new Team { Name = "Name 3" }, InfiniteRechargeType.Team);
-            //DataService.SaveToDatabase(new Team { Name = "Name 4" }, InfiniteRechargeType.Team);
-            //DataService.SaveToDatabase(new Team { Name = "Name 5" }, InfiniteRechargeType.Team);
+            //DataService.SaveToDatabase(new Team { Name = "Name 1" });
+            //DataService.SaveToDatabase(new Team { Name = "Name 2" });
+            //DataService.SaveToDatabase(new Team { Name = "Name 3" });
+            //DataService.SaveToDatabase(new Team { Name = "Name 4" });
+            //DataService.SaveToDatabase(new Team { Name = "Name 5" });
 
-            //DataService.SaveToDatabase(new Match { Title = "Match 1" }, InfiniteRechargeType.Match);
-            //DataService.SaveToDatabase(new Match { Title = "Match 2" }, InfiniteRechargeType.Match);
-            //DataService.SaveToDatabase(new Match { Title = "Match 3" }, InfiniteRechargeType.Match);
-            //DataService.SaveToDatabase(new Match { Title = "Match 4" }, InfiniteRechargeType.Match);
-            //DataService.SaveToDatabase(new Match { Title = "Match 5" }, InfiniteRechargeType.Match);
+            //DataService.SaveToDatabase(new Match { Title = "Match 1" });
+            //DataService.SaveToDatabase(new Match { Title = "Match 2" });
+            //DataService.SaveToDatabase(new Match { Title = "Match 3" });
+            //DataService.SaveToDatabase(new Match { Title = "Match 4" });
+            //DataService.SaveToDatabase(new Match { Title = "Match 5" });
 
             //DataService.SaveToDatabase(new Performance()
             //{
@@ -70,8 +72,7 @@ namespace InfiniteRechargeMetrics
             //    ManualLowPoint = 12,
             //    ManualMedPoint = 10,
             //    ManualHighPoint = 4
-            //},
-            //InfiniteRechargeType.Performance);
+            //});
 
             //DataService.SaveToDatabase(new Performance()
             //{
@@ -82,8 +83,7 @@ namespace InfiniteRechargeMetrics
             //    ManualLowPoint = 12,
             //    ManualMedPoint = 10,
             //    ManualHighPoint = 4
-            //},
-            //InfiniteRechargeType.Performance);
+            //});
 
             //DataService.SaveToDatabase(new Performance()
             //{
@@ -94,8 +94,7 @@ namespace InfiniteRechargeMetrics
             //    ManualLowPoint = 12,
             //    ManualMedPoint = 10,
             //    ManualHighPoint = 4
-            //},
-            //InfiniteRechargeType.Performance);
+            //});
 
             //DataService.SaveToDatabase(new Performance()
             //{
@@ -106,8 +105,7 @@ namespace InfiniteRechargeMetrics
             //    ManualLowPoint = 12,
             //    ManualMedPoint = 10,
             //    ManualHighPoint = 4
-            //},
-            //InfiniteRechargeType.Performance);
+            //});
 
             //DataService.SaveToDatabase(new Performance()
             //{
@@ -118,8 +116,41 @@ namespace InfiniteRechargeMetrics
             //    ManualLowPoint = 12,
             //    ManualMedPoint = 10,
             //    ManualHighPoint = 4
-            //},
-            //InfiniteRechargeType.Performance);
+            //});
+
+
+            //DatabaseService.SaveToDatabase(new Performance()
+            //{
+            //    TeamId_FK = "Name 1",
+            //    AutoLowPoint = 9,
+            //    AutoMedPoint = 11,
+            //    AutoHighPoint = 3,
+            //    ManualLowPoint = 12,
+            //    ManualMedPoint = 10,
+            //    ManualHighPoint = 4
+            //});
+
+            //DatabaseService.SaveToDatabase(new Performance()
+            //{
+            //    TeamId_FK = "Name 1",
+            //    AutoLowPoint = 9,
+            //    AutoMedPoint = 11,
+            //    AutoHighPoint = 3,
+            //    ManualLowPoint = 12,
+            //    ManualMedPoint = 10,
+            //    ManualHighPoint = 4
+            //});
+
+            //DatabaseService.SaveToDatabase(new Performance()
+            //{
+            //    TeamId_FK = "Name 1",
+            //    AutoLowPoint = 9,
+            //    AutoMedPoint = 11,
+            //    AutoHighPoint = 3,
+            //    ManualLowPoint = 12,
+            //    ManualMedPoint = 10,
+            //    ManualHighPoint = 4
+            //});
         }
 
         protected override void OnSleep()

@@ -42,16 +42,14 @@ namespace InfiniteRechargeMetrics.Pages
                     connection.CreateTable<Match>();
                     // Returns all the Teams from the db
                     Matches = new ObservableCollection<Match>(connection.Table<Match>().ToList());
-                }
-                // Showing this does run asynchronously
-                System.Threading.Thread.Sleep(2500);    // ---------------------------------------------------------------  remove later           
+                }       
             });
             MatchesListView.ItemsSource = Matches;
         }
 
         private void OnNewMatch(object sender, EventArgs e)
         {
-            DataService.SaveToDatabase(new Match() { Title = "Match" }, InfiniteRechargeType.Match);
+            DatabaseService.SaveToDatabase(new Match() { Title = "Match" });
         }
     }
 }

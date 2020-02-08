@@ -11,6 +11,7 @@
         "dependencies": {
           "NETStandard.Library": "2.0.3",
           "Plugin.GoogleClient": "1.1.1",
+          "Sharpnado.Forms.HorizontalListView": "1.4.0",
           "Xamarin.Essentials": "1.3.1",
           "Xamarin.Forms": "4.3.0.908675",
           "sqlite-net-pcl": "1.6.292"
@@ -28,6 +29,26 @@
       "Plugin.GoogleClient/1.1.1": {
         "runtime": {
           "lib/netstandard2.0/Plugin.GoogleClient.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Sharpnado.Forms.HorizontalListView/1.4.0": {
+        "dependencies": {
+          "Sharpnado.TaskMonitor": "1.0.0",
+          "Xamarin.Forms": "4.3.0.908675"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Sharpnado.Presentation.Forms.dll": {
+            "assemblyVersion": "1.4.0.0",
+            "fileVersion": "1.4.0.0"
+          }
+        }
+      },
+      "Sharpnado.TaskMonitor/1.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/Sharpnado.TaskMonitor.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -135,6 +156,20 @@
       "sha512": "sha512-VMexp923Ovx4rNOW77GRbc06rfe1hNl2fY7+oRfDaTxH3q3NkV2NXTvUB39txO6HYBXzVFHbp49POrq6+sFQzw==",
       "path": "plugin.googleclient/1.1.1",
       "hashPath": "plugin.googleclient.1.1.1.nupkg.sha512"
+    },
+    "Sharpnado.Forms.HorizontalListView/1.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZzGAOP38qF/+3eblqAsJPjO0E4CX1OzzMqtwsAYRmMVqySuvJHShB8b1v2hNJk0w0AfnMyd2y8uDT2gfJvwE2w==",
+      "path": "sharpnado.forms.horizontallistview/1.4.0",
+      "hashPath": "sharpnado.forms.horizontallistview.1.4.0.nupkg.sha512"
+    },
+    "Sharpnado.TaskMonitor/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Yc3P4jOWrF3IVpJSfEookkGkmkbcdvyp/2WLz8dNR5b7/7iyI7tDo64HnyNJ5HVy45g8nrPaGwuauG6rHhZAZg==",
+      "path": "sharpnado.taskmonitor/1.0.0",
+      "hashPath": "sharpnado.taskmonitor.1.0.0.nupkg.sha512"
     },
     "sqlite-net-pcl/1.6.292": {
       "type": "package",

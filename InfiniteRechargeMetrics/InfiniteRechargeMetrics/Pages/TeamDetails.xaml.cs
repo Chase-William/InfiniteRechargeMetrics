@@ -1,12 +1,7 @@
 ﻿using InfiniteRechargeMetrics.Data;
-using SQLite;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,6 +18,12 @@ namespace InfiniteRechargeMetrics.Pages
         public TeamDetails()
         {
             InitializeComponent();
+            PerformanceHorizontalListView.Focused += PerformanceHorizontalListView_Focused;
+        }
+
+        private void PerformanceHorizontalListView_Focused(object sender, FocusEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         protected async override void OnAppearing()
@@ -30,25 +31,10 @@ namespace InfiniteRechargeMetrics.Pages
             base.OnAppearing();
             await Task.Run(() =>
             {
-                using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseFilePath))
-                {
-                    connection.CreateTable<Team>();
-                    Performances = new ObservableCollection<Performance>(connection.Table<Performance>().ToList());
-                }
+                // Setting the Performances collection's data to the returned data from a database query.
+                Performances = new ObservableCollection<Performance>(DatabaseService.GetPerformancesForTeam((Team)this.BindingContext));
             });
-            PerformancesListView.ItemsSource = Performances;
-        }
-
-        private void OnNewTeam(object sender, EventArgs e)
-        {
-            //DataService.SaveToDatabase(new Performance() 
-            //                            { AutoLowPoint = 9,
-            //                              AutoMedPoint = 11,
-            //                              AutoHighPoint = 3,
-            //                              ManualLowPoint = 12,
-            //                              ManualMedPoint = 10,
-            //                              ManualHighPoint = 4 },
-            //                            InfiniteRechargeType.Team);
+            PerformanceHorizontalListView.ItemsSource = Performances;
         }
     }
 }

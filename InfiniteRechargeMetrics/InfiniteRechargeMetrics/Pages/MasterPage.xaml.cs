@@ -1,10 +1,4 @@
-﻿using InfiniteRechargeMetrics.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +16,20 @@ namespace InfiniteRechargeMetrics.Pages
         private void OnLoginBtnClicked(object sender, EventArgs e)
         {
             //App.Current.MainPage.Navigation.PushModalAsync(new LoginPopupPage());
-            ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushModalAsync(new LoginPage());
+            App.Current.MainPage.Navigation.PushModalAsync(new LoginPage());
+        }
+
+        private void OnChangeLoginClicked(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushModalAsync(new LoginPage());
+        }
+
+        /// <summary>
+        ///     Needed because when the view is appearing, the masterpage header needs to update.
+        /// </summary>
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
         }
     }
 }

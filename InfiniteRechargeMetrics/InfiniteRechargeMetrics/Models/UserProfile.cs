@@ -9,7 +9,7 @@ namespace InfiniteRechargeMetrics.Models
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public Uri Picture { get; set; }
+        public Uri Avatar { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

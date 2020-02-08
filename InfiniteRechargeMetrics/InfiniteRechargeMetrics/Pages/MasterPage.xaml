@@ -3,49 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="using:InfiniteRechargeMetrics"
+             xmlns:local="using:InfiniteRechargeMetrics"             
              xmlns:local_pages="clr-namespace:InfiniteRechargeMetrics.Pages"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.MasterPage"
-             Title="MasterPage">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource HighLightColor}"/>
-                
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>    
+             Title="MasterPage">    
     
     <!-- This is the content for the drawer nav -->
     <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
 
+
         <!-- Header that displays information IF THE USER IS LOGGED IN -->
-        <StackLayout HeightRequest="200" BackgroundColor="White" IsVisible="{Binding IsLoggedIn}">
-            <Frame CornerRadius="50" Padding="5" Margin="5" HorizontalOptions="Start">
-                <Image Source="blue_rebel_icon.png" WidthRequest="80"/>
-            </Frame>
-            <Label Text="{Binding Name}"/>
-        </StackLayout>
+        <Frame CornerRadius="10" HeightRequest="220" Padding="0" BackgroundColor="White" IsVisible="{Binding IsLoggedIn}" HorizontalOptions="Center" WidthRequest="320">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- User Avatar -->
+                <Frame x:Name="HeaderAvatar" CornerRadius="50" Padding="0" HasShadow="True" Margin="0,10,0,0" HeightRequest="100" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="0" Grid.Row="0" IsClippedToBounds="True">
+                    <Image Source="{Binding Avatar}" Aspect="AspectFill"/>
+                </Frame>
+
+                <!-- Name and Email -->
+                <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Large" HorizontalOptions="Center"/>
+                <Label Text="{Binding Email}" Grid.Column="0" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                <!-- Takes the user to the logout screen -->
+                <Button Text="Change" Clicked="OnChangeLoginClicked" WidthRequest="100" HeightRequest="30" VerticalOptions="End" HorizontalOptions="End" Grid.Column="1" Grid.Row="2" Margin="5,0,10,5" Padding="0" Style="{StaticResource HighLightButton}"/>
+            </Grid>
+        </Frame>
+        
 
         <!-- Header that prompts the user to login (DISPLAYS ONLY WHEN USER NOT LOGGED IN) -->
-        <Frame CornerRadius="5" Padding="5" Margin="5"  BackgroundColor="White" IsVisible="{Binding IsLoggedIn, Converter={StaticResource BoolVisibilityConverter}}">
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Login" HorizontalOptions="FillAndExpand" Clicked="OnLoginBtnClicked"/>
-                <Button Text="Why?" HorizontalOptions="EndAndExpand"/>
+        <Frame CornerRadius="10" HeightRequest="220" Padding="0" BackgroundColor="White" HorizontalOptions="Center" WidthRequest="320" IsVisible="{Binding IsLoggedIn, Converter={StaticResource BoolVisibilityConverter}}">
+            <StackLayout>
+                <Label Text="Share your data now!" FontSize="Large" Margin="10,20,5,5"/>
+                <Label Text="Login to start sharing." Margin="10,5"/>
+                <Button Text="Login" VerticalOptions="EndAndExpand" Margin="10,0,10,15" Clicked="OnLoginBtnClicked" Style="{StaticResource HighLightButton}"/>
             </StackLayout>
         </Frame>
 
 
-
-        <ListView>
+        <!-- Main Navigation from this app, IMPORTANT WE MAKE THE LISTVIEW PUBLIC SO WE CAN ACCESS IT IN THE MAINPAGE -->
+        <ListView x:Name="MasterPageNavListView" x:FieldModifier="public">
             <!-- Our item source is static and therefore we can define the array here of our MasterPageImageItem type -->
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type local:MasterPageImageItem}">
-                    <local:MasterPageImageItem Title="Home" Source="red_rebel_icon.png" TargetType="{x:Type local_pages:HomeTeamPage}"/>
-                    <local:MasterPageImageItem Title="Teams" Source="red_rebel_icon.png" TargetType="{x:Type local_pages:TeamsPage}"/>
-                    <local:MasterPageImageItem Title="Matches" Source="red_rebel_icon.png" TargetType="{x:Type local_pages:MatchesPage}"/>
+                    <local:MasterPageImageItem Title="Home" Source="home_icon.png" TargetType="{x:Type local_pages:HomeTeamPage}"/> <!--                  DOES NOT START THIS NEW PAGE                                       -->
+                    <local:MasterPageImageItem Title="Teams" Source="teams_icon.png" TargetType="{x:Type local_pages:TeamsPage}"/>
+                    <local:MasterPageImageItem Title="Matches" Source="matches_icon.png" TargetType="{x:Type local_pages:MatchesPage}"/>
                 </x:Array>
             </ListView.ItemsSource>
 
@@ -53,14 +66,12 @@
                 <DataTemplate>
                     <!-- Cell for the menu items -->
                     <ViewCell>
-                        <Frame BorderColor="Red" CornerRadius="5" BackgroundColor="White">
-                            <StackLayout Margin="20" Orientation="Horizontal">
+                        <StackLayout Margin="10" Orientation="Horizontal">
 
-                                <Image Source="{Binding Source}" WidthRequest="30"/>
-                                <Label Text="{Binding Title}" Margin="15,0,0,0" VerticalOptions="Center"/>
+                            <Image Source="{Binding Source}" WidthRequest="30"/>
+                            <Label Text="{Binding Title}" Margin="15,0,0,0" VerticalOptions="Center" TextColor="White" FontSize="Medium"/>
 
-                            </StackLayout>
-                        </Frame>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

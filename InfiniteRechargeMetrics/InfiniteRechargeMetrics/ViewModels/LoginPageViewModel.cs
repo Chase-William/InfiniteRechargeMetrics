@@ -2,43 +2,87 @@
 
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using InfiniteRechargeMetrics.Models;
+using InfiniteRechargeMetrics.Pages;
 using Plugin.GoogleClient;
 using Plugin.GoogleClient.Shared;
 using Xamarin.Forms;
-
+/// <summary>
+/// 
+///     This class is based off the samples here: https://github.com/CrossGeeks/GoogleClientPlugin
+/// 
+/// </summary>
 namespace InfiniteRechargeMetrics.ViewModels
 {
     public class LoginPageViewModel : INotifyPropertyChanged
     {
+        #region Properties
+        /// <summary>
+        ///     The user profile which holds the data about a user we care about.
+        /// </summary>
         public UserProfile User { get; set; } = new UserProfile();
         public string Name
         {
-            get => User.Name;            
-            set => User.Name = value;
+            get => User.Name;
+            set {
+                User.Name = value;
+                NotifyPropertyChanged(nameof(Name));
+            }
         }
 
         public string Email
         {
             get => User.Email;
-            set => User.Email = value;
+            set {
+                User.Email = value;
+                NotifyPropertyChanged(nameof(Email));
+            }
         }
 
-        public Uri Picture
+        public Uri Avatar
         {
-            get => User.Picture;
-            set => User.Picture = value;
+            get => User.Avatar;
+            set
+            {
+                User.Avatar = value;
+                NotifyPropertyChanged(nameof(Avatar));
+            }
         }
 
-        public bool IsLoggedIn { get; set; }
-
+        private bool isLoggedIn;
+        /// <summary>
+        ///     States whether we are logged into the app and also has notifyPropChanged for UI
+        /// </summary>
+        public bool IsLoggedIn { 
+            get => isLoggedIn; 
+            set
+            {
+                isLoggedIn = value;
+                // Triggers the update for the MasterPage Header
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLoggedIn)));
+            }
+        }
         public string Token { get; set; }
 
+        /// <summary>
+        ///     ICommands for handling login and logout button clicks.
+        ///         Our UI elements are located in another class.
+        /// </summary>
         public ICommand LoginCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
-        private readonly IGoogleClientManager _googleClientManager;
+        private readonly IGoogleClientManager googleClientManager;
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+        /// <summary>
+        ///     Used for triggering UI updates.
+        /// </summary>
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public LoginPageViewModel()
         {
@@ -46,19 +90,21 @@ namespace InfiniteRechargeMetrics.ViewModels
             // Instead this class is treated as the bindingContext for it.
             LoginCommand = new Command(LoginAsync);
             LogoutCommand = new Command(Logout);
-
-            _googleClientManager = CrossGoogleClient.Current;
-
-
+            
+            googleClientManager = CrossGoogleClient.Current;
+            // By default the user is not logged in
             IsLoggedIn = false;
         }
 
+        /// <summary>
+        ///     Provides the login functionality with expects for targeting specific problems.
+        /// </summary>
         public async void LoginAsync()
         {
-            _googleClientManager.OnLogin += OnLoginCompleted;
+            googleClientManager.OnLogin += OnLoginCompleted;
             try
             {
-                await _googleClientManager.LoginAsync();               
+                await googleClientManager.LoginAsync();               
             }
             catch (GoogleClientSignInNetworkErrorException e)
             {
@@ -84,53 +130,69 @@ namespace InfiniteRechargeMetrics.ViewModels
             {
                 await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
             }
-
         }
 
-
+        /// <summary>
+        ///     Called when the login process has finished and is ready to have its data assigned into our program
+        /// </summary>
         private void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
         {
             if (loginEventArgs.Data != null)
             {
                 GoogleUser googleUser = loginEventArgs.Data;
-                User.Name = googleUser.Name;
-                User.Email = googleUser.Email;
-                User.Picture = googleUser.Picture;
-                var GivenName = googleUser.GivenName;
-                var FamilyName = googleUser.FamilyName;
+                Name = googleUser.Name;
+                Email = googleUser.Email;
 
+                // The default size image the URI has is a 96x96.. which is too small
+                // Here we modify the query URI to return a 512x512 which is better
+                string absoluteURI = googleUser.Picture.AbsoluteUri;
+                absoluteURI = absoluteURI.TrimEnd('9', '6', '-', 'c');               
+                Avatar = new Uri(absoluteURI += "512-c");
 
-                // Log the current User email
-                Debug.WriteLine(User.Email);
+                // Update the state variable for loggin status
                 IsLoggedIn = true;
 
                 var token = CrossGoogleClient.Current.ActiveToken;
                 Token = token;
 
-                // Assigning the application the mainpage
-                App.Current.MainPage.Navigation.PopModalAsync();
-                App.Current.MainPage = new MainPage();
+                // Popping off the login page once finished
+                ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PopToRootAsync();
             }
             else
             {
                 App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
             }            
 
-            _googleClientManager.OnLogin -= OnLoginCompleted;
-
+            googleClientManager.OnLogin -= OnLoginCompleted;
+            UpdateUI();
         }
 
+        /// <summary>
+        ///     Called when The logout button is pressed
+        /// </summary>
         public void Logout()
         {
-            _googleClientManager.OnLogout += OnLogoutCompleted;
-            _googleClientManager.Logout();
+            googleClientManager.OnLogout += OnLogoutCompleted;
+            googleClientManager.Logout();
         }
 
+        /// <summary>
+        ///     Called when the logout process is complete.
+        /// </summary>
         private void OnLogoutCompleted(object sender, EventArgs loginEventArgs)
         {
             IsLoggedIn = false;
             User.Email = "Offline";
-            _googleClientManager.OnLogout -= OnLogoutCompleted;
+            googleClientManager.OnLogout -= OnLogoutCompleted;
+            UpdateUI();
+        }
+
+        /// <summary>
+        ///     Updates the UI
+        /// </summary>
+        private void UpdateUI()
+        {
+            App.Current.MainPage.Navigation.PopModalAsync();
         }
     }
 }

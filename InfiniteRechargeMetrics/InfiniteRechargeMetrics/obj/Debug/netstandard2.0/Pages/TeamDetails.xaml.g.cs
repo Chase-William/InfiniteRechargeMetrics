@@ -17,12 +17,12 @@ namespace InfiniteRechargeMetrics.Pages {
     public partial class TeamDetails : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::Xamarin.Forms.ListView PerformancesListView;
+        private global::Sharpnado.Presentation.Forms.RenderedViews.HorizontalListView PerformanceHorizontalListView;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(TeamDetails));
-            PerformancesListView = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.ListView>(this, "PerformancesListView");
+            PerformanceHorizontalListView = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Sharpnado.Presentation.Forms.RenderedViews.HorizontalListView>(this, "PerformanceHorizontalListView");
         }
     }
 }

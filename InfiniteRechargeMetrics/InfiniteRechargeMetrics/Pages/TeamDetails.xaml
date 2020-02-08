@@ -3,59 +3,150 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.TeamDetails">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New Team" Priority="0" Clicked="OnNewTeam"/>
-    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PerformanceFrameHeader" TargetType="Frame">
+                <Setter Property="AbsoluteLayout.BackgroundColor" Value="{StaticResource HighLightColor}"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Grid.ColumnSpan" Value="2"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Padding" Value="5,2"/>
+            </Style>
+            
+            <Style x:Key="PeformanceDataLabel" TargetType="Label">
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+                <Setter Property="Margin" Value="0,0,10,0"/>
+            </Style>
 
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Name:"/>
-            <Label Text="{Binding Name}"/>
+            <Style x:Key="PeformanceTitleLabel" TargetType="Label">
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Margin" Value="10,0,0,0"/>
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    
+    
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
 
-            <!--<CarouselView>
-                <CarouselView.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Baboon</x:String>
-                        <x:String>Capuchin Monkey</x:String>
-                        <x:String>Blue Monkey</x:String>
-                        <x:String>Squirrel Monkey</x:String>
-                        <x:String>Golden Lion Tamarin</x:String>
-                        <x:String>Howler Monkey</x:String>
-                        <x:String>Japanese Macaque</x:String>
-                    </x:Array>
-                </CarouselView.ItemsSource>
-            </CarouselView>-->
+        <Label Text="Name:"/>
+        <Label Text="{Binding Name}"/>
 
-
-            <ListView x:Name="PerformancesListView"
-                      FlowDirection="LeftToRight">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <!-- Cell that models Performance (class, table) -->
-                            <StackLayout Orientation="Horizontal" 
-                                         HeightRequest="100">
-                                <Frame Padding="5"
-                                       Margin="10"
+        <renderedViews:HorizontalListView x:Name="PerformanceHorizontalListView" 
+                                          Margin="0,200,0,0" 
+                                          CollectionPadding="8"
+                                          ItemSpacing="8"
+                                          ListLayout="Linear"
+                                          ItemHeight="320"
+                                          ItemWidth="200"
+                                          SnapStyle="Center"                                          
+                                          HeightRequest="335">
+            <renderedViews:HorizontalListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!-- Cell that models Performance (class, table) -->
+                        <Frame Padding="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!-- Icon for a performance -->
+                                <Frame Grid.Column="0"
+                                       Grid.Row="0"
+                                       Grid.ColumnSpan="2"
+                                       Padding="2"
+                                       VerticalOptions="StartAndExpand"
+                                       Margin="2"
                                        HasShadow="True"
-                                       CornerRadius="50">
+                                       CornerRadius="50"   
+                                       HorizontalOptions="CenterAndExpand">
                                     <Image Source="red_rebel_icon.png"/>
                                 </Frame>
-                                <Label Text="{Binding AutoLowPoint}"/>
-                                <Label Text="{Binding AutoMedPoint}"/>
-                                <Label Text="{Binding AutoHighPoint}"/>
                                 
-                                <Label Text="{Binding ManualLowPoint}"/>
-                                <Label Text="{Binding ManualMedPoint}"/>
-                                <Label Text="{Binding ManualHighPoint}"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-    </ContentPage.Content>
+                                <!-- Data fields for points -->
+                                
+                                <!-- Autonomous Mode Header -->
+                                <Frame Style="{StaticResource PerformanceFrameHeader}" Grid.Row="1" >
+                                    <Label Text="- Automonous Mode -" TextColor="Black" FontSize="15"/>
+                                </Frame>
+
+                                <!-- Autonomous Mode data fields -->
+                                <Label Text="Lower Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="2"/>
+                                <Label Text="{Binding AutoLowPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="2"/>
+                                <Label Text="Upper Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="3"/>
+                                <Label Text="{Binding AutoMedPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="3"/>
+                                <Label Text="Small Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="4"/>
+                                <Label Text="{Binding AutoHighPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="4"/>
+
+                                <!-- Manual Mode Header -->
+                                <Frame Style="{StaticResource PerformanceFrameHeader}" Grid.Row="5" >
+                                    <Label Text="- Manual Mode -" HorizontalOptions="Center" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" TextColor="Black" FontSize="15"/>
+                                </Frame>
+                                <!-- Manual Mode data fields -->
+                                <Label Text="Lower Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="6"/>
+                                <Label Text="{Binding ManualLowPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="6"/>
+                                <Label Text="Upper Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="7"/>
+                                <Label Text="{Binding ManualMedPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="7"/>
+                                <Label Text="Small Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="8"/>
+                                <Label Text="{Binding ManualHighPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="8"/>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </renderedViews:HorizontalListView.ItemTemplate>
+        </renderedViews:HorizontalListView>
+
+
+
+        <!--<ListView x:Name="PerformancesListView" Rotation="270">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        --><!-- Cell that models Performance (class, table) --><!--
+                        <StackLayout Orientation="Horizontal" HeightRequest="200" Rotation="90">
+                            <Frame Padding="5"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   VerticalOptions="Center"
+                                   Margin="10"
+                                   HasShadow="True"
+                                   CornerRadius="100"                                   
+                                   HorizontalOptions="EndAndExpand">
+                                <Image Source="red_rebel_icon.png"/>
+                            </Frame>
+                            <Label Text="Automonous Low Point:"/>
+                            <Label Text="{Binding AutoLowPoint}"/>
+                            <Label Text="{Binding AutoMedPoint}"/>
+                            <Label Text="{Binding AutoHighPoint}"/>
+
+                            <Label Text="{Binding ManualLowPoint}"/>
+                            <Label Text="{Binding ManualMedPoint}"/>
+                            <Label Text="{Binding ManualHighPoint}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
+    </StackLayout>
+        
 </ContentPage>

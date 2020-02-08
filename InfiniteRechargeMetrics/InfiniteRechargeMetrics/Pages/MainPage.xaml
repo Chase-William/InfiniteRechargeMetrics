@@ -10,7 +10,7 @@
 
     <!-- The page that will make up the content inside the drawer -->
     <MasterDetailPage.Master>
-        <local:MasterPage/>
+        <local:MasterPage x:Name="masterPage"/>
     </MasterDetailPage.Master>
     
     <!-- Our MasterDetailPage -->
