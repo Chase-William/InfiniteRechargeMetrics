@@ -14,7 +14,15 @@ namespace InfiniteRechargeMetrics.Pages
     {
         public HomeTeamPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            // Calling the function for loading performances from the database.
+            await TeamStats.OnLoadPerformancesAsync();
+            await TeamStats.OnLoadMatchesAsync();
         }
     }
 }

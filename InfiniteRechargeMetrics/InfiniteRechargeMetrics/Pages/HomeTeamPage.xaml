@@ -4,11 +4,11 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             xmlns:local="clr-namespace:InfiniteRechargeMetrics.Pages;assembly=InfiniteRechargeMetrics"
+             xmlns:local_templates="clr-namespace:InfiniteRechargeMetrics.Templates"
              x:Class="InfiniteRechargeMetrics.Pages.HomeTeamPage">
 
 
-    <ContentPage.Content>
-        <local:HomeTeamComponent/> <!-- Make this like a component, we use it serveral palces -->
-    </ContentPage.Content>
+    <local_templates:TeamStatsTemplate x:Name="TeamStats">
+        <local_templates:TeamStatsTemplate.Body/>
+    </local_templates:TeamStatsTemplate>
 </ContentPage>

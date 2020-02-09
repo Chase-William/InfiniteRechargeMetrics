@@ -18,23 +18,14 @@ namespace InfiniteRechargeMetrics.Pages
         public TeamDetails()
         {
             InitializeComponent();
-            PerformanceHorizontalListView.Focused += PerformanceHorizontalListView_Focused;
-        }
-
-        private void PerformanceHorizontalListView_Focused(object sender, FocusEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await Task.Run(() =>
-            {
-                // Setting the Performances collection's data to the returned data from a database query.
-                Performances = new ObservableCollection<Performance>(DatabaseService.GetPerformancesForTeam((Team)this.BindingContext));
-            });
-            PerformanceHorizontalListView.ItemsSource = Performances;
+            // Calling the function for loading performances from the database.
+            await TeamStats.OnLoadPerformancesAsync();
+            await TeamStats.OnLoadMatchesAsync();
         }
     }
 }

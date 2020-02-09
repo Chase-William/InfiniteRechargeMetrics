@@ -1,6 +1,11 @@
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\InfiniteRechargeMetrics.iOS.exe
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\InfiniteRechargeMetrics.iOS.pdb
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\Plugin.GoogleClient.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\Sharpnado.Presentation.Forms.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\Sharpnado.Presentation.Forms.pdb
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\Sharpnado.Presentation.Forms.iOS.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\Sharpnado.Presentation.Forms.iOS.pdb
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\Sharpnado.TaskMonitor.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\SQLite-net.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\SQLitePCLRaw.batteries_green.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\bin\iPhone\Debug\SQLitePCLRaw.batteries_v2.dll

@@ -17,8 +17,12 @@ namespace InfiniteRechargeMetrics.Pages {
     public partial class HomeTeamPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        private global::InfiniteRechargeMetrics.Templates.TeamStatsTemplate TeamStats;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(HomeTeamPage));
+            TeamStats = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::InfiniteRechargeMetrics.Templates.TeamStatsTemplate>(this, "TeamStats");
         }
     }
 }

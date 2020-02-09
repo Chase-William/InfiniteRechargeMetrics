@@ -523,6 +523,12 @@
     <AppxPackagedFile Include="C:\Users\Chase Roth\.nuget\packages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.1.9\runtimes\win10-x86\lib\uap10.0.15138\netstandard.dll">
       <PackagePath>netstandard.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Chase Roth\.nuget\packages\sharpnado.forms.horizontallistview\1.4.0\lib\netstandard2.0\Sharpnado.Presentation.Forms.dll">
+      <PackagePath>Sharpnado.Presentation.Forms.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Chase Roth\.nuget\packages\sharpnado.taskmonitor\1.0.0\lib\netstandard2.0\Sharpnado.TaskMonitor.dll">
+      <PackagePath>Sharpnado.TaskMonitor.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Chase Roth\.nuget\packages\sqlite-net-pcl\1.6.292\lib\netstandard1.1\SQLite-net.dll">
       <PackagePath>SQLite-net.dll</PackagePath>
     </AppxPackagedFile>

@@ -41,5 +41,14 @@ namespace InfiniteRechargeMetrics.Data
                 return cn.Query<Performance>("SELECT * FROM Performance WHERE team_id_fk = ?", _team.Name);                
             }
         }
+
+        public static List<Match> GetMatchesForTeam(int[] _performances)
+        {
+            using (SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath))
+            {
+                cn.CreateTable<Match>();             
+                return cn.Query<Match>("SELECT * FROM Match WHERE team_one_performance_fk OR team_two_performance_fk IN (?)", _performances[0], _performances[1]);               
+            }
+        }
     }
 }

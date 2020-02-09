@@ -51,21 +51,22 @@ namespace InfiniteRechargeMetrics
 
         protected override void OnStart()
         {
-            //DataService.SaveToDatabase(new Team { Name = "Name 1" });
-            //DataService.SaveToDatabase(new Team { Name = "Name 2" });
-            //DataService.SaveToDatabase(new Team { Name = "Name 3" });
-            //DataService.SaveToDatabase(new Team { Name = "Name 4" });
-            //DataService.SaveToDatabase(new Team { Name = "Name 5" });
+            //DatabaseService.SaveToDatabase(new Team { Name = "Name 1" });
+            //DatabaseService.SaveToDatabase(new Team { Name = "Name 2" });
+            //DatabaseService.SaveToDatabase(new Team { Name = "Name 3" });
+            //DatabaseService.SaveToDatabase(new Team { Name = "Name 4" });
+            //DatabaseService.SaveToDatabase(new Team { Name = "Name 5" });
 
-            //DataService.SaveToDatabase(new Match { Title = "Match 1" });
-            //DataService.SaveToDatabase(new Match { Title = "Match 2" });
-            //DataService.SaveToDatabase(new Match { Title = "Match 3" });
-            //DataService.SaveToDatabase(new Match { Title = "Match 4" });
-            //DataService.SaveToDatabase(new Match { Title = "Match 5" });
+            //DatabaseService.SaveToDatabase(new Match { Title = "Match 1", TeamOnePerformance_FK = 1 });
+            //DatabaseService.SaveToDatabase(new Match { Title = "Match 2", TeamOnePerformance_FK = 1 });
+            //DatabaseService.SaveToDatabase(new Match { Title = "Match 3", TeamOnePerformance_FK = 1 });
+            //DatabaseService.SaveToDatabase(new Match { Title = "Match 4", TeamTwoPerformance_FK = 1 });
+            //DatabaseService.SaveToDatabase(new Match { Title = "Match 5", TeamTwoPerformance_FK = 1 });
 
-            //DataService.SaveToDatabase(new Performance()
+            //DatabaseService.SaveToDatabase(new Performance()
             //{
             //    TeamId_FK = "Name 1",
+            //    Id = 1,
             //    AutoLowPoint = 9,
             //    AutoMedPoint = 11,
             //    AutoHighPoint = 3,
@@ -74,7 +75,7 @@ namespace InfiniteRechargeMetrics
             //    ManualHighPoint = 4
             //});
 
-            //DataService.SaveToDatabase(new Performance()
+            //DatabaseService.SaveToDatabase(new Performance()
             //{
             //    TeamId_FK = "Name 2",
             //    AutoLowPoint = 9,
@@ -85,7 +86,7 @@ namespace InfiniteRechargeMetrics
             //    ManualHighPoint = 4
             //});
 
-            //DataService.SaveToDatabase(new Performance()
+            //DatabaseService.SaveToDatabase(new Performance()
             //{
             //    TeamId_FK = "Name 3",
             //    AutoLowPoint = 9,
@@ -96,7 +97,7 @@ namespace InfiniteRechargeMetrics
             //    ManualHighPoint = 4
             //});
 
-            //DataService.SaveToDatabase(new Performance()
+            //DatabaseService.SaveToDatabase(new Performance()
             //{
             //    TeamId_FK = "Name 4",
             //    AutoLowPoint = 9,
@@ -107,7 +108,7 @@ namespace InfiniteRechargeMetrics
             //    ManualHighPoint = 4
             //});
 
-            //DataService.SaveToDatabase(new Performance()
+            //DatabaseService.SaveToDatabase(new Performance()
             //{
             //    TeamId_FK = "Name 5",
             //    AutoLowPoint = 9,

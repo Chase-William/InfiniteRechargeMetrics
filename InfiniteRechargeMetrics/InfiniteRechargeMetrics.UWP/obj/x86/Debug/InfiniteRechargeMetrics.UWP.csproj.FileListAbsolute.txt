@@ -175,6 +175,9 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.U
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\WindowsBase.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\mscorlib.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\netstandard.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Sharpnado.Presentation.Forms.dll
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Sharpnado.Presentation.Forms.pdb
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\Sharpnado.TaskMonitor.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLite-net.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLitePCLRaw.batteries_green.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\bin\x86\Debug\SQLitePCLRaw.batteries_v2.dll
