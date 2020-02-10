@@ -10,5 +10,8 @@ namespace InfiniteRechargeMetrics.Data
         /// </summary>
         [Column("name"), PrimaryKey, Unique]
         public string Name { get; set; }
+
+        [Column("image_path")]
+        public string ImagePath { get; set; }
     }
 }

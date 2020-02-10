@@ -61,7 +61,7 @@
         <Button Text="Cancel"
                 VerticalOptions="End"
                 Margin="0,0,0,100"
-                Clicked="OnCancelBtnClicked"
+                Clicked="OnCancelBtn_Clicked"
                 Style="{StaticResource ButtonBase}"
                 BackgroundColor="{StaticResource HighLightColor}"/>
     </StackLayout>

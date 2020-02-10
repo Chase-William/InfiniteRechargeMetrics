@@ -1,14 +1,9 @@
 ﻿using InfiniteRechargeMetrics.Data;
-using SQLite;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System;
+using System.Collections.Generic;
 
 namespace InfiniteRechargeMetrics.Pages
 {
@@ -22,16 +17,31 @@ namespace InfiniteRechargeMetrics.Pages
 
         public TeamsPage()
         {
-            InitializeComponent();               
+            InitializeComponent();
+            SearchBar.TextChanged += SearchBar_TextChanged;
         }
-
         protected async override void OnAppearing()
         {
             TeamsListView.IsEnabled = true;
             base.OnAppearing();
-            Teams = new ObservableCollection<Team>(await DatabaseService.GetAllTeams());
+            Teams = new ObservableCollection<Team>(await DatabaseService.GetAllTeamsAsync());
             TeamsListView.ItemsSource = Teams;
         }
+
+        /// <summary>
+        ///     Handles the text inside the searchbar being changed, then request a query to the databaseservice.
+        /// </summary>
+        private async void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (e.NewTextValue.Length >= 1)
+            {
+                TeamsListView.ItemsSource = new ObservableCollection<Team>(await DatabaseService.QueryTeamsByName(e.NewTextValue));
+            }
+            else
+            {
+                TeamsListView.ItemsSource = Teams;
+            }
+        }       
 
         private void OnNewTeam(object sender, EventArgs e)
         {

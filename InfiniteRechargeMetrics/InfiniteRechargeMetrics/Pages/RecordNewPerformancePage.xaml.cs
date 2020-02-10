@@ -21,7 +21,7 @@ namespace InfiniteRechargeMetrics.Pages
         {
             base.OnAppearing();
 
-            var teams = await Data.DatabaseService.GetAllTeams();
+            var teams = await Data.DatabaseService.GetAllTeamsAsync();
 
             string[] teamNames = new string[teams.Count];
             for (int i = 0; i < teams.Count; i++)

@@ -13,13 +13,13 @@ namespace InfiniteRechargeMetrics.Pages
             BindingContext = App.LoginPageViewModel;
         }
 
-        private void OnLoginBtnClicked(object sender, EventArgs e)
+        private void OnLoginBtn_Clicked(object sender, EventArgs e)
         {
             //App.Current.MainPage.Navigation.PushModalAsync(new LoginPopupPage());
             App.Current.MainPage.Navigation.PushModalAsync(new LoginPage());
         }
 
-        private void OnChangeLoginClicked(object sender, EventArgs e)
+        private void OnChangeLogin_Clicked(object sender, EventArgs e)
         {
             App.Current.MainPage.Navigation.PushModalAsync(new LoginPage());
         }
