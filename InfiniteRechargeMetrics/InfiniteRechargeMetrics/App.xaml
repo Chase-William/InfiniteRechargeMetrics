@@ -17,11 +17,26 @@
                 <Setter Property="HasUnevenRows" Value="True"/>
                 <Setter Property="Margin" Value="5,5,5,0"/>
             </Style>
-            <ResourceDictionary>
-                <Style x:Key="HighLightButton" TargetType="Button">
-                    <Setter Property="BackgroundColor" Value="{StaticResource HighLightColor}"/>
-                </Style>
-            </ResourceDictionary>
+            <Style x:Key="HighLightButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource HighLightColor}"/>
+            </Style>
+            <!-- The header for the performance horizontal listview -->
+            <Style x:Key="FrameHeader" TargetType="Frame">
+                <Setter Property="AbsoluteLayout.BackgroundColor" Value="{StaticResource HighLightColor}"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Grid.ColumnSpan" Value="2"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Padding" Value="5,2"/>
+            </Style>
+
+            <Style x:Key="FrameHeaderLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="15"/>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

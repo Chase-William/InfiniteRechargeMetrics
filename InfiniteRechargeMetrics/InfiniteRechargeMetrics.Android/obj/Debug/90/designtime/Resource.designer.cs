@@ -7871,19 +7871,22 @@ namespace InfiniteRechargeMetrics.Droid
 			public const int notify_panel_notification_icon_bg = 2131165321;
 			
 			// aapt resource value: 0x7F07008A
-			public const int red_rebel_icon = 2131165322;
+			public const int record_performance_icon = 2131165322;
 			
 			// aapt resource value: 0x7F07008B
-			public const int teams_icon = 2131165323;
+			public const int red_rebel_icon = 2131165323;
 			
 			// aapt resource value: 0x7F07008C
-			public const int tooltip_frame_dark = 2131165324;
+			public const int teams_icon = 2131165324;
 			
 			// aapt resource value: 0x7F07008D
-			public const int tooltip_frame_light = 2131165325;
+			public const int tooltip_frame_dark = 2131165325;
 			
 			// aapt resource value: 0x7F07008E
-			public const int top_shadow = 2131165326;
+			public const int tooltip_frame_light = 2131165326;
+			
+			// aapt resource value: 0x7F07008F
+			public const int top_shadow = 2131165327;
 			
 			static Drawable()
 			{

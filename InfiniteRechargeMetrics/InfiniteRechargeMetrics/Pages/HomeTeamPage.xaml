@@ -7,8 +7,7 @@
              xmlns:local_templates="clr-namespace:InfiniteRechargeMetrics.Templates"
              x:Class="InfiniteRechargeMetrics.Pages.HomeTeamPage">
 
-
     <local_templates:TeamStatsTemplate x:Name="TeamStats">
-        <local_templates:TeamStatsTemplate.Body/>
+        <local_templates:TeamStatsTemplate.Content/>
     </local_templates:TeamStatsTemplate>
 </ContentPage>

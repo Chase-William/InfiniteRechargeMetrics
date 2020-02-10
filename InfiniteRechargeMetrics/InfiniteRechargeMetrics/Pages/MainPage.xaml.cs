@@ -17,10 +17,14 @@ namespace InfiniteRechargeMetrics
         public MainPage()
         {
             InitializeComponent();
-            masterPage.MasterPageNavListView.ItemTapped += OnMasterPageNavListviewItemTapped;       
+            masterPage.MasterPageNavListView.ItemTapped += OnMasterPageListViewItemTapped;
+            masterPage.MasterPageActions.ItemTapped += OnMasterPageListViewItemTapped;
         }
 
-        void OnMasterPageNavListviewItemTapped(object sender, ItemTappedEventArgs e)
+        /// <summary>
+        ///     Handler for both the main listview for navigating and the listview for actions
+        /// </summary>
+        void OnMasterPageListViewItemTapped(object sender, ItemTappedEventArgs e)
         {
             var item = e.Item as MasterPageImageItem;
             if (item != null)

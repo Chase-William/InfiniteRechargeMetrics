@@ -29,18 +29,7 @@ namespace InfiniteRechargeMetrics.Pages
         {
             TeamsListView.IsEnabled = true;
             base.OnAppearing();
-
-            await Task.Run(() =>
-            {
-                // Creating a connection to the db
-                using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseFilePath))
-                {
-                    // Creates a table if it doesn't already exist
-                    connection.CreateTable<Team>();
-                    // Returns all the Teams from the db
-                    Teams = new ObservableCollection<Team>(connection.Table<Team>().ToList());
-                }       
-            });
+            Teams = new ObservableCollection<Team>(await DatabaseService.GetAllTeams());
             TeamsListView.ItemsSource = Teams;
         }
 
