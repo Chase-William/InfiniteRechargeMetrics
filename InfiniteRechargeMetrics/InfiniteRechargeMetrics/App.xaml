@@ -10,6 +10,7 @@
         <ResourceDictionary>
 
             <converter:InvertBooleanConverter x:Key="BoolVisibilityConverter"/>
+
             <!-- Custom color codes -->
             <Color x:Key="BackgroundColor">#175878</Color>
             <Color x:Key="HighLightColor">#EFE170</Color>
@@ -29,6 +30,7 @@
                 <Setter Property="Padding" Value="5,2"/>
             </Style>
 
+            <!-- The header for Labels that are inside frames for titleing the sub data set -->
             <Style x:Key="FrameHeaderLabel" TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
@@ -36,7 +38,22 @@
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="FontSize" Value="15"/>
             </Style>
-            
+
+            <!-- Category of data header -->
+            <Style x:Key="CategoryHeader" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+
+            <!-- BoxView style for the entire app, because we only use it as a horizontal line break for organization -->
+            <Style TargetType="BoxView">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="HeightRequest" Value="2"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

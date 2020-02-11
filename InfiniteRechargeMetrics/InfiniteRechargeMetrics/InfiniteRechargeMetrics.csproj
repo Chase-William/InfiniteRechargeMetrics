@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\RecordNewPerformancePage.xaml.cs">
-      <DependentUpon>RecordNewPerformancePage.xaml</DependentUpon>
+    <Compile Update="Pages\RecordPerformancePage.xaml.cs">
+      <DependentUpon>RecordPerformancePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Templates\TeamStatsTemplate.xaml.cs">
       <DependentUpon>TeamStatsTemplate.xaml</DependentUpon>
@@ -46,7 +46,7 @@
     <EmbeddedResource Update="Pages\TeamDetails.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\RecordNewPerformancePage.xaml">
+    <EmbeddedResource Update="Pages\RecordPerformancePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Templates\TeamStatsTemplate.xaml">

@@ -18,5 +18,5 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\b
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\ref\InfiniteRechargeMetrics.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\InfiniteRechargeMetrics.pdb
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\XamlC.stamp
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\RecordNewPerformancePage.xaml.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\InfiniteRechargeMetrics.csprojAssemblyReference.cache
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\RecordPerformancePage.xaml.g.cs

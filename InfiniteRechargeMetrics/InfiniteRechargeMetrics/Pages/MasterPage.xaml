@@ -85,7 +85,7 @@
             <!-- Our item source is static and therefore we can define the array here of our MasterPageImageItem type -->
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type local:MasterPageImageItem}">
-                    <local:MasterPageImageItem Title="Record New Performance" Source="record_performance_icon.png" TargetType="{x:Type local_pages:RecordNewPerformancePage}"/>
+                    <local:MasterPageImageItem Title="Record New Performance" Source="record_performance_icon.png" TargetType="{x:Type local_pages:RecordPerformancePage}"/>
                 </x:Array>
             </ListView.ItemsSource>
 

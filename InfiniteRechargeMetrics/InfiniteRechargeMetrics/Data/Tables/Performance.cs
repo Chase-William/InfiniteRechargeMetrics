@@ -22,18 +22,18 @@ namespace InfiniteRechargeMetrics.Data
         /// <summary>
         ///     A lower port score in autonomous mode
         /// </summary>
-        [Column("auto_low_point")]
-        public int AutoLowPoint { get; set; }
+        [Column("auto_low_port_points")]
+        public int AutoLowPortPoints { get; set; }
         /// <summary>
         ///     A upper port score in autonomous mode
         /// </summary>
-        [Column("auto_med_point")]
-        public int AutoMedPoint { get; set; }
+        [Column("auto_upper_port_points")]
+        public int AutoUpperPortPoints { get; set; }
         /// <summary>
         ///     A small port score in autonomous mode
         /// </summary>
-        [Column("auto_high_point")]
-        public int AutoHighPoint { get; set; }
+        [Column("auto_small_port_points")]
+        public int AutoSmallPortPoints { get; set; }
 
 
         // --- Manual ---
@@ -41,17 +41,17 @@ namespace InfiniteRechargeMetrics.Data
         /// <summary>
         ///     A lower port point in manual mode
         /// </summary>
-        [Column("manual_low_point")]
-        public int ManualLowPoint { get; set; }
+        [Column("manual_low_port_points")]
+        public int ManualLowPortPoints { get; set; }
         /// <summary>
         ///     A upper port point in manual mode
         /// </summary>
-        [Column("manual_med_point")]
-        public int ManualMedPoint { get; set; }
+        [Column("manual_upper_port_points")]
+        public int ManualUpperPortPoints { get; set; }
         /// <summary>
         ///     A small port point in manual mode
         /// </summary>
-        [Column("manual_high_point")]
-        public int ManualHighPoint { get; set; }
+        [Column("manual_small_port_points")]
+        public int ManualSmallPortPoints { get; set; }
     }
 }

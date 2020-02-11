@@ -24,13 +24,6 @@
                 <Setter Property="Margin" Value="0,0,10,0"/>
             </Style>
 
-            <!-- Category of data header -->
-            <Style x:Key="CategoryHeader" TargetType="Label">
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="TextColor" Value="White"/>
-                <Setter Property="FontSize" Value="Medium"/>
-            </Style> 
-            
             <!-- Base style for overall generic data -->
             <Style TargetType="Label" x:Key="BaseOverallLabel">
                 <Setter Property="FontSize" Value="Small"/>
@@ -91,7 +84,7 @@
                 <ContentView x:Name="PerformanceOverall">
                     <StackLayout Margin="0,100,0,0">
                         <Label Text="Generic Stats" Style="{StaticResource CategoryHeader}"/>
-                        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" WidthRequest="1" Color="White"/>
+                        <BoxView/>
 
                         <Grid Padding="10" RowSpacing="10">
                             <Grid.RowDefinitions>
@@ -102,8 +95,6 @@
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-
-
 
                             <Label Text="Performances:" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="0"/>
                             <Label x:Name="PerformancesNum" Style="{StaticResource OverallDataLabel}"/>
@@ -123,7 +114,7 @@
                     <StackLayout Margin="0,20,0,0">
 
                         <Label Text="Team's Performances" Style="{StaticResource CategoryHeader}"/>
-                        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" WidthRequest="1" Color="White"/>
+                        <BoxView/>
 
                         <renderedViews:HorizontalListView x:Name="PerformanceHorizontalListView" 
                                                           VerticalOptions="StartAndExpand"                                          
