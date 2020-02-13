@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace InfiniteRechargeMetrics.Data
+namespace InfiniteRechargeMetrics.Models
 {
     [Table("Performance")]
     public class Performance
@@ -22,7 +22,7 @@ namespace InfiniteRechargeMetrics.Data
         /// <summary>
         ///     A lower port score in autonomous mode
         /// </summary>
-        [Column("auto_low_port_points")]
+        [Column("stage_one_low_port_points")]
         public int AutoLowPortPoints { get; set; }
         /// <summary>
         ///     A upper port score in autonomous mode

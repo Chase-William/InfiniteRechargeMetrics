@@ -1,4 +1,4 @@
-﻿using InfiniteRechargeMetrics.Data;
+﻿using InfiniteRechargeMetrics.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -158,5 +158,5 @@ namespace InfiniteRechargeMetrics.ViewModels
         } 
     }
 
-    enum PortIdentifier { AutoLowPort, AutoUpperPort, AutoSmallPort, ManualLowPort, ManualUpperPort, ManualSmallPort }
+    //enum PortIdentifier { AutoLowPort, AutoUpperPort, AutoSmallPort, ManualLowPort, ManualUpperPort, ManualSmallPort }
 }

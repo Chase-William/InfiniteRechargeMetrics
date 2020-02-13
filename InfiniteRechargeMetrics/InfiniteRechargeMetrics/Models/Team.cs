@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace InfiniteRechargeMetrics.Data
+namespace InfiniteRechargeMetrics.Models
 {
     [Table("Team")]
     public class Team

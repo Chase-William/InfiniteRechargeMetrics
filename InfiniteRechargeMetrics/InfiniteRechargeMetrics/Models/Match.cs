@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace InfiniteRechargeMetrics.Data
+namespace InfiniteRechargeMetrics.Models
 {
     /// <summary>
     ///     A Match is a (class, table) that represents an instance of a game where two opposing teams

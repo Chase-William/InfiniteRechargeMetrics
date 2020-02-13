@@ -1,9 +1,9 @@
-﻿using InfiniteRechargeMetrics.Data;
+﻿using InfiniteRechargeMetrics.Models;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System;
-using System.Collections.Generic;
+using InfiniteRechargeMetrics.Data;
 
 namespace InfiniteRechargeMetrics.Pages
 {

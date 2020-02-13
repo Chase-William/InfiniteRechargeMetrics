@@ -1,13 +1,7 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using System.IO;
-using Xamarin.Forms;
 using Plugin.GoogleClient;
 using Android.Content;
 using Sharpnado.Presentation.Forms.Droid;
@@ -42,7 +36,7 @@ namespace InfiniteRechargeMetrics.Droid
             // Getting the folder path that already exist on the device and will be used to map a location to our database.
             string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             // Combining the two paths to create a completed path
-            string completedPath = Path.Combine(folderPath, Data.Config.DATABASE_NAME);           
+            string completedPath = Path.Combine(folderPath, InfiniteRechargeMetrics.Data.Config.DATABASE_NAME);           
 
             LoadApplication(new App(completedPath));
         }

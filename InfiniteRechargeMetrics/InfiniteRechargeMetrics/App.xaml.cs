@@ -1,4 +1,4 @@
-﻿using InfiniteRechargeMetrics.Data;
+﻿using InfiniteRechargeMetrics.Models;
 using InfiniteRechargeMetrics.Pages;
 using InfiniteRechargeMetrics.ViewModels;
 using Xamarin.Forms;
