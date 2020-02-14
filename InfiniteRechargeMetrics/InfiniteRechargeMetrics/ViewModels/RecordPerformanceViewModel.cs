@@ -64,31 +64,31 @@ namespace InfiniteRechargeMetrics.ViewModels
         }
         public int ManualLowPortPoints
         {
-            get => Performance.ManualLowPortPoints;
+            get => Performance.StageOneLowPortPoints;
             set
             {
                 if (value < 0) return;
-                Performance.ManualLowPortPoints = value;
+                Performance.StageOneLowPortPoints = value;
                 NotifyPropertyChanged(nameof(ManualLowPortPoints));
             }
         }
         public int ManualUpperPortPoints
         {
-            get => Performance.ManualUpperPortPoints;
+            get => Performance.StageOneUpperPortPoints;
             set
             {
                 if (value < 0) return;
-                Performance.ManualUpperPortPoints = value;
+                Performance.StageOneUpperPortPoints = value;
                 NotifyPropertyChanged(nameof(ManualUpperPortPoints));
             }
         }
         public int ManualSmallPortPoints
         {
-            get => Performance.ManualSmallPortPoints;
+            get => Performance.StageOneSmallPortPoints;
             set
             {
                 if (value < 0) return;
-                Performance.ManualSmallPortPoints = value;
+                Performance.StageOneSmallPortPoints = value;
                 NotifyPropertyChanged(nameof(ManualSmallPortPoints));
             }
         }
@@ -129,15 +129,15 @@ namespace InfiniteRechargeMetrics.ViewModels
 
                 // Manual Mode Lower Port,     1 points
                 case (int)PortIdentifier.ManualLowPort:
-                    ManualLowPortPoints = ChangePortPoints(Performance.ManualLowPortPoints, MANUAL_LPP);
+                    ManualLowPortPoints = ChangePortPoints(Performance.StageOneLowPortPoints, MANUAL_LPP);
                     break; 
                 // Manual Upper Port,          2 points
                 case (int)PortIdentifier.ManualUpperPort:
-                    ManualUpperPortPoints = ChangePortPoints(Performance.ManualUpperPortPoints, MANUAL_UPP);
+                    ManualUpperPortPoints = ChangePortPoints(Performance.StageOneUpperPortPoints, MANUAL_UPP);
                     break;
                 // Autonomous Mode Small Port, 3 points
                 case (int)PortIdentifier.ManualSmallPort:
-                    ManualSmallPortPoints = ChangePortPoints(Performance.ManualSmallPortPoints, MANUAL_SPP);
+                    ManualSmallPortPoints = ChangePortPoints(Performance.StageOneSmallPortPoints, MANUAL_SPP);
                     break;
                 default:
                     break;

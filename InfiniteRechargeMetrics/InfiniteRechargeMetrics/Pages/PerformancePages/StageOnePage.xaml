@@ -21,7 +21,7 @@
                 <Setter Property="Scale" Value="0.8"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="Margin" Value="0"/>
-                <Setter Property="Command" Value="{Binding ChangePoints}"/>
+                <Setter Property="Command" Value="{Binding ChangePointsCMD}"/>
             </Style>
 
             <!-- the style for decrement btns -->
@@ -59,6 +59,7 @@
     <!-- The grid for tracking all points -->
     <Grid VerticalOptions="Start" HeightRequest="700" BackgroundColor="{StaticResource BackgroundColor}" Padding="5">
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>    <!-- Start Button -->
             <RowDefinition Height="40"/>    <!-- Did the robot move off the line row -->
             <RowDefinition Height="80"/>    <!-- Low Power Port Points -->
             <RowDefinition Height="80"/>    <!-- Upper Power Port Points -->
@@ -82,43 +83,46 @@
             </ResourceDictionary>
         </Grid.Resources>
 
+        <Button x:Name="StartBtn" Text="Start Recording" Grid.ColumnSpan="3" HorizontalOptions="Center" WidthRequest="200"/>
+
+
         <!-- Robot move off line options -->
-        <Label Text="Moved From Line:" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="0" TextColor="White"/>
-        <local:SteppedSlider Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Minimum="0" Maximum="3" Value="3" />
+        <Label Text="Moved From Line:" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="1" TextColor="White"/>
+        <local:SteppedSlider Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Minimum="0" Maximum="3" Value="3" />
 
         <!-- Low Power Port Autonomous -->
-        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="1" CommandParameter="-0"/>
-        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="1">
+        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="2" CommandParameter="-0"/>
+        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="2">
             <Frame Style="{StaticResource FrameHeader}">
                 <Label Text="Low Power Port" Style="{StaticResource FrameHeaderLabel}"/>
             </Frame>
-            <Label Text="{Binding AutoLowPortPoints}" Style="{StaticResource FrameDataLabel}"/>
+            <Label Text="{Binding AutoLowPortPoints, Converter={StaticResource IntToStringConverter}}" Style="{StaticResource FrameDataLabel}"/>
         </StackLayout>
-        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="1" CommandParameter="+0"/>
+        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="2" CommandParameter="+0"/>
 
         <!-- Medium Power Port Autonomous -->
-        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="2" CommandParameter="-1"/>
-        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="2">
+        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="3" CommandParameter="-1"/>
+        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="3">
             <Frame Style="{StaticResource FrameHeader}">
                 <Label Text="Medium Power Port" Style="{StaticResource FrameHeaderLabel}"/>
             </Frame>
-            <Label Text="{Binding AutoUpperPortPoints}" Style="{StaticResource FrameDataLabel}"/>
+            <Label Text="{Binding AutoUpperPortPoints, Converter={StaticResource IntToStringConverter}}" Style="{StaticResource FrameDataLabel}"/>
         </StackLayout>
-        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="2" CommandParameter="+1"/>
+        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="3" CommandParameter="+1"/>
 
         <!-- Small Power Port Autonomous -->
-        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="3" CommandParameter="-2"/>
-        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="3">
+        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="4" CommandParameter="-2"/>
+        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="4">
             <Frame Style="{StaticResource FrameHeader}">
                 <Label Text="Small Power Port" Style="{StaticResource FrameHeaderLabel}"/>
             </Frame>
-            <Label Text="{Binding AutoSmallPortPoints}" Style="{StaticResource FrameDataLabel}"/>
+            <Label Text="{Binding AutoSmallPortPoints, Converter={StaticResource IntToStringConverter}}" Style="{StaticResource FrameDataLabel}"/>
         </StackLayout>
-        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="3" CommandParameter="+2"/>
+        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="4" CommandParameter="+2"/>
 
-        <BoxView Grid.Row="4"/>
-        <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" Grid.Row="5"/>
-        <Switch Grid.Column="2" Grid.Row="5" Scale="1.5" HorizontalOptions="Center"/>
+        <BoxView Grid.Row="5"/>
+        <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" Grid.Row="6"/>
+        <Switch x:Name="ControlPanelSwitch" Grid.Column="2" Grid.Row="6" Scale="1.5" HorizontalOptions="Center"/>
 
     </Grid>
 </ContentPage>

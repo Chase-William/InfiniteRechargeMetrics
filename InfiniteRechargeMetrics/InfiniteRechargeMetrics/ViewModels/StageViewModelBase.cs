@@ -5,11 +5,30 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
+    /// <summary>
+    ///     enum for determining wether the stage is in autonomous mode or manuals
+    /// </summary>
+    public enum StageState { Autononmous, Manual }
+
+    /// <summary>
+    ///     Base class for all stage viewmodels
+    /// </summary>
     public abstract class StageViewModelBase : INotifyPropertyChanged
     {
+        private const string ADD_POINTS = "+";
+
+        private const int AUTO_LPP = 2;
+        private const int AUTO_UPP = 4;
+        private const int AUTO_SPP = 6;
+        private const int MANUAL_LPP = 1;
+        private const int MANUAL_UPP = 2;
+        private const int MANUAL_SPP = 3;
+
         private Performance performance;
         public Performance Performance
         {
@@ -28,52 +47,51 @@ namespace InfiniteRechargeMetrics.ViewModels
             Performance = _performance;
         }
 
-        /// <summary>
-        ///     Determines the first step of changing the points process be evaluating the caller's param
-        /// </summary>
-        private void DetermineNextAction(object _portIdentifier)
+        protected void ChangePoints(StageViewModelBase _viewModel, string entireCode)
         {
-            if (_portIdentifier == null) return;
+            // if nothing was passed in the code, return
+            if (entireCode == null) return;
+            // Parsing to a number so we can use an enum to make this more readable
+            if (!int.TryParse(entireCode.Substring(1, 1), out int portIndex)) return;
+            // informs whether we shall add or subtract based off the code
+            string portOperator = entireCode.Substring(0, 1);
 
-            string portIdentifier = (string)_portIdentifier;
-
-            if (!int.TryParse(portIdentifier.Substring(1, 1), out int port)) return;
-
-            switch (port)
+            if (_viewModel is StageOneViewModel stageOneViewModel)
             {
-                // Autonomous Mode Low Port,   2 points
-                case (int)PortIdentifier.AutoLowPort:
-                    AutoLowPortPoints = ChangePortPoints(AutoLowPortPoints, AUTO_LPP);
-                    break;
-                // Autonomous Mode Upper Port, 4 points
-                case (int)PortIdentifier.AutoUpperPort:
-                    AutoUpperPortPoints = ChangePortPoints(Performance.AutoUpperPortPoints, AUTO_UPP);
-                    break;
-                // Autonomous Mode Small Port, 6 points
-                case (int)PortIdentifier.AutoSmallPort:
-                    AutoSmallPortPoints = ChangePortPoints(Performance.AutoSmallPortPoints, AUTO_SPP);
-                    break;
-
-                // Manual Mode Lower Port,     1 points
-                case (int)PortIdentifier.ManualLowPort:
-                    ManualLowPortPoints = ChangePortPoints(Performance.ManualLowPortPoints, MANUAL_LPP);
-                    break;
-                // Manual Upper Port,          2 points
-                case (int)PortIdentifier.ManualUpperPort:
-                    ManualUpperPortPoints = ChangePortPoints(Performance.ManualUpperPortPoints, MANUAL_UPP);
-                    break;
-                // Autonomous Mode Small Port, 3 points
-                case (int)PortIdentifier.ManualSmallPort:
-                    ManualSmallPortPoints = ChangePortPoints(Performance.ManualSmallPortPoints, MANUAL_SPP);
-                    break;
-                default:
-                    break;
+                if (stageOneViewModel.StageState == StageState.Autononmous)
+                {
+                    switch (portIndex)
+                    {
+                        // Autonomous Mode Low Port,   2 points
+                        case (int)PortIdentifier.AutoLowPort:
+                            stageOneViewModel.AutoLowPortPoints = ChangePortPoints(stageOneViewModel.AutoLowPortPoints, AUTO_LPP);
+                            break;
+                        // Autonomous Mode Upper Port, 4 points
+                        case (int)PortIdentifier.AutoUpperPort:
+                            stageOneViewModel.AutoUpperPortPoints = ChangePortPoints(stageOneViewModel.AutoUpperPortPoints, AUTO_UPP);
+                            break;
+                        // Autonomous Mode Small Port, 6 points
+                        case (int)PortIdentifier.AutoSmallPort:
+                            stageOneViewModel.AutoSmallPortPoints = ChangePortPoints(stageOneViewModel.AutoSmallPortPoints, AUTO_SPP);
+                            break;
+                        default:
+                            break;
+                    }
+                }                    
             }
+            else if (_viewModel is StageTwoViewModel stageTwoViewModel)
+            {
+                
+            }
+            else if (_viewModel is StageThreeViewModel stageThreeViewModel)
+            {
+
+            }        
 
             // Modifies Performance port's points 
             int ChangePortPoints(int thisPort, int _points)
             {
-                if (portIdentifier.Substring(0, 1).Equals(ADD_POINTS))
+                if (portOperator.Equals(ADD_POINTS))
                 {
                     return thisPort += _points;
                 }

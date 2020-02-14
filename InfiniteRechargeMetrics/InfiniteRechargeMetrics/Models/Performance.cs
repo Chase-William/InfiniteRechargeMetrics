@@ -15,14 +15,14 @@ namespace InfiniteRechargeMetrics.Models
         /// </summary>
         [Column("team_id_fk"), NotNull]
         public string TeamId_FK { get; set; }
-        
 
+        #region Stage One
         // --- Automonous ---
 
         /// <summary>
         ///     A lower port score in autonomous mode
         /// </summary>
-        [Column("stage_one_low_port_points")]
+        [Column("auto_low_port_points")]
         public int AutoLowPortPoints { get; set; }
         /// <summary>
         ///     A upper port score in autonomous mode
@@ -35,23 +35,72 @@ namespace InfiniteRechargeMetrics.Models
         [Column("auto_small_port_points")]
         public int AutoSmallPortPoints { get; set; }
 
+        // --- Stage 1 Manual ---
 
-        // --- Manual ---
+        /// <summary>
+        ///     A lower port point in stage one manual mode
+        /// </summary>
+        [Column("stage_one_low_port_points")]
+        public int StageOneLowPortPoints { get; set; }
+        /// <summary>
+        ///     A upper port point in stage one manual mode
+        /// </summary>
+        [Column("stage_one_upper_port_points")]
+        public int StageOneUpperPortPoints { get; set; }
+        /// <summary>
+        ///     A small port point in stage one manual mode
+        /// </summary>
+        [Column("stage_one_small_port_points")]
+        public int StageOneSmallPortPoints { get; set; }
+
+        // Control Panel
+        [Column("control_panel")]
+        public bool IsControlPanelFinished { get; set; }
+        /// <summary>
+        ///     Records the miliseconds from the round start at which the control panel was finished
+        /// </summary>
+        [Column("control_panel_time")]
+        public bool TimeControlPanelFinished { get; set; }
+
+        #endregion Stage One End
+
+        #region Stage Two
 
         /// <summary>
-        ///     A lower port point in manual mode
+        ///     A lower port point in stage two 
         /// </summary>
-        [Column("manual_low_port_points")]
-        public int ManualLowPortPoints { get; set; }
+        [Column("stage_two_low_port_points")]
+        public int StageTwoLowPortPoints { get; set; }
         /// <summary>
-        ///     A upper port point in manual mode
+        ///     A upper port point in stage two 
         /// </summary>
-        [Column("manual_upper_port_points")]
-        public int ManualUpperPortPoints { get; set; }
+        [Column("stage_two_upper_port_points")]
+        public int StageTwoUpperPortPoints { get; set; }
         /// <summary>
-        ///     A small port point in manual mode
+        ///     A small port point in stage two 
         /// </summary>
-        [Column("manual_small_port_points")]
-        public int ManualSmallPortPoints { get; set; }
+        [Column("stage_two_small_port_points")]
+        public int StageTwoSmallPortPoints { get; set; }
+
+        #endregion Stage Two End
+
+        #region Stage Three
+
+        /// <summary>
+        ///     A lower port point in stage three 
+        /// </summary>
+        [Column("stage_three_low_port_points")]
+        public int StageThreeLowPortPoints { get; set; }
+        /// <summary>
+        ///     A upper port point in stage three 
+        /// </summary>
+        [Column("stage_three_upper_port_points")]
+        public int StageThreeUpperPortPoints { get; set; }
+        /// <summary>
+        ///     A small port point in stage three 
+        /// </summary>
+        [Column("stage_three_small_port_points")]
+        public int StageThreeSmallPortPoints { get; set; }
+        #endregion Stage Three End
     }
 }

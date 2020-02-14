@@ -10,6 +10,7 @@
         <ResourceDictionary>
 
             <converter:InvertBooleanConverter x:Key="BoolVisibilityConverter"/>
+            <converter:IntToStringConverter x:Key="IntToStringConverter"/>
 
             <!-- Custom color codes -->
             <Color x:Key="BackgroundColor">#175878</Color>
