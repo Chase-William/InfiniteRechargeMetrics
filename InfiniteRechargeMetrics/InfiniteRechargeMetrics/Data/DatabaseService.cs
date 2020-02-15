@@ -44,6 +44,9 @@ namespace InfiniteRechargeMetrics.Data
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static List<Match> GetMatchesForTeam(int[] _performances)
         {
             using (SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath))
@@ -75,6 +78,12 @@ namespace InfiniteRechargeMetrics.Data
             // Using the '%' wildcard character to signify that we don't care about what is infront or behind depending on where we place it.
             // Just makes our query more flexable
             return await cn.QueryAsync<Team>("SELECT * FROM Team WHERE name LIKE ?", '%' + _query + '%');
+        }
+
+        public async static Task<List<int>> GetNextId()
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            return await cn.QueryAsync<int>("SELECT * FROM SQLITE_SEQUENCE WHERE name='TABLE'");
         }
     }
 }

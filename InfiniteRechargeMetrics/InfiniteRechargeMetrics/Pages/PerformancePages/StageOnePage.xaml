@@ -4,13 +4,16 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:InfiniteRechargeMetrics.SharedCustomViews"
+             xmlns:converter="clr-namespace:InfiniteRechargeMetrics.Pages.Converters"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.PerformancePages.StageOnePage"
              Title="Stage One">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            
+
+            <converter:StageStateStringConverter x:Key="StateStateStringConverter"/>
+
             <Style x:Key="DarkBGLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="FontSize" Value="Medium"/>
@@ -61,6 +64,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>    <!-- Start Button -->
             <RowDefinition Height="40"/>    <!-- Did the robot move off the line row -->
+            <RowDefinition Height="20"/>    <!-- Category Header -->
+            <RowDefinition Height="10"/>    <!-- Horizontal Line -->
             <RowDefinition Height="80"/>    <!-- Low Power Port Points -->
             <RowDefinition Height="80"/>    <!-- Upper Power Port Points -->
             <RowDefinition Height="80"/>    <!-- Small Power Port Points -->
@@ -83,46 +88,55 @@
             </ResourceDictionary>
         </Grid.Resources>
 
-        <Button x:Name="StartBtn" Text="Start Recording" Grid.ColumnSpan="3" HorizontalOptions="Center" WidthRequest="200"/>
+        <Button x:Name="StartBtn" Text="Start Recording" Grid.ColumnSpan="3" HorizontalOptions="Center" WidthRequest="200" Command="{Binding StartTimerCMD}"/>
 
 
         <!-- Robot move off line options -->
         <Label Text="Moved From Line:" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="1" TextColor="White"/>
-        <local:SteppedSlider Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Minimum="0" Maximum="3" Value="3" />
+        <local:SteppedSlider Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Minimum="0" Maximum="3" Value="3" ValueChanged="SteppedSlider_ValueChanged"/>
 
+        <Label Text="{Binding StageState, Converter={StaticResource StateStateStringConverter}}" Style="{StaticResource CategoryHeader}" Grid.Row="2" Grid.ColumnSpan="3"/>
+        <BoxView Grid.Row="3"/>
+        
+        
+        
         <!-- Low Power Port Autonomous -->
-        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="2" CommandParameter="-0"/>
-        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="2">
+        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="4" CommandParameter="-0"/>
+        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="4">
             <Frame Style="{StaticResource FrameHeader}">
                 <Label Text="Low Power Port" Style="{StaticResource FrameHeaderLabel}"/>
             </Frame>
-            <Label Text="{Binding AutoLowPortPoints, Converter={StaticResource IntToStringConverter}}" Style="{StaticResource FrameDataLabel}"/>
+            <Label Text="{Binding GenericLowPortTotalValue, Converter={StaticResource IntToStringConverter}}" Style="{StaticResource FrameDataLabel}"/>
         </StackLayout>
-        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="2" CommandParameter="+0"/>
+        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="4" CommandParameter="+0"/>
 
+        
+        
         <!-- Medium Power Port Autonomous -->
-        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="3" CommandParameter="-1"/>
-        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="3">
+        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="5" CommandParameter="-1"/>
+        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="5">
             <Frame Style="{StaticResource FrameHeader}">
                 <Label Text="Medium Power Port" Style="{StaticResource FrameHeaderLabel}"/>
             </Frame>
-            <Label Text="{Binding AutoUpperPortPoints, Converter={StaticResource IntToStringConverter}}" Style="{StaticResource FrameDataLabel}"/>
+            <Label Text="{Binding GenericUpperPortTotalValue, Converter={StaticResource IntToStringConverter}}" Style="{StaticResource FrameDataLabel}"/>
         </StackLayout>
-        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="3" CommandParameter="+1"/>
+        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="5" CommandParameter="+1"/>
 
+        
+        
         <!-- Small Power Port Autonomous -->
-        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="4" CommandParameter="-2"/>
-        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="4">
+        <ImageButton Style="{StaticResource DecrementBtn}" Source="decrement_icon.png" Grid.Row="6" CommandParameter="-2"/>
+        <StackLayout Style="{StaticResource DataStackLayout}" Grid.Row="6">
             <Frame Style="{StaticResource FrameHeader}">
                 <Label Text="Small Power Port" Style="{StaticResource FrameHeaderLabel}"/>
             </Frame>
-            <Label Text="{Binding AutoSmallPortPoints, Converter={StaticResource IntToStringConverter}}" Style="{StaticResource FrameDataLabel}"/>
+            <Label Text="{Binding GenericSmallPortTotalValue, Converter={StaticResource IntToStringConverter}}" Style="{StaticResource FrameDataLabel}"/>
         </StackLayout>
-        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="4" CommandParameter="+2"/>
+        <ImageButton Style="{StaticResource IncrementBtn}" Source="increment_icon.png" Grid.Row="6" CommandParameter="+2"/>
 
-        <BoxView Grid.Row="5"/>
-        <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" Grid.Row="6"/>
-        <Switch x:Name="ControlPanelSwitch" Grid.Column="2" Grid.Row="6" Scale="1.5" HorizontalOptions="Center"/>
+        <BoxView Grid.Row="7"/>
+        <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" Grid.Row="8"/>
+        <Switch x:Name="ControlPanelSwitch" x:FieldModifier="public" Grid.Column="2" Grid.Row="8" Scale="1.5" HorizontalOptions="Center" IsToggled="False" OnColor="{StaticResource ActiveColor}"/>
 
     </Grid>
 </ContentPage>

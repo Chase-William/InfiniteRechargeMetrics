@@ -18,16 +18,16 @@ namespace InfiniteRechargeMetrics.Pages
         {
             base.OnAppearing();
             // Setting the binding context to our viewmodel to handle the UI code side
-            BindingContext = new RecordPerformanceViewModel();
+            //BindingContext = new RecordPerformanceViewModel();
 
-            var teams = await DatabaseService.GetAllTeamsAsync();
+            //var teams = await DatabaseService.GetAllTeamsAsync();
 
-            string[] teamNames = new string[teams.Count];
-            for (int i = 0; i < teams.Count; i++)
-            {
-                teamNames[i] = teams[i].Name;
-            }
-            TeamPicker.ItemsSource = teamNames;
+            //string[] teamNames = new string[teams.Count];
+            //for (int i = 0; i < teams.Count; i++)
+            //{
+            //    teamNames[i] = teams[i].Name;
+            //}
+            //TeamPicker.ItemsSource = teamNames;
         }
     }
 }

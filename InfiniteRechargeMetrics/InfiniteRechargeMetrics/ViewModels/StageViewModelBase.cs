@@ -1,12 +1,10 @@
 ﻿using InfiniteRechargeMetrics.Models;
-using InfiniteRechargeMetrics.Pages.PerformancePages;
-using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
+using Point = InfiniteRechargeMetrics.Models.Point;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
@@ -16,18 +14,21 @@ namespace InfiniteRechargeMetrics.ViewModels
     public enum StageState { Autononmous, Manual }
 
     /// <summary>
+    ///     enum for determining the meaning of the command parameters from XAML command bindings.
+    ///     Low   == 0
+    ///     Upper == 1
+    ///     Small == 2
+    /// </summary>
+    public enum PointFromXAMLIdentifier { Low, Upper, Small }
+
+    /// <summary>
     ///     Base class for all stage viewmodels
     /// </summary>
     public abstract class StageViewModelBase : INotifyPropertyChanged
     {
-        private const string ADD_POINTS = "+";
-
-        private const int AUTO_LPP = 2;
-        private const int AUTO_UPP = 4;
-        private const int AUTO_SPP = 6;
-        private const int MANUAL_LPP = 1;
-        private const int MANUAL_UPP = 2;
-        private const int MANUAL_SPP = 3;
+        private const string ADD_POINTS = "+";        
+        public const int MIN_POINTS = 0;
+        public const int MAX_POINTS = 999;  
 
         private Performance performance;
         public Performance Performance
@@ -42,12 +43,23 @@ namespace InfiniteRechargeMetrics.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        ///     To use this method; YOU MUST SPECIFY PROPERTY NAME.
+        /// </summary>
+        protected virtual void NotifyPropertiesChanged(params string[] propertyNames)
+        {
+            foreach (string propName in propertyNames)
+            {                
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
         public StageViewModelBase(Performance _performance)
         {
             Performance = _performance;
         }
 
-        protected void ChangePoints(StageViewModelBase _viewModel, string entireCode)
+        protected async void ChangePoints(StageViewModelBase _viewModel, string entireCode, int _milliSeconds)
         {
             // if nothing was passed in the code, return
             if (entireCode == null) return;
@@ -56,52 +68,86 @@ namespace InfiniteRechargeMetrics.ViewModels
             // informs whether we shall add or subtract based off the code
             string portOperator = entireCode.Substring(0, 1);
 
+            List<int> test = await Data.DatabaseService.GetNextId();
+
+            // ------------------------------------------------------------------------------ we need to know the ID this have so we can give the points the primary key
+
+            Point newPoint = new Point {
+                TimeClickedFromStart = _milliSeconds
+            };
+
+            // Process for StageOne
             if (_viewModel is StageOneViewModel stageOneViewModel)
             {
+                // Process Automonous Click
                 if (stageOneViewModel.StageState == StageState.Autononmous)
                 {
                     switch (portIndex)
                     {
                         // Autonomous Mode Low Port,   2 points
-                        case (int)PortIdentifier.AutoLowPort:
-                            stageOneViewModel.AutoLowPortPoints = ChangePortPoints(stageOneViewModel.AutoLowPortPoints, AUTO_LPP);
+                        case (int)PointFromXAMLIdentifier.Low:
+                            ChangePoints(stageOneViewModel.AutoLowPortPoints, PointType.AutomonousLow);
                             break;
                         // Autonomous Mode Upper Port, 4 points
-                        case (int)PortIdentifier.AutoUpperPort:
-                            stageOneViewModel.AutoUpperPortPoints = ChangePortPoints(stageOneViewModel.AutoUpperPortPoints, AUTO_UPP);
+                        case (int)PointFromXAMLIdentifier.Upper:
+                            ChangePoints(stageOneViewModel.AutoUpperPortPoints, PointType.AutomonousUpper);
                             break;
                         // Autonomous Mode Small Port, 6 points
-                        case (int)PortIdentifier.AutoSmallPort:
-                            stageOneViewModel.AutoSmallPortPoints = ChangePortPoints(stageOneViewModel.AutoSmallPortPoints, AUTO_SPP);
+                        case (int)PointFromXAMLIdentifier.Small:
+                            ChangePoints(stageOneViewModel.AutoSmallPortPoints, PointType.AutomonousSmall);
                             break;
                         default:
                             break;
                     }
-                }                    
+                }   
+                // Process Manual Click
+                else
+                {
+                    switch (portIndex)
+                    {
+                        // Autonomous Mode Low Port,   2 points
+                        case (int)PointFromXAMLIdentifier.Low:
+                            ChangePoints(stageOneViewModel.StageOneLowPortPoints, PointType.StageOneLow);
+                            break;
+                        // Autonomous Mode Upper Port, 4 points
+                        case (int)PointFromXAMLIdentifier.Upper:
+                            ChangePoints(stageOneViewModel.StageOneUpperPortPoints, PointType.StageOneUpper);
+                            break;
+                        // Autonomous Mode Small Port, 6 points
+                        case (int)PointFromXAMLIdentifier.Small:
+                            ChangePoints(stageOneViewModel.StageOneSmallPortPoints, PointType.StageOneSmall);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
+            // Process for Stage Two
             else if (_viewModel is StageTwoViewModel stageTwoViewModel)
             {
                 
             }
+            // Process for Stage Three
             else if (_viewModel is StageThreeViewModel stageThreeViewModel)
             {
 
-            }        
+            }
 
             // Modifies Performance port's points 
-            int ChangePortPoints(int thisPort, int _points)
+            void ChangePoints(ObservableCollection<Point> _points, PointType _pointType)
             {
+                // Add a new point
                 if (portOperator.Equals(ADD_POINTS))
                 {
-                    return thisPort += _points;
+                    newPoint.SetPointType(_pointType);
+                    _points.Add(newPoint);
                 }
-                else
+                // Remove the last point
+                else if (_points.Count != 0)
                 {
-                    return thisPort -= _points;
+                    _points.RemoveAt(_points.Count - 1);
                 }
             }
         }
     }
-
-    enum PortIdentifier { AutoLowPort, AutoUpperPort, AutoSmallPort, ManualLowPort, ManualUpperPort, ManualSmallPort }
 }

@@ -20,7 +20,7 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages {
         private global::Xamarin.Forms.Button StartBtn;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::Xamarin.Forms.Switch ControlPanelSwitch;
+        public global::Xamarin.Forms.Switch ControlPanelSwitch;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {

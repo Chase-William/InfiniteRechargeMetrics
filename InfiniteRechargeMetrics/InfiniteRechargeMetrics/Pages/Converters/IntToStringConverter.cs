@@ -10,7 +10,7 @@ namespace InfiniteRechargeMetrics.Pages.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return string.Format("{0}", value);
+            return $"{value:000}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

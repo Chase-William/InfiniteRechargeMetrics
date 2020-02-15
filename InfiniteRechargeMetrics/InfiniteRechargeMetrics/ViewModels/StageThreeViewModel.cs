@@ -11,7 +11,7 @@ namespace InfiniteRechargeMetrics.ViewModels
             get => Performance.StageThreeLowPortPoints;
             set
             {
-                if (value < 0) return;
+                if (value < MIN_POINTS || value > MAX_POINTS) return;
                 Performance.StageThreeLowPortPoints = value;
                 NotifyPropertyChanged(nameof(StageThreeLowPortPoints));
             }
@@ -21,7 +21,7 @@ namespace InfiniteRechargeMetrics.ViewModels
             get => Performance.StageThreeUpperPortPoints;
             set
             {
-                if (value < 0) return;
+                if (value < MIN_POINTS || value > MAX_POINTS) return;
                 Performance.StageThreeUpperPortPoints = value;
                 NotifyPropertyChanged(nameof(StageThreeUpperPortPoints));
             }
@@ -31,7 +31,7 @@ namespace InfiniteRechargeMetrics.ViewModels
             get => Performance.StageThreeSmallPortPoints;
             set
             {
-                if (value < 0) return;
+                if (value < MIN_POINTS || value > MAX_POINTS) return;
                 Performance.StageThreeSmallPortPoints = value;
                 NotifyPropertyChanged(nameof(StageThreeSmallPortPoints));
             }
