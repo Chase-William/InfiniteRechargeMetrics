@@ -20,7 +20,7 @@ namespace InfiniteRechargeMetrics.ViewModels
             PerformanceSetupPage = _performanceSetup;
             StartRecordingCMD = new Command(StartRecording);
             ClearCMD = new Command(ClearFields);
-        }
+        }        
 
         /// <summary>
         ///     Continues to the next page for recording

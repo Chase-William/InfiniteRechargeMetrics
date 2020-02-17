@@ -12,7 +12,7 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
         public StageTwoPage(Performance _performance)
         {
             InitializeComponent();
-            performance = _performance;
+            performance = _performance;            
         }
 
         protected override void OnAppearing()

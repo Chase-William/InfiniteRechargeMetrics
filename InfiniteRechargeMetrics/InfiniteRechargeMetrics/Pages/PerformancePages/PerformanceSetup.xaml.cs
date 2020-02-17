@@ -18,7 +18,6 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-
             BindingContext = new PerformanceSetupViewModel(this);
 
             var teams = await DatabaseService.GetAllTeamsAsync();

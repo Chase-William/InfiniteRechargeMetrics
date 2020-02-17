@@ -16,7 +16,6 @@ namespace InfiniteRechargeMetrics.ViewModels
     public class StageOneViewModel : StageViewModelBase, IStageViewModel
     {
         private event Action StageStateChanged;
-        private event Action CheckIfMeetStageRequirements;
         private int timerCounter;
 
         private double progressBarProgress;
@@ -30,14 +29,22 @@ namespace InfiniteRechargeMetrics.ViewModels
             }
         }
 
-        // Funcs that will be used to make our properties for Total values more dynamic depending on the state of the stage.
-        public Func<int> LowPortTotalValueAction;
-        public Func<int> UpperPortTotalValueAction;
-        public Func<int> SmallPortTotalValueAction;
+        #region Total Value Of Points Props
+        // Gets the the total points worth of the collection
+        Func<int> LowPortAction;
+        Func<int> UpperPortAction;
+        Func<int> SmallPortAction;
 
-        public override int StageLowPortTotalValue => LowPortTotalValueAction.Invoke();
-        public override int StageUpperPortTotalValue => UpperPortTotalValueAction.Invoke();
-        public override int StageSmallPortTotalValue => SmallPortTotalValueAction.Invoke();
+        public int AutoStageLowPortTotalValue => AutoLowPortPoints.Count * StageConstants.AUTO_LPP;        
+        public int AutoStageUpperPortTotalValue => AutoUpperPortPoints.Count * StageConstants.AUTO_LPP;        
+        public int AutoStageSmallPortTotalValue => AutoSmallPortPoints.Count * StageConstants.AUTO_SPP;             
+        public int ManualStageLowPortTotalValue { get => StageLowPortPoints.Count * StageConstants.MANUAL_LPP; }
+        public int ManualStageUpperPortTotalValue { get => StageUpperPortPoints.Count * StageConstants.MANUAL_UPP; }
+        public int ManualStageSmallPortTotalValue { get => StageSmallPortPoints.Count * StageConstants.MANUAL_SPP; }
+        public override int StageLowPortTotalValue => LowPortAction.Invoke();
+        public override int StageUpperPortTotalValue => UpperPortAction.Invoke();
+        public override int StageSmallPortTotalValue => SmallPortAction.Invoke();
+        #endregion
 
         #region Stage Points Scored        
 
@@ -87,10 +94,18 @@ namespace InfiniteRechargeMetrics.ViewModels
             }
         }
 
+        private bool isControlPanelFinished;
         /// <summary>
-        ///     Boolean representing whether the team has completed the control panel step.
+        ///     Boolean representing whether the team has completed the control panel step. ------------------------------- need to make it databindable and also link to our static class, use interface instead
         /// </summary>
-        public bool IsControlPanelFinished { get; set; }
+        public bool IsControlPanelFinished { 
+            get => isControlPanelFinished; 
+            set 
+            {
+                isControlPanelFinished = value;
+                CheckIfStageIsComplete();
+            } 
+        }
 
         #endregion
 
@@ -111,57 +126,113 @@ namespace InfiniteRechargeMetrics.ViewModels
         public ICommand StartTimerCMD { get; set; }
 
         public StageOneViewModel(StageOnePage _stageOnePage, Performance _performance) : base(_performance)
-        {
+        {           
             StartTimerCMD = new Command(StartAutonomousTimer);
-            CheckIfMeetStageRequirements += StageOneViewModel_CheckIfMeetStageRequirements;
             _stageOnePage.ControlPanelSwitch.Toggled += ControlPanelSwitch_Toggled;
             RobotsMovedFromSpawnPoints = StageConstants.ROBOTS_MOVED_FROM_SPAWN_DEFAULT_VALUE;
             // Preparing the timer
             MainTimer.Elapsed += AutononmousState_TimerElapsed;
 
             // Binding handlers for our state changed event
-            StageStateChanged += BindTotalValueBasedOffState;
             StageStateChanged += UpdateViews;
+            StageStateChanged += BindPortLabelsToProp;
 
-            // Binding for autonomous as default
-            BindTotalValueBasedOffState();
+            BindPortLabelsToProp();
 
             // Attaching the notify prop to our collection changed event as a handler
             AutoLowPortPoints.CollectionChanged += delegate
             {
                 NotifyPropertyChanged(nameof(StageLowPortTotalValue));
+                CheckIfStageIsComplete();
             };
             AutoUpperPortPoints.CollectionChanged += delegate
             {
                 NotifyPropertyChanged(nameof(StageUpperPortTotalValue));
+                CheckIfStageIsComplete();
             };
             AutoSmallPortPoints.CollectionChanged += delegate
             {
                 NotifyPropertyChanged(nameof(StageSmallPortTotalValue));
+                CheckIfStageIsComplete();
             };
             StageLowPortPoints.CollectionChanged += delegate
             {
                 NotifyPropertyChanged(nameof(StageLowPortTotalValue));
+                CheckIfStageIsComplete();
             };
             StageUpperPortPoints.CollectionChanged += delegate
             {
                 NotifyPropertyChanged(nameof(StageUpperPortTotalValue));
+                CheckIfStageIsComplete();
             };
             StageSmallPortPoints.CollectionChanged += delegate
             {
                 NotifyPropertyChanged(nameof(StageSmallPortTotalValue));
+                CheckIfStageIsComplete();
             };
         }
 
         /// <summary>
-        ///     Checks all the required fields for this stage to be considered complete
+        ///     Sets the binding property for the UI's implementation according to the stage's state
         /// </summary>
-        private void StageOneViewModel_CheckIfMeetStageRequirements()
+        private void BindPortLabelsToProp()
         {
-            // Check auto
-            // check manage 
-            // -- both must come to atleast 9 points --------------------------------------------------------------------------------- start here
-            // check control panel <- do this first.. faster
+            if (StageState == StageState.Autononmous)
+            {
+                LowPortAction = () =>
+                {
+                    return AutoStageLowPortTotalValue;
+                };
+                UpperPortAction = () =>
+                {
+                    return AutoStageUpperPortTotalValue;
+                };
+                SmallPortAction = () =>
+                {
+                    return AutoStageSmallPortTotalValue;
+                };
+            }
+            else
+            {
+                LowPortAction = () =>
+                {
+                    return ManualStageLowPortTotalValue;
+                };
+                UpperPortAction = () =>
+                {
+                    return ManualStageUpperPortTotalValue;
+                };
+                SmallPortAction = () =>
+                {
+                    return ManualStageSmallPortTotalValue;
+                };
+            }
+        }
+
+        /// <summary>
+        ///     Checks to see if the stage meets the requirements to move to the next stage.
+        /// </summary>
+        private void CheckIfStageIsComplete()
+        {
+            if (!IsControlPanelFinished)
+            {
+                IsStageComplete = false;
+                return;
+            }           
+
+            if (!(AddTotalValues(AutoStageLowPortTotalValue + 
+                                 AutoStageUpperPortTotalValue + 
+                                 AutoStageSmallPortTotalValue +
+                                 ManualStageLowPortTotalValue + 
+                                 ManualStageUpperPortTotalValue + 
+                                 ManualStageSmallPortTotalValue) >= StageConstants.MIN_VALUE_FOR_COMPLETED_STAGE_ONE))
+            {
+                IsStageComplete = false;
+                return;
+            }
+
+            // Under those conditions the stage can be set to finished (true)
+            IsStageComplete = true;
         }
 
         /// <summary>
@@ -194,7 +265,7 @@ namespace InfiniteRechargeMetrics.ViewModels
                 StageState = StageState.Manual;
                 MainTimer.Start();
             }
-        }
+        }        
 
         private void ManualState_TimerElapsed(object sender, ElapsedEventArgs e)
         {
@@ -219,52 +290,24 @@ namespace InfiniteRechargeMetrics.ViewModels
         }
 
         /// <summary>
-        ///     Sets the action for our total value props to autonomous settings.
-        /// </summary>
-        private void BindTotalValueBasedOffState()
-        {
-            // Do if state is autonomous
-            if (StageState == StageState.Autononmous)
-            {
-                // Initializing Funcs for our dynamic properties
-                LowPortTotalValueAction = () =>
-                {
-                    return AutoLowPortPoints.Count * StageConstants.AUTO_LPP;
-                };
-                UpperPortTotalValueAction = () =>
-                {
-                    return AutoUpperPortPoints.Count * StageConstants.AUTO_UPP;
-                };
-                SmallPortTotalValueAction = () =>
-                {
-                    return AutoSmallPortPoints.Count * StageConstants.AUTO_SPP;
-                };
-            }
-            // do if not autonomous
-            else
-            {
-                // Initializing Funcs for our dynamic properties
-                LowPortTotalValueAction = () =>
-                {
-                    return StageLowPortPoints.Count * StageConstants.MANUAL_LPP;
-                };
-                UpperPortTotalValueAction = () =>
-                {
-                    return StageUpperPortPoints.Count * StageConstants.MANUAL_UPP;
-                };
-                SmallPortTotalValueAction = () =>
-                {
-                    return StageSmallPortPoints.Count * StageConstants.MANUAL_SPP;
-                };
-            }
-        }
-
-        /// <summary>
         ///     Notifies the properties needing to be updated
         /// </summary>
         private void UpdateViews()
         {
             NotifyPropertiesChanged(nameof(StageState), nameof(StageLowPortTotalValue), nameof(StageUpperPortTotalValue), nameof(StageSmallPortTotalValue));
+        }
+
+        /// <summary>
+        ///     Helper function to add integers together... Math lib didnt have this
+        /// </summary>
+        private int AddTotalValues(params int[] _value)
+        {
+            int sum = 0;
+            for (int i = 0; i < _value.Length; i++)
+            {
+                sum += _value[i];
+            }
+            return sum;
         }
     }
 }

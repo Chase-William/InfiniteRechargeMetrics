@@ -16,6 +16,7 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
         {
             InitializeComponent();
             performance = _performance;
+            
         }
 
         protected override void OnAppearing()

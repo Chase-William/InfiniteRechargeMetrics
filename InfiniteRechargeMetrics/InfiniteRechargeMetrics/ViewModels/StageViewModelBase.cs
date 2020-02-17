@@ -1,4 +1,5 @@
 ﻿using InfiniteRechargeMetrics.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -32,9 +33,9 @@ namespace InfiniteRechargeMetrics.ViewModels
         #region Singletons Children Use
         private const string ADD_POINTS = "+";
         public const int MIN_POINTS = 0;
-        public const int MAX_POINTS = 999;
+        public const int MAX_POINTS = 999;       
 
-        public static Timer MainTimer { get; set; } = new Timer();
+        public static Timer MainTimer { get; set; }
 
         private static bool isRecording;
         /// <summary>
@@ -66,24 +67,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         public virtual ObservableCollection<Point> StageSmallPortPoints { get; set; }
         #endregion
 
-        /// <summary>
-        ///     Gets whether or not the application is recording
-        /// </summary>
-        public bool IsRecording { get => isRecording; }
-
-        private bool isStageComplete;
-        /// <summary>
-        ///     Is set to true when the stage has all the requirements fulfilled to be consider complete.
-        /// </summary>
-        public bool IsStageComplete
-        {
-            get => isStageComplete;
-            set
-            {
-                isStageComplete = value;
-                NotifyPropertyChanged(nameof(IsStageComplete));
-            }
-        }
+        public StageCompletionManager StageCompletionManager { get; set; }
 
         private Performance performance;
         public Performance Performance
@@ -92,6 +76,19 @@ namespace InfiniteRechargeMetrics.ViewModels
             set => performance = value;
         }
 
+        #region Page Data
+        /// <summary>
+        ///     Gets whether or not the application is recording
+        /// </summary>
+        public bool IsRecording { get => isRecording; }
+
+        /// <summary>
+        ///     Is set to true when the stage has all the requirements fulfilled to be consider complete.
+        /// </summary>
+        public virtual bool IsStageComplete { get; set; }
+        #endregion
+
+        #region INotifyPropertyChanged Props/Functions
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -108,6 +105,7 @@ namespace InfiniteRechargeMetrics.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
             }
         }
+        #endregion
 
         /// <summary>
         ///     Command that is tied to all the buttons that change points.
@@ -116,9 +114,12 @@ namespace InfiniteRechargeMetrics.ViewModels
 
         public StageViewModelBase(Performance _performance)
         {
+            MainTimer = new Timer();
+            Stopwatch = new Stopwatch();
             ChangePointsCMD = new Command((object charCode) => ChangePoints(this, (string)charCode, Stopwatch.Elapsed.Milliseconds));
             Performance = _performance;
             SetRecordingState(this, false);
+            isRecording = false;
         }
 
         protected async void ChangePoints(StageViewModelBase _viewModel, string entireCode, int _milliSeconds)
