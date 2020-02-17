@@ -1,5 +1,4 @@
 ﻿using InfiniteRechargeMetrics.Models;
-using InfiniteRechargeMetrics.Pages.PerformancePages;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {

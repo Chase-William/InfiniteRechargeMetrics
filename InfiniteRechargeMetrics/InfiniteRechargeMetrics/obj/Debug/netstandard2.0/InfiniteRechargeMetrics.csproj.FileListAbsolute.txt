@@ -5,8 +5,16 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\o
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\MasterPage.xaml.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\MatchesPage.xaml.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\ModifyMatch.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\RecordPerformancePage.xaml.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\TeamDetails.xaml.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\TeamsPage.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\PerformanceContent\PerformancePages\MasterPerformancePage.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\PerformanceContent\PerformancePages\MasterRecordPerformancePage.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\PerformanceContent\PerformancePages\PerformanceSetup.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\PerformanceContent\PerformanceViews\StageOneView.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\PerformanceContent\PerformanceViews\StageThreeView.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\PerformanceContent\PerformanceViews\StageTwoView.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Templates\ChangePointsTemplate.xaml.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Templates\TeamStatsTemplate.xaml.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\InfiniteRechargeMetrics.AssemblyInfoInputs.cache
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\InfiniteRechargeMetrics.AssemblyInfo.cs
@@ -18,10 +26,3 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\b
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\ref\InfiniteRechargeMetrics.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\InfiniteRechargeMetrics.pdb
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\XamlC.stamp
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\InfiniteRechargeMetrics.csprojAssemblyReference.cache
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\RecordPerformancePage.xaml.g.cs
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\MasterRecordPerformancePage.xaml.g.cs
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\StageOnePage.xaml.g.cs
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\StageThreePage.xaml.g.cs
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\StageTwoPage.xaml.g.cs
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\PerformanceSetup.xaml.g.cs

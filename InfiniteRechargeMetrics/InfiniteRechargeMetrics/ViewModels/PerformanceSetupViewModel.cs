@@ -1,5 +1,5 @@
 ﻿using InfiniteRechargeMetrics.Models;
-using InfiniteRechargeMetrics.Pages.PerformancePages;
+using InfiniteRechargeMetrics.PerformanceContent.PerformancePages;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -11,12 +11,13 @@ namespace InfiniteRechargeMetrics.ViewModels
     public class PerformanceSetupViewModel
     {
         public PerformanceSetup PerformanceSetupPage { get; private set; }
-        public Performance Performance { get; set; } = new Performance();
+        public Performance Performance { get; set; } 
         public ICommand StartRecordingCMD { get; private set; }
         public ICommand ClearCMD { get; private set; }
 
         public PerformanceSetupViewModel(PerformanceSetup _performanceSetup)
         {
+            Performance = new Performance();
             PerformanceSetupPage = _performanceSetup;
             StartRecordingCMD = new Command(StartRecording);
             ClearCMD = new Command(ClearFields);
@@ -28,7 +29,8 @@ namespace InfiniteRechargeMetrics.ViewModels
         private async void StartRecording()
         {
             // To use PushAsync we need to stack the page onto this pages own stack navigation
-            await PerformanceSetupPage.Navigation.PushAsync(new MasterRecordPerformancePage(Performance));
+            //await PerformanceSetupPage.Navigation.PushAsync(new MasterRecordPerformancePage(Performance));
+            await PerformanceSetupPage.Navigation.PushAsync(new MasterPerformancePage(Performance));
         }
 
         /// <summary>

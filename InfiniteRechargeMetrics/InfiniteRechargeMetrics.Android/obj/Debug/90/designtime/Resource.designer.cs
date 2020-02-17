@@ -6762,10 +6762,16 @@ namespace InfiniteRechargeMetrics.Droid
 			public const int switch_thumb_normal_material_light = 2131034256;
 			
 			// aapt resource value: 0x7F050091
-			public const int tooltip_background_dark = 2131034257;
+			public const int tabBarSelected = 2131034257;
 			
 			// aapt resource value: 0x7F050092
-			public const int tooltip_background_light = 2131034258;
+			public const int tabBarUnselected = 2131034258;
+			
+			// aapt resource value: 0x7F050093
+			public const int tooltip_background_dark = 2131034259;
+			
+			// aapt resource value: 0x7F050094
+			public const int tooltip_background_light = 2131034260;
 			
 			static Color()
 			{

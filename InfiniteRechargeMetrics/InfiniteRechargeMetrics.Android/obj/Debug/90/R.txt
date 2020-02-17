@@ -660,8 +660,10 @@ int color switch_thumb_material_dark 0x7f05008d
 int color switch_thumb_material_light 0x7f05008e
 int color switch_thumb_normal_material_dark 0x7f05008f
 int color switch_thumb_normal_material_light 0x7f050090
-int color tooltip_background_dark 0x7f050091
-int color tooltip_background_light 0x7f050092
+int color tabBarSelected 0x7f050091
+int color tabBarUnselected 0x7f050092
+int color tooltip_background_dark 0x7f050093
+int color tooltip_background_light 0x7f050094
 int dimen abc_action_bar_content_inset_material 0x7f060000
 int dimen abc_action_bar_content_inset_with_nav 0x7f060001
 int dimen abc_action_bar_default_height_material 0x7f060002

@@ -55,8 +55,12 @@ namespace InfiniteRechargeMetrics.Models
         [Column("stage_one_small_port_points")]
         public ObservableCollection<Point> StageOneSmallPortPoints { get; set; } = new ObservableCollection<Point>();
 
-        [Column("moved_off_start_line_points")]
-        public int MovedOffStartLinePoints { get; set; }
+        /// <summary>
+        ///     Holds the point values of the robots that moved off their spawn location.
+        ///     Each robot that moves off spawn earns 5 points.
+        /// </summary>
+        [Column("robots_moved_from_spawn_points")]
+        public int RobotsMovedFromSpawnPoints { get; set; }
 
         // Control Panel
         [Column("control_panel")]
@@ -75,17 +79,17 @@ namespace InfiniteRechargeMetrics.Models
         ///     A lower port point in stage two 
         /// </summary>
         [Column("stage_two_low_port_points")]
-        public int StageTwoLowPortPoints { get; set; }
+        public ObservableCollection<Point> StageTwoLowPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A upper port point in stage two 
         /// </summary>
         [Column("stage_two_upper_port_points")]
-        public int StageTwoUpperPortPoints { get; set; }
+        public ObservableCollection<Point> StageTwoUpperPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A small port point in stage two 
         /// </summary>
         [Column("stage_two_small_port_points")]
-        public int StageTwoSmallPortPoints { get; set; }
+        public ObservableCollection<Point> StageTwoSmallPortPoints { get; set; } = new ObservableCollection<Point>();
 
         #endregion Stage Two End
 

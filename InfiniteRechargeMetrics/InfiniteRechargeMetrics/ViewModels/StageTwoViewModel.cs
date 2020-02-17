@@ -1,46 +1,43 @@
 ﻿using InfiniteRechargeMetrics.Models;
-using InfiniteRechargeMetrics.Pages.PerformancePages;
+using System.Collections.ObjectModel;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
     public class StageTwoViewModel : StageViewModelBase
     {
         #region Points Scored
-        public int StageTwoLowPortPoints
-        {
+        public override int StageLowPortTotalValue => StageLowPortPoints.Count * StageConstants.MANUAL_LPP;
+        public override int StageUpperPortTotalValue => StageUpperPortPoints.Count * StageConstants.MANUAL_UPP;
+        public override int StageSmallPortTotalValue => StageSmallPortPoints.Count * StageConstants.MANUAL_SPP;
+
+        public override ObservableCollection<Point> StageLowPortPoints {
             get => Performance.StageTwoLowPortPoints;
-            set
-            {
-                if (value < MIN_POINTS || value > MAX_POINTS) return;
-                Performance.StageTwoLowPortPoints = value;
-                NotifyPropertyChanged(nameof(StageTwoLowPortPoints));
-            }
+            set => Performance.StageTwoLowPortPoints = value;
         }
-        public int StageTwoUpperPortPoints
-        {
+        public override ObservableCollection<Point> StageUpperPortPoints {
             get => Performance.StageTwoUpperPortPoints;
-            set
-            {
-                if (value < MIN_POINTS || value > MAX_POINTS) return;
-                Performance.StageTwoUpperPortPoints = value;
-                NotifyPropertyChanged(nameof(StageTwoUpperPortPoints));
-            }
+            set => Performance.StageTwoLowPortPoints = value;
         }
-        public int StageTwoSmallPortPoints
-        {
+        public override ObservableCollection<Point> StageSmallPortPoints {
             get => Performance.StageTwoSmallPortPoints;
-            set
-            {
-                if (value < MIN_POINTS || value > MAX_POINTS) return;
-                Performance.StageTwoSmallPortPoints = value;
-                NotifyPropertyChanged(nameof(StageTwoSmallPortPoints));
-            }
+            set => Performance.StageTwoSmallPortPoints = value;
         }
         #endregion
 
         public StageTwoViewModel(Performance _performance) : base(_performance)
         {
-
+            StageLowPortPoints.CollectionChanged += delegate
+            {
+                NotifyPropertyChanged(nameof(StageLowPortTotalValue));
+            };
+            StageUpperPortPoints.CollectionChanged += delegate
+            {
+                NotifyPropertyChanged(nameof(StageUpperPortTotalValue));
+            };
+            StageSmallPortPoints.CollectionChanged += delegate
+            {
+                NotifyPropertyChanged(nameof(StageSmallPortTotalValue));
+            };
         }
     }
 }

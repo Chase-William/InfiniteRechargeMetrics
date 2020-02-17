@@ -1,7 +1,0 @@
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\obj\iPhone\Debug\ibtool\_BundleResourceWithLogicalName.items
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\obj\iPhone\Debug\actool\_PartialAppManifest.items
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\obj\iPhone\Debug\actool\_BundleResourceWithLogicalName.items
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\obj\iPhone\Debug\coremlc\_PartialAppManifest.items
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\obj\iPhone\Debug\coremlc\_BundleResourceWithLogicalName.items
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\obj\iPhone\Debug\optimized\
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.iOS\obj\iPhone\Debug\InfiniteRechargeMetrics.iOS.csprojAssemblyReference.cache

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:InfiniteRechargeMetrics.SharedCustomViews"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.PerformanceContent.PerformancePages.PerformanceSetup"
+             Title="Setup Recording">
+
+
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+
+        <Frame CornerRadius="10" Padding="5" Margin="5,100,5,5">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Team Selection" VerticalOptions="Center"/>
+                <Picker x:Name="TeamPicker" x:FieldModifier="public" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+        </Frame>
+
+        <Frame CornerRadius="10" Padding="5" Margin="5">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Title" VerticalOptions="Center"/>
+                <Entry HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+        </Frame>
+        
+        <Frame CornerRadius="10" Padding="5" Margin="5">
+            <StackLayout>
+                <Label Text="Comments" VerticalOptions="Center"/>
+                <local:CustomEditor HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+        </Frame>
+        
+        <StackLayout VerticalOptions="EndAndExpand" Margin="0,0,0,20">
+            <Button Text="Start" Style="{StaticResource ButtonBase}" Command="{Binding StartRecordingCMD}"/>
+            <Button Text="Clear" Style="{StaticResource ButtonBase}" Command="{Binding ClearCMD}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

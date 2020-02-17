@@ -4,4 +4,6 @@
     <color name="colorPrimary">#175878</color>
     <color name="colorPrimaryDark">#175878</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="tabBarUnselected">#754985</color>
+    <color name="tabBarSelected">#787315</color>
 </resources>

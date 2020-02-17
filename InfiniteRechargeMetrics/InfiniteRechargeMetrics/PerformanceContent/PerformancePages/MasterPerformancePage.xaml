@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
+             xmlns:stages="clr-namespace:InfiniteRechargeMetrics.Pages.PerformancePages"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.PerformanceContent.PerformancePages.MasterPerformancePage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="tabs:UnderlinedTabItem">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid ColumnSpacing="0" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ProgressBar IsVisible="{Binding IsRecording}" Progress="{Binding ProgressBarProgress}" Grid.Row="0" Grid.Column="0"/>
+
+        <tabs:TabHostView x:Name="TabHost"
+                          Grid.Row="4"                          
+                          BackgroundColor="White"    
+                          SelectedIndex="{Binding Source={x:Reference ViewSwitcher}, Path=SelectedIndex, Mode=TwoWay}"
+                          ShadowType="Bottom">
+            <tabs:TabHostView.Tabs>
+                <tabs:UnderlinedTabItem Label="Stage One"/>
+                <tabs:UnderlinedTabItem Label="Stage Two"/>
+                <tabs:UnderlinedTabItem Label="Stage Three"/>
+            </tabs:TabHostView.Tabs>
+        </tabs:TabHostView>
+
+        <ScrollView Grid.Row="5">
+            <tabs:ViewSwitcher x:Name="ViewSwitcher"                               
+                               Animate="True">
+            </tabs:ViewSwitcher>
+        </ScrollView>
+    </Grid>
+    
+</ContentPage>

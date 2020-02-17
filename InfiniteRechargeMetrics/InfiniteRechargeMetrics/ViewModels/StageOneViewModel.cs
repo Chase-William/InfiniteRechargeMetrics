@@ -1,5 +1,4 @@
 ﻿using InfiniteRechargeMetrics.Models;
-using InfiniteRechargeMetrics.Pages.PerformancePages;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Timers;
@@ -7,6 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System;
 using Point = InfiniteRechargeMetrics.Models.Point;
+using InfiniteRechargeMetrics.PerformanceContent.PerformanceViews;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
@@ -16,22 +16,28 @@ namespace InfiniteRechargeMetrics.ViewModels
     public class StageOneViewModel : StageViewModelBase, IStageViewModel
     {
         private event Action StageStateChanged;
+        private int timerCounter;
 
-        private const int AUTOMONOUS_DURATION = 1000;
-        public Timer MainTimer { get; set; } = new Timer();
-        public Stopwatch Stopwatch { get; set; } = new Stopwatch();
+        private double progressBarProgress;
+        public double ProgressBarProgress {
+            get => progressBarProgress;
+            set
+            {
+                progressBarProgress = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         // Funcs that will be used to make our properties for Total values more dynamic depending on the state of the stage.
         public Func<int> LowPortTotalValueAction;
         public Func<int> UpperPortTotalValueAction;
         public Func<int> SmallPortTotalValueAction;
 
-        #region Stage Points Scored
+        public override int StageLowPortTotalValue => LowPortTotalValueAction.Invoke();
+        public override int StageUpperPortTotalValue => UpperPortTotalValueAction.Invoke();
+        public override int StageSmallPortTotalValue => SmallPortTotalValueAction.Invoke();
 
-        // --- Properties used for getting the count of a specific collection
-        public int GenericLowPortTotalValue { get => LowPortTotalValueAction.Invoke(); }
-        public int GenericUpperPortTotalValue { get => UpperPortTotalValueAction.Invoke(); }
-        public int GenericSmallPortTotalValue { get => SmallPortTotalValueAction.Invoke(); }
+        #region Stage Points Scored        
 
         #region Autonomous Points Scored
         public ObservableCollection<Point> AutoLowPortPoints {
@@ -45,23 +51,32 @@ namespace InfiniteRechargeMetrics.ViewModels
         public ObservableCollection<Point> AutoSmallPortPoints {
             get => Performance.AutoSmallPortPoints;
             set => Performance.AutoSmallPortPoints = value;
-        }        
+        }
         #endregion
 
         #region Manual Points Scored
-        public ObservableCollection<Point> StageOneLowPortPoints {
+        public override ObservableCollection<Point> StageLowPortPoints {
             get => Performance.StageOneLowPortPoints;
             set => Performance.StageOneLowPortPoints = value;
         }
-        public ObservableCollection<Point> StageOneUpperPortPoints {
+        public override ObservableCollection<Point> StageUpperPortPoints {
             get => Performance.StageOneUpperPortPoints;
             set => Performance.StageOneUpperPortPoints = value;
         }
-        public ObservableCollection<Point> StageOneSmallPortPoints {
+        public override ObservableCollection<Point> StageSmallPortPoints {
             get => Performance.StageOneSmallPortPoints;
             set => Performance.StageOneSmallPortPoints = value;
         }
         #endregion
+
+        public int RobotsMovedFromSpawnPoints {
+            get => Performance.RobotsMovedFromSpawnPoints;
+            set
+            {
+                Performance.RobotsMovedFromSpawnPoints = value;
+                NotifyPropertyChanged(nameof(RobotsMovedFromSpawnPoints));
+            } 
+        }
 
         /// <summary>
         ///     Boolean representing whether the team has completed the control panel step.
@@ -79,21 +94,17 @@ namespace InfiniteRechargeMetrics.ViewModels
                 StageStateChanged?.Invoke();
             }
         }
-
-        /// <summary>
-        ///     Command that is tied to all the buttons that change points.
-        /// </summary>
-        public ICommand ChangePointsCMD { get; set; }
+       
         /// <summary>
         ///     Command for the timer button
         /// </summary>
         public ICommand StartTimerCMD { get; set; }
 
-        public StageOneViewModel(StageOnePage _stageOnePage, Performance _performance) : base(_performance) 
-        {
-            ChangePointsCMD = new Command(HandleChangePointsBtnClicked);
+        public StageOneViewModel(StageOneView _stageOneView, Performance _performance) : base(_performance) 
+        {                        
             StartTimerCMD = new Command(StartAutonomousTimer);
-            _stageOnePage.ControlPanelSwitch.Toggled += ControlPanelSwitch_Toggled;
+            _stageOneView.ControlPanelSwitch.Toggled += ControlPanelSwitch_Toggled;
+            RobotsMovedFromSpawnPoints = StageConstants.ROBOTS_MOVED_FROM_SPAWN_DEFAULT_VALUE;
             // Preparing the timer
             MainTimer.Elapsed += AutononmousState_TimerElapsed;
 
@@ -107,37 +118,42 @@ namespace InfiniteRechargeMetrics.ViewModels
             // Attaching the notify prop to our collection changed event as a handler
             AutoLowPortPoints.CollectionChanged += delegate
             {
-                NotifyPropertyChanged(nameof(GenericLowPortTotalValue));
+                NotifyPropertyChanged(nameof(StageLowPortTotalValue));
             };
             AutoUpperPortPoints.CollectionChanged += delegate
             {
-                NotifyPropertyChanged(nameof(GenericUpperPortTotalValue));
+                NotifyPropertyChanged(nameof(StageUpperPortTotalValue));
             };
             AutoSmallPortPoints.CollectionChanged += delegate
             {
-                NotifyPropertyChanged(nameof(GenericSmallPortTotalValue));
+                NotifyPropertyChanged(nameof(StageSmallPortTotalValue));
             };
-            StageOneLowPortPoints.CollectionChanged += delegate
+            StageLowPortPoints.CollectionChanged += delegate
             {
-                NotifyPropertyChanged(nameof(GenericLowPortTotalValue));
+                NotifyPropertyChanged(nameof(StageLowPortTotalValue));
             };
-            StageOneUpperPortPoints.CollectionChanged += delegate
+            StageUpperPortPoints.CollectionChanged += delegate
             {
-                NotifyPropertyChanged(nameof(GenericUpperPortTotalValue));
+                NotifyPropertyChanged(nameof(StageUpperPortTotalValue));
             };
-            StageOneSmallPortPoints.CollectionChanged += delegate
+            StageSmallPortPoints.CollectionChanged += delegate
             {
-                NotifyPropertyChanged(nameof(GenericSmallPortTotalValue));
+                NotifyPropertyChanged(nameof(StageSmallPortTotalValue));
             };
         }        
+
+        //public static StageOneViewModel InitStageOneViewModel(StageOnePage _stageOnePage, Performance _performance)
+        //{
+        //    return new StageOneViewModel(_stageOnePage, _performance);
+        //}
 
         /// <summary>
         ///     Starts the timer setup for the autonomous state
         /// </summary>
         private void StartAutonomousTimer()
-        {            
-            MainTimer.Interval = AUTOMONOUS_DURATION;
-            MainTimer.AutoReset = false;
+        {
+            SetRecordingState(this, true);
+            MainTimer.Interval = 50;
             MainTimer.Start();
             Stopwatch.Start();
         }
@@ -147,8 +163,25 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// </summary>
         private void AutononmousState_TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            MainTimer.Elapsed -= AutononmousState_TimerElapsed;
-            StageState = StageState.Manual;
+            if (timerCounter != StageConstants.AUTONOMOUS_MAX_TIMER_ITERATIONS)
+            {
+                ProgressBarProgress = ProgressBarProgress + StageConstants.AUTONOMOUS_PROGRESSBAR_UPDATE;
+                timerCounter++;
+            }
+            else
+            {
+                MainTimer.Stop();
+                MainTimer.Elapsed -= AutononmousState_TimerElapsed;
+                MainTimer.Elapsed += ManualState_TimerElapsed;
+                MainTimer.Interval = StageConstants.MANUAL_MODE_MAX_TIME;                
+                StageState = StageState.Manual;
+                MainTimer.Start();
+            }
+        }
+
+        private void ManualState_TimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -179,15 +212,15 @@ namespace InfiniteRechargeMetrics.ViewModels
                 // Initializing Funcs for our dynamic properties
                 LowPortTotalValueAction = () =>
                 {
-                    return AutoLowPortPoints.Count * StageConfig.AUTO_LPP;
+                    return AutoLowPortPoints.Count * StageConstants.AUTO_LPP;
                 };
                 UpperPortTotalValueAction = () =>
                 {
-                    return AutoUpperPortPoints.Count * StageConfig.AUTO_UPP;
+                    return AutoUpperPortPoints.Count * StageConstants.AUTO_UPP;
                 };
                 SmallPortTotalValueAction = () =>
                 {
-                    return AutoSmallPortPoints.Count * StageConfig.AUTO_SPP;
+                    return AutoSmallPortPoints.Count * StageConstants.AUTO_SPP;
                 };
             }   
             // do if not autonomous
@@ -196,15 +229,15 @@ namespace InfiniteRechargeMetrics.ViewModels
                 // Initializing Funcs for our dynamic properties
                 LowPortTotalValueAction = () =>
                 {
-                    return StageOneLowPortPoints.Count * StageConfig.MANUAL_LPP;
+                    return StageLowPortPoints.Count * StageConstants.MANUAL_LPP;
                 };
                 UpperPortTotalValueAction = () =>
                 {
-                    return StageOneUpperPortPoints.Count * StageConfig.MANUAL_UPP;
+                    return StageUpperPortPoints.Count * StageConstants.MANUAL_UPP;
                 };
                 SmallPortTotalValueAction = () =>
                 {
-                    return StageOneSmallPortPoints.Count * StageConfig.MANUAL_SPP;
+                    return StageSmallPortPoints.Count * StageConstants.MANUAL_SPP;
                 };
             }
         }
@@ -214,7 +247,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// </summary>
         private void UpdateViews()
         {
-            NotifyPropertiesChanged(nameof(StageState), nameof(GenericLowPortTotalValue), nameof(GenericUpperPortTotalValue), nameof(GenericSmallPortTotalValue));
+            NotifyPropertiesChanged(nameof(StageState), nameof(StageLowPortTotalValue), nameof(StageUpperPortTotalValue), nameof(StageSmallPortTotalValue));
         }
     }
 }

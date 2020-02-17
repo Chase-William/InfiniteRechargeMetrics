@@ -11,19 +11,12 @@ namespace InfiniteRechargeMetrics.Pages.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var state = (StageState)value;
-            if (StageState.Autononmous == state)
-                return StageConfig.STAGE_STAGE_AUTONOMOUS;
-            else
-                return StageConfig.STAGE_STATE_MANUAL;
+            return (StageState)value == StageState.Autononmous ? StageConstants.STAGE_STAGE_AUTONOMOUS : StageConstants.STAGE_STATE_MANUAL;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (((string)value).Substring(0, 6) == "Manual")
-                return StageState.Manual;
-            else
-                return StageState.Autononmous;
+            return ((string)value).Substring(0, 6) == "Manual" ? StageState.Manual : StageState.Autononmous;
         }
     }
 }

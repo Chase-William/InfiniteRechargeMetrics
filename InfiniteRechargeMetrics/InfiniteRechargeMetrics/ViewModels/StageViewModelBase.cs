@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Timers;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Point = InfiniteRechargeMetrics.Models.Point;
 
@@ -26,9 +29,60 @@ namespace InfiniteRechargeMetrics.ViewModels
     /// </summary>
     public abstract class StageViewModelBase : INotifyPropertyChanged
     {
+        #region Singletons Children Use
         private const string ADD_POINTS = "+";        
         public const int MIN_POINTS = 0;
-        public const int MAX_POINTS = 999;  
+        public const int MAX_POINTS = 999;
+
+        public static Timer MainTimer { get; set; } = new Timer();
+
+        private static bool isRecording;
+        /// <summary>
+        ///     Method for setting the recording variable
+        /// </summary>
+        public static void SetRecordingState(StageViewModelBase sender, bool _recording)
+        {
+            isRecording = _recording;
+            sender.NotifyPropertyChanged(nameof(IsRecording));
+        }
+
+        public static Stopwatch Stopwatch { get; set; } = new Stopwatch();
+        #endregion
+
+        #region Points List & Total Value Props
+        //
+        //     Calculates the overall value of a list.
+        //     Must be overriden.
+        //
+        public virtual int StageLowPortTotalValue { get; }
+        public virtual int StageUpperPortTotalValue { get; }
+        public virtual int StageSmallPortTotalValue { get; }
+        //
+        //      Holds the collection of points made for the current child.
+        //      Must be overriden.
+        //
+        public virtual ObservableCollection<Point> StageLowPortPoints { get; set; }
+        public virtual ObservableCollection<Point> StageUpperPortPoints { get; set; }
+        public virtual ObservableCollection<Point> StageSmallPortPoints { get; set; }
+        #endregion
+
+        /// <summary>
+        ///     Gets whether or not the application is recording
+        /// </summary>
+        public bool IsRecording { get => isRecording; }
+
+        private bool isStageComplete;
+        /// <summary>
+        ///     Is set to true when the stage has all the requirements fulfilled to be consider complete.
+        /// </summary>
+        public bool IsStageComplete {
+            get => isStageComplete;
+            set
+            {
+                isStageComplete = value;                
+                NotifyPropertyChanged(nameof(IsStageComplete));
+            } 
+        }
 
         private Performance performance;
         public Performance Performance
@@ -38,15 +92,15 @@ namespace InfiniteRechargeMetrics.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        }        
 
         /// <summary>
         ///     To use this method; YOU MUST SPECIFY PROPERTY NAME.
         /// </summary>
-        protected virtual void NotifyPropertiesChanged(params string[] propertyNames)
+        protected void NotifyPropertiesChanged(params string[] propertyNames)
         {
             foreach (string propName in propertyNames)
             {                
@@ -54,9 +108,16 @@ namespace InfiniteRechargeMetrics.ViewModels
             }
         }
 
+        /// <summary>
+        ///     Command that is tied to all the buttons that change points.
+        /// </summary>
+        public ICommand ChangePointsCMD { get; set; }
+
         public StageViewModelBase(Performance _performance)
         {
+            ChangePointsCMD = new Command((object charCode) => ChangePoints(this, (string)charCode, Stopwatch.Elapsed.Milliseconds));
             Performance = _performance;
+            SetRecordingState(this, false);
         }
 
         protected async void ChangePoints(StageViewModelBase _viewModel, string entireCode, int _milliSeconds)
@@ -107,15 +168,15 @@ namespace InfiniteRechargeMetrics.ViewModels
                     {
                         // Autonomous Mode Low Port,   2 points
                         case (int)PointFromXAMLIdentifier.Low:
-                            ChangePoints(stageOneViewModel.StageOneLowPortPoints, PointType.StageOneLow);
+                            ChangePoints(stageOneViewModel.StageLowPortPoints, PointType.StageOneLow);
                             break;
                         // Autonomous Mode Upper Port, 4 points
                         case (int)PointFromXAMLIdentifier.Upper:
-                            ChangePoints(stageOneViewModel.StageOneUpperPortPoints, PointType.StageOneUpper);
+                            ChangePoints(stageOneViewModel.StageUpperPortPoints, PointType.StageOneUpper);
                             break;
                         // Autonomous Mode Small Port, 6 points
                         case (int)PointFromXAMLIdentifier.Small:
-                            ChangePoints(stageOneViewModel.StageOneSmallPortPoints, PointType.StageOneSmall);
+                            ChangePoints(stageOneViewModel.StageSmallPortPoints, PointType.StageOneSmall);
                             break;
                         default:
                             break;
@@ -125,7 +186,23 @@ namespace InfiniteRechargeMetrics.ViewModels
             // Process for Stage Two
             else if (_viewModel is StageTwoViewModel stageTwoViewModel)
             {
-                
+                switch (portIndex)
+                {
+                    // Autonomous Mode Low Port,   2 points
+                    case (int)PointFromXAMLIdentifier.Low:
+                        ChangePoints(stageTwoViewModel.StageLowPortPoints, PointType.StageOneLow);
+                        break;
+                    // Autonomous Mode Upper Port, 4 points
+                    case (int)PointFromXAMLIdentifier.Upper:
+                        ChangePoints(stageTwoViewModel.StageUpperPortPoints, PointType.StageOneUpper);
+                        break;
+                    // Autonomous Mode Small Port, 6 points
+                    case (int)PointFromXAMLIdentifier.Small:
+                        ChangePoints(stageTwoViewModel.StageSmallPortPoints, PointType.StageOneSmall);
+                        break;
+                    default:
+                        break;
+                }
             }
             // Process for Stage Three
             else if (_viewModel is StageThreeViewModel stageThreeViewModel)

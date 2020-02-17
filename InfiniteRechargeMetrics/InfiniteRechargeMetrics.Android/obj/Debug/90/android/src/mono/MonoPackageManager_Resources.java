@@ -8,6 +8,7 @@ public class MonoPackageManager_Resources {
 		"Plugin.GoogleClient.dll",
 		"Sharpnado.Presentation.Forms.dll",
 		"Sharpnado.Presentation.Forms.Droid.dll",
+		"Sharpnado.TaskLoaderView.dll",
 		"Sharpnado.TaskMonitor.dll",
 		"SQLite-net.dll",
 		"SQLitePCLRaw.batteries_green.dll",
