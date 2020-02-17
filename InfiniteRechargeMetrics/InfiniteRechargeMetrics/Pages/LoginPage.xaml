@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BindingContext="{Binding LoginPageViewModel}"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             x:Class="InfiniteRechargeMetrics.Pages.LoginPage">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <Style x:Key="MyButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+                <Setter Property="Margin" Value="0,0,0,10"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+        <!-- Contains the logged in user data -->
+        <StackLayout Margin="0,100,0,0" IsVisible="{Binding IsLoggedIn}">
+            <Frame CornerRadius="50" Padding="0" HorizontalOptions="Center" IsClippedToBounds="True">
+                <Image Source="{Binding Avatar}" HorizontalOptions="Center"/>
+            </Frame>
+            <Label Text="{Binding Name}" HorizontalOptions="Center" FontSize="Large"/>
+            <Label Text="{Binding Email}" HorizontalOptions="Center" TextColor="#BBBBBBBB" FontSize="Medium"/>
+        </StackLayout>
+
+
+        <!-- Button that is visible when the user is logged out and triggers the login process -->
+        <Button x:Name="LoginBtn"
+                Text="Login"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding LoginCommand}"
+                IsVisible="{Binding IsLoggedIn, Converter={StaticResource BoolVisibilityConverter}}"
+                BackgroundColor="{StaticResource HighLightColor}"/>
+
+        <!-- Button that is visible when the user is logged in and triggers the logout process -->
+        <Button x:Name="LogoutBtn"
+                Text="Logout"  
+                Style="{StaticResource MyButtonStyle}"
+                IsVisible="{Binding IsLoggedIn}"
+                Command="{Binding LogoutCommand}"
+                BackgroundColor="{StaticResource HighLightColor}"/>
+
+        <Button Text="Cancel"
+                VerticalOptions="End"
+                Margin="0,0,0,100"
+                Clicked="OnCancelBtn_Clicked"
+                Style="{StaticResource ButtonBase}"
+                BackgroundColor="{StaticResource HighLightColor}"/>
+    </StackLayout>
+
+</ContentPage>

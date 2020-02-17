@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="using:InfiniteRechargeMetrics"             
+             xmlns:local_pages="clr-namespace:InfiniteRechargeMetrics.Pages"
+             xmlns:local_performance_pages="clr-namespace:InfiniteRechargeMetrics.Pages.PerformancePages"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.MasterPage"
+             Title="MasterPage">    
+    
+    <!-- This is the content for the drawer nav -->
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+
+
+        <!-- Header that displays information IF THE USER IS LOGGED IN -->
+        <Frame CornerRadius="10" HeightRequest="220" Padding="0" BackgroundColor="White" IsVisible="{Binding IsLoggedIn}" HorizontalOptions="Center" WidthRequest="320">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- User Avatar -->
+                <Frame x:Name="HeaderAvatar" CornerRadius="50" Padding="0" HasShadow="True" Margin="0,10,0,0" HeightRequest="100" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="0" Grid.Row="0" IsClippedToBounds="True">
+                    <Image Source="{Binding Avatar}" Aspect="AspectFill"/>
+                </Frame>
+
+                <!-- Name and Email -->
+                <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Large" HorizontalOptions="Center"/>
+                <Label Text="{Binding Email}" Grid.Column="0" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                <!-- Takes the user to the logout screen -->
+                <Button Text="Change" Clicked="OnChangeLogin_Clicked" WidthRequest="100" HeightRequest="30" VerticalOptions="End" HorizontalOptions="End" Grid.Column="1" Grid.Row="2" Margin="5,0,10,5" Padding="0" Style="{StaticResource HighLightButton}"/>
+            </Grid>
+        </Frame>
+        
+
+        <!-- Header that prompts the user to login (DISPLAYS ONLY WHEN USER NOT LOGGED IN) -->
+        <Frame CornerRadius="10" HeightRequest="150" VerticalOptions="Start" Padding="0" BackgroundColor="White" HorizontalOptions="Center" WidthRequest="320" IsVisible="{Binding IsLoggedIn, Converter={StaticResource BoolVisibilityConverter}}">
+            <StackLayout>
+                <Label Text="Share your data now!" FontSize="Large" Margin="10,20,5,5"/>
+                <Label Text="Login to start sharing." Margin="10,5"/>
+                <Button Text="Login" VerticalOptions="EndAndExpand" Margin="10,0,10,15" Clicked="OnLoginBtn_Clicked" Style="{StaticResource HighLightButton}"/>
+            </StackLayout>
+        </Frame>
+
+
+        <!-- Main Navigation from this app, IMPORTANT WE MAKE THE LISTVIEW PUBLIC SO WE CAN ACCESS IT IN THE MAINPAGE -->
+        <ListView x:Name="MasterPageNavListView" x:FieldModifier="public" VerticalOptions="Start" HeightRequest="150">
+            <!-- Our item source is static and therefore we can define the array here of our MasterPageImageItem type -->
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type local:MasterPageImageItem}">
+                    <local:MasterPageImageItem Title="Home" Source="home_icon.png" TargetType="{x:Type local_pages:HomeTeamPage}"/>
+                    <local:MasterPageImageItem Title="Teams" Source="teams_icon.png" TargetType="{x:Type local_pages:TeamsPage}"/>
+                    <local:MasterPageImageItem Title="Matches" Source="matches_icon.png" TargetType="{x:Type local_pages:MatchesPage}"/>
+                </x:Array>
+            </ListView.ItemsSource>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <!-- Cell for the menu items -->
+                    <ViewCell>
+                        <StackLayout Margin="10" Orientation="Horizontal">
+
+                            <Image Source="{Binding Source}" WidthRequest="30"/>
+                            <Label Text="{Binding Title}" Margin="15,0,0,0" VerticalOptions="Center" TextColor="White" FontSize="Medium"/>
+
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" WidthRequest="1" Color="White"/>
+
+
+        <!-- Actions the user can perform -->
+        <ListView x:Name="MasterPageActions" x:FieldModifier="public" VerticalOptions="Start" HeightRequest="150">
+            <!-- Our item source is static and therefore we can define the array here of our MasterPageImageItem type -->
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type local:MasterPageImageItem}">
+                    <local:MasterPageImageItem Title="Record New Performance" Source="record_performance_icon.png" TargetType="{x:Type local_performance_pages:PerformanceSetup}"/>
+                </x:Array>
+            </ListView.ItemsSource>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <!-- Cell for the menu items -->
+                    <ViewCell>
+                        <StackLayout Margin="10" Orientation="Horizontal">
+
+                            <Image Source="{Binding Source}" WidthRequest="30"/>
+                            <Label Text="{Binding Title}" Margin="15,0,0,0" VerticalOptions="Center" TextColor="White" FontSize="Medium"/>
+
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

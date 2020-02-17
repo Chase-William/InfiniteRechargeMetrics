@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:InfiniteRechargeMetrics.ViewModels"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.TeamsPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New Team" Priority="0" Clicked="OnNewTeam"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+        <Frame CornerRadius="10" Margin="5" Padding="5">
+            <SearchBar x:Name="SearchBar"                       
+                       Placeholder="Search Teams"/>
+            <!--<SearchBar.Behaviors>
+                    <local:SearchBarViewModel/>
+                </SearchBar.Behaviors>
+            </SearchBar>-->
+        </Frame>
+        <ListView x:Name     ="TeamsListView"
+                  ItemTapped ="OnTeamTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!-- Cell that models Team (class, table) --> 
+                        <StackLayout Orientation="Horizontal" HeightRequest="80">
+                            <Frame Padding="5"
+                                   Margin="10"
+                                   HasShadow="True"
+                                   CornerRadius="50">
+                                <Image Source="{Binding ImagePath}"/>
+                            </Frame>
+                            <Label Text="{Binding Name}"
+                                   VerticalOptions="Center" TextColor="White" FontSize="Large"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    
+</ContentPage>
