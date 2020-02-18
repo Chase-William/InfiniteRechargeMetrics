@@ -28,7 +28,13 @@ namespace InfiniteRechargeMetrics.ViewModels
         }
         #endregion        
 
-        public StageThreeViewModel(Performance _performance, StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager) { }
+        public StageThreeViewModel(StageThreePage _stageThreePage, Performance _performance, StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager) 
+        {
+            _stageThreePage.DroidOneRandevuSwitch.Toggled   += (e, a) => Performance.DroidOneRandevu   = a.Value;
+            _stageThreePage.DroidTwoRandevuSwitch.Toggled   += (e, a) => Performance.DroidTwoRandevu   = a.Value;
+            _stageThreePage.DroidThreeRandevuSwitch.Toggled += (e, a) => Performance.DroidThreeRandevu = a.Value;
+            _stageThreePage.IsRandevuBarLevelSwitch.Toggled += (e, a) => Performance.IsRandevuLevel    = a.Value;
+        }
 
         public override void CheckIfStageIsComplete()
         {

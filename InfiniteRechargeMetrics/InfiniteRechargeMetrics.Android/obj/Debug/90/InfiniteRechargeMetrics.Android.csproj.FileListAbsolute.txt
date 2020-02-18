@@ -1102,3 +1102,7 @@ C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\Infi
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\stamp\_GenerateJavaStubs.stamp
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\stage_one.png
+C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\stage_three.png
+C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\stage_two.png
+C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\save_icon.png

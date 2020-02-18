@@ -232,7 +232,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         private void StartAutonomousTimer()
         {
             SetRecordingState(this, true);
-            MainTimer.Interval = 50;
+            MainTimer.Interval = StageConstants.AUTONOMOUS_TIMER_INTERVAL;
             MainTimer.Start();
             Stopwatch.Start();
             MasterPerformancePage.ClockTimer.Start();

@@ -39,6 +39,7 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
             this.Children.Add(new StageOnePage(this, Performance, StageCompletionManager));
             this.Children.Add(new StageTwoPage(Performance, StageCompletionManager));
             this.Children.Add(new StageThreePage(Performance, StageCompletionManager));
+            this.Children.Add(new FinalizeRecordingPage(Performance));
         }
     }
 }

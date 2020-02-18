@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:InfiniteRechargeMetrics.SharedCustomViews"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.PerformancePages.FinalizeRecordingPage"
+             Title="Finalize"
+             IconImageSource="save_icon.png">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Style used by the Finalize class -->
+            <Style x:Key="FinalizeLabel" TargetType="Label" BasedOn="{StaticResource DarkBGLabel}">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="20,0,0,0"/>
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <!-- Style for the entries that robot numbers will be entered into -->
+            <Style x:Key="RobotNumberEntry" TargetType="Entry">
+                <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+                <Setter Property="Margin" Value="0,0,20,0"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="Placeholder" Value="Robot #"/>
+                <Setter Property="PlaceholderColor" Value="LightGray"/>
+            </Style>
+
+            <Style TargetType="local:CustomEditor">
+                <Setter Property="Placeholder" Value="Additional information here..."/>
+            </Style>
+
+            <Style x:Key="RobotHorizontalLineBreak" TargetType="BoxView" BasedOn="{StaticResource HorizontalLineBreak}">
+                <Setter Property="Margin" Value="0,20,0,0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="10">
+
+            <StackLayout x:Name="RobotCommentLayout">
+                <!-- Robot Notes 1 -->
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsRobotOneBeingRecorded}">
+                    <Label Text="Robot #1" Style="{StaticResource FinalizeLabel}"/>
+                    <Entry Style="{StaticResource RobotNumberEntry}"/>
+                </StackLayout>
+                <Frame Style="{StaticResource FrameEditorBG}" IsVisible="{Binding IsRobotOneBeingRecorded}">
+                    <local:CustomEditor/>
+                </Frame>
+
+                <BoxView Grid.Row="2" Style="{StaticResource RobotHorizontalLineBreak}" IsVisible="{Binding IsRobotTwoBeingRecorded}"/>
+
+                <!-- Robot Notes 2 -->
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsRobotTwoBeingRecorded}">
+                    <Label Text="Robot #2" Style="{StaticResource FinalizeLabel}"/>
+                    <Entry Style="{StaticResource RobotNumberEntry}"/>
+                </StackLayout>
+                <Frame Style="{StaticResource FrameEditorBG}" IsVisible="{Binding IsRobotTwoBeingRecorded}">
+                    <local:CustomEditor/>
+                </Frame>
+
+                <BoxView Grid.Row="5" Style="{StaticResource RobotHorizontalLineBreak}" IsVisible="{Binding IsRobotThreeBeingRecorded}"/>
+
+                <!-- Robot Notes 3 -->
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsRobotThreeBeingRecorded}">
+                    <Label Text="Robot #3" Style="{StaticResource FinalizeLabel}"/>
+                    <Entry Style="{StaticResource RobotNumberEntry}"/>
+                </StackLayout>
+                <Frame Style="{StaticResource FrameEditorBG}" IsVisible="{Binding IsRobotThreeBeingRecorded}">
+                    <local:CustomEditor/>
+                </Frame>
+            </StackLayout>
+
+
+            <Label Text="Comments" Style="{StaticResource DarkBGLabel}"/>
+            <Frame Style="{StaticResource FrameEditorBG}">
+                <local:CustomEditor/>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

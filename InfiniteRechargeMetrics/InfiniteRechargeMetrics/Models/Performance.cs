@@ -115,6 +115,14 @@ namespace InfiniteRechargeMetrics.Models
         /// </summary>
         [Column("stage_three_small_port_points")]
         public ObservableCollection<Point> StageThreeSmallPortPoints { get; set; } = new ObservableCollection<Point>();
+        [Column("droid_one_randevu")]
+        public bool DroidOneRandevu { get; set; }
+        [Column("droid_two_randevu")]
+        public bool DroidTwoRandevu { get; set; }
+        [Column("droid_three_randevu")]
+        public bool DroidThreeRandevu { get; set; }
+        [Column("is_droid_randevu_level")]
+        public bool IsRandevuLevel { get; set; }
         #endregion Stage Three End
     }
 }

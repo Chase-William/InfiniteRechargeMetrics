@@ -59,6 +59,10 @@
         /// </summary>
         public const string STAGE_INCOMPLETE = "Incomplete";
         /// <summary>
+        ///     Amount of time in miliseconds the timer for autonomous mode should have for its interval property.
+        /// </summary>
+        public const int AUTONOMOUS_TIMER_INTERVAL = 50;
+        /// <summary>
         ///     Is added to the autonomous progess bar every 50 miliseconds
         /// </summary>
         public const double AUTONOMOUS_PROGRESSBAR_UPDATE = 0.00333333333;

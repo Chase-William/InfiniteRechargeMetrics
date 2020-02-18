@@ -6,32 +6,36 @@
              xmlns:local_templates="clr-namespace:InfiniteRechargeMetrics.Templates"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.PerformancePages.StageTwoPage"
-             Title="Stage Two">
-    
-    <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
-        <StackLayout Style="{StaticResource StageHeaderStackLayout}">
-            <Label Text="Stage Status:" Style="{StaticResource DarkBGLabel}"/>
-            <Label Text="{Binding StageCompletionManager.IsStageTwoComplete, Converter={StaticResource IsStageCompleteConverter}}" Style="{DynamicResource BaseLabel}" TextColor="{Binding StageCompletionManager.IsStageTwoComplete, Converter={StaticResource BoolToColorConverter}}"/>
+             Title="Stage"
+             IconImageSource="stage_two.png">
+
+    <ScrollView>
+        <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+            <StackLayout Style="{StaticResource StageHeaderStackLayout}">
+                <Label Text="Stage Status:" Style="{StaticResource DarkBGLabel}"/>
+                <Label Text="{Binding StageCompletionManager.IsStageTwoComplete, Converter={StaticResource IsStageCompleteConverter}}" Style="{DynamicResource BaseLabel}" TextColor="{Binding StageCompletionManager.IsStageTwoComplete, Converter={StaticResource BoolToColorConverter}}"/>
+            </StackLayout>
+
+            <Grid IsEnabled="{Binding StageCompletionManager.IsStageOneComplete}" Style="{StaticResource StageGrid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- The UI template for changing the points for a performance -->
+                <local_templates:ChangePointsTemplate Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+                <BoxView Grid.Row="1" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
+                <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" Grid.Row="2"/>
+                <Switch x:Name="ControlPanelSwitch" x:FieldModifier="public" Grid.Row="2" Style="{StaticResource StageSwitch}"/>
+            </Grid>
         </StackLayout>
-
-        <Grid IsEnabled="{Binding StageCompletionManager.IsStageOneComplete}" Style="{StaticResource StageGrid}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="300"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <!-- The UI template for changing the points for a performance -->
-            <local_templates:ChangePointsTemplate Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-
-            <BoxView Grid.Row="1" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
-            <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" Grid.Row="2"/>
-            <Switch x:Name="ControlPanelSwitch" x:FieldModifier="public" Grid.Row="2" Style="{StaticResource StageSwitch}"/>
-        </Grid>
-    </StackLayout>
+    </ScrollView>
+    
 </ContentPage>

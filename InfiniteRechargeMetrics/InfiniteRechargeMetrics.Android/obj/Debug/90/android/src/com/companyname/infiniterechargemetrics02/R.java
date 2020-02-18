@@ -4664,10 +4664,14 @@ public final class R {
     public static final int notify_panel_notification_icon_bg=0x7f07008f;
     public static final int record_performance_icon=0x7f070090;
     public static final int red_rebel_icon=0x7f070091;
-    public static final int teams_icon=0x7f070092;
-    public static final int tooltip_frame_dark=0x7f070093;
-    public static final int tooltip_frame_light=0x7f070094;
-    public static final int top_shadow=0x7f070095;
+    public static final int save_icon=0x7f070092;
+    public static final int stage_one=0x7f070093;
+    public static final int stage_three=0x7f070094;
+    public static final int stage_two=0x7f070095;
+    public static final int teams_icon=0x7f070096;
+    public static final int tooltip_frame_dark=0x7f070097;
+    public static final int tooltip_frame_light=0x7f070098;
+    public static final int top_shadow=0x7f070099;
   }
   public static final class id {
     public static final int ALT=0x7f080000;

@@ -4,14 +4,12 @@ using System.Timers;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
-    public class MasterRecordPerformanceViewModel : INotifyPropertyChanged
+    public class MasterRecordPerformanceViewModel
     {
         /// <summary>
         ///     Update the clock every second (1000ms)
         /// </summary>
         private const int UPDATE_CLOCK_INTERVAL = 1000;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public Timer ClockTimer { get; set; } = new Timer();
 

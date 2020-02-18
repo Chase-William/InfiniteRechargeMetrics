@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Timers;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Point = InfiniteRechargeMetrics.Models.Point;
 
@@ -20,7 +21,7 @@ namespace InfiniteRechargeMetrics.ViewModels
     /// <summary>
     ///     Base class for all stage viewmodels
     /// </summary>
-    public abstract class StageViewModelBase : INotifyPropertyChanged, IStageViewModel
+    public abstract class StageViewModelBase : NotifyClass, IStageViewModel
     {
         #region Singletons Children Use
         private const string ADD_POINTS = "+";
@@ -32,7 +33,10 @@ namespace InfiniteRechargeMetrics.ViewModels
         private const int LOW_PORT = 0;
         private const int UPPER_PORT = 1;
         private const int SMALL_PORT = 2;
-
+        /// <summary>
+        ///     Tracks whether the Xamarin.Essentials Vibrate is supported on this device.
+        /// </summary>
+        private static bool IsVibrateSupported = true;
         public static Timer MainTimer { get; set; }        
 
         private static bool isRecording;
@@ -65,6 +69,9 @@ namespace InfiniteRechargeMetrics.ViewModels
         public virtual ObservableCollection<Point> StageSmallPortPoints { get; set; }
         #endregion
 
+        /// <summary>
+        ///     Shared Class for tracking the state of all stages and their completion.
+        /// </summary>
         public StageCompletionManager StageCompletionManager { get; set; }
 
         private Performance performance;
@@ -82,24 +89,6 @@ namespace InfiniteRechargeMetrics.ViewModels
        
         #endregion
 
-        #region INotifyPropertyChanged Props/Functions
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        /// <summary>
-        ///     To use this method; YOU MUST SPECIFY PROPERTY NAME.
-        /// </summary>
-        protected void NotifyPropertiesChanged(params string[] propertyNames)
-        {
-            foreach (string propName in propertyNames)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-            }
-        }
-        #endregion
 
         /// <summary>
         ///     Command that is tied to all the buttons that change points.
@@ -133,8 +122,26 @@ namespace InfiniteRechargeMetrics.ViewModels
             };
         }
 
-        private static async void ChangePoints(StageViewModelBase _viewModel, string entireCode, int _milliSeconds)
+        private static void ChangePoints(StageViewModelBase _viewModel, string entireCode, int _milliSeconds)
         {
+            // Will only vibrate the device as long it has worked before and therefore is supported.
+            if (IsVibrateSupported)
+            {
+                try
+                {
+                    Vibration.Vibrate(TimeSpan.FromMilliseconds(180));
+                }
+                catch (FeatureNotSupportedException ex)
+                {
+                    IsVibrateSupported = false;
+                }
+                catch (Exception ex)
+                {
+                    IsVibrateSupported = false;
+                }
+            }
+            
+
             // if nothing was passed in the code, return
             if (entireCode == null) return;
             // Parsing to a number so we can use an enum to make this more readable
@@ -142,7 +149,7 @@ namespace InfiniteRechargeMetrics.ViewModels
             // informs whether we shall add or subtract based off the code
             string portOperator = entireCode.Substring(0, 1);
 
-            List<int> test = await Data.DatabaseService.GetNextId();
+            // List<int> test = await Data.DatabaseService.GetNextId();
 
             // ------------------------------------------------------------------------------ we need to know the ID this have so we can give the points the primary key
 

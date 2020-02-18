@@ -8,7 +8,8 @@
              xmlns:local_templates="clr-namespace:InfiniteRechargeMetrics.Templates"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.PerformancePages.StageOnePage"
-             Title="Stage One">
+             Title="Stage"
+             IconImageSource="stage_one.png">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,66 +20,69 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+    <ScrollView>
+        <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
 
-        <!-- Button which will start the recording -->
-        <Button x:Name="StartBtn" Text="Start Recording" Grid.ColumnSpan="3" HorizontalOptions="Center" WidthRequest="200" Command="{Binding StartTimerCMD}" IsVisible="{Binding IsRecording, Converter={StaticResource BoolVisibilityConverter}}"/>
+            <!-- Button which will start the recording -->
+            <Button x:Name="StartBtn" Text="Start Recording" Grid.ColumnSpan="3" HorizontalOptions="Center" WidthRequest="200" Command="{Binding StartTimerCMD}" IsVisible="{Binding IsRecording, Converter={StaticResource BoolVisibilityConverter}}"/>
 
-        <StackLayout IsVisible="{Binding IsRecording}" Style="{StaticResource StageHeaderStackLayout}">
-            <Label Text="Stage Status:" Style="{StaticResource DarkBGLabel}"/>
-            <Label Text="{Binding StageCompletionManager.IsStageOneComplete, Converter={StaticResource IsStageCompleteConverter}}" Style="{DynamicResource BaseLabel}" TextColor="{Binding StageCompletionManager.IsStageOneComplete, Converter={StaticResource BoolToColorConverter}}"/>
+            <StackLayout IsVisible="{Binding IsRecording}" Style="{StaticResource StageHeaderStackLayout}">
+                <Label Text="Stage Status:" Style="{StaticResource DarkBGLabel}"/>
+                <Label Text="{Binding StageCompletionManager.IsStageOneComplete, Converter={StaticResource IsStageCompleteConverter}}" Style="{DynamicResource BaseLabel}" TextColor="{Binding StageCompletionManager.IsStageOneComplete, Converter={StaticResource BoolToColorConverter}}"/>
+            </StackLayout>
+
+            <ProgressBar IsVisible="{Binding IsRecording}" Progress="{Binding ProgressBarProgress}"/>
+
+            <!-- The grid for tracking all points -->
+            <Grid HeightRequest="700" IsEnabled="{Binding IsRecording}" Style="{StaticResource StageGrid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <!-- Start Button -->
+                    <RowDefinition Height="40"/>
+                    <!-- Did the robot move off the line row -->
+                    <RowDefinition Height="20"/>
+                    <!-- Category Header -->
+                    <RowDefinition Height="10"/>
+                    <!-- Horizontal Line -->
+                    <RowDefinition Height="300"/>
+                    <!-- ChangePointTemplate -->
+                    <RowDefinition Height="10"/>
+                    <!-- line break -->
+                    <RowDefinition Height="40"/>
+                    <!-- control panel spun? -->
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- The grid labels should look as follows -->
+                <Grid.Resources>
+                    <ResourceDictionary>
+                        <Style TargetType="BoxView">
+                            <Setter Property="Grid.Column" Value="0"/>
+                            <Setter Property="Grid.ColumnSpan" Value="3"/>
+                        </Style>
+                    </ResourceDictionary>
+                </Grid.Resources>
+
+                <!-- Robot move off line options -->
+                <Label Text="{Binding RobotsMovedFromSpawnPoints, Converter={StaticResource RobotsMovedFromSpawnConverter}}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" TextColor="White"/>
+                <local:SteppedSlider Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" HorizontalOptions="EndAndExpand" WidthRequest="200" Minimum="0" Maximum="3" Value="3" ValueChanged="SteppedSlider_ValueChanged"/>
+
+                <Label Text="{Binding StageState, Converter={StaticResource StateStateStringConverter}}" Style="{StaticResource CategoryHeader}" Grid.Row="2" Grid.ColumnSpan="3"/>
+                <BoxView Grid.Row="3" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
+
+                <!-- The UI template for changing the points for a performance -->
+                <local_templates:ChangePointsTemplate Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+                <BoxView Grid.Row="5" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
+                <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" Grid.Row="6"/>
+                <Switch x:Name="ControlPanelSwitch" x:FieldModifier="public" Style="{StaticResource StageSwitch}" Grid.Row="6"/>
+
+            </Grid>
         </StackLayout>
-
-        <ProgressBar IsVisible="{Binding IsRecording}" Progress="{Binding ProgressBarProgress}"/>
-
-        <!-- The grid for tracking all points -->
-        <Grid HeightRequest="700" IsEnabled="{Binding IsRecording}" Style="{StaticResource StageGrid}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <!-- Start Button -->
-                <RowDefinition Height="40"/>
-                <!-- Did the robot move off the line row -->
-                <RowDefinition Height="20"/>
-                <!-- Category Header -->
-                <RowDefinition Height="10"/>
-                <!-- Horizontal Line -->
-                <RowDefinition Height="300"/>
-                <!-- ChangePointTemplate -->
-                <RowDefinition Height="10"/>
-                <!-- line break -->
-                <RowDefinition Height="40"/>
-                <!-- control panel spun? -->
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <!-- The grid labels should look as follows -->
-            <Grid.Resources>
-                <ResourceDictionary>
-                    <Style TargetType="BoxView">
-                        <Setter Property="Grid.Column" Value="0"/>
-                        <Setter Property="Grid.ColumnSpan" Value="3"/>
-                    </Style>
-                </ResourceDictionary>
-            </Grid.Resources>
-
-            <!-- Robot move off line options -->
-            <Label Text="{Binding RobotsMovedFromSpawnPoints, Converter={StaticResource RobotsMovedFromSpawnConverter}}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" TextColor="White"/>
-            <local:SteppedSlider Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" HorizontalOptions="EndAndExpand" WidthRequest="200" Minimum="0" Maximum="3" Value="3" ValueChanged="SteppedSlider_ValueChanged"/>
-
-            <Label Text="{Binding StageState, Converter={StaticResource StateStateStringConverter}}" Style="{StaticResource CategoryHeader}" Grid.Row="2" Grid.ColumnSpan="3"/>
-            <BoxView Grid.Row="3" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
-
-            <!-- The UI template for changing the points for a performance -->
-            <local_templates:ChangePointsTemplate Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"/>
-
-            <BoxView Grid.Row="5" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
-            <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" Grid.Row="6"/>
-            <Switch x:Name="ControlPanelSwitch" x:FieldModifier="public" Style="{StaticResource StageSwitch}" Grid.Row="6"/>
-
-        </Grid>
-    </StackLayout>
+    </ScrollView>
+    
 </ContentPage>

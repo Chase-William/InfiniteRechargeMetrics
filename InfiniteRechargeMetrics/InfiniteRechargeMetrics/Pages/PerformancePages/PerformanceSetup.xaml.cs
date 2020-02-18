@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using InfiniteRechargeMetrics.ViewModels;
 using InfiniteRechargeMetrics.Models;
+using Xamarin.Essentials;
 
 namespace InfiniteRechargeMetrics.Pages.PerformancePages
 {
@@ -21,7 +22,7 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
             BindingContext = new PerformanceSetupViewModel(this);
 
             var teams = await DatabaseService.GetAllTeamsAsync();
-
+           
             string[] teamNames = new string[teams.Count];
             for (int i = 0; i < teams.Count; i++)
             {

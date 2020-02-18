@@ -10,12 +10,12 @@ namespace InfiniteRechargeMetrics.Pages.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? Color.Green : Color.Red;
+            return (bool)value ? Color.LightGreen : Color.Red;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (Color)value == Color.Green ? true : false;
+            return (Color)value == Color.LightGreen ? true : false;
         }
     }
 }
