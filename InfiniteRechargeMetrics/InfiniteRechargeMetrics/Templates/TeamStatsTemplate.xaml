@@ -84,7 +84,7 @@
                 <ContentView x:Name="PerformanceOverall">
                     <StackLayout Margin="0,100,0,0">
                         <Label Text="Generic Stats" Style="{StaticResource CategoryHeader}"/>
-                        <BoxView/>
+                        <BoxView Style="{StaticResource HorizontalLineBreak}"/>
 
                         <Grid Padding="10" RowSpacing="10">
                             <Grid.RowDefinitions>
@@ -114,7 +114,7 @@
                     <StackLayout Margin="0,20,0,0">
 
                         <Label Text="Team's Performances" Style="{StaticResource CategoryHeader}"/>
-                        <BoxView/>
+                        <BoxView Style="{StaticResource HorizontalLineBreak}"/>
 
                         <renderedViews:HorizontalListView x:Name="PerformanceHorizontalListView" 
                                                           VerticalOptions="StartAndExpand"                                          

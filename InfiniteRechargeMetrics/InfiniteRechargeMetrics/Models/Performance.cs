@@ -61,10 +61,11 @@ namespace InfiniteRechargeMetrics.Models
         /// </summary>
         [Column("robots_moved_from_spawn_points")]
         public int RobotsMovedFromSpawnPoints { get; set; }
-
-        // Control Panel
-        [Column("control_panel")]
-        public bool IsControlPanelFinished { get; set; }
+        /// <summary>
+        ///     Records whether the stage one control panel was finished or not        
+        /// </summary>
+        [Column("stage_one_control_panel")]
+        public bool IsStageOneControlPanelFinished { get; set; }
         /// <summary>
         ///     Records the miliseconds from the round start at which the control panel was finished
         /// </summary>
@@ -90,7 +91,11 @@ namespace InfiniteRechargeMetrics.Models
         /// </summary>
         [Column("stage_two_small_port_points")]
         public ObservableCollection<Point> StageTwoSmallPortPoints { get; set; } = new ObservableCollection<Point>();
-
+        /// <summary>
+        ///     Record whether the stage two control panel was finished or not
+        /// </summary>
+        [Column("stage_two_control_panel")]
+        public bool IsStageTwoControlPanelFinished { get; set; }
         #endregion Stage Two End
 
         #region Stage Three
@@ -99,17 +104,17 @@ namespace InfiniteRechargeMetrics.Models
         ///     A lower port point in stage three 
         /// </summary>
         [Column("stage_three_low_port_points")]
-        public int StageThreeLowPortPoints { get; set; }
+        public ObservableCollection<Point> StageThreeLowPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A upper port point in stage three 
         /// </summary>
         [Column("stage_three_upper_port_points")]
-        public int StageThreeUpperPortPoints { get; set; }
+        public ObservableCollection<Point> StageThreeUpperPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A small port point in stage three 
         /// </summary>
         [Column("stage_three_small_port_points")]
-        public int StageThreeSmallPortPoints { get; set; }
+        public ObservableCollection<Point> StageThreeSmallPortPoints { get; set; } = new ObservableCollection<Point>();
         #endregion Stage Three End
     }
 }

@@ -12,7 +12,8 @@
             <converter:InvertBooleanConverter x:Key="BoolVisibilityConverter"/>
             <converter:IntToStringConverter x:Key="IntToStringConverter"/>
             <converter:BoolToColorConverter x:Key="BoolToColorConverter"/>
-
+            <converter:IsStageCompleteConverter x:Key="IsStageCompleteConverter"/>
+            
             <!-- Custom color codes -->
             <Color x:Key="BackgroundColor">#175878</Color>
             <Color x:Key="HighLightColor">#EFE170</Color>
@@ -50,12 +51,16 @@
                 <Setter Property="FontSize" Value="Medium"/>
             </Style>
 
-            <!-- BoxView style for the entire app, because we only use it as a horizontal line break for organization -->
-            <Style TargetType="BoxView">
+            <Style x:Key="HorizontalLineBreak" TargetType="BoxView">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="HeightRequest" Value="2"/>
                 <Setter Property="VerticalOptions" Value="Start"/>
+            </Style>
+            
+            <!-- BoxView style for the entire app, because we only use it as a horizontal line break for organization -->
+            <Style x:Key="GridBasedHorizontalLineBreak" TargetType="BoxView" BasedOn="{StaticResource HorizontalLineBreak}">
+                <Setter Property="Grid.ColumnSpan" Value="3"/>
             </Style>
 
             <!-- Button style that is used commonly around the app for constant theme -->
@@ -73,6 +78,34 @@
                 <Setter Property="TextColor" Value="White"/>
             </Style>
 
+            
+            <Style x:Key="StageSwitch" TargetType="Switch">
+                <Setter Property="Grid.Column" Value="2"/>
+                <Setter Property="Scale" Value="1.5"/>
+                <Setter Property="Margin" Value="10,0,0,0"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="IsToggled" Value="False"/>
+                <Setter Property="OnColor" Value="{StaticResource ActiveColor}"/>
+            </Style>
+
+            <Style x:Key="SwitchLabel" TargetType="Label" BasedOn="{StaticResource DarkBGLabel}">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Grid.ColumnSpan" Value="2"/>
+            </Style>
+
+            <!-- Style for the main grid inside the stage pages -->
+            <Style x:Key="StageGrid" TargetType="Grid">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+            </Style>
+            <!-- Style for the header stacklayouts inside the stage pages -->
+            <Style x:Key="StageHeaderStackLayout" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

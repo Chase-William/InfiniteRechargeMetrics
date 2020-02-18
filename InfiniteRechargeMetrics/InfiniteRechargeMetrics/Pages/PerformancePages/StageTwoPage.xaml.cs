@@ -9,16 +9,19 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
     public partial class StageTwoPage : ContentPage
     {
         private Performance performance;
-        public StageTwoPage(Performance _performance)
+        private StageCompletionManager stageCompletionManager;
+
+        public StageTwoPage(Performance _performance, StageCompletionManager _stageCompletionManager)
         {
             InitializeComponent();
-            performance = _performance;            
+            performance = _performance;
+            stageCompletionManager = _stageCompletionManager;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            BindingContext = new StageTwoViewModel(performance);
+            BindingContext = BindingContext ?? new StageTwoViewModel(this, performance, stageCompletionManager);
         }
     }
 }

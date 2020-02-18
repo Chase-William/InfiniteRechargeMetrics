@@ -78,7 +78,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" WidthRequest="1" Color="White"/>
+        <BoxView Style="{StaticResource HorizontalLineBreak}"/>
 
 
         <!-- Actions the user can perform -->

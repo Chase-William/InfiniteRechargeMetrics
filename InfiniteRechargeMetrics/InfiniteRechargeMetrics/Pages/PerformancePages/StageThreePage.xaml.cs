@@ -15,17 +15,18 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
     public partial class StageThreePage : ContentPage
     {
         private Performance performance;
-        public StageThreePage(Performance _performance)
+        private StageCompletionManager stageCompletionManager;
+        public StageThreePage(Performance _performance, StageCompletionManager _stageCompletionManager)
         {
             InitializeComponent();
             performance = _performance;
-           
+            stageCompletionManager = _stageCompletionManager;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            BindingContext = new StageThreeViewModel(performance);
+            BindingContext = BindingContext ?? new StageThreeViewModel(performance, stageCompletionManager);
         }
     }
 }

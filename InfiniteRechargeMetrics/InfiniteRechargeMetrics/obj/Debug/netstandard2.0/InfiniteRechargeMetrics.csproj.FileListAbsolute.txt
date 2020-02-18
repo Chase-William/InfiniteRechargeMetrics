@@ -29,7 +29,6 @@ C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\Infi
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\InfiniteRechargeMetrics.dll
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\ref\InfiniteRechargeMetrics.dll
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\InfiniteRechargeMetrics.pdb
-C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\InfiniteRechargeMetrics.csprojAssemblyReference.cache
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\App.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\HomeTeamPage.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\LoginPage.xaml.g.cs
@@ -53,3 +52,4 @@ C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\Infi
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\ref\InfiniteRechargeMetrics.dll
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\InfiniteRechargeMetrics.pdb
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Templates\ChangePointsTemplate.xaml.g.cs
+C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\InfiniteRechargeMetrics.csprojAssemblyReference.cache

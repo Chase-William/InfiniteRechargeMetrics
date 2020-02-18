@@ -10,7 +10,9 @@ namespace InfiniteRechargeMetrics.ViewModels
     /// </summary>s
     public interface IStageViewModel
     {
-        void HandleChangePointsBtnClicked(object keyChar);
-        ICommand ChangePointsCMD { get; set; }
+        /// <summary>
+        ///     Based of implementation; should check if the conditions are met to declare the current stage as complete.
+        /// </summary>
+        void CheckIfStageIsComplete();
     }
 }

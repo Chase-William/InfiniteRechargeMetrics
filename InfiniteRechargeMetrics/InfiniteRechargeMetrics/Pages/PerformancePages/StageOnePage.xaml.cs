@@ -11,18 +11,21 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
     public partial class StageOnePage : ContentPage
     {
         private Performance performance;
+        private StageCompletionManager stageCompletionManager;
+        public MasterRecordPerformancePage MasterPerformancePage { get; set; }
 
-        public StageOnePage(Performance _performance)
+        public StageOnePage(MasterRecordPerformancePage _masterPerformancePage, Performance _performance, StageCompletionManager _stageCompletionManager)
         {
             InitializeComponent();
             performance = _performance;
-            
+            stageCompletionManager = _stageCompletionManager;
+            MasterPerformancePage = _masterPerformancePage;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            BindingContext = BindingContext ?? new StageOneViewModel(this, performance);
+            BindingContext = BindingContext ?? new StageOneViewModel(this, performance, stageCompletionManager);
             // Starts the animation of the start button
             // StartBtnAnimation();
         }

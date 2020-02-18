@@ -14,7 +14,7 @@ namespace InfiniteRechargeMetrics.Pages
             InitializeComponent();
         }
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             // Setting the binding context to our viewmodel to handle the UI code side

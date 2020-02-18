@@ -1,9 +1,10 @@
 ﻿using InfiniteRechargeMetrics.Models;
+using InfiniteRechargeMetrics.Pages.PerformancePages;
 using System.Collections.ObjectModel;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
-    public class StageTwoViewModel : StageViewModelBase
+    public class StageTwoViewModel : StageViewModelBase, IStageViewModel
     {
         #region Points Scored
         public override int StageLowPortTotalValue => StageLowPortPoints.Count * StageConstants.MANUAL_LPP;
@@ -27,20 +28,46 @@ namespace InfiniteRechargeMetrics.ViewModels
         }
         #endregion
 
-        public StageTwoViewModel(Performance _performance) : base(_performance)
+        /// <summary>
+        ///     Boolean representing whether the team has completed the control panel step.
+        /// </summary>
+        public bool IsControlPanelFinished
         {
-            StageLowPortPoints.CollectionChanged += delegate
+            get => Performance.IsStageTwoControlPanelFinished;
+            set
             {
-                NotifyPropertyChanged(nameof(StageLowPortTotalValue));
-            };
-            StageUpperPortPoints.CollectionChanged += delegate
+                Performance.IsStageTwoControlPanelFinished = value;
+                CheckIfStageIsComplete();
+            }
+        }
+
+        public StageTwoViewModel(StageTwoPage _stageTwoPage, Performance _performance, StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager)
+        {
+            _stageTwoPage.ControlPanelSwitch.Toggled += ControlPanelSwitch_Toggled;            
+        }
+
+        /// <summary>
+        ///     Handler for the control switch being toggled.
+        ///     Updates the Performance's control panel value based off the switch.
+        /// </summary>
+        private void ControlPanelSwitch_Toggled(object sender, Xamarin.Forms.ToggledEventArgs e)
+        {
+            IsControlPanelFinished = e.Value;
+        }
+
+        public override void CheckIfStageIsComplete()
+        {
+            if (!IsControlPanelFinished || !(base.AddTotalValues(StageLowPortTotalValue +
+                                                                 StageUpperPortTotalValue +
+                                                                 StageSmallPortTotalValue) >= StageConstants.MIN_VALUE_FOR_COMPLETED_STAGE_TWO))
             {
-                NotifyPropertyChanged(nameof(StageUpperPortTotalValue));
-            };
-            StageSmallPortPoints.CollectionChanged += delegate
+                base.StageCompletionManager.IsStageTwoComplete = false;
+                return;
+            }
+            else
             {
-                NotifyPropertyChanged(nameof(StageSmallPortTotalValue));
-            };
+                base.StageCompletionManager.IsStageTwoComplete = true;
+            }
         }
     }
 }

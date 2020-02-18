@@ -3,14 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local_templates="clr-namespace:InfiniteRechargeMetrics.Templates"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.PerformancePages.StageThreePage"
              Title="Stage Three">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+    
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+        <StackLayout Style="{StaticResource StageHeaderStackLayout}">
+            <Label Text="Stage Status:" Style="{StaticResource DarkBGLabel}"/>
+            <Label Text="{Binding StageCompletionManager.IsStageThreeComplete, Converter={StaticResource IsStageCompleteConverter}}" Style="{DynamicResource BaseLabel}" TextColor="{Binding StageCompletionManager.IsStageThreeComplete, Converter={StaticResource BoolToColorConverter}}"/>
         </StackLayout>
-    </ContentPage.Content>
+
+        <Grid IsEnabled="{Binding StageCompletionManager.IsStageTwoComplete}" Style="{StaticResource StageGrid}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- The UI template for changing the points for a performance -->
+            <local_templates:ChangePointsTemplate Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+        </Grid>
+    </StackLayout>
 </ContentPage>

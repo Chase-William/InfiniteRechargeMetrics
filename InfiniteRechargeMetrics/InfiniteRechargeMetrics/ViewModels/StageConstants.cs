@@ -70,6 +70,17 @@
         ///     The amount of time in miliseconds for the manual part of the match or performance to be finished. (time limit)
         /// </summary>
         public const int MANUAL_MODE_MAX_TIME = 135000;
+        /// <summary>
+        ///     The min value of points required to complete stage one.
+        /// </summary>
         public const int MIN_VALUE_FOR_COMPLETED_STAGE_ONE = 9;
+        /// <summary>
+        ///     The min value of points required to complete stage two.
+        /// </summary>
+        public const int MIN_VALUE_FOR_COMPLETED_STAGE_TWO = 20;
+        /// <summary>
+        ///     The mai value of points required to complete stage three.
+        /// </summary>
+        public const int MIN_VALUE_FOR_COMPLETED_STAGE_THREE = 20;
     }
 }

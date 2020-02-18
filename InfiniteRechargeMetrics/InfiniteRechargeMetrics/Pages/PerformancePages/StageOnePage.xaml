@@ -15,14 +15,6 @@
 
             <converter:StageStateStringConverter x:Key="StateStateStringConverter"/>
             <converter:RobotsMovedFromSpawnConverter x:Key="RobotsMovedFromSpawnConverter"/>
-            <converter:IsStageCompleteConverter x:Key="IsStageCompleteConverter"/>
-
-            <Style x:Key="SwitchLabel" TargetType="Label" BasedOn="{StaticResource DarkBGLabel}">
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
-                <Setter Property="Grid.Column" Value="0"/>
-                <Setter Property="Grid.ColumnSpan" Value="2"/>
-            </Style>
 
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -32,15 +24,15 @@
         <!-- Button which will start the recording -->
         <Button x:Name="StartBtn" Text="Start Recording" Grid.ColumnSpan="3" HorizontalOptions="Center" WidthRequest="200" Command="{Binding StartTimerCMD}" IsVisible="{Binding IsRecording, Converter={StaticResource BoolVisibilityConverter}}"/>
 
-        <StackLayout Orientation="Horizontal" IsVisible="{Binding IsRecording}" Padding="10" HorizontalOptions="Center">
+        <StackLayout IsVisible="{Binding IsRecording}" Style="{StaticResource StageHeaderStackLayout}">
             <Label Text="Stage Status:" Style="{StaticResource DarkBGLabel}"/>
-            <Label Text="{Binding IsStageComplete, Converter={StaticResource IsStageCompleteConverter}}" Style="{DynamicResource BaseLabel}" TextColor="{Binding IsStageComplete, Converter={StaticResource BoolToColorConverter}}"/>
+            <Label Text="{Binding StageCompletionManager.IsStageOneComplete, Converter={StaticResource IsStageCompleteConverter}}" Style="{DynamicResource BaseLabel}" TextColor="{Binding StageCompletionManager.IsStageOneComplete, Converter={StaticResource BoolToColorConverter}}"/>
         </StackLayout>
 
         <ProgressBar IsVisible="{Binding IsRecording}" Progress="{Binding ProgressBarProgress}"/>
 
         <!-- The grid for tracking all points -->
-        <Grid VerticalOptions="Start" HeightRequest="700" BackgroundColor="{StaticResource BackgroundColor}" Padding="5" IsEnabled="{Binding IsRecording}">
+        <Grid HeightRequest="700" IsEnabled="{Binding IsRecording}" Style="{StaticResource StageGrid}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <!-- Start Button -->
@@ -78,14 +70,14 @@
             <local:SteppedSlider Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" HorizontalOptions="EndAndExpand" WidthRequest="200" Minimum="0" Maximum="3" Value="3" ValueChanged="SteppedSlider_ValueChanged"/>
 
             <Label Text="{Binding StageState, Converter={StaticResource StateStateStringConverter}}" Style="{StaticResource CategoryHeader}" Grid.Row="2" Grid.ColumnSpan="3"/>
-            <BoxView Grid.Row="3"/>
+            <BoxView Grid.Row="3" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
 
             <!-- The UI template for changing the points for a performance -->
             <local_templates:ChangePointsTemplate Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"/>
 
-            <BoxView Grid.Row="5"/>
+            <BoxView Grid.Row="5" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
             <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" Grid.Row="6"/>
-            <Switch x:Name="ControlPanelSwitch" x:FieldModifier="public" Grid.Column="2" Grid.Row="6" Scale="1.5" HorizontalOptions="Center" IsToggled="False" OnColor="{StaticResource ActiveColor}"/>
+            <Switch x:Name="ControlPanelSwitch" x:FieldModifier="public" Style="{StaticResource StageSwitch}" Grid.Row="6"/>
 
         </Grid>
     </StackLayout>

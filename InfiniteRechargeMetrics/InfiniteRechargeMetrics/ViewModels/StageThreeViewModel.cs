@@ -1,45 +1,48 @@
 ﻿using InfiniteRechargeMetrics.Models;
 using InfiniteRechargeMetrics.Pages.PerformancePages;
+using System.Collections.ObjectModel;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
-    public class StageThreeViewModel : StageViewModelBase
+    public class StageThreeViewModel : StageViewModelBase, IStageViewModel
     {
         #region Points Scored
-        public int StageThreeLowPortPoints
+        public override int StageLowPortTotalValue => StageLowPortPoints.Count * StageConstants.MANUAL_LPP;
+        public override int StageUpperPortTotalValue => StageUpperPortPoints.Count * StageConstants.MANUAL_UPP;
+        public override int StageSmallPortTotalValue => StageSmallPortPoints.Count * StageConstants.MANUAL_SPP;
+
+        public override ObservableCollection<Point> StageLowPortPoints
         {
             get => Performance.StageThreeLowPortPoints;
-            set
-            {
-                if (value < MIN_POINTS || value > MAX_POINTS) return;
-                Performance.StageThreeLowPortPoints = value;
-                NotifyPropertyChanged(nameof(StageThreeLowPortPoints));
-            }
+            set => Performance.StageThreeLowPortPoints = value;
         }
-        public int StageThreeUpperPortPoints
+        public override ObservableCollection<Point> StageUpperPortPoints
         {
             get => Performance.StageThreeUpperPortPoints;
-            set
-            {
-                if (value < MIN_POINTS || value > MAX_POINTS) return;
-                Performance.StageThreeUpperPortPoints = value;
-                NotifyPropertyChanged(nameof(StageThreeUpperPortPoints));
-            }
+            set => Performance.StageThreeUpperPortPoints = value;
         }
-        public int StageThreeSmallPortPoints
+        public override ObservableCollection<Point> StageSmallPortPoints
         {
             get => Performance.StageThreeSmallPortPoints;
-            set
-            {
-                if (value < MIN_POINTS || value > MAX_POINTS) return;
-                Performance.StageThreeSmallPortPoints = value;
-                NotifyPropertyChanged(nameof(StageThreeSmallPortPoints));
-            }
+            set => Performance.StageThreeSmallPortPoints = value;
         }
-        #endregion
-        public StageThreeViewModel(Performance _performance) : base(_performance)
-        {
+        #endregion        
 
+        public StageThreeViewModel(Performance _performance, StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager) { }
+
+        public override void CheckIfStageIsComplete()
+        {
+            if (!(base.AddTotalValues(StageLowPortTotalValue +
+                                      StageUpperPortTotalValue +
+                                      StageSmallPortTotalValue) >= StageConstants.MIN_VALUE_FOR_COMPLETED_STAGE_TWO))
+            {
+                base.StageCompletionManager.IsStageThreeComplete = false;
+                return;
+            }
+            else
+            {
+                base.StageCompletionManager.IsStageThreeComplete = true;
+            }
         }
     }
 }

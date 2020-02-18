@@ -15,27 +15,25 @@ namespace InfiniteRechargeMetrics.ViewModels
     /// <summary>
     ///     enum for determining wether the stage is in autonomous mode or manuals
     /// </summary>
-    public enum StageState { Autononmous, Manual }
-
-    /// <summary>
-    ///     enum for determining the meaning of the command parameters from XAML command bindings.
-    ///     Low   == 0
-    ///     Upper == 1
-    ///     Small == 2
-    /// </summary>
-    public enum PointFromXAMLIdentifier { Low, Upper, Small }
+    public enum StageState { Autononmous, Manual }    
 
     /// <summary>
     ///     Base class for all stage viewmodels
     /// </summary>
-    public abstract class StageViewModelBase : INotifyPropertyChanged
+    public abstract class StageViewModelBase : INotifyPropertyChanged, IStageViewModel
     {
         #region Singletons Children Use
         private const string ADD_POINTS = "+";
         public const int MIN_POINTS = 0;
-        public const int MAX_POINTS = 999;       
+        public const int MAX_POINTS = 999;
+        /// <summary>
+        ///     Used for determining which port was the intent click to.
+        /// </summary>
+        private const int LOW_PORT = 0;
+        private const int UPPER_PORT = 1;
+        private const int SMALL_PORT = 2;
 
-        public static Timer MainTimer { get; set; }
+        public static Timer MainTimer { get; set; }        
 
         private static bool isRecording;
         /// <summary>
@@ -81,11 +79,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         ///     Gets whether or not the application is recording
         /// </summary>
         public bool IsRecording { get => isRecording; }
-
-        /// <summary>
-        ///     Is set to true when the stage has all the requirements fulfilled to be consider complete.
-        /// </summary>
-        public virtual bool IsStageComplete { get; set; }
+       
         #endregion
 
         #region INotifyPropertyChanged Props/Functions
@@ -112,17 +106,34 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// </summary>
         public ICommand ChangePointsCMD { get; set; }
 
-        public StageViewModelBase(Performance _performance)
+        public StageViewModelBase(Performance _performance, StageCompletionManager _stageCompletionManager)
         {
             MainTimer = new Timer();
             Stopwatch = new Stopwatch();
             ChangePointsCMD = new Command((object charCode) => ChangePoints(this, (string)charCode, Stopwatch.Elapsed.Milliseconds));
+            StageCompletionManager = _stageCompletionManager;
             Performance = _performance;
             SetRecordingState(this, false);
             isRecording = false;
+
+            StageLowPortPoints.CollectionChanged += delegate
+            {
+                NotifyPropertyChanged(nameof(StageLowPortTotalValue));
+                CheckIfStageIsComplete();
+            };
+            StageUpperPortPoints.CollectionChanged += delegate
+            {
+                NotifyPropertyChanged(nameof(StageUpperPortTotalValue));
+                CheckIfStageIsComplete();
+            };
+            StageSmallPortPoints.CollectionChanged += delegate
+            {
+                NotifyPropertyChanged(nameof(StageSmallPortTotalValue));
+                CheckIfStageIsComplete();
+            };
         }
 
-        protected async void ChangePoints(StageViewModelBase _viewModel, string entireCode, int _milliSeconds)
+        private static async void ChangePoints(StageViewModelBase _viewModel, string entireCode, int _milliSeconds)
         {
             // if nothing was passed in the code, return
             if (entireCode == null) return;
@@ -149,15 +160,15 @@ namespace InfiniteRechargeMetrics.ViewModels
                     switch (portIndex)
                     {
                         // Autonomous Mode Low Port,   2 points
-                        case (int)PointFromXAMLIdentifier.Low:
+                        case LOW_PORT:
                             ChangePoints(stageOneViewModel.AutoLowPortPoints, PointType.AutomonousLow);
                             break;
                         // Autonomous Mode Upper Port, 4 points
-                        case (int)PointFromXAMLIdentifier.Upper:
+                        case UPPER_PORT:
                             ChangePoints(stageOneViewModel.AutoUpperPortPoints, PointType.AutomonousUpper);
                             break;
                         // Autonomous Mode Small Port, 6 points
-                        case (int)PointFromXAMLIdentifier.Small:
+                        case SMALL_PORT:
                             ChangePoints(stageOneViewModel.AutoSmallPortPoints, PointType.AutomonousSmall);
                             break;
                         default:
@@ -170,15 +181,15 @@ namespace InfiniteRechargeMetrics.ViewModels
                     switch (portIndex)
                     {
                         // Autonomous Mode Low Port,   2 points
-                        case (int)PointFromXAMLIdentifier.Low:
+                        case LOW_PORT:
                             ChangePoints(stageOneViewModel.StageLowPortPoints, PointType.StageOneLow);
                             break;
                         // Autonomous Mode Upper Port, 4 points
-                        case (int)PointFromXAMLIdentifier.Upper:
+                        case UPPER_PORT:
                             ChangePoints(stageOneViewModel.StageUpperPortPoints, PointType.StageOneUpper);
                             break;
                         // Autonomous Mode Small Port, 6 points
-                        case (int)PointFromXAMLIdentifier.Small:
+                        case SMALL_PORT:
                             ChangePoints(stageOneViewModel.StageSmallPortPoints, PointType.StageOneSmall);
                             break;
                         default:
@@ -192,16 +203,16 @@ namespace InfiniteRechargeMetrics.ViewModels
                 switch (portIndex)
                 {
                     // Autonomous Mode Low Port,   2 points
-                    case (int)PointFromXAMLIdentifier.Low:
-                        ChangePoints(stageTwoViewModel.StageLowPortPoints, PointType.StageOneLow);
+                    case LOW_PORT:
+                        ChangePoints(stageTwoViewModel.StageLowPortPoints, PointType.StageTwoLow);
                         break;
                     // Autonomous Mode Upper Port, 4 points
-                    case (int)PointFromXAMLIdentifier.Upper:
-                        ChangePoints(stageTwoViewModel.StageUpperPortPoints, PointType.StageOneUpper);
+                    case UPPER_PORT:
+                        ChangePoints(stageTwoViewModel.StageUpperPortPoints, PointType.StageTwoUpper);
                         break;
                     // Autonomous Mode Small Port, 6 points
-                    case (int)PointFromXAMLIdentifier.Small:
-                        ChangePoints(stageTwoViewModel.StageSmallPortPoints, PointType.StageOneSmall);
+                    case SMALL_PORT:
+                        ChangePoints(stageTwoViewModel.StageSmallPortPoints, PointType.StageTwoSmall);
                         break;
                     default:
                         break;
@@ -210,7 +221,20 @@ namespace InfiniteRechargeMetrics.ViewModels
             // Process for Stage Three
             else if (_viewModel is StageThreeViewModel stageThreeViewModel)
             {
-
+                switch (portIndex)
+                {
+                    case LOW_PORT:
+                        ChangePoints(stageThreeViewModel.StageLowPortPoints, PointType.StageThreeLow);
+                        break;
+                    case UPPER_PORT:
+                        ChangePoints(stageThreeViewModel.StageUpperPortPoints, PointType.StageThreeUpper);
+                        break;
+                    case SMALL_PORT:
+                        ChangePoints(stageThreeViewModel.StageSmallPortPoints, PointType.StageThreeSmall);
+                        break;
+                    default:
+                        break;
+                }
             }
 
             // Modifies Performance port's points 
@@ -229,5 +253,20 @@ namespace InfiniteRechargeMetrics.ViewModels
                 }
             }
         }
+
+        /// <summary>
+        ///     Helper function to add integers together... Math lib didnt have this
+        /// </summary>
+        public int AddTotalValues(params int[] _value)
+        {
+            int sum = 0;
+            for (int i = 0; i < _value.Length; i++)
+            {
+                sum += _value[i];
+            }
+            return sum;
+        }
+
+        public virtual void CheckIfStageIsComplete() { }
     }
 }
