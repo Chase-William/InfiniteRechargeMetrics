@@ -10,8 +10,8 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StageOnePage : ContentPage
     {
-        private Performance performance;
-        private StageCompletionManager stageCompletionManager;
+        private readonly Performance performance;
+        private readonly StageCompletionManager stageCompletionManager;
         public MasterRecordPerformancePage MasterPerformancePage { get; set; }
 
         public StageOnePage(MasterRecordPerformancePage _masterPerformancePage, Performance _performance, StageCompletionManager _stageCompletionManager)
@@ -20,14 +20,8 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
             performance = _performance;
             stageCompletionManager = _stageCompletionManager;
             MasterPerformancePage = _masterPerformancePage;
-        }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            BindingContext = BindingContext ?? new StageOneViewModel(this, performance, stageCompletionManager);
-            // Starts the animation of the start button
-            // StartBtnAnimation();
+            BindingContext = new StageOneViewModel(this, performance, stageCompletionManager);
         }
 
         private void SteppedSlider_ValueChanged(object sender, ValueChangedEventArgs e)

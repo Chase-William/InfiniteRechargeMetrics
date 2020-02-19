@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:InfiniteRechargeMetrics.SharedCustomViews"
              mc:Ignorable="d"
-             x:Class="InfiniteRechargeMetrics.Pages.PerformancePages.PerformanceSetup"
+             x:Class="InfiniteRechargeMetrics.Pages.PerformancePages.PerformanceSetupPage"
              Title="Setup Recording">
 
 

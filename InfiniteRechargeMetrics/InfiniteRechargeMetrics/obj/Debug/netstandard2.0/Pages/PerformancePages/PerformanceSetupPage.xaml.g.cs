@@ -8,20 +8,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("InfiniteRechargeMetrics.Pages.PerformancePages.PerformanceSetup.xaml", "Pages/PerformancePages/PerformanceSetup.xaml", typeof(global::InfiniteRechargeMetrics.Pages.PerformancePages.PerformanceSetup))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("InfiniteRechargeMetrics.Pages.PerformancePages.PerformanceSetupPage.xaml", "Pages/PerformancePages/PerformanceSetupPage.xaml", typeof(global::InfiniteRechargeMetrics.Pages.PerformancePages.PerformanceSetupPage))]
 
 namespace InfiniteRechargeMetrics.Pages.PerformancePages {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Pages\\PerformancePages\\PerformanceSetup.xaml")]
-    public partial class PerformanceSetup : global::Xamarin.Forms.ContentPage {
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Pages\\PerformancePages\\PerformanceSetupPage.xaml")]
+    public partial class PerformanceSetupPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         public global::Xamarin.Forms.Picker TeamPicker;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
-            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(PerformanceSetup));
+            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(PerformanceSetupPage));
             TeamPicker = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Picker>(this, "TeamPicker");
         }
     }

@@ -1,30 +1,21 @@
 ﻿using InfiniteRechargeMetrics.Models;
 using InfiniteRechargeMetrics.Pages.PerformancePages;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
     public class StageTwoViewModel : StageViewModelBase, IStageViewModel
     {
         #region Points Scored
-        public override int StageLowPortTotalValue => StageLowPortPoints.Count * StageConstants.MANUAL_LPP;
-        public override int StageUpperPortTotalValue => StageUpperPortPoints.Count * StageConstants.MANUAL_UPP;
-        public override int StageSmallPortTotalValue => StageSmallPortPoints.Count * StageConstants.MANUAL_SPP;
+        public override int StageLowPortTotalValue => CurrentStagePortPoints.Where(point => point.GetPointType() == PointType.StageTwoLow).ToList().Count * StageConstants.MANUAL_LPP;
+        public override int StageUpperPortTotalValue => CurrentStagePortPoints.Where(point => point.GetPointType() == PointType.StageTwoUpper).ToList().Count * StageConstants.MANUAL_UPP;
+        public override int StageSmallPortTotalValue => CurrentStagePortPoints.Where(point => point.GetPointType() == PointType.StageTwoSmall).ToList().Count * StageConstants.MANUAL_SPP;
 
-        public override ObservableCollection<Point> StageLowPortPoints
+        public override ObservableCollection<Point> CurrentStagePortPoints
         {
-            get => Performance.StageTwoLowPortPoints;
-            set => Performance.StageTwoLowPortPoints = value;
-        }
-        public override ObservableCollection<Point> StageUpperPortPoints
-        {
-            get => Performance.StageTwoUpperPortPoints;
-            set => Performance.StageTwoLowPortPoints = value;
-        }
-        public override ObservableCollection<Point> StageSmallPortPoints
-        {
-            get => Performance.StageTwoSmallPortPoints;
-            set => Performance.StageTwoSmallPortPoints = value;
+            get => Performance.StageTwoPortPoints;
+            set => Performance.StageTwoPortPoints = value;
         }
         #endregion
 

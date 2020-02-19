@@ -9,9 +9,9 @@ using Xamarin.Essentials;
 namespace InfiniteRechargeMetrics.Pages.PerformancePages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PerformanceSetup : ContentPage
+    public partial class PerformanceSetupPage : ContentPage
     {
-        public PerformanceSetup()
+        public PerformanceSetupPage()
         {
             InitializeComponent();
         }

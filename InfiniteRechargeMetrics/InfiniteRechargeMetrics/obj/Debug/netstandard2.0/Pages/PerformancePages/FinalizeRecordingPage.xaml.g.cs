@@ -20,9 +20,37 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages {
         private global::Xamarin.Forms.StackLayout RobotCommentLayout;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        public global::Xamarin.Forms.Entry RobotThreeIdEntry;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        public global::InfiniteRechargeMetrics.SharedCustomViews.CustomEditor RobotOneInfoEditor;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        public global::Xamarin.Forms.Entry RobotTwoIdEntry;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        public global::InfiniteRechargeMetrics.SharedCustomViews.CustomEditor RobotTwoInfoEditor;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        public global::Xamarin.Forms.Entry RobotOneIdEntry;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        public global::InfiniteRechargeMetrics.SharedCustomViews.CustomEditor RobotThreeInfoEditor;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        public global::InfiniteRechargeMetrics.SharedCustomViews.CustomEditor PerformanceCommentsEditor;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(FinalizeRecordingPage));
             RobotCommentLayout = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.StackLayout>(this, "RobotCommentLayout");
+            RobotThreeIdEntry = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Entry>(this, "RobotThreeIdEntry");
+            RobotOneInfoEditor = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::InfiniteRechargeMetrics.SharedCustomViews.CustomEditor>(this, "RobotOneInfoEditor");
+            RobotTwoIdEntry = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Entry>(this, "RobotTwoIdEntry");
+            RobotTwoInfoEditor = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::InfiniteRechargeMetrics.SharedCustomViews.CustomEditor>(this, "RobotTwoInfoEditor");
+            RobotOneIdEntry = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Entry>(this, "RobotOneIdEntry");
+            RobotThreeInfoEditor = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::InfiniteRechargeMetrics.SharedCustomViews.CustomEditor>(this, "RobotThreeInfoEditor");
+            PerformanceCommentsEditor = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::InfiniteRechargeMetrics.SharedCustomViews.CustomEditor>(this, "PerformanceCommentsEditor");
         }
     }
 }

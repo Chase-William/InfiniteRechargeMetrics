@@ -7,6 +7,7 @@ namespace InfiniteRechargeMetrics.Models
     [Table("Performance")]
     public class Performance
     {
+        #region Performance Itself
         /// <summary>
         ///     The identifier for this class / table
         /// </summary>
@@ -22,43 +23,28 @@ namespace InfiniteRechargeMetrics.Models
         /// </summary>
         [Column("team_id_fk")]
         public string TeamId_FK { get; set; }
+        [Column("comments")]
+        public string Comments { get; set; }
+        #endregion
+
+
 
         #region Stage One
         // --- Automonous ---
 
         /// <summary>
-        ///     A lower port score in autonomous mode
+        ///     Stores the points relate to stage one autonomous.
         /// </summary>
         [Ignore]
-        public ObservableCollection<Point> AutoLowPortPoints { get; set; } = new ObservableCollection<Point>();
-        /// <summary>
-        ///     A upper port score in autonomous mode
-        /// </summary>
-        [Ignore]
-        public ObservableCollection<Point> AutoUpperPortPoints { get; set; } = new ObservableCollection<Point>();
-        /// <summary>
-        ///     A small port score in autonomous mode
-        /// </summary
-        [Ignore]
-        public ObservableCollection<Point> AutoSmallPortPoints { get; set; } = new ObservableCollection<Point>();
+        public ObservableCollection<Point> AutonomousPortPoints { get; set; } = new ObservableCollection<Point>();
 
         // --- Stage 1 Manual ---
 
         /// <summary>
-        ///     A lower port point in stage one manual mode
+        ///     Stores the points relate to stage one manual.
         /// </summary>
         [Ignore]
-        public ObservableCollection<Point> StageOneLowPortPoints { get; set; } = new ObservableCollection<Point>();
-        /// <summary>
-        ///     A upper port point in stage one manual mode
-        /// </summary>
-        [Ignore]
-        public ObservableCollection<Point> StageOneUpperPortPoints { get; set; } = new ObservableCollection<Point>();
-        /// <summary>
-        ///     A small port point in stage one manual mode
-        /// </summary
-        [Ignore]
-        public ObservableCollection<Point> StageOneSmallPortPoints { get; set; } = new ObservableCollection<Point>();
+        public ObservableCollection<Point> StageOnePortPoints { get; set; } = new ObservableCollection<Point>();
 
         /// <summary>
         ///     Holds the point values of the robots that moved off their spawn location.
@@ -76,50 +62,27 @@ namespace InfiniteRechargeMetrics.Models
         /// </summary>
         [Column("control_panel_time")]
         public bool TimeControlPanelFinished { get; set; }
-
-        #endregion Stage One End
+        #endregion
 
         #region Stage Two
-
         /// <summary>
-        ///     A lower port point in stage two 
+        ///     Stores the points relate to stage tw0.
         /// </summary>
         [Ignore]
-        public ObservableCollection<Point> StageTwoLowPortPoints { get; set; } = new ObservableCollection<Point>();
-        /// <summary>
-        ///     A upper port point in stage two 
-        /// </summary>
-        [Ignore]
-        public ObservableCollection<Point> StageTwoUpperPortPoints { get; set; } = new ObservableCollection<Point>();
-        /// <summary>
-        ///     A small port point in stage two 
-        /// </summary>
-        [Ignore]
-        public ObservableCollection<Point> StageTwoSmallPortPoints { get; set; } = new ObservableCollection<Point>();
+        public ObservableCollection<Point> StageTwoPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     Record whether the stage two control panel was finished or not
         /// </summary>
         [Column("stage_two_control_panel")]
         public bool IsStageTwoControlPanelFinished { get; set; }
-        #endregion Stage Two End
+        #endregion 
 
         #region Stage Three
-
         /// <summary>
-        ///     A lower port point in stage three 
+        ///     Stores the points relate to stage three.
         /// </summary>
         [Ignore]
-        public ObservableCollection<Point> StageThreeLowPortPoints { get; set; } = new ObservableCollection<Point>();
-        /// <summary>
-        ///     A upper port point in stage three 
-        /// </summary>
-        [Ignore]
-        public ObservableCollection<Point> StageThreeUpperPortPoints { get; set; } = new ObservableCollection<Point>();
-        /// <summary>
-        ///     A small port point in stage three 
-        /// </summary>
-        [Ignore]
-        public ObservableCollection<Point> StageThreeSmallPortPoints { get; set; } = new ObservableCollection<Point>();
+        public ObservableCollection<Point> StageThreePortPoints { get; set; } = new ObservableCollection<Point>();
 
         [Column("droid_one_randevu")]
         public bool DroidOneRandevu { get; set; }
@@ -130,5 +93,29 @@ namespace InfiniteRechargeMetrics.Models
         [Column("is_droid_randevu_level")]
         public bool IsRandevuLevel { get; set; }
         #endregion Stage Three End
+
+        #region Robot Info
+        /// <summary>
+        ///     Information about the robots used during this performance.
+        ///     
+        ///     - Idealy in the future robot should be its own class and table inside the database.
+        ///         For now it will simply remain as part of the Performance directly.
+        /// 
+        /// </summary>
+        [Column("robot_one_id")]
+        public string RobotOneId { get; set; }
+        [Column("robot_one_info")]
+        public string RobotOneInfo { get; set; }
+
+        [Column("robot_two_id")]
+        public string RobotTwoId { get; set; }
+        [Column("robot_two_info")]
+        public string RobotTwoInfo { get; set; }
+
+        [Column("robot_three_id")]
+        public string RobotThreeId { get; set; }
+        [Column("robot_three_info")]
+        public string RobotThreeInfo { get; set; }
+        #endregion
     }
 }

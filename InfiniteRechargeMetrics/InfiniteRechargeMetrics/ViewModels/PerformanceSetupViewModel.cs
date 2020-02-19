@@ -10,12 +10,12 @@ namespace InfiniteRechargeMetrics.ViewModels
     /// </summary>
     public class PerformanceSetupViewModel
     {
-        public PerformanceSetup PerformanceSetupPage { get; private set; }
+        public PerformanceSetupPage PerformanceSetupPage { get; private set; }
         public Performance Performance { get; set; } = new Performance();
         public ICommand StartRecordingCMD { get; private set; }
         public ICommand ClearCMD { get; private set; }
 
-        public PerformanceSetupViewModel(PerformanceSetup _performanceSetup)
+        public PerformanceSetupViewModel(PerformanceSetupPage _performanceSetup)
         {
             PerformanceSetupPage = _performanceSetup;
             StartRecordingCMD = new Command(StartRecording);
@@ -28,7 +28,8 @@ namespace InfiniteRechargeMetrics.ViewModels
         private async void StartRecording()
         {
             // To use PushAsync we need to stack the page onto this pages own stack navigation
-            await PerformanceSetupPage.Navigation.PushModalAsync(new MasterRecordPerformancePage(Performance));
+            await PerformanceSetupPage.Navigation.PushAsync(new MasterRecordPerformancePage(PerformanceSetupPage, Performance));
+            
         }
 
         /// <summary>

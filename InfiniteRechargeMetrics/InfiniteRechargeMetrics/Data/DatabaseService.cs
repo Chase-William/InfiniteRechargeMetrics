@@ -2,7 +2,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfiniteRechargeMetrics.Models;
-
+/// <summary>
+/// 
+///     Utility class used to interact with our local database.
+/// 
+///     References:
+///         https://github.com/praeclarum/sqlite-net/wiki/GettingStarted
+/// 
+/// </summary>
 namespace InfiniteRechargeMetrics.Data
 {
     public static class DatabaseService
@@ -78,25 +85,34 @@ namespace InfiniteRechargeMetrics.Data
             return await cn.QueryAsync<Team>("SELECT * FROM Team WHERE name LIKE ?", '%' + _query + '%');
         }
 
-        public async static Task<List<int>> GetNextId()
-        {
-            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
-            return await cn.QueryAsync<int>("SELECT * FROM SQLITE_SEQUENCE WHERE name='TABLE'");
-        }
-
         /// <summary>
         ///     Saves the past instance of a Performance and its various properties to the local database.
         /// </summary>
-        public async static void SavePerformanceToDB(Performance _performance)
-        {
-            await Task.Run(() =>
-            {
-                SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+        public async static Task SavePerformanceToLocalDBAsync(Performance _performance)
+        {            
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
 
-                cn.InsertAsync(_performance);
+            // Creating the tables if they do not exist.
+            await cn.CreateTablesAsync<Performance, Point>();
 
-                cn.CloseAsync();
-            });
+            // Inserting our performance and gettings it identifier
+            int Id = await cn.InsertAsync(_performance);
+
+            // In the following loops we attach the performanceId
+            
+            // Autonomous Points
+            foreach (var point in _performance.AutonomousPortPoints) { point.PerformanceId = Id; }
+            await cn.InsertAllAsync(_performance.AutonomousPortPoints);                
+
+            // Normal Stage Points
+            foreach (var point in _performance.StageOnePortPoints) { point.PerformanceId = Id; }
+            await cn.InsertAllAsync(_performance.StageOnePortPoints);
+            foreach (var point in _performance.StageTwoPortPoints) { point.PerformanceId = Id; }
+            await cn.InsertAllAsync(_performance.StageTwoPortPoints);
+            foreach (var point in _performance.StageThreePortPoints) { point.PerformanceId = Id; }
+            await cn.InsertAllAsync(_performance.StageThreePortPoints);
+
+            await cn.CloseAsync();       
         }
     }
 }

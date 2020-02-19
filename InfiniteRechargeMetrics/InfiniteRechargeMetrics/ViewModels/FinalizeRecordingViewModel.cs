@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using System.Windows.Input;
 using InfiniteRechargeMetrics.Models;
-using System.ComponentModel;
+using InfiniteRechargeMetrics.Pages.PerformancePages;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
@@ -23,8 +23,10 @@ namespace InfiniteRechargeMetrics.ViewModels
         private const int INSERT_POS_CHANGE_AMT = 3;
         #endregion  
 
+        private readonly PerformanceSetupPage performanceSetupPage;
         public Performance Performance { get; set; }
         public StackLayout AddRemoveBtnLayout { get; set; }
+        public FinalizeRecordingPage FinalizeRecordingPage { get; set; }
 
         #region Robots Visibility Props
 
@@ -72,8 +74,20 @@ namespace InfiniteRechargeMetrics.ViewModels
         public ICommand AddRobotCMD { get; set; }
         public ICommand RemoveRobotCMD { get; set; }
         public ICommand FinishedRecordingCMD { get; set; }
-        public FinalizeRecordingViewModel(StackLayout _addRemoveBtnLayout, Performance _performance)
+        public FinalizeRecordingViewModel(PerformanceSetupPage _performanceSetupPage, FinalizeRecordingPage _finalizePerformancePage, StackLayout _addRemoveBtnLayout, Performance _performance)
         {
+            FinalizeRecordingPage = _finalizePerformancePage;
+            performanceSetupPage = _performanceSetupPage;
+            //_finalizePerformancePage.RobotOneIdEntry.TextChanged   += (e, a) => Performance.RobotOneId   = a.NewTextValue;
+            //_finalizePerformancePage.RobotTwoIdEntry.TextChanged   += (e, a) => Performance.RobotTwoId   = a.NewTextValue;
+            //_finalizePerformancePage.RobotThreeIdEntry.TextChanged += (e, a) => Performance.RobotThreeId = a.NewTextValue;
+
+            //_finalizePerformancePage.RobotOneInfoEditor.TextChanged   += (e, a) => Performance.RobotOneInfo   = a.NewTextValue;
+            //_finalizePerformancePage.RobotTwoInfoEditor.TextChanged   += (e, a) => Performance.RobotTwoInfo   = a.NewTextValue;
+            //_finalizePerformancePage.RobotThreeInfoEditor.TextChanged += (e, a) => Performance.RobotThreeInfo = a.NewTextValue;
+
+            //_finalizePerformancePage.PerformanceCommentsEditor.TextChanged += (e, a) => Performance.Comments = a.NewTextValue;
+
             Performance = _performance;
             AddRemoveBtnLayout = _addRemoveBtnLayout;
             AddRobotCMD = new Command(RevealNextRobotUI);
@@ -84,9 +98,23 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// <summary>
         ///     Starts the finishing process for this performance.
         /// </summary>
-        private void FinishRecording()
+        private async void FinishRecording()
         {
-            Data.DatabaseService.SavePerformanceToDB(Performance);
+            // Getting the robot Ids
+            Performance.RobotOneId = FinalizeRecordingPage.RobotOneIdEntry.Text;
+            Performance.RobotTwoId = FinalizeRecordingPage.RobotTwoIdEntry.Text;
+            Performance.RobotThreeId = FinalizeRecordingPage.RobotThreeIdEntry.Text;
+            // Getting the robot info
+            Performance.RobotOneInfo = FinalizeRecordingPage.RobotOneInfoEditor.Text;
+            Performance.RobotTwoInfo = FinalizeRecordingPage.RobotTwoInfoEditor.Text;
+            Performance.RobotThreeInfo = FinalizeRecordingPage.RobotThreeInfoEditor.Text;
+            // Getting the performance info
+            Performance.Comments = FinalizeRecordingPage.PerformanceCommentsEditor.Text;
+            // Saving to the database
+
+            await performanceSetupPage.Navigation.PopAsync();
+
+            await Data.DatabaseService.SavePerformanceToLocalDBAsync(Performance);
         }
 
         /// <summary>

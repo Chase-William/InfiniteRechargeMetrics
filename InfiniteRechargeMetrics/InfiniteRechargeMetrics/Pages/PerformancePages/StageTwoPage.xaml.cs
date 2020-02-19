@@ -16,12 +16,10 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
             InitializeComponent();
             performance = _performance;
             stageCompletionManager = _stageCompletionManager;
-        }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            BindingContext = BindingContext ?? new StageTwoViewModel(this, performance, stageCompletionManager);
+            // So we need to set the bindingcontext during initialization otherwise our MasterRecordPerformance's clock
+            //  wont display if we create a new context later.
+            BindingContext = new StageTwoViewModel(this, performance, stageCompletionManager);
         }
     }
 }

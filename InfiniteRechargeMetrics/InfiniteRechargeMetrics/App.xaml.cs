@@ -50,11 +50,11 @@ namespace InfiniteRechargeMetrics
 
         protected override void OnStart()
         {
-            DatabaseService.SaveToDatabase(new Team { Name = "Name 1", ImagePath = "blue_rebel_icon" });
-            DatabaseService.SaveToDatabase(new Team { Name = "Name 2", ImagePath = "red_rebel_icon" });
-            DatabaseService.SaveToDatabase(new Team { Name = "Name 3", ImagePath = "blue_rebel_icon" });
-            DatabaseService.SaveToDatabase(new Team { Name = "Name 4", ImagePath = "blue_rebel_icon" });
-            DatabaseService.SaveToDatabase(new Team { Name = "Name 5", ImagePath = "red_rebel_icon" });
+            //DatabaseService.SaveToDatabase(new Team { Name = "Name 1", ImagePath = "blue_rebel_icon" });
+            //DatabaseService.SaveToDatabase(new Team { Name = "Name 2", ImagePath = "red_rebel_icon" });
+            //DatabaseService.SaveToDatabase(new Team { Name = "Name 3", ImagePath = "blue_rebel_icon" });
+            //DatabaseService.SaveToDatabase(new Team { Name = "Name 4", ImagePath = "blue_rebel_icon" });
+            //DatabaseService.SaveToDatabase(new Team { Name = "Name 5", ImagePath = "red_rebel_icon" });
 
             //DatabaseService.SaveToDatabase(new Match { Title = "Match 1", TeamOnePerformance_FK = 1 });
             //DatabaseService.SaveToDatabase(new Match { Title = "Match 2", TeamOnePerformance_FK = 1 });

@@ -64,9 +64,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         //      Holds the collection of points made for the current child.
         //      Must be overriden.
         //
-        public virtual ObservableCollection<Point> StageLowPortPoints { get; set; }
-        public virtual ObservableCollection<Point> StageUpperPortPoints { get; set; }
-        public virtual ObservableCollection<Point> StageSmallPortPoints { get; set; }
+        public virtual ObservableCollection<Point> CurrentStagePortPoints { get; set; }
         #endregion
 
         /// <summary>
@@ -105,19 +103,9 @@ namespace InfiniteRechargeMetrics.ViewModels
             SetRecordingState(this, false);
             isRecording = false;
 
-            StageLowPortPoints.CollectionChanged += delegate
+            CurrentStagePortPoints.CollectionChanged += delegate
             {
-                NotifyPropertyChanged(nameof(StageLowPortTotalValue));
-                CheckIfStageIsComplete();
-            };
-            StageUpperPortPoints.CollectionChanged += delegate
-            {
-                NotifyPropertyChanged(nameof(StageUpperPortTotalValue));
-                CheckIfStageIsComplete();
-            };
-            StageSmallPortPoints.CollectionChanged += delegate
-            {
-                NotifyPropertyChanged(nameof(StageSmallPortTotalValue));
+                NotifyPropertiesChanged(nameof(StageLowPortTotalValue), nameof(StageUpperPortTotalValue), nameof(StageSmallPortTotalValue));
                 CheckIfStageIsComplete();
             };
         }
@@ -149,10 +137,6 @@ namespace InfiniteRechargeMetrics.ViewModels
             // informs whether we shall add or subtract based off the code
             string portOperator = entireCode.Substring(0, 1);
 
-            // List<int> test = await Data.DatabaseService.GetNextId();
-
-            // ------------------------------------------------------------------------------ we need to know the ID this have so we can give the points the primary key
-
             Point newPoint = new Point
             {
                 TimeClickedFromStart = _milliSeconds
@@ -168,15 +152,15 @@ namespace InfiniteRechargeMetrics.ViewModels
                     {
                         // Autonomous Mode Low Port,   2 points
                         case LOW_PORT:
-                            ChangePoints(stageOneViewModel.AutoLowPortPoints, PointType.AutomonousLow);
+                            ChangePoints(stageOneViewModel.AutonomousPortPoints, PointType.AutomonousLow);
                             break;
                         // Autonomous Mode Upper Port, 4 points
                         case UPPER_PORT:
-                            ChangePoints(stageOneViewModel.AutoUpperPortPoints, PointType.AutomonousUpper);
+                            ChangePoints(stageOneViewModel.AutonomousPortPoints, PointType.AutomonousUpper);
                             break;
                         // Autonomous Mode Small Port, 6 points
                         case SMALL_PORT:
-                            ChangePoints(stageOneViewModel.AutoSmallPortPoints, PointType.AutomonousSmall);
+                            ChangePoints(stageOneViewModel.AutonomousPortPoints, PointType.AutomonousSmall);
                             break;
                         default:
                             break;
@@ -189,15 +173,15 @@ namespace InfiniteRechargeMetrics.ViewModels
                     {
                         // Autonomous Mode Low Port,   2 points
                         case LOW_PORT:
-                            ChangePoints(stageOneViewModel.StageLowPortPoints, PointType.StageOneLow);
+                            ChangePoints(stageOneViewModel.CurrentStagePortPoints, PointType.StageOneLow);
                             break;
                         // Autonomous Mode Upper Port, 4 points
                         case UPPER_PORT:
-                            ChangePoints(stageOneViewModel.StageUpperPortPoints, PointType.StageOneUpper);
+                            ChangePoints(stageOneViewModel.CurrentStagePortPoints, PointType.StageOneUpper);
                             break;
                         // Autonomous Mode Small Port, 6 points
                         case SMALL_PORT:
-                            ChangePoints(stageOneViewModel.StageSmallPortPoints, PointType.StageOneSmall);
+                            ChangePoints(stageOneViewModel.CurrentStagePortPoints, PointType.StageOneSmall);
                             break;
                         default:
                             break;
@@ -211,15 +195,15 @@ namespace InfiniteRechargeMetrics.ViewModels
                 {
                     // Autonomous Mode Low Port,   2 points
                     case LOW_PORT:
-                        ChangePoints(stageTwoViewModel.StageLowPortPoints, PointType.StageTwoLow);
+                        ChangePoints(stageTwoViewModel.CurrentStagePortPoints, PointType.StageTwoLow);
                         break;
                     // Autonomous Mode Upper Port, 4 points
                     case UPPER_PORT:
-                        ChangePoints(stageTwoViewModel.StageUpperPortPoints, PointType.StageTwoUpper);
+                        ChangePoints(stageTwoViewModel.CurrentStagePortPoints, PointType.StageTwoUpper);
                         break;
                     // Autonomous Mode Small Port, 6 points
                     case SMALL_PORT:
-                        ChangePoints(stageTwoViewModel.StageSmallPortPoints, PointType.StageTwoSmall);
+                        ChangePoints(stageTwoViewModel.CurrentStagePortPoints, PointType.StageTwoSmall);
                         break;
                     default:
                         break;
@@ -231,13 +215,13 @@ namespace InfiniteRechargeMetrics.ViewModels
                 switch (portIndex)
                 {
                     case LOW_PORT:
-                        ChangePoints(stageThreeViewModel.StageLowPortPoints, PointType.StageThreeLow);
+                        ChangePoints(stageThreeViewModel.CurrentStagePortPoints, PointType.StageThreeLow);
                         break;
                     case UPPER_PORT:
-                        ChangePoints(stageThreeViewModel.StageUpperPortPoints, PointType.StageThreeUpper);
+                        ChangePoints(stageThreeViewModel.CurrentStagePortPoints, PointType.StageThreeUpper);
                         break;
                     case SMALL_PORT:
-                        ChangePoints(stageThreeViewModel.StageSmallPortPoints, PointType.StageThreeSmall);
+                        ChangePoints(stageThreeViewModel.CurrentStagePortPoints, PointType.StageThreeSmall);
                         break;
                     default:
                         break;

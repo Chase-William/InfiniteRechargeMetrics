@@ -102,7 +102,7 @@ namespace InfiniteRechargeMetrics.Models
         /// <summary>
         ///     Method for getting point type as an enum
         /// </summary>
-        public PointType GetPointType(string _pointType)
+        public PointType GetPointType()
         {
             switch (PointType)
             {

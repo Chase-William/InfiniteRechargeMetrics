@@ -1,32 +1,23 @@
 ﻿using InfiniteRechargeMetrics.Models;
 using InfiniteRechargeMetrics.Pages.PerformancePages;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
     public class StageThreeViewModel : StageViewModelBase, IStageViewModel
     {
         #region Points Scored
-        public override int StageLowPortTotalValue => StageLowPortPoints.Count * StageConstants.MANUAL_LPP;
-        public override int StageUpperPortTotalValue => StageUpperPortPoints.Count * StageConstants.MANUAL_UPP;
-        public override int StageSmallPortTotalValue => StageSmallPortPoints.Count * StageConstants.MANUAL_SPP;
+        public override int StageLowPortTotalValue => CurrentStagePortPoints.Where(point => point.GetPointType() == PointType.StageThreeLow).ToList().Count * StageConstants.MANUAL_LPP;
+        public override int StageUpperPortTotalValue => CurrentStagePortPoints.Where(point => point.GetPointType() == PointType.StageThreeUpper).ToList().Count * StageConstants.MANUAL_UPP;
+        public override int StageSmallPortTotalValue => CurrentStagePortPoints.Where(point => point.GetPointType() == PointType.StageThreeSmall).ToList().Count * StageConstants.MANUAL_SPP;
 
-        public override ObservableCollection<Point> StageLowPortPoints
+        public override ObservableCollection<Point> CurrentStagePortPoints
         {
-            get => Performance.StageThreeLowPortPoints;
-            set => Performance.StageThreeLowPortPoints = value;
+            get => Performance.StageThreePortPoints;
+            set => Performance.StageThreePortPoints = value;
         }
-        public override ObservableCollection<Point> StageUpperPortPoints
-        {
-            get => Performance.StageThreeUpperPortPoints;
-            set => Performance.StageThreeUpperPortPoints = value;
-        }
-        public override ObservableCollection<Point> StageSmallPortPoints
-        {
-            get => Performance.StageThreeSmallPortPoints;
-            set => Performance.StageThreeSmallPortPoints = value;
-        }
-        #endregion        
+        #endregion
 
         public StageThreeViewModel(StageThreePage _stageThreePage, Performance _performance, StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager) 
         {

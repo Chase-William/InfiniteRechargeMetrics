@@ -21,12 +21,8 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
             InitializeComponent();
             performance = _performance;
             stageCompletionManager = _stageCompletionManager;
-        }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            BindingContext = BindingContext ?? new StageThreeViewModel(this, performance, stageCompletionManager);
+            BindingContext =  new StageThreeViewModel(this, performance, stageCompletionManager);
         }
     }
 }

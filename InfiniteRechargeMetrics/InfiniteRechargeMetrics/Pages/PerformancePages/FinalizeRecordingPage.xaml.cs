@@ -16,19 +16,21 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
     {
         private const string ADD_REMOVE_BTN_LAYOUT_ID = "add_remove_layout";
 
-        private Performance performance;
+        private readonly Performance performance;
+        private readonly PerformanceSetupPage performanceSetupPage;
 
-        public FinalizeRecordingPage(Performance _performance)
+        public FinalizeRecordingPage(PerformanceSetupPage _performanceSetupPage, Performance _performance)
         {
+            performanceSetupPage = _performanceSetupPage;
             performance = _performance;
             InitializeComponent();
+
+            BindingContext = new FinalizeRecordingViewModel(performanceSetupPage, this, RobotCommentLayout, performance);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            BindingContext = new FinalizeRecordingViewModel(RobotCommentLayout, performance);
 
             // if a add robot btn doesnt already exist inside the grid.. add one
             if (!(RobotCommentLayout.Children.Any(view => view.AutomationId == ADD_REMOVE_BTN_LAYOUT_ID)))

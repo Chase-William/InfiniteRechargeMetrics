@@ -5,6 +5,7 @@ using System.Timers;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System;
+using System.Linq;
 using Point = InfiniteRechargeMetrics.Models.Point;
 using InfiniteRechargeMetrics.Pages.PerformancePages;
 
@@ -43,12 +44,12 @@ namespace InfiniteRechargeMetrics.ViewModels
         Func<int> UpperPortAction;
         Func<int> SmallPortAction;
 
-        public int AutoStageLowPortTotalValue => AutoLowPortPoints.Count * StageConstants.AUTO_LPP;        
-        public int AutoStageUpperPortTotalValue => AutoUpperPortPoints.Count * StageConstants.AUTO_LPP;        
-        public int AutoStageSmallPortTotalValue => AutoSmallPortPoints.Count * StageConstants.AUTO_SPP;             
-        public int ManualStageLowPortTotalValue { get => StageLowPortPoints.Count * StageConstants.MANUAL_LPP; }
-        public int ManualStageUpperPortTotalValue { get => StageUpperPortPoints.Count * StageConstants.MANUAL_UPP; }
-        public int ManualStageSmallPortTotalValue { get => StageSmallPortPoints.Count * StageConstants.MANUAL_SPP; }
+        public int AutoStageLowPortTotalValue => AutonomousPortPoints.Where(point => point.GetPointType() == PointType.AutomonousLow).ToList().Count * StageConstants.AUTO_LPP;        
+        public int AutoStageUpperPortTotalValue => AutonomousPortPoints.Where(point => point.GetPointType() == PointType.AutomonousUpper).ToList().Count * StageConstants.AUTO_UPP;        
+        public int AutoStageSmallPortTotalValue => AutonomousPortPoints.Where(point => point.GetPointType() == PointType.AutomonousSmall).ToList().Count * StageConstants.AUTO_SPP;             
+        public int ManualStageLowPortTotalValue { get => CurrentStagePortPoints.Where(point => point.GetPointType() == PointType.StageOneLow).ToList().Count * StageConstants.MANUAL_LPP; }
+        public int ManualStageUpperPortTotalValue { get => CurrentStagePortPoints.Where(point => point.GetPointType() == PointType.StageOneUpper).ToList().Count * StageConstants.MANUAL_UPP; }
+        public int ManualStageSmallPortTotalValue { get => CurrentStagePortPoints.Where(point => point.GetPointType() == PointType.StageOneSmall).ToList().Count * StageConstants.MANUAL_SPP; }
         public override int StageLowPortTotalValue => LowPortAction.Invoke();
         public override int StageUpperPortTotalValue => UpperPortAction.Invoke();
         public override int StageSmallPortTotalValue => SmallPortAction.Invoke();
@@ -56,41 +57,17 @@ namespace InfiniteRechargeMetrics.ViewModels
 
         #region Stage Points / Variables        
 
-        #region Autonomous Points Scored
-        public ObservableCollection<Point> AutoLowPortPoints
+        public ObservableCollection<Point> AutonomousPortPoints
         {
-            get => Performance.AutoLowPortPoints;
-            set => Performance.AutoLowPortPoints = value;
+            get => Performance.AutonomousPortPoints;
+            set => Performance.AutonomousPortPoints = value;
         }
-        public ObservableCollection<Point> AutoUpperPortPoints
-        {
-            get => Performance.AutoUpperPortPoints;
-            set => Performance.AutoUpperPortPoints = value;
-        }
-        public ObservableCollection<Point> AutoSmallPortPoints
-        {
-            get => Performance.AutoSmallPortPoints;
-            set => Performance.AutoSmallPortPoints = value;
-        }
-        #endregion
 
-        #region Manual Points Scored
-        public override ObservableCollection<Point> StageLowPortPoints
+        public override ObservableCollection<Point> CurrentStagePortPoints
         {
-            get => Performance.StageOneLowPortPoints;
-            set => Performance.StageOneLowPortPoints = value;
+            get => Performance.StageOnePortPoints;
+            set => Performance.StageOnePortPoints = value;
         }
-        public override ObservableCollection<Point> StageUpperPortPoints
-        {
-            get => Performance.StageOneUpperPortPoints;
-            set => Performance.StageOneUpperPortPoints = value;
-        }
-        public override ObservableCollection<Point> StageSmallPortPoints
-        {
-            get => Performance.StageOneSmallPortPoints;
-            set => Performance.StageOneSmallPortPoints = value;
-        }
-        #endregion
 
         public int RobotsMovedFromSpawnPoints
         {
@@ -152,21 +129,11 @@ namespace InfiniteRechargeMetrics.ViewModels
             BindPortLabelsToProp();
 
             // Attaching the notify prop to our collection changed event as a handler
-            AutoLowPortPoints.CollectionChanged += delegate
+            AutonomousPortPoints.CollectionChanged += delegate
             {
-                NotifyPropertyChanged(nameof(StageLowPortTotalValue));
+                NotifyPropertiesChanged(nameof(StageLowPortTotalValue), nameof(StageUpperPortTotalValue), nameof(StageSmallPortTotalValue));
                 CheckIfStageIsComplete();
-            };
-            AutoUpperPortPoints.CollectionChanged += delegate
-            {
-                NotifyPropertyChanged(nameof(StageUpperPortTotalValue));
-                CheckIfStageIsComplete();
-            };
-            AutoSmallPortPoints.CollectionChanged += delegate
-            {
-                NotifyPropertyChanged(nameof(StageSmallPortTotalValue));
-                CheckIfStageIsComplete();
-            };            
+            };                    
         }
 
         /// <summary>
@@ -256,8 +223,6 @@ namespace InfiniteRechargeMetrics.ViewModels
                 MainTimer.Interval = StageConstants.MANUAL_MODE_MAX_TIME;
                 StageState = StageState.Manual;
                 MainTimer.Start();
-
-                
             }
         }        
 

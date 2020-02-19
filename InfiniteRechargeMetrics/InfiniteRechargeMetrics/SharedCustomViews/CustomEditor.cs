@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace InfiniteRechargeMetrics.SharedCustomViews
 {
-    class CustomEditor : Editor
+    public class CustomEditor : Editor
     {
         public CustomEditor()
         {
