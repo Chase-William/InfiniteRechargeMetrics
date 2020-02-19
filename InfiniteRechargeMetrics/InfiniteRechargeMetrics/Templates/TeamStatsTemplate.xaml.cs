@@ -16,7 +16,7 @@ namespace InfiniteRechargeMetrics.Templates
         ///     A collection of the all the performances the choosen team has.
         /// </summary>
         private ObservableCollection<Performance> performances = new ObservableCollection<Performance>();
-        private ObservableCollection<Match> matches = new ObservableCollection<Match>();
+        //private ObservableCollection<Match> matches = new ObservableCollection<Match>();
         private int totalMatches;
         private int totalPerformances;
 
@@ -28,14 +28,14 @@ namespace InfiniteRechargeMetrics.Templates
                 TotalPerformances = value.Count;
             }
         }
-        public ObservableCollection<Match> Matches {
-            get => matches;
-            set
-            {
-                matches = value;
-                TotalMatches = value.Count;
-            } 
-        }
+        //public ObservableCollection<Match> Matches {
+        //    get => matches;
+        //    set
+        //    {
+        //        matches = value;
+        //        TotalMatches = value.Count;
+        //    } 
+        //}
 
         /// <summary>
         ///     Tracks the total number of Performances.
@@ -86,7 +86,7 @@ namespace InfiniteRechargeMetrics.Templates
         public async Task OnLoadPerformancesAsync()
         {            
             // Setting the Performances collection's data to the returned data from a database query.               
-            Performances = new ObservableCollection<Performance>(await DatabaseService.GetPerformancesForTeam(new Team { Name = "Name 1" }));                                         
+            //Performances = new ObservableCollection<Performance>(await DatabaseService.Provider.GetPerformancesForTeam(new Team { Name = "Name 1" }));                                         
         }
 
         //public async Task OnLoadMatchesAsync()

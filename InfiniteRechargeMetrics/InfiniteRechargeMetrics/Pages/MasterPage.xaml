@@ -59,7 +59,6 @@
                 <x:Array Type="{x:Type local:MasterPageImageItem}">
                     <local:MasterPageImageItem Title="Home" Source="home_icon.png" TargetType="{x:Type local_pages:HomeTeamPage}"/>
                     <local:MasterPageImageItem Title="Teams" Source="teams_icon.png" TargetType="{x:Type local_pages:TeamsPage}"/>
-                    <local:MasterPageImageItem Title="Matches" Source="matches_icon.png" TargetType="{x:Type local_pages:MatchesPage}"/>
                 </x:Array>
             </ListView.ItemsSource>
 

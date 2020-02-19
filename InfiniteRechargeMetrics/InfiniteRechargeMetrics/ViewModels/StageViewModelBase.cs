@@ -36,8 +36,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// <summary>
         ///     Tracks whether the Xamarin.Essentials Vibrate is supported on this device.
         /// </summary>
-        private static bool IsVibrateSupported = true;
-        public static Timer MainTimer { get; set; }        
+        private static bool IsVibrateSupported = true;           
 
         private static bool isRecording;
         /// <summary>
@@ -95,7 +94,6 @@ namespace InfiniteRechargeMetrics.ViewModels
 
         public StageViewModelBase(Performance _performance, StageCompletionManager _stageCompletionManager)
         {
-            MainTimer = new Timer();
             Stopwatch = new Stopwatch();
             ChangePointsCMD = new Command((object charCode) => ChangePoints(this, (string)charCode, Stopwatch.Elapsed.Milliseconds));
             StageCompletionManager = _stageCompletionManager;

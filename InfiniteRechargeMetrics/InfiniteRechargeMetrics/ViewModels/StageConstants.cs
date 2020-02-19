@@ -67,9 +67,9 @@
         /// </summary>
         public const double AUTONOMOUS_PROGRESSBAR_UPDATE = 0.00333333333;
         /// <summary>
-        ///     The timer for autonomous mode should run this many times and then stop.
+        ///     The amount of time in milliseconds a timer should run when in a relationship with autonomous mode
         /// </summary>
-        public const int AUTONOMOUS_MAX_TIMER_ITERATIONS = 300;
+        public const int AUTONOMOUS_DURATION_IN_MILLISECONDS = 15000;
         /// <summary>
         ///     The amount of time in miliseconds for the manual part of the match or performance to be finished. (time limit)
         /// </summary>

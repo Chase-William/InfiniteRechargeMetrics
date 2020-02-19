@@ -24,7 +24,7 @@ namespace InfiniteRechargeMetrics.Pages
         {
             TeamsListView.IsEnabled = true;
             base.OnAppearing();
-            Teams = new ObservableCollection<Team>(await DatabaseService.GetAllTeamsAsync());
+            //Teams = new ObservableCollection<Team>(await DatabaseService.GetAllTeamsAsync());
             TeamsListView.ItemsSource = Teams;
         }
 
@@ -35,7 +35,7 @@ namespace InfiniteRechargeMetrics.Pages
         {
             if (e.NewTextValue.Length >= 1)
             {
-                TeamsListView.ItemsSource = new ObservableCollection<Team>(await DatabaseService.QueryTeamsByName(e.NewTextValue));
+                //TeamsListView.ItemsSource = new ObservableCollection<Team>(await DatabaseService.QueryTeamsByName(e.NewTextValue));
             }
             else
             {
@@ -57,10 +57,10 @@ namespace InfiniteRechargeMetrics.Pages
             // Prevent the clicking of multiple items
             TeamsListView.IsEnabled = false;
 
-            App.Current.MainPage.Navigation.PushModalAsync(new TeamDetails()
-            {
-                BindingContext = (Team)e.Item
-            });
+            //App.Current.MainPage.Navigation.PushModalAsync(new TeamDetails()
+            //{
+            //    BindingContext = (Team)e.Item
+            //});
         }
     }
 }

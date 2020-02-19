@@ -10,7 +10,7 @@
              IconImageSource="stage_three.png">
 
     <ScrollView>
-        <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+        <StackLayout BackgroundColor="{StaticResource BackgroundColor}" IsEnabled="{Binding StageCompletionManager.IsTimeOut, Converter={StaticResource BoolVisibilityConverter}}">
             <StackLayout Style="{StaticResource StageHeaderStackLayout}">
                 <Label Text="Stage Status:" Style="{StaticResource DarkBGLabel}"/>
                 <Label Text="{Binding StageCompletionManager.IsStageThreeComplete, Converter={StaticResource IsStageCompleteConverter}}" Style="{DynamicResource BaseLabel}" TextColor="{Binding StageCompletionManager.IsStageThreeComplete, Converter={StaticResource BoolToColorConverter}}"/>

@@ -7,13 +7,16 @@
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.PerformancePages.PerformanceSetupPage"
              Title="Setup Recording">
-
+  
 
     <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
 
         <Frame CornerRadius="10" Padding="5" Margin="5,100,5,5">
             <StackLayout Orientation="Horizontal">
-                <Label Text="Team Selection" VerticalOptions="Center"/>
+                <Label Text="Team:" Style="{StaticResource InsideFrameLabelHeader}"/>
+                <Label Text="New:" Style="{StaticResource InsideFrameLabel}"/>
+                <Entry Placeholder="#" WidthRequest="100"/>
+                <Label Text="Existing:" Style="{StaticResource InsideFrameLabel}"/>
                 <Picker x:Name="TeamPicker" x:FieldModifier="public" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
         </Frame>

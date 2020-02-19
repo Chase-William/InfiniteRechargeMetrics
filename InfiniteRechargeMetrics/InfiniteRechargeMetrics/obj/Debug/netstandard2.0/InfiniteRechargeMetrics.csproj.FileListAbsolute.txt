@@ -34,14 +34,11 @@ C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\Infi
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\LoginPage.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\MainPage.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\MasterPage.xaml.g.cs
-C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\MatchesPage.xaml.g.cs
-C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\ModifyMatch.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\MasterRecordPerformancePage.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\StageOnePage.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\StageThreePage.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\StageTwoPage.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\RecordPerformancePage.xaml.g.cs
-C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\TeamDetails.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\TeamsPage.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Templates\TeamStatsTemplate.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\InfiniteRechargeMetrics.AssemblyInfoInputs.cache
@@ -53,3 +50,4 @@ C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\Infi
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Templates\ChangePointsTemplate.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\FinalizeRecordingPage.xaml.g.cs
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\PerformancePages\PerformanceSetupPage.xaml.g.cs
+C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\InfiniteRechargeMetrics.csprojAssemblyReference.cache

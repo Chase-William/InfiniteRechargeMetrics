@@ -29,7 +29,8 @@ namespace InfiniteRechargeMetrics.ViewModels
         {
             // To use PushAsync we need to stack the page onto this pages own stack navigation
             await PerformanceSetupPage.Navigation.PushAsync(new MasterRecordPerformancePage(PerformanceSetupPage, Performance));
-            
+            // Disabling the drawer from sliding out
+            ((MainPage)App.Current.MainPage).IsGestureEnabled = false;
         }
 
         /// <summary>

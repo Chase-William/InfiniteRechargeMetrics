@@ -21,7 +21,7 @@
     </ContentPage.Resources>
 
     <ScrollView>
-        <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+        <StackLayout BackgroundColor="{StaticResource BackgroundColor}" IsEnabled="{Binding StageCompletionManager.IsTimeOut, Converter={StaticResource BoolVisibilityConverter}}">
 
             <!-- Button which will start the recording -->
             <Button x:Name="StartBtn" Text="Start Recording" Grid.ColumnSpan="3" HorizontalOptions="Center" WidthRequest="200" Style="{StaticResource CyanBtnStyle}" Command="{Binding StartTimerCMD}" IsVisible="{Binding IsRecording, Converter={StaticResource BoolVisibilityConverter}}"/>

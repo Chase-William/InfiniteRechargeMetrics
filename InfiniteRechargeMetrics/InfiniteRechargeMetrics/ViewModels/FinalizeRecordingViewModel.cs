@@ -114,7 +114,7 @@ namespace InfiniteRechargeMetrics.ViewModels
 
             await performanceSetupPage.Navigation.PopAsync();
 
-            await Data.DatabaseService.SavePerformanceToLocalDBAsync(Performance);
+            await Data.DatabaseService.Provider.SavePerformanceToLocalDB(Performance);
         }
 
         /// <summary>

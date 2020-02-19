@@ -24,8 +24,9 @@ namespace InfiniteRechargeMetrics.Pages
             TeamStats.TempNameVar.Text = "Example Team Name";   // TO BE REMOVED LATER IN DEVELOPMENT
 
             // Calling the function for loading performances from the database.            
-            await TeamStats.OnLoadPerformancesAsync();
-            //await TeamStats.OnLoadMatchesAsync();
+            var test = Data.DatabaseService.Provider.GetAllPerformancesFromTeam("Team 1");
+
+            Console.WriteLine();
         }
     }
 }

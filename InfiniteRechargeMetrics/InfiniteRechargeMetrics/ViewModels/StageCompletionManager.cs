@@ -7,7 +7,7 @@ namespace InfiniteRechargeMetrics.ViewModels
     /// <summary>
     ///     Class tasked with managing the completion status of different pages
     /// </summary>
-    public class StageCompletionManager : INotifyPropertyChanged
+    public class StageCompletionManager : NotifyClass
     {
         /// <summary>
         ///     Each of the stage property track the state of the stages.
@@ -44,13 +44,20 @@ namespace InfiniteRechargeMetrics.ViewModels
                 NotifyPropertyChanged(nameof(IsStageThreeComplete));
             }
         }
-        #endregion
+        #endregion       
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string _propName = "")
+        /// <summary>
+        ///     Property that signals whether the match is out of time (2:30)
+        /// </summary>
+        private bool isTimeOut;
+        public bool IsTimeOut
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(_propName));
+            get => isTimeOut;
+            set
+            {
+                isTimeOut = value;
+                NotifyPropertyChanged();
+            }
         }
     }
 }

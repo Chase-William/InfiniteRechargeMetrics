@@ -20,11 +20,8 @@ namespace InfiniteRechargeMetrics.ViewModels
         ///     Event is fired when the state (Autonmonous / Manual) is changed.
         /// </summary>
         private event Action StageStateChanged;
-        /// <summary>
-        ///     Tracks interations of stopwatch elapsed
-        /// </summary>
-        private int timerCounter;
 
+        public Timer MainTimer { get; set; } = new Timer();
         public MasterRecordPerformancePage MasterPerformancePage { get; set; }
 
         private double progressBarProgress;
@@ -36,7 +33,7 @@ namespace InfiniteRechargeMetrics.ViewModels
                 progressBarProgress = value;
                 NotifyPropertyChanged(nameof(ProgressBarProgress));
             }
-        }
+        }        
 
         #region Total Value Of Points Props
         // Gets the the total points worth of the collection
@@ -202,7 +199,7 @@ namespace InfiniteRechargeMetrics.ViewModels
             MainTimer.Interval = StageConstants.AUTONOMOUS_TIMER_INTERVAL;
             MainTimer.Start();
             Stopwatch.Start();
-            MasterPerformancePage.ClockTimer.Start();
+            MasterPerformancePage.StartClockTimer();
         }
 
         /// <summary>
@@ -210,10 +207,9 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// </summary>
         private void AutononmousState_TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            if (timerCounter != StageConstants.AUTONOMOUS_MAX_TIMER_ITERATIONS)
+            if (Stopwatch.ElapsedMilliseconds <= StageConstants.AUTONOMOUS_DURATION_IN_MILLISECONDS)
             {
                 ProgressBarProgress = ProgressBarProgress + StageConstants.AUTONOMOUS_PROGRESSBAR_UPDATE;
-                timerCounter++;
             }
             else
             {
@@ -228,9 +224,11 @@ namespace InfiniteRechargeMetrics.ViewModels
 
         private void ManualState_TimerElapsed(object sender, ElapsedEventArgs e)
         {
+            // Informing the program that all the time has ran out
+            base.StageCompletionManager.IsTimeOut = true;
             Stopwatch.Stop();
             MainTimer.Stop();
-            MasterPerformancePage.ClockTimer.Stop();
+            MasterPerformancePage.StopClockTimer();          
         }
 
         /// <summary>

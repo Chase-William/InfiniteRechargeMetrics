@@ -17,7 +17,7 @@ namespace InfiniteRechargeMetrics {
     public partial class MainPage : global::Xamarin.Forms.MasterDetailPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::InfiniteRechargeMetrics.Pages.MasterPage masterPage;
+        public global::InfiniteRechargeMetrics.Pages.MasterPage masterPage;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {

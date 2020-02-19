@@ -21,14 +21,17 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
             base.OnAppearing();
             BindingContext = new PerformanceSetupViewModel(this);
 
-            var teams = await DatabaseService.GetAllTeamsAsync();
+            // Enabling the drawer nav, since we may have turned it off in one of the next pages
+            ((MainPage)App.Current.MainPage).IsGestureEnabled = true;
+
+            //var teams = await DatabaseService.GetAllTeamsAsync();
            
-            string[] teamNames = new string[teams.Count];
-            for (int i = 0; i < teams.Count; i++)
-            {
-                teamNames[i] = teams[i].Name;
-            }
-            TeamPicker.ItemsSource = teamNames;
+            //string[] teamNames = new string[teams.Count];
+            //for (int i = 0; i < teams.Count; i++)
+            //{
+            //    teamNames[i] = teams[i].Name;
+            //}
+            //TeamPicker.ItemsSource = teamNames;
         }
     }
 }

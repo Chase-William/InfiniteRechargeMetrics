@@ -17,7 +17,7 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
         private readonly PerformanceSetupPage performanceSetupPage;
         public Performance Performance { get; set; }
         public StageCompletionManager StageCompletionManager { get; set; } = new StageCompletionManager();        
-        public Timer ClockTimer { get; set; } = new Timer();
+        private Timer clockTimer = new Timer();
 
 
         public MasterRecordPerformancePage(PerformanceSetupPage _performanceSetupPage, Performance _performance)
@@ -25,12 +25,25 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
             InitializeComponent();
             performanceSetupPage = _performanceSetupPage;
             Performance = _performance;
-            ClockTimer.Interval = UPDATE_CLOCK_INTERVAL;
-            ClockTimer.Elapsed += delegate
+            clockTimer.Interval = UPDATE_CLOCK_INTERVAL;
+            clockTimer.Elapsed += delegate
             {
                 TimeSpan time = new TimeSpan(StageViewModelBase.Stopwatch.ElapsedTicks);
                 Device.BeginInvokeOnMainThread(() => Title = $"{time.Minutes.ToString("00")}:{time.Seconds.ToString("00")}");                
             };
+        }
+
+        /// <summary>
+        ///     Start the clock timer
+        /// </summary>
+        public void StartClockTimer() => clockTimer.Start();
+        /// <summary>
+        ///     Stops the clock timer
+        /// </summary>
+        public void StopClockTimer()
+        {
+            clockTimer.Stop();
+            Device.BeginInvokeOnMainThread(() => Title = "Recording Finished");
         }
 
         protected override void OnAppearing()
