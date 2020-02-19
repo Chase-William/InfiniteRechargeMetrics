@@ -1106,3 +1106,4 @@ C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\Infi
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\stage_three.png
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\stage_two.png
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\save_icon.png
+C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\finish_icon.png

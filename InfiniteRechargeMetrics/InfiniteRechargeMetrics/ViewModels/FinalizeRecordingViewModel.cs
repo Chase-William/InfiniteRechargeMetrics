@@ -71,13 +71,22 @@ namespace InfiniteRechargeMetrics.ViewModels
         public int RobotsRecordingUIInsertPos { get; set; }
         public ICommand AddRobotCMD { get; set; }
         public ICommand RemoveRobotCMD { get; set; }
-
+        public ICommand FinishedRecordingCMD { get; set; }
         public FinalizeRecordingViewModel(StackLayout _addRemoveBtnLayout, Performance _performance)
         {
             Performance = _performance;
             AddRemoveBtnLayout = _addRemoveBtnLayout;
             AddRobotCMD = new Command(RevealNextRobotUI);
             RemoveRobotCMD = new Command(HideLastRobotUI);
+            FinishedRecordingCMD = new Command(FinishRecording);
+        }
+
+        /// <summary>
+        ///     Starts the finishing process for this performance.
+        /// </summary>
+        private void FinishRecording()
+        {
+            Data.DatabaseService.SavePerformanceToDB(Performance);
         }
 
         /// <summary>
@@ -121,9 +130,7 @@ namespace InfiniteRechargeMetrics.ViewModels
                     break;
             }
         }
-
        
-
         /// <summary>
         ///     Changes the position of the add / remove button in the UI.
         /// </summary>

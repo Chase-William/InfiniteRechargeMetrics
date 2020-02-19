@@ -14,7 +14,6 @@
             <!-- Style used by the Finalize class -->
             <Style x:Key="FinalizeLabel" TargetType="Label" BasedOn="{StaticResource DarkBGLabel}">
                 <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="Margin" Value="20,0,0,0"/>
             </Style>
 
             <Style TargetType="Entry">
@@ -40,6 +39,14 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Finished"
+                     IconImageSource="finish_icon"
+                     Order="Primary"
+                     Command="{Binding FinishedRecordingCMD}"
+                     Priority="0"/>
+    </ContentPage.ToolbarItems>
     
     <ScrollView>
         <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="10">

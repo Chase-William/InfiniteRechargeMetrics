@@ -24,7 +24,7 @@
         <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
 
             <!-- Button which will start the recording -->
-            <Button x:Name="StartBtn" Text="Start Recording" Grid.ColumnSpan="3" HorizontalOptions="Center" WidthRequest="200" Command="{Binding StartTimerCMD}" IsVisible="{Binding IsRecording, Converter={StaticResource BoolVisibilityConverter}}"/>
+            <Button x:Name="StartBtn" Text="Start Recording" Grid.ColumnSpan="3" HorizontalOptions="Center" WidthRequest="200" Style="{StaticResource CyanBtnStyle}" Command="{Binding StartTimerCMD}" IsVisible="{Binding IsRecording, Converter={StaticResource BoolVisibilityConverter}}"/>
 
             <StackLayout IsVisible="{Binding IsRecording}" Style="{StaticResource StageHeaderStackLayout}">
                 <Label Text="Stage Status:" Style="{StaticResource DarkBGLabel}"/>

@@ -8,14 +8,19 @@ namespace InfiniteRechargeMetrics.Models
     public class Performance
     {
         /// <summary>
-        ///     The identifier for this class or table
+        ///     The identifier for this class / table
         /// </summary>
-        [Column("id"), PrimaryKey, AutoIncrement, Unique]
+        [Column("Id"), PrimaryKey, AutoIncrement, Unique]
         public int Id { get; set; }
+        /// <summary>
+        ///     The name of the peformance, does not need to be unique.
+        /// </summary>
+        [Column("performance_name")]
+        public string PerformanceName { get; set; }
         /// <summary>
         ///     The foreign key of which a teams Performance belongs to
         /// </summary>
-        [Column("team_id_fk"), NotNull]
+        [Column("team_id_fk")]
         public string TeamId_FK { get; set; }
 
         #region Stage One
@@ -24,17 +29,17 @@ namespace InfiniteRechargeMetrics.Models
         /// <summary>
         ///     A lower port score in autonomous mode
         /// </summary>
-        [Column("auto_low_port_points")]
+        [Ignore]
         public ObservableCollection<Point> AutoLowPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A upper port score in autonomous mode
         /// </summary>
-        [Column("auto_upper_port_points")]
+        [Ignore]
         public ObservableCollection<Point> AutoUpperPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A small port score in autonomous mode
-        /// </summary>
-        [Column("auto_small_port_points")]
+        /// </summary
+        [Ignore]
         public ObservableCollection<Point> AutoSmallPortPoints { get; set; } = new ObservableCollection<Point>();
 
         // --- Stage 1 Manual ---
@@ -42,17 +47,17 @@ namespace InfiniteRechargeMetrics.Models
         /// <summary>
         ///     A lower port point in stage one manual mode
         /// </summary>
-        [Column("stage_one_low_port_points")]
+        [Ignore]
         public ObservableCollection<Point> StageOneLowPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A upper port point in stage one manual mode
         /// </summary>
-        [Column("stage_one_upper_port_points")]
+        [Ignore]
         public ObservableCollection<Point> StageOneUpperPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A small port point in stage one manual mode
-        /// </summary>
-        [Column("stage_one_small_port_points")]
+        /// </summary
+        [Ignore]
         public ObservableCollection<Point> StageOneSmallPortPoints { get; set; } = new ObservableCollection<Point>();
 
         /// <summary>
@@ -79,17 +84,17 @@ namespace InfiniteRechargeMetrics.Models
         /// <summary>
         ///     A lower port point in stage two 
         /// </summary>
-        [Column("stage_two_low_port_points")]
+        [Ignore]
         public ObservableCollection<Point> StageTwoLowPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A upper port point in stage two 
         /// </summary>
-        [Column("stage_two_upper_port_points")]
+        [Ignore]
         public ObservableCollection<Point> StageTwoUpperPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A small port point in stage two 
         /// </summary>
-        [Column("stage_two_small_port_points")]
+        [Ignore]
         public ObservableCollection<Point> StageTwoSmallPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     Record whether the stage two control panel was finished or not
@@ -103,18 +108,19 @@ namespace InfiniteRechargeMetrics.Models
         /// <summary>
         ///     A lower port point in stage three 
         /// </summary>
-        [Column("stage_three_low_port_points")]
+        [Ignore]
         public ObservableCollection<Point> StageThreeLowPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A upper port point in stage three 
         /// </summary>
-        [Column("stage_three_upper_port_points")]
+        [Ignore]
         public ObservableCollection<Point> StageThreeUpperPortPoints { get; set; } = new ObservableCollection<Point>();
         /// <summary>
         ///     A small port point in stage three 
         /// </summary>
-        [Column("stage_three_small_port_points")]
+        [Ignore]
         public ObservableCollection<Point> StageThreeSmallPortPoints { get; set; } = new ObservableCollection<Point>();
+
         [Column("droid_one_randevu")]
         public bool DroidOneRandevu { get; set; }
         [Column("droid_two_randevu")]

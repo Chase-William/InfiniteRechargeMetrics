@@ -25,7 +25,7 @@ namespace InfiniteRechargeMetrics.Pages
 
             // Calling the function for loading performances from the database.            
             await TeamStats.OnLoadPerformancesAsync();
-            await TeamStats.OnLoadMatchesAsync();
+            //await TeamStats.OnLoadMatchesAsync();
         }
     }
 }

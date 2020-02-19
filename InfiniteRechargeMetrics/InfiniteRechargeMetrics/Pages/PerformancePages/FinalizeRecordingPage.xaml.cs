@@ -38,18 +38,29 @@ namespace InfiniteRechargeMetrics.Pages.PerformancePages
                     Orientation = StackOrientation.Horizontal,
                     AutomationId = ADD_REMOVE_BTN_LAYOUT_ID
                 };
+
+                // https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/resourcedictionary-and-xaml-resource-references
+                // We can retrieve the style using the Resources Dictionary, application level
+                Style cyanBtnStyle = (Style)App.Current.Resources["CyanBtnStyle"];
+
+
                 var addRobotBtn = new Button
                 {
-                    Text = "Add Robot"
+                    Text = "Add Robot",
+                    Style = cyanBtnStyle
+                    
                 };
                 var removeRobotBtn = new Button
                 {
-                    Text = "Remove Robot"
+                    Text = "Remove Robot",
+                    Style = cyanBtnStyle
                 };
 
                 // Setting our binding for the CommandProperty
                 addRobotBtn.SetBinding(Button.CommandProperty, "AddRobotCMD");
+                addRobotBtn.SetBinding(Button.IsVisibleProperty, "IsRobotThreeBeingRecorded", BindingMode.Default, new Converters.InvertBooleanConverter());
                 removeRobotBtn.SetBinding(Button.CommandProperty, "RemoveRobotCMD");
+                removeRobotBtn.SetBinding(Button.IsVisibleProperty, "IsRobotOneBeingRecorded");
 
                 // Adding to the UI
                 btnLayout.Children.Add(addRobotBtn);

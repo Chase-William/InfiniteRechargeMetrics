@@ -84,29 +84,20 @@ namespace InfiniteRechargeMetrics.Templates
         }                
 
         public async Task OnLoadPerformancesAsync()
-        {
-            await Task.Run(() =>
-            {
-                // Setting the Performances collection's data to the returned data from a database query.
-                lock (Performances)
-                {
-                    Performances = new ObservableCollection<Performance>(DatabaseService.GetPerformancesForTeam(new Team { Name = "Name 1" }));
-                }               
-            });
+        {            
+            // Setting the Performances collection's data to the returned data from a database query.               
+            Performances = new ObservableCollection<Performance>(await DatabaseService.GetPerformancesForTeam(new Team { Name = "Name 1" }));                                         
         }
 
-        public async Task OnLoadMatchesAsync()
-        {
-            await Task.Run(() =>
-            {
-                // Setting the Performances collection's data to the returned data from a database query.
-                lock (Matches)
-                {
-                    Matches = new ObservableCollection<Match>(DatabaseService.GetMatchesForTeam(Performances.Select(performance => performance.Id).ToArray()));
-                }
-            });
-            PerformanceHorizontalListView.ItemsSource = Matches;
-            PerformanceHorizontalListView.ItemsSource = Performances;
-        }
+        //public async Task OnLoadMatchesAsync()
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        // Setting the Performances collection's data to the returned data from a database query.                
+        //        Matches = new ObservableCollection<Match>(DatabaseService.GetMatchesForTeam(Performances.Select(performance => performance.Id).ToArray()));                
+        //    });
+        //    PerformanceHorizontalListView.ItemsSource = Matches;
+        //    PerformanceHorizontalListView.ItemsSource = Performances;
+        //}
     }
 }

@@ -83,6 +83,7 @@
             <Style x:Key="SwitchLabel" TargetType="Label" BasedOn="{StaticResource DarkBGLabel}">
                 <Setter Property="Grid.Column" Value="0"/>
                 <Setter Property="Grid.ColumnSpan" Value="2"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
 
             <Style x:Key="StageSwitch" TargetType="Switch">
@@ -118,6 +119,13 @@
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="Padding" Value="5"/>
             </Style>
+
+            <Style x:Key="CyanBtnStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ActiveColor}"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

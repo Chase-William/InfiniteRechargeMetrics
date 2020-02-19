@@ -28,7 +28,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         private async void StartRecording()
         {
             // To use PushAsync we need to stack the page onto this pages own stack navigation
-            await PerformanceSetupPage.Navigation.PushAsync(new MasterRecordPerformancePage(Performance));
+            await PerformanceSetupPage.Navigation.PushModalAsync(new MasterRecordPerformancePage(Performance));
         }
 
         /// <summary>
