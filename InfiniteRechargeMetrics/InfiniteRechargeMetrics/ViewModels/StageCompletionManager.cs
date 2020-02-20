@@ -59,5 +59,16 @@ namespace InfiniteRechargeMetrics.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
+        public bool IsRecording { get; set; }
+
+        /// <summary>
+        ///     Method for setting the recording variable
+        /// </summary>
+        public void SetRecordingState(bool _recording)
+        {
+            IsRecording = _recording;
+            NotifyPropertyChanged(nameof(IsRecording));
+        }
     }
 }

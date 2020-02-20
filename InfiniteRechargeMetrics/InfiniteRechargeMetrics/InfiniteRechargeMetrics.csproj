@@ -19,14 +19,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\PerformancePages\PerformanceSetupPage.xaml.cs">
-      <DependentUpon>PerformanceSetupPage.xaml</DependentUpon>
+    <Compile Update="Pages\MainMasterPage.xaml.cs">
+      <DependentUpon>MainMasterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\RecordPerformancePage.xaml.cs">
-      <DependentUpon>RecordPerformancePage.xaml</DependentUpon>
+    <Compile Update="Pages\MatchPages\MasterRecordMatchPage.xaml.cs">
+      <DependentUpon>MasterRecordMatchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\MatchPages\MatchSetupPage.xaml.cs">
+      <DependentUpon>MatchSetupPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Templates\ChangePointsTemplate.xaml.cs">
       <DependentUpon>ChangePointsTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\SetHomeTeamTemplate.xaml.cs">
+      <DependentUpon>SetHomeTeamTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Update="Templates\TeamStatsTemplate.xaml.cs">
       <DependentUpon>TeamStatsTemplate.xaml</DependentUpon>
@@ -46,28 +52,28 @@
     <EmbeddedResource Update="Pages\MasterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\PerformancePages\FinalizeRecordingPage.xaml">
+    <EmbeddedResource Update="Pages\MatchPages\FinalizeRecordingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\PerformancePages\MasterRecordPerformancePage.xaml">
+    <EmbeddedResource Update="Pages\MatchPages\MasterRecordMatchPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\PerformancePages\PerformanceSetupPage.xaml">
+    <EmbeddedResource Update="Pages\MatchPages\MatchSetupPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\PerformancePages\StageOnePage.xaml">
+    <EmbeddedResource Update="Pages\MatchPages\StageOnePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\PerformancePages\StageThreePage.xaml">
+    <EmbeddedResource Update="Pages\MatchPages\StageThreePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\PerformancePages\StageTwoPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\RecordPerformancePage.xaml">
+    <EmbeddedResource Update="Pages\MatchPages\StageTwoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Templates\ChangePointsTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Templates\SetHomeTeamTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Templates\TeamStatsTemplate.xaml">

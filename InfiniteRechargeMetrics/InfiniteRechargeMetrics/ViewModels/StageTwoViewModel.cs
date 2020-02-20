@@ -1,5 +1,5 @@
 ﻿using InfiniteRechargeMetrics.Models;
-using InfiniteRechargeMetrics.Pages.PerformancePages;
+using InfiniteRechargeMetrics.Pages.MatchPages;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -14,8 +14,8 @@ namespace InfiniteRechargeMetrics.ViewModels
 
         public override ObservableCollection<Point> CurrentStagePortPoints
         {
-            get => Performance.StageTwoPortPoints;
-            set => Performance.StageTwoPortPoints = value;
+            get => Match.StageTwoPortPoints;
+            set => Match.StageTwoPortPoints = value;
         }
         #endregion
 
@@ -24,15 +24,15 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// </summary>
         public bool IsControlPanelFinished
         {
-            get => Performance.IsStageTwoControlPanelFinished;
+            get => Match.IsStageTwoControlPanelFinished;
             set
             {
-                Performance.IsStageTwoControlPanelFinished = value;
+                Match.IsStageTwoControlPanelFinished = value;
                 CheckIfStageIsComplete();
             }
         }
 
-        public StageTwoViewModel(StageTwoPage _stageTwoPage, Performance _performance, StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager)
+        public StageTwoViewModel(StageTwoPage _stageTwoPage, Match _match, StageCompletionManager _stageCompletionManager) : base(_match, _stageCompletionManager)
         {
             _stageTwoPage.ControlPanelSwitch.Toggled += ControlPanelSwitch_Toggled;            
         }

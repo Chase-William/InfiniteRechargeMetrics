@@ -1,11 +1,7 @@
 ﻿using InfiniteRechargeMetrics.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Timers;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -36,17 +32,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// <summary>
         ///     Tracks whether the Xamarin.Essentials Vibrate is supported on this device.
         /// </summary>
-        private static bool IsVibrateSupported = true;           
-
-        private static bool isRecording;
-        /// <summary>
-        ///     Method for setting the recording variable
-        /// </summary>
-        public static void SetRecordingState(StageViewModelBase sender, bool _recording)
-        {
-            isRecording = _recording;
-            sender.NotifyPropertyChanged(nameof(IsRecording));
-        }
+        private static bool IsVibrateSupported = true;                          
 
         public static Stopwatch Stopwatch { get; set; } = new Stopwatch();
         #endregion
@@ -71,36 +57,27 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// </summary>
         public StageCompletionManager StageCompletionManager { get; set; }
 
-        private Performance performance;
-        public Performance Performance
+        private Match match;
+        public Match Match
         {
-            get => performance;
-            set => performance = value;
+            get => match;
+            set => match = value;
         }
-
-        #region Page Data
-        /// <summary>
-        ///     Gets whether or not the application is recording
-        /// </summary>
-        public bool IsRecording { get => isRecording; }
        
-        #endregion
-
-
         /// <summary>
         ///     Command that is tied to all the buttons that change points.
         /// </summary>
         public ICommand ChangePointsCMD { get; set; }
 
-        public StageViewModelBase(Performance _performance, StageCompletionManager _stageCompletionManager)
+        public StageViewModelBase(Match _match, StageCompletionManager _stageCompletionManager)
         {
             Stopwatch = new Stopwatch();
             ChangePointsCMD = new Command((object charCode) => ChangePoints(this, (string)charCode, Stopwatch.Elapsed.Milliseconds));
             StageCompletionManager = _stageCompletionManager;
-            Performance = _performance;
-            SetRecordingState(this, false);
-            isRecording = false;
-
+            Match = _match;
+            StageCompletionManager.SetRecordingState(false);           
+            
+            // when any of the overrided or current version of this collection changed, notify the binding engine
             CurrentStagePortPoints.CollectionChanged += delegate
             {
                 NotifyPropertiesChanged(nameof(StageLowPortTotalValue), nameof(StageUpperPortTotalValue), nameof(StageSmallPortTotalValue));
@@ -256,6 +233,9 @@ namespace InfiniteRechargeMetrics.ViewModels
             return sum;
         }
 
+        /// <summary>
+        ///     All classes will have their own implementation of this method to check the status of their stage completion
+        /// </summary>
         public virtual void CheckIfStageIsComplete() { }
     }
 }

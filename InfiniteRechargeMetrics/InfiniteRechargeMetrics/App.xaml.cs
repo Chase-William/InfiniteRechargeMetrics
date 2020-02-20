@@ -1,5 +1,7 @@
 ﻿using InfiniteRechargeMetrics.Data;
 using InfiniteRechargeMetrics.Models;
+using InfiniteRechargeMetrics.Pages;
+using InfiniteRechargeMetrics.Pages.MatchPages;
 using InfiniteRechargeMetrics.ViewModels;
 using Xamarin.Forms;
 
@@ -30,31 +32,47 @@ namespace InfiniteRechargeMetrics
         /// </summary>
         public static string DatabaseFilePath;
 
-        public static LoginPageViewModel LoginPageViewModel { get; set; } = new LoginPageViewModel();
-
-        public App()
-        {
-            InitializeComponent();
-            MainPage = new MainPage();         
-        }
+        public static LoginPageViewModel LoginPageViewModel { get; set; } = new LoginPageViewModel();       
 
         public App(string _filePath)
         {
             InitializeComponent();
-            
-            MainPage = new MainPage();
             DatabaseFilePath = _filePath;
+            MainPage = InitMainMasterPage();            
         }
 
-
-
-        protected override void OnStart()
+        /// <summary>
+        ///     Sets the launch page based off whether the user has a home team set or not.
+        /// </summary>
+        private MainMasterPage InitMainMasterPage()
         {
-            //DatabaseService.SaveToDatabase(new Team { Name = "Name 1", ImagePath = "blue_rebel_icon" });
-            //DatabaseService.SaveToDatabase(new Team { Name = "Name 2", ImagePath = "red_rebel_icon" });
-            //DatabaseService.SaveToDatabase(new Team { Name = "Name 3", ImagePath = "blue_rebel_icon" });
-            //DatabaseService.SaveToDatabase(new Team { Name = "Name 4", ImagePath = "blue_rebel_icon" });
-            //DatabaseService.SaveToDatabase(new Team { Name = "Name 5", ImagePath = "red_rebel_icon" });
+            Team homeTeam = new Team();
+            try
+            {
+                homeTeam = DatabaseService.Provider.GetHomeTeam();
+            }
+            catch { }
+            MainMasterPage mainMasterDetail = new MainMasterPage();                        
+            // Take the user to a record page
+            if (homeTeam == null)
+            {
+                mainMasterDetail.Detail = new NavigationPage(new MatchSetupPage());
+            }
+            // Take the user to home page
+            else
+            {
+                mainMasterDetail.Detail = new NavigationPage(new HomeTeamPage(homeTeam));
+            }
+            return mainMasterDetail;
+        }
+
+        protected async override void OnStart()
+        {
+            //await DatabaseService.Provider.SaveTeamToLocalDBAsync(new Team { TeamId = "0001", Alias = "Name 1", ImagePath = "blue_rebel_icon" });
+            //await DatabaseService.Provider.SaveTeamToLocalDBAsync(new Team { TeamId = "0002", Alias = "Name 2", ImagePath = "red_rebel_icon" });
+            //await DatabaseService.Provider.SaveTeamToLocalDBAsync(new Team { TeamId = "0003", Alias = "Name 3", ImagePath = "blue_rebel_icon" });
+            //await DatabaseService.Provider.SaveTeamToLocalDBAsync(new Team { TeamId = "0004", Alias = "Name 4", ImagePath = "blue_rebel_icon" });
+            //await DatabaseService.Provider.SaveTeamToLocalDBAsync(new Team { TeamId = "0005", Alias = "Name 5", ImagePath = "red_rebel_icon" });
 
             //DatabaseService.SaveToDatabase(new Match { Title = "Match 1", TeamOnePerformance_FK = 1 });
             //DatabaseService.SaveToDatabase(new Match { Title = "Match 2", TeamOnePerformance_FK = 1 });

@@ -15,12 +15,12 @@ namespace InfiniteRechargeMetrics.Templates
         // <summary>
         ///     A collection of the all the performances the choosen team has.
         /// </summary>
-        private ObservableCollection<Performance> performances = new ObservableCollection<Performance>();
+        private ObservableCollection<Match> performances = new ObservableCollection<Match>();
         //private ObservableCollection<Match> matches = new ObservableCollection<Match>();
         private int totalMatches;
         private int totalPerformances;
 
-        public ObservableCollection<Performance> Performances { 
+        public ObservableCollection<Match> Performances { 
             get => performances;
             set
             {
@@ -28,14 +28,6 @@ namespace InfiniteRechargeMetrics.Templates
                 TotalPerformances = value.Count;
             }
         }
-        //public ObservableCollection<Match> Matches {
-        //    get => matches;
-        //    set
-        //    {
-        //        matches = value;
-        //        TotalMatches = value.Count;
-        //    } 
-        //}
 
         /// <summary>
         ///     Tracks the total number of Performances.
@@ -81,23 +73,6 @@ namespace InfiniteRechargeMetrics.Templates
         public TeamStatsTemplate()
         {
             InitializeComponent();
-        }                
-
-        public async Task OnLoadPerformancesAsync()
-        {            
-            // Setting the Performances collection's data to the returned data from a database query.               
-            //Performances = new ObservableCollection<Performance>(await DatabaseService.Provider.GetPerformancesForTeam(new Team { Name = "Name 1" }));                                         
-        }
-
-        //public async Task OnLoadMatchesAsync()
-        //{
-        //    await Task.Run(() =>
-        //    {
-        //        // Setting the Performances collection's data to the returned data from a database query.                
-        //        Matches = new ObservableCollection<Match>(DatabaseService.GetMatchesForTeam(Performances.Select(performance => performance.Id).ToArray()));                
-        //    });
-        //    PerformanceHorizontalListView.ItemsSource = Matches;
-        //    PerformanceHorizontalListView.ItemsSource = Performances;
-        //}
+        }     
     }
 }

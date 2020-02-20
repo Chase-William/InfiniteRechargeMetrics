@@ -1,5 +1,5 @@
 ﻿using InfiniteRechargeMetrics.Models;
-using InfiniteRechargeMetrics.Pages.PerformancePages;
+using InfiniteRechargeMetrics.Pages.MatchPages;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -14,17 +14,17 @@ namespace InfiniteRechargeMetrics.ViewModels
 
         public override ObservableCollection<Point> CurrentStagePortPoints
         {
-            get => Performance.StageThreePortPoints;
-            set => Performance.StageThreePortPoints = value;
+            get => Match.StageThreePortPoints;
+            set => Match.StageThreePortPoints = value;
         }
         #endregion
 
-        public StageThreeViewModel(StageThreePage _stageThreePage, Performance _performance, StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager) 
+        public StageThreeViewModel(StageThreePage _stageThreePage, Match _performance, StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager) 
         {
-            _stageThreePage.DroidOneRandevuSwitch.Toggled   += (e, a) => Performance.DroidOneRandevu   = a.Value;
-            _stageThreePage.DroidTwoRandevuSwitch.Toggled   += (e, a) => Performance.DroidTwoRandevu   = a.Value;
-            _stageThreePage.DroidThreeRandevuSwitch.Toggled += (e, a) => Performance.DroidThreeRandevu = a.Value;
-            _stageThreePage.IsRandevuBarLevelSwitch.Toggled += (e, a) => Performance.IsRandevuLevel    = a.Value;
+            _stageThreePage.DroidOneRandevuSwitch.Toggled   += (e, a) => Match.DroidOneRandevu   = a.Value;
+            _stageThreePage.DroidTwoRandevuSwitch.Toggled   += (e, a) => Match.DroidTwoRandevu   = a.Value;
+            _stageThreePage.DroidThreeRandevuSwitch.Toggled += (e, a) => Match.DroidThreeRandevu = a.Value;
+            _stageThreePage.IsRandevuBarLevelSwitch.Toggled += (e, a) => Match.IsRandevuLevel    = a.Value;
         }
 
         public override void CheckIfStageIsComplete()

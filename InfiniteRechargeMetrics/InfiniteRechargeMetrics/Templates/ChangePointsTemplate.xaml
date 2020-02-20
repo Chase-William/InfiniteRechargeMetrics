@@ -13,7 +13,6 @@
             <Style x:Key="BaseImageBtns" TargetType="ImageButton">
                 <Setter Property="Scale" Value="0.8"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="Margin" Value="0"/>
                 <Setter Property="Command" Value="{Binding ChangePointsCMD}"/>
             </Style>
 

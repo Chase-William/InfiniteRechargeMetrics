@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using System.Windows.Input;
 using InfiniteRechargeMetrics.Models;
-using InfiniteRechargeMetrics.Pages.PerformancePages;
+using InfiniteRechargeMetrics.Pages.MatchPages;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
@@ -23,8 +23,8 @@ namespace InfiniteRechargeMetrics.ViewModels
         private const int INSERT_POS_CHANGE_AMT = 3;
         #endregion  
 
-        private readonly PerformanceSetupPage performanceSetupPage;
-        public Performance Performance { get; set; }
+        private readonly MatchSetupPage performanceSetupPage;
+        public Match Performance { get; set; }
         public StackLayout AddRemoveBtnLayout { get; set; }
         public FinalizeRecordingPage FinalizeRecordingPage { get; set; }
 
@@ -74,7 +74,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         public ICommand AddRobotCMD { get; set; }
         public ICommand RemoveRobotCMD { get; set; }
         public ICommand FinishedRecordingCMD { get; set; }
-        public FinalizeRecordingViewModel(PerformanceSetupPage _performanceSetupPage, FinalizeRecordingPage _finalizePerformancePage, StackLayout _addRemoveBtnLayout, Performance _performance)
+        public FinalizeRecordingViewModel(MatchSetupPage _performanceSetupPage, FinalizeRecordingPage _finalizePerformancePage, StackLayout _addRemoveBtnLayout, Match _performance)
         {
             FinalizeRecordingPage = _finalizePerformancePage;
             performanceSetupPage = _performanceSetupPage;
@@ -112,9 +112,9 @@ namespace InfiniteRechargeMetrics.ViewModels
             Performance.Comments = FinalizeRecordingPage.PerformanceCommentsEditor.Text;
             // Saving to the database
 
-            await performanceSetupPage.Navigation.PopAsync();
+            await App.Current.MainPage.Navigation.PopModalAsync();
 
-            await Data.DatabaseService.Provider.SavePerformanceToLocalDB(Performance);
+            await Data.DatabaseService.Provider.SaveMatchToLocalDBAsync(Performance);
         }
 
         /// <summary>

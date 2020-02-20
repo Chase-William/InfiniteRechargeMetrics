@@ -7,7 +7,7 @@ using Xamarin.Forms;
 using System;
 using System.Linq;
 using Point = InfiniteRechargeMetrics.Models.Point;
-using InfiniteRechargeMetrics.Pages.PerformancePages;
+using InfiniteRechargeMetrics.Pages.MatchPages;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
@@ -22,7 +22,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         private event Action StageStateChanged;
 
         public Timer MainTimer { get; set; } = new Timer();
-        public MasterRecordPerformancePage MasterPerformancePage { get; set; }
+        public MasterRecordMatchPage MasterPerformancePage { get; set; }
 
         private double progressBarProgress;
         public double ProgressBarProgress
@@ -56,22 +56,22 @@ namespace InfiniteRechargeMetrics.ViewModels
 
         public ObservableCollection<Point> AutonomousPortPoints
         {
-            get => Performance.AutonomousPortPoints;
-            set => Performance.AutonomousPortPoints = value;
+            get => Match.AutonomousPortPoints;
+            set => Match.AutonomousPortPoints = value;
         }
 
         public override ObservableCollection<Point> CurrentStagePortPoints
         {
-            get => Performance.StageOnePortPoints;
-            set => Performance.StageOnePortPoints = value;
+            get => Match.StageOnePortPoints;
+            set => Match.StageOnePortPoints = value;
         }
 
         public int RobotsMovedFromSpawnPoints
         {
-            get => Performance.RobotsMovedFromSpawnPoints;
+            get => Match.RobotsMovedFromSpawnPoints;
             set
             {
-                Performance.RobotsMovedFromSpawnPoints = value;
+                Match.RobotsMovedFromSpawnPoints = value;
                 NotifyPropertyChanged(nameof(RobotsMovedFromSpawnPoints));
             }
         }
@@ -80,10 +80,10 @@ namespace InfiniteRechargeMetrics.ViewModels
         ///     Boolean representing whether the team has completed the control panel step.
         /// </summary>
         public bool IsControlPanelFinished { 
-            get => Performance.IsStageOneControlPanelFinished; 
+            get => Match.IsStageOneControlPanelFinished; 
             set 
             {
-                Performance.IsStageOneControlPanelFinished = value;
+                Match.IsStageOneControlPanelFinished = value;
                 CheckIfStageIsComplete();
             } 
         }
@@ -107,11 +107,11 @@ namespace InfiniteRechargeMetrics.ViewModels
         public ICommand StartTimerCMD { get; set; }        
 
         public StageOneViewModel(StageOnePage _stageOnePage, 
-                                 Performance _performance, 
+                                 Match _performance, 
                                  StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager)
         {           
             StartTimerCMD = new Command(StartAutonomousTimer);
-            MasterPerformancePage = _stageOnePage.MasterPerformancePage;
+            MasterPerformancePage = _stageOnePage.MasterMatchPage;
             // Getting a reference to the masterPerforance to make calls on it's timer
             //MasterPerformanceVMO = _stageOnePage.MasterRecordPerformanceVMO;
             // Handles the switch being updated for control panel
@@ -195,7 +195,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// </summary>
         private void StartAutonomousTimer()
         {
-            SetRecordingState(this, true);
+            StageCompletionManager.SetRecordingState(true);
             MainTimer.Interval = StageConstants.AUTONOMOUS_TIMER_INTERVAL;
             MainTimer.Start();
             Stopwatch.Start();

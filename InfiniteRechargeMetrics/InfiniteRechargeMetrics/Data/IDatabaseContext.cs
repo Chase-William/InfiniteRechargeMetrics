@@ -8,7 +8,10 @@ namespace InfiniteRechargeMetrics.Data
 {
     interface IDatabaseContext
     {
-        Task SavePerformanceToLocalDB(Performance _performance);
-        Task<List<Performance>> GetAllPerformancesFromTeam(string _teamName);
+        Task SaveTeamToLocalDBAsync(Team _team);
+        Task SaveMatchToLocalDBAsync(Match _performance);
+        Task<List<Match>> GetAllMatchesForTeamAsync(string _teamName);
+        Task<string[]> GetAllTeamsIdPlusName();
+        Team GetHomeTeam();
     }
 }

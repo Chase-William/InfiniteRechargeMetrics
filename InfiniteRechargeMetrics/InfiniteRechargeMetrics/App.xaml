@@ -84,6 +84,7 @@
                 <Setter Property="Grid.Column" Value="0"/>
                 <Setter Property="Grid.ColumnSpan" Value="2"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="5,0,0,0"/>
             </Style>
 
             <Style x:Key="StageSwitch" TargetType="Switch">
@@ -97,7 +98,6 @@
 
             <!-- Style for the main grid inside the stage pages -->
             <Style x:Key="StageGrid" TargetType="Grid">
-                <Setter Property="Padding" Value="5"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
             </Style>
             <!-- Style for the header stacklayouts inside the stage pages -->
@@ -115,6 +115,8 @@
 
             <Style x:Key="InsideFrameLabel" TargetType="Label">
                 <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="Medium"/>
             </Style>
 
             <Style x:Key="InsideFrameLabelHeader" TargetType="Label" BasedOn="{StaticResource InsideFrameLabel}">

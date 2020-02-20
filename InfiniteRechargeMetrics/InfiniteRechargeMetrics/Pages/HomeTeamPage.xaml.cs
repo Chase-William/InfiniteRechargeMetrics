@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using InfiniteRechargeMetrics.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using InfiniteRechargeMetrics.Templates;
+using InfiniteRechargeMetrics.Data;
 
 namespace InfiniteRechargeMetrics.Pages
 {
@@ -14,19 +11,35 @@ namespace InfiniteRechargeMetrics.Pages
     {
         public HomeTeamPage()
         {
-            InitializeComponent();            
+            InitializeComponent();
+
+            Team homeTeam = new Team();
+            try
+            {
+                homeTeam = DatabaseService.Provider.GetHomeTeam();
+            }
+            catch { }
+
+            // if their is a home team set, display the UI for the team
+            if (homeTeam == null)
+            {
+                Content = new SetHomeTeamTemplate();
+            }
+            // otherwise there is no home team set, therefore display the set home team view
+            else
+            {
+                Content = new TeamStatsTemplate();
+            }
         }
 
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            TeamStats.TempNameVar.Text = "Example Team Name";   // TO BE REMOVED LATER IN DEVELOPMENT
-
-            // Calling the function for loading performances from the database.            
-            var test = Data.DatabaseService.Provider.GetAllPerformancesFromTeam("Team 1");
-
-            Console.WriteLine();
+        /// <summary>
+        ///     Parameterized Contructor used by the APP on startup based off if a hometeam is set in the local database.
+        /// </summary>
+        public HomeTeamPage(Team _homeTeam) 
+        { 
+            InitializeComponent();
+            BindingContext = _homeTeam;
         }
+
     }
 }
