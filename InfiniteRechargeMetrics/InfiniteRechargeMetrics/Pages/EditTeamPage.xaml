@@ -6,6 +6,14 @@
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.EditTeamPage">
 
+    <!--<ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="Triggers" Value=""
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>-->
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Finished"
                      Order="Primary"
@@ -23,17 +31,63 @@
         <Frame Style="{StaticResource FrameEditorBG}">
             <Entry Placeholder="Id Number"/>
         </Frame>
-        <Frame Style="{StaticResource FrameEditorBG}">
+        <!--<Frame Style="{StaticResource FrameEditorBG}">
+            <Frame.Triggers>
+                <Trigger TargetType="Frame" Property="IsFocused" Value="True">
+                    <Setter Property="Scale" Value="1.1" />
+                    --><!-- multiple Setters elements are allowed --><!--
+                </Trigger>
+            </Frame.Triggers>
             <Entry Placeholder="Alias">
+                --><!-- Using a trigger to make the entry larger on focus --><!--
                 <Entry.Triggers>
-                    <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference entry}, Path=Text.Length}" Value="0">
-                        <Setter Property="IsEnabled" Value="False" />
-                        <!-- multiple Setters elements are allowed -->
-                    </DataTrigger>
+                    <Trigger TargetType="Entry" Property="IsFocused" Value="True">
+                        <Setter Property="Scale" Value="1.1" />
+                        --><!-- multiple Setters elements are allowed --><!--
+                    </Trigger>
                 </Entry.Triggers>
             </Entry>
-        </Frame>
-
+        </Frame>-->
+        
+        
+        <ContentPresenter>
+            <ContentPresenter.Content>
+                <Frame Style="{StaticResource FrameEditorBG}">
+                    <Entry Placeholder="Alias"/>
+                </Frame>
+            </ContentPresenter.Content>
+            <ContentPresenter.Triggers>
+                <Trigger TargetType="Frame">
+                    <Setter Property="Scale" Value="1.1"/>
+                </Trigger>
+                <Trigger TargetType="Entry">
+                    <Setter Property="Scale" Value="1.1"/>
+                </Trigger>
+            </ContentPresenter.Triggers>
+        </ContentPresenter>
+        
+        <!--<Frame>
+            <ControlTemplate TargetType="ToggleButton">
+                <Image Name="ExpanderImage" Height="24" Width="24" Source="..\Images\Icons\32x32\Blue\Open.png" />
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter TargetName="ExpanderImage" Property="Source" Value="..\Images\Icons\32x32\Blue\Close.png" />
+                    </Trigger>
+                    <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                        <Setter TargetName="ExpanderImage" Property="Source" Value="..\Images\Icons\32x32\Green\Open.png" />
+                    </DataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}" Value="True" />
+                            <Condition Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True" />
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="ExpanderImage" Property="Source" Value="..\Images\Icons\32x32\Green\Close.png" />
+                    </MultiDataTrigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Frame>-->
+        
+        
         <Button Text="Cancel" Command="{Binding CancelEditingCMD}" Style="{StaticResource HighLightButton}"/>
 
     </StackLayout>

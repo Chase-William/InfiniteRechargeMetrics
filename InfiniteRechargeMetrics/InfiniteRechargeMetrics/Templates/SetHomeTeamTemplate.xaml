@@ -7,19 +7,13 @@
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Templates.SetHomeTeamTemplate">
 
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <local:NullToBoolConverter x:Key="NullToBoolConverter"/>
-        </ResourceDictionary>
-    </ContentView.Resources>
-    
     <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="50,100,50,50">
         <Label Text="Set Your Home Team" Style="{StaticResource CategoryHeader}"/>
         <Button Text="New" Style="{StaticResource HighLightButton}" Command="{Binding CreateNewTeamCMD}"/>
         <Button Text="Existing" Style="{StaticResource HighLightButton}" Command="{Binding UseExistingTeamCMD}"/>
         <Picker x:Name="TeamPicker" Title="Select A Team" SelectedIndexChanged="Picker_SelectedIndexChanged" IsVisible="{Binding IsUsingExisting}" TextColor="White"/>
 
-        <Button Text="Save" IsVisible="{Binding IsTeamSelected}" Style="{StaticResource HighLightButton}"/>
+        <Button Text="Save" IsVisible="{Binding IsUsingExisting}" IsEnabled="{Binding IsTeamSelected}" Style="{StaticResource HighLightButton}"/>
     </StackLayout>
     
 </ContentView>
