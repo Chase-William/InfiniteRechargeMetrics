@@ -68,10 +68,9 @@
                         </Frame>
 
                         <!-- The icon for the team, place below the stacklayout so this will easily render on top, without needing to using z-index or anything -->
-                        <Frame CornerRadius="100" 
-                           Padding="5"              
-                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0, Constant=40}"
-                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=95}">
+                        <Frame Style="{StaticResource FrameImageWrapper}"              
+                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0, Constant=40}"
+                               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=95}">
                             <Image Source="blue_rebel_icon.png" WidthRequest="80"/>
                         </Frame>
 

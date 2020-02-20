@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.EditTeamPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Finished"
+                     Order="Primary"
+                     Priority="0"
+                     IconImageSource="finish_icon.png"
+                     Command="{Binding FinishedEditingCMD}"/>
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="5,50,5,0">
+
+        <Frame Style="{StaticResource FrameImageWrapper}" HorizontalOptions="Center">
+            <ImageButton Command="{Binding SetTeamImageCMD}" Source="red_rebel_icon.png" BackgroundColor="Transparent" WidthRequest="80"/>
+        </Frame>
+
+        <Frame Style="{StaticResource FrameEditorBG}">
+            <Entry Placeholder="Id Number"/>
+        </Frame>
+        <Frame Style="{StaticResource FrameEditorBG}">
+            <Entry Placeholder="Alias">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference entry}, Path=Text.Length}" Value="0">
+                        <Setter Property="IsEnabled" Value="False" />
+                        <!-- multiple Setters elements are allowed -->
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+        </Frame>
+
+        <Button Text="Cancel" Command="{Binding CancelEditingCMD}" Style="{StaticResource HighLightButton}"/>
+
+    </StackLayout>
+</ContentPage>

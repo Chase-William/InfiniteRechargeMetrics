@@ -22,7 +22,7 @@ namespace InfiniteRechargeMetrics.Pages
 
             // if their is a home team set, display the UI for the team
             if (homeTeam == null)
-            {
+            {              
                 Content = new SetHomeTeamTemplate();
             }
             // otherwise there is no home team set, therefore display the set home team view

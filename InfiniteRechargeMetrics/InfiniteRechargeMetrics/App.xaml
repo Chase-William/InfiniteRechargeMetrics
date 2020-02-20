@@ -135,6 +135,12 @@
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             </Style>
+
+            <!-- Style for a frame that has an image inside of it -->
+            <Style x:Key="FrameImageWrapper" TargetType="Frame">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="CornerRadius" Value="100"/>
+            </Style>
             
         </ResourceDictionary>
     </Application.Resources>
