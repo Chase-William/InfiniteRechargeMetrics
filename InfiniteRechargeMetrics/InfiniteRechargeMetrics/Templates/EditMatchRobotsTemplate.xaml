@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:InfiniteRechargeMetrics.Pages.Converters"
+             xmlns:local="clr-namespace:InfiniteRechargeMetrics.SharedCustomViews"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Templates.EditMatchRobotsTemplate">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:DetermineFrameVisibility x:Key="DetermineFrameVisibility"/>
+            <converter:ImagePathConverter x:Key="ImagePathConverter"/>
+
+            <Style x:Key="RobotFrame" TargetType="Frame" BasedOn="{StaticResource MarginedFrame}">
+                <Setter Property="IsVisible" Value="False"/>
+            </Style>
+
+            <Style x:Key="RobotImageFrame" TargetType="Frame" BasedOn="{StaticResource FrameImageWrapper}">
+                <Setter Property="HorizontalOptions" Value="End"/>
+            </Style>
+            <Style TargetType="ImageButton">
+                <Setter Property="Command" Value="{Binding GetPictureCMD}"/>
+                <Setter Property="WidthRequest" Value="90"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="WidthRequest" Value="100"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="Placeholder" Value="Robot #"/>
+            </Style>
+            <Style TargetType="local:CustomEditor">
+                <Setter Property="Placeholder" Value="Write comments here."/>
+                <Setter Property="Grid.Row" Value="1"/>
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Grid.ColumnSpan" Value="2"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+        <StackLayout>
+            <Label Text="Robots" Style="{StaticResource CategoryHeader}" Margin="0,30,0,0"/>
+            <BoxView Style="{StaticResource HorizontalLineBreak}"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Remove" Style="{StaticResource CyanBtnStyle}" Command="{Binding HideRobotCMD}"/>
+                <Button Text="Add" Style="{StaticResource CyanBtnStyle}" Command="{Binding RevealARobotCMD}"/>
+            </StackLayout>
+
+        <StackLayout x:Name="DataLayout">
+            <Frame Style="{StaticResource RobotFrame}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.9*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Style="{StaticResource FrameImageWrapper}">
+                        <ImageButton Source="{Binding RobotOneImagePath, Converter={asdfasdfadsf d6f875dsa8f5a87df98a7sf9a8sd}}" CommandParameter="0">
+                            <ImageButton.Triggers>
+                                <DataTrigger TargetType="ImageButton" Binding="{Binding RobotOneImagePath, Converter={StaticResource ImagePathConverter}}" Value="true">
+                                    <Setter Property="Source" Value="default_robot_icon"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="ImageButton" Binding="{Binding RobotOneImagePath, Converter={StaticResource ImagePathConverter}}" Value="false">
+                                    <Setter Property="Source" Value="{Binding Match.Robots[0].ImagePath}"/>
+                                </DataTrigger>
+                            </ImageButton.Triggers>
+                        </ImageButton>
+                    </Frame>
+                    <Entry Text="{Binding RobotOneId}"/>
+                    <local:CustomEditor Text="{Binding Match.Robots[0].RobotInfo}"/>
+                </Grid>
+                
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, 
+                        ConverterParameter=1}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            <!--<Frame Style="{StaticResource RobotFrame}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.9*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Style="{StaticResource FrameImageWrapper}">
+                        <ImageButton Source="red_rebel_icon.png"/>
+                    </Frame>
+                    <Entry Text="{Binding UIRobotTwo}"/>
+                    <local:CustomEditor/>
+                </Grid>
+
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, 
+                        ConverterParameter=2}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            <Frame Style="{StaticResource RobotFrame}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.9*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Style="{StaticResource FrameImageWrapper}">
+                        <ImageButton Source="red_rebel_icon.png"/>
+                    </Frame>
+                    <Entry Text="{Binding UIRobotThree}"/>
+                    <local:CustomEditor/>
+                </Grid>
+
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, 
+                        ConverterParameter=3}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            <Frame Style="{StaticResource RobotFrame}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.9*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Style="{StaticResource FrameImageWrapper}">
+                        <ImageButton Source="red_rebel_icon.png"/>
+                    </Frame>
+                    <Entry Text="{Binding UIRobotFour}"/>
+                    <local:CustomEditor/>
+                </Grid>
+
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, 
+                        ConverterParameter=4}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            <Frame Style="{StaticResource RobotFrame}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.9*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Style="{StaticResource FrameImageWrapper}">
+                        <ImageButton Source="red_rebel_icon.png"/>
+                    </Frame>
+                    <Entry Text="{Binding UIRobotFive}"/>
+                    <local:CustomEditor/>
+                </Grid>
+
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, 
+                        ConverterParameter=5}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            <Frame Style="{StaticResource RobotFrame}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.9*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Style="{StaticResource FrameImageWrapper}">
+                        <ImageButton Source="red_rebel_icon.png"/>
+                    </Frame>
+                    <Entry Text="{Binding UIRobotSix}"/>
+                    <local:CustomEditor/>
+                </Grid>
+
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, 
+                        ConverterParameter=6}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>-->
+        </StackLayout>
+            
+        </StackLayout>
+</ContentView>

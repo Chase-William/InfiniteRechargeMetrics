@@ -1,5 +1,8 @@
 FormsViewGroup
+Plugin.CurrentActivity
 Plugin.GoogleClient
+Plugin.Media
+Plugin.Permissions
 Sharpnado.Presentation.Forms.Droid
 SQLitePCLRaw.batteries_green
 SQLitePCLRaw.batteries_v2

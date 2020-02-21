@@ -3,26 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:InfiniteRechargeMetrics.SharedCustomViews"
-             xmlns:converter="clr-namespace:InfiniteRechargeMetrics.Pages.Converters"
+             xmlns:template="clr-namespace:InfiniteRechargeMetrics.Templates"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.MatchPages.MatchSetupPage"
              Title="Setup Recording">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-
-            <converter:DetermineFrameVisibility x:Key="DetermineFrameVisibility"/>
-
-            <Style x:Key="MarginedFrame" TargetType="Frame" BasedOn="{StaticResource FrameEditorBG}">
-                <Setter Property="Margin" Value="5,0,5,0"/>
-            </Style>
-            <Style x:Key="RobotFrame" TargetType="Frame" BasedOn="{StaticResource MarginedFrame}">
-                <Setter Property="IsVisible" Value="False"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
 
     <!--<DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference TeamId}, Path=Text.Length, Converter={StaticResource HasDataBeenEnteredConverter}}" Value="true">
         <Setter Property="IsEnabled" Value="True"/>
@@ -45,7 +29,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Text="Match:" Style="{StaticResource InsideFrameLabelHeader}"/>
-                    <Entry Placeholder="#" WidthRequest="100" x:Name="MatchNumberEntry" x:FieldModifier="public" Grid.Column="1"/>
+                    <Entry x:Name="MatchIdEntry" Placeholder="#" WidthRequest="100" Text="{Binding MatchId}" Grid.Column="1"/>
                 </Grid>
             </Frame>
             <!-- Entry frame that allows the user to give the match a title -->
@@ -59,7 +43,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Text="Title" Style="{StaticResource InsideFrameLabelHeader}"/>
-                    <Entry HorizontalOptions="FillAndExpand" x:Name="TitleEntry" x:FieldModifier="public" Grid.Column="1"/>
+                    <Entry x:Name="MatchName" HorizontalOptions="FillAndExpand" Text="{Binding MatchName}" Grid.Column="1"/>
                 </Grid>
             </Frame>
 
@@ -79,68 +63,13 @@
 
 
                     <Label Text="New:" Style="{StaticResource InsideFrameLabel}" Grid.Column="0"/>
-                    <Entry Placeholder="#" WidthRequest="100" x:Name="TeamNumberEntry" x:FieldModifier="public" Grid.Column="1"/>
+                    <Entry x:Name="TeamId" Placeholder="#" WidthRequest="100" Text="{Binding TeamId}" Grid.Column="1"/>
                     <Label Text="Existing:" Style="{StaticResource InsideFrameLabel}" Grid.Row="1"/>
-                    <Picker x:Name="TeamPicker" x:FieldModifier="public" Grid.Row="1" Grid.Column="1"/>
+                    <Picker x:Name="TeamPicker" Grid.Row="1" Grid.Column="1" SelectedItem="{Binding TeamPickerSelectedItem}"/>
                 </Grid>
             </Frame>
 
-            <Label Text="Robots" Style="{StaticResource CategoryHeader}" Margin="0,30,0,0"/>
-            <BoxView Style="{StaticResource HorizontalLineBreak}"/>
-
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Remove" Style="{StaticResource CyanBtnStyle}" Command="{Binding HideRobotCMD}"/>
-                <Button Text="Add" Style="{StaticResource CyanBtnStyle}" Command="{Binding RevealARobotCMD}"/>
-            </StackLayout>
-
-            <Frame Style="{StaticResource RobotFrame}">
-                <Entry Placeholder="Robot #"/>
-                <Frame.Triggers>
-                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=1}" Value="true">
-                        <Setter Property="IsVisible" Value="True"/>
-                    </DataTrigger>
-                </Frame.Triggers>
-            </Frame>
-            <Frame Style="{StaticResource RobotFrame}">
-                <Entry Placeholder="Robot #"/>
-                <Frame.Triggers>
-                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=2}" Value="true">
-                        <Setter Property="IsVisible" Value="True"/>
-                    </DataTrigger>
-                </Frame.Triggers>
-            </Frame>
-            <Frame Style="{StaticResource RobotFrame}">
-                <Entry Placeholder="Robot #"/>
-                <Frame.Triggers>
-                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=3}" Value="true">
-                        <Setter Property="IsVisible" Value="True"/>
-                    </DataTrigger>
-                </Frame.Triggers>
-            </Frame>
-            <Frame Style="{StaticResource RobotFrame}">
-                <Entry Placeholder="Robot #"/>
-                <Frame.Triggers>
-                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=4}" Value="true">
-                        <Setter Property="IsVisible" Value="True"/>
-                    </DataTrigger>
-                </Frame.Triggers>
-            </Frame>
-            <Frame Style="{StaticResource RobotFrame}">
-                <Entry Placeholder="Robot #"/>
-                <Frame.Triggers>
-                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=5}" Value="true">
-                        <Setter Property="IsVisible" Value="True"/>
-                    </DataTrigger>
-                </Frame.Triggers>
-            </Frame>
-            <Frame Style="{StaticResource RobotFrame}">
-                <Entry Placeholder="Robot #"/>
-                <Frame.Triggers>
-                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=6}" Value="true">
-                        <Setter Property="IsVisible" Value="True"/>
-                    </DataTrigger>
-                </Frame.Triggers>
-            </Frame>
+            <ContentView x:Name="ForEditingRobotsTemplate"/>
 
             <StackLayout VerticalOptions="EndAndExpand" Margin="0,0,0,20">
                 <Button Text="Start" Style="{StaticResource ButtonBase}" Command="{Binding StartRecordingCMD}"/>

@@ -16,11 +16,6 @@
                 <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
 
-            <Style TargetType="Entry">
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="TextColor" Value="White"/>
-            </Style>
-
             <!-- Style for the entries that robot numbers will be entered into -->
             <Style x:Key="RobotNumberEntry" TargetType="Entry">
                 <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
@@ -49,10 +44,12 @@
     </ContentPage.ToolbarItems>
     
     <ScrollView>
-        <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="10">
+        <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
 
-            <StackLayout x:Name="RobotCommentLayout">
-                <!-- Robot Notes 1 -->
+            <ContentView x:Name="ForEditingRobotsTemplate"/>
+
+            <!--<StackLayout x:Name="RobotCommentLayout">
+                --><!-- Robot Notes 1 --><!--
                 <StackLayout Orientation="Horizontal" IsVisible="{Binding IsRobotOneBeingRecorded}">
                     <Label Text="Robot #1" Style="{StaticResource FinalizeLabel}"/>
                     <Entry x:Name="RobotThreeIdEntry" x:FieldModifier="public" Style="{StaticResource RobotNumberEntry}"/>
@@ -63,7 +60,7 @@
 
                 <BoxView Grid.Row="2" Style="{StaticResource RobotHorizontalLineBreak}" IsVisible="{Binding IsRobotTwoBeingRecorded}"/>
 
-                <!-- Robot Notes 2 -->
+                --><!-- Robot Notes 2 --><!--
                 <StackLayout Orientation="Horizontal" IsVisible="{Binding IsRobotTwoBeingRecorded}">
                     <Label Text="Robot #2" Style="{StaticResource FinalizeLabel}"/>
                     <Entry x:Name="RobotTwoIdEntry" x:FieldModifier="public" Style="{StaticResource RobotNumberEntry}"/>
@@ -74,7 +71,7 @@
 
                 <BoxView Grid.Row="5" Style="{StaticResource RobotHorizontalLineBreak}" IsVisible="{Binding IsRobotThreeBeingRecorded}"/>
 
-                <!-- Robot Notes 3 -->
+                --><!-- Robot Notes 3 --><!--
                 <StackLayout Orientation="Horizontal" IsVisible="{Binding IsRobotThreeBeingRecorded}">
                     <Label Text="Robot #3" Style="{StaticResource FinalizeLabel}"/>
                     <Entry x:Name="RobotOneIdEntry" x:FieldModifier="public" Style="{StaticResource RobotNumberEntry}"/>
@@ -82,7 +79,34 @@
                 <Frame Style="{StaticResource FrameEditorBG}" IsVisible="{Binding IsRobotThreeBeingRecorded}">
                     <local:CustomEditor x:Name="RobotThreeInfoEditor" x:FieldModifier="public"/>
                 </Frame>
-            </StackLayout>
+
+                --><!-- Robot Notes 4 --><!--
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsRobotThreeBeingRecorded}">
+                    <Label Text="Robot #3" Style="{StaticResource FinalizeLabel}"/>
+                    <Entry x:Name="RobotOneIdEntry" x:FieldModifier="public" Style="{StaticResource RobotNumberEntry}"/>
+                </StackLayout>
+                <Frame Style="{StaticResource FrameEditorBG}" IsVisible="{Binding IsRobotThreeBeingRecorded}">
+                    <local:CustomEditor x:Name="RobotThreeInfoEditor" x:FieldModifier="public"/>
+                </Frame>
+
+                --><!-- Robot Notes 5 --><!--
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsRobotThreeBeingRecorded}">
+                    <Label Text="Robot #3" Style="{StaticResource FinalizeLabel}"/>
+                    <Entry x:Name="RobotOneIdEntry" x:FieldModifier="public" Style="{StaticResource RobotNumberEntry}"/>
+                </StackLayout>
+                <Frame Style="{StaticResource FrameEditorBG}" IsVisible="{Binding IsRobotThreeBeingRecorded}">
+                    <local:CustomEditor x:Name="RobotThreeInfoEditor" x:FieldModifier="public"/>
+                </Frame>
+
+                --><!-- Robot Notes 6 --><!--
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsRobotThreeBeingRecorded}">
+                    <Label Text="Robot #3" Style="{StaticResource FinalizeLabel}"/>
+                    <Entry x:Name="RobotOneIdEntry" x:FieldModifier="public" Style="{StaticResource RobotNumberEntry}"/>
+                </StackLayout>
+                <Frame Style="{StaticResource FrameEditorBG}" IsVisible="{Binding IsRobotThreeBeingRecorded}">
+                    <local:CustomEditor x:Name="RobotThreeInfoEditor" x:FieldModifier="public"/>
+                </Frame>
+            </StackLayout>-->
 
 
             <Label Text="Comments" Style="{StaticResource DarkBGLabel}"/>

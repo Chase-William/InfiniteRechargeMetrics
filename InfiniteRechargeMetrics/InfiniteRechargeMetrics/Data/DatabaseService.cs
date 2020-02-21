@@ -67,16 +67,6 @@ namespace InfiniteRechargeMetrics.Data
         }
 
         /// <summary>
-        ///     Gets the instance of the home team's Id if it found one.
-        /// </summary>
-        //public async Task<string> GetHomeTeamIdAsync()
-        //{
-        //    SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
-        //    await cn.CreateTableAsync<Team>();            
-        //    return cn.QueryAsync<Team>("SELECT team_id FROM Team WHERE is_home_team = ?", true).Result.FirstOrDefault().TeamId;
-        //}
-
-        /// <summary>
         ///     Returns an instance of the team it found, if it found one.       
         /// </summary>
         public async Task<Team> GetTeamAsync(string _teamId)
@@ -87,9 +77,9 @@ namespace InfiniteRechargeMetrics.Data
         }
 
         /// <summary>
-        ///     Saves the past instance of a Performance and its various properties to the local database.
+        ///     Saves the past instance of a Match and its various properties to the local database.
         /// </summary>
-        public async Task SaveMatchToLocalDBAsync(Match _performance)
+        public async Task SaveMatchToLocalDBAsync(Match _match)
         {
 
             SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
@@ -98,21 +88,21 @@ namespace InfiniteRechargeMetrics.Data
             await cn.CreateTablesAsync<Match, Point>();
 
             // Inserting our performance and gettings it identifier
-            int Id = await cn.InsertAsync(_performance);
+            int Id = await cn.InsertAsync(_match);
 
-            // In the following loops we attach the performanceId
+            // In the following loops we attach the matchId
 
             // Autonomous Points
-            foreach (var point in _performance.AutonomousPortPoints) { point.MatchId = Id; }
-            await cn.InsertAllAsync(_performance.AutonomousPortPoints);
+            foreach (var point in _match.AutonomousPortPoints) { point.MatchId = Id; }
+            await cn.InsertAllAsync(_match.AutonomousPortPoints);
 
             // Normal Stage Points
-            foreach (var point in _performance.StageOnePortPoints) { point.MatchId = Id; }
-            await cn.InsertAllAsync(_performance.StageOnePortPoints);
-            foreach (var point in _performance.StageTwoPortPoints) { point.MatchId = Id; }
-            await cn.InsertAllAsync(_performance.StageTwoPortPoints);
-            foreach (var point in _performance.StageThreePortPoints) { point.MatchId = Id; }
-            await cn.InsertAllAsync(_performance.StageThreePortPoints);                       
+            foreach (var point in _match.StageOnePortPoints) { point.MatchId = Id; }
+            await cn.InsertAllAsync(_match.StageOnePortPoints);
+            foreach (var point in _match.StageTwoPortPoints) { point.MatchId = Id; }
+            await cn.InsertAllAsync(_match.StageTwoPortPoints);
+            foreach (var point in _match.StageThreePortPoints) { point.MatchId = Id; }
+            await cn.InsertAllAsync(_match.StageThreePortPoints);                       
         }
 
         /// <summary>
@@ -147,7 +137,7 @@ namespace InfiniteRechargeMetrics.Data
 
             foreach (var match in _matches)
             {
-                points.AddRange(await cn.QueryAsync<Point>("SELECT * FROM Point WHERE match_id = ?", match.Id));
+                points.AddRange(await cn.QueryAsync<Point>("SELECT * FROM Point WHERE match_id = ?", match.MatchId));
             }
 
             return points;          

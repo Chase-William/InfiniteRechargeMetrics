@@ -7,12 +7,14 @@ namespace InfiniteRechargeMetrics.Models
     [Table("Match")]
     public class Match
     {
-        #region Performance Itself
+        public const byte MAX_ROBOTS_IN_MATCH = 6;
+
+        #region Match Data
         /// <summary>
         ///     The identifier for this class / table
         /// </summary>
-        [Column("Id"), PrimaryKey, AutoIncrement, Unique]
-        public int Id { get; set; }
+        [Column("match_id"), PrimaryKey, Unique]
+        public string MatchId { get; set; }
         /// <summary>
         ///     The name of the peformance, does not need to be unique.
         /// </summary>
@@ -26,8 +28,6 @@ namespace InfiniteRechargeMetrics.Models
         [Column("comments")]
         public string Comments { get; set; }
         #endregion
-
-
 
         #region Stage One
         // --- Automonous ---
@@ -101,20 +101,38 @@ namespace InfiniteRechargeMetrics.Models
         ///         For now it will simply remain as part of the Match directly.
         /// 
         /// </summary>
-        [Column("robot_one_id")]
-        public string RobotOneId { get; set; }
-        [Column("robot_one_info")]
-        public string RobotOneInfo { get; set; }
+        [Ignore]
+        public Robot[] Robots { get; set; } = new Robot[MAX_ROBOTS_IN_MATCH];
 
-        [Column("robot_two_id")]
-        public string RobotTwoId { get; set; }
-        [Column("robot_two_info")]
-        public string RobotTwoInfo { get; set; }
+        //[Column("robot_one_id")]
+        //public string RobotOneId { get; set; }
+        //[Column("robot_one_info")]
+        //public string RobotOneInfo { get; set; }
 
-        [Column("robot_three_id")]
-        public string RobotThreeId { get; set; }
-        [Column("robot_three_info")]
-        public string RobotThreeInfo { get; set; }
+        //[Column("robot_two_id")]
+        //public string RobotTwoId { get; set; }
+        //[Column("robot_two_info")]
+        //public string RobotTwoInfo { get; set; }
+
+        //[Column("robot_three_id")]
+        //public string RobotThreeId { get; set; }
+        //[Column("robot_three_info")]
+        //public string RobotThreeInfo { get; set; }
+
+        //[Column("robot_four_id")]
+        //public string RobotFourId { get; set; }
+        //[Column("robot_four_info")]
+        //public string RobotFourInfo { get; set; }
+
+        //[Column("robot_five_id")]
+        //public string RobotFiveId { get; set; }
+        //[Column("robot_five_info")]
+        //public string RobotFiveInfo { get; set; }
+
+        //[Column("robot_six_id")]
+        //public string RobotSixId { get; set; }
+        //[Column("robot_three_info")]
+        //public string RobotSixInfo { get; set; }
         #endregion
     }
 }

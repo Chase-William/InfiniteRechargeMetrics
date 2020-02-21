@@ -12,36 +12,56 @@ namespace InfiniteRechargeMetrics.ViewModels
     /// </summary>
     public class MatchSetupViewModel : NotifyClass
     {
-        private byte displayRobotFrameAmount;
-        public byte DisplayRobotFrameAmount { 
-            get => displayRobotFrameAmount; 
-            set
-            {
-                // The user could add or subtract past the limit
-                if (value <= 6 && value >= 0)
-                {
-                    displayRobotFrameAmount = value;
-                    NotifyPropertyChanged();
-                }                    
-            } 
-        }
-
-        public MatchSetupPage MatchSetupPage { get; private set; }
-        public Match Match { get; set; } = new Match();
-
-        public ICommand RevealARobotCMD { get; set; }
-        public ICommand HideRobotCMD { get; set; }
+        public Match Match { get; set; }
         public ICommand StartRecordingCMD { get; private set; }
         public ICommand ClearCMD { get; private set; }
+        private object teamPickerSelectedItem;
+        public object TeamPickerSelectedItem { 
+            get => teamPickerSelectedItem; 
+            set
+            {
+                teamPickerSelectedItem = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-        public MatchSetupViewModel(MatchSetupPage _matchSetupPage)
+        public string MatchId { 
+            get => Match.MatchId;
+            set
+            {
+                Match.MatchId = value;
+                NotifyPropertyChanged();
+            } 
+        }
+        public string TeamId
         {
-            MatchSetupPage = _matchSetupPage;            
+            get => Match.TeamId_FK;
+            set
+            {
+                Match.TeamId_FK = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public string MatchName
+        {
+            get => Match.MatchName;
+            set
+            {
+                Match.MatchName = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public MatchSetupViewModel(Match _match)
+        {
+            Match = _match;            
             StartRecordingCMD = new Command(ValidateStartRecording);
             // Adding a func for validation to make sure the user has entered the required information.
             ClearCMD = new Command(ClearFields);
-            RevealARobotCMD = new Command(() => DisplayRobotFrameAmount++);
-            HideRobotCMD = new Command(() => DisplayRobotFrameAmount--);
+            
+            
+            //Match.RobotOneId
+            //Match.RobotOneInfo
         }
 
         /// <summary>
@@ -56,14 +76,14 @@ namespace InfiniteRechargeMetrics.ViewModels
         private void ValidateStartRecording()
         {
             // No match number was provided
-            if (string.IsNullOrWhiteSpace(MatchSetupPage.MatchNumberEntry.Text))
+            if (string.IsNullOrWhiteSpace(Match.MatchId))
             {
-                MatchSetupPage.DisplayAlert("Error", "You must provide a match number.", "OK");                
+                App.Current.MainPage.DisplayAlert("Error", "You must provide a match number.", "OK");                
             }
             // No team name was provided in either fields
-            else if (MatchSetupPage.TeamPicker.SelectedItem == null && string.IsNullOrWhiteSpace(MatchSetupPage.TeamNumberEntry.Text))
+            else if (TeamPickerSelectedItem == null && string.IsNullOrWhiteSpace(Match.TeamId_FK))
             {
-                MatchSetupPage.DisplayAlert("Error", "You must provide a team name.", "OK");              
+                App.Current.MainPage.DisplayAlert("Error", "You must provide a team name.", "OK");              
             }
             // Everything require has been furfilled
             else
@@ -80,7 +100,7 @@ namespace InfiniteRechargeMetrics.ViewModels
             // Disabling the drawer from sliding out
             //((MainMasterPage)App.Current.MainPage).IsGestureEnabled = false;
             // To use PushAsync we need to stack the page onto this pages own stack navigation            
-            App.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new MasterRecordMatchPage(MatchSetupPage, Match)));            
+            App.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new MasterRecordMatchPage(Match)));            
         }
 
         /// <summary>
@@ -88,10 +108,10 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// </summary>
         private void ClearFields()
         {
-            MatchSetupPage.MatchNumberEntry.Text = null;
-            MatchSetupPage.TeamNumberEntry.Text = null;
-            MatchSetupPage.TeamPicker.SelectedItem = null;
-            MatchSetupPage.TitleEntry.Text = null;
+            MatchId = null;
+            MatchName = null;
+            TeamId = null;
+            TeamPickerSelectedItem = null;
         }
     }
 }
