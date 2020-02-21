@@ -10,12 +10,27 @@ namespace InfiniteRechargeMetrics.ViewModels
     /// <summary>
     ///     MVVM that handles the setup required for recording a team's performance.
     /// </summary>
-    public class MatchSetupViewModel
+    public class MatchSetupViewModel : NotifyClass
     {
+        private byte displayRobotFrameAmount;
+        public byte DisplayRobotFrameAmount { 
+            get => displayRobotFrameAmount; 
+            set
+            {
+                // The user could add or subtract past the limit
+                if (value <= 6 && value >= 0)
+                {
+                    displayRobotFrameAmount = value;
+                    NotifyPropertyChanged();
+                }                    
+            } 
+        }
+
         public MatchSetupPage MatchSetupPage { get; private set; }
         public Match Match { get; set; } = new Match();
-                
 
+        public ICommand RevealARobotCMD { get; set; }
+        public ICommand HideRobotCMD { get; set; }
         public ICommand StartRecordingCMD { get; private set; }
         public ICommand ClearCMD { get; private set; }
 
@@ -25,7 +40,9 @@ namespace InfiniteRechargeMetrics.ViewModels
             StartRecordingCMD = new Command(ValidateStartRecording);
             // Adding a func for validation to make sure the user has entered the required information.
             ClearCMD = new Command(ClearFields);
-        }       
+            RevealARobotCMD = new Command(() => DisplayRobotFrameAmount++);
+            HideRobotCMD = new Command(() => DisplayRobotFrameAmount--);
+        }
 
         /// <summary>
         ///     Validates the starting of recording the match

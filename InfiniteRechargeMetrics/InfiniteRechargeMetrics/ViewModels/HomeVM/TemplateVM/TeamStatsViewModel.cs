@@ -23,8 +23,12 @@ namespace InfiniteRechargeMetrics.ViewModels.HomeVM
 
         private async void LoadData()
         {
-            Matches = new ObservableCollection<Match>(await DatabaseService.Provider.GetAllMatchesForTeamAsync(CurrentTeam.TeamId));
-            Points = new ObservableCollection<Point>(await DatabaseService.Provider.GetPointsFromMatches(Matches.ToList()));
+            try
+            {
+                Matches = new ObservableCollection<Match>(await DatabaseService.Provider.GetAllMatchesForTeamAsync(CurrentTeam.TeamId));
+                Points = new ObservableCollection<Point>(await DatabaseService.Provider.GetPointsFromMatches(Matches.ToList()));
+            }
+            catch { }
         }
     }
 }

@@ -31,6 +31,11 @@ namespace InfiniteRechargeMetrics.Pages.MatchPages
                 TimeSpan time = new TimeSpan(StageViewModelBase.Stopwatch.ElapsedTicks);
                 Device.BeginInvokeOnMainThread(() => Title = $"{time.Minutes.ToString("00")}:{time.Seconds.ToString("00")}");                
             };
+
+            this.Children.Add(new StageOnePage(this, Match, StageCompletionManager));
+            this.Children.Add(new StageTwoPage(Match, StageCompletionManager));
+            this.Children.Add(new StageThreePage(Match, StageCompletionManager));
+            this.Children.Add(new FinalizeRecordingPage(matchSetupPage, Match));
         }
 
         /// <summary>
@@ -44,15 +49,6 @@ namespace InfiniteRechargeMetrics.Pages.MatchPages
         {
             clockTimer.Stop();
             Device.BeginInvokeOnMainThread(() => Title = "Recording Finished");
-        }
-
-        protected override void OnAppearing()
-        {       
-            base.OnAppearing();
-            this.Children.Add(new StageOnePage(this, Match, StageCompletionManager));
-            this.Children.Add(new StageTwoPage(Match, StageCompletionManager));
-            this.Children.Add(new StageThreePage(Match, StageCompletionManager));
-            this.Children.Add(new FinalizeRecordingPage(matchSetupPage, Match));
         }
     }
 }

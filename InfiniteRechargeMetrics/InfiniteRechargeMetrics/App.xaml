@@ -134,6 +134,8 @@
             <Style x:Key="CyanBtnStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource ActiveColor}"/>
                 <Setter Property="TextColor" Value="White"/>
+                <Setter Property="HeightRequest" Value="25"/>
+                <Setter Property="Padding" Value="0"/>
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             </Style>
 

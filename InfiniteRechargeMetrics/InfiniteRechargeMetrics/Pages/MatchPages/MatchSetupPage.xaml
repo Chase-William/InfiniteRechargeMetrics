@@ -4,68 +4,148 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:InfiniteRechargeMetrics.SharedCustomViews"
+             xmlns:converter="clr-namespace:InfiniteRechargeMetrics.Pages.Converters"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.MatchPages.MatchSetupPage"
              Title="Setup Recording">
 
-    <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
 
-        <Label Text="Match Info" Style="{StaticResource CategoryHeader}" Margin="0,50,0,0"/>
-        <BoxView Style="{StaticResource HorizontalLineBreak}"/>
-        <!-- Entry frame for the match number (identifier) -->
-        <Frame Style="{StaticResource FrameEditorBG}" Margin="5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.3*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Label Text="Match:" Style="{StaticResource InsideFrameLabelHeader}"/>
-                <Entry Placeholder="#" WidthRequest="100" x:Name="MatchNumberEntry" x:FieldModifier="public" Grid.Column="1"/>
-            </Grid>
-        </Frame>
-        <!-- Entry frame that allows the user to give the match a title -->
-        <Frame Style="{StaticResource FrameEditorBG}" Margin="5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.3*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Label Text="Title" Style="{StaticResource InsideFrameLabelHeader}"/>
-                <Entry HorizontalOptions="FillAndExpand" x:Name="TitleEntry" x:FieldModifier="public" Grid.Column="1"/>
-            </Grid>
-        </Frame>
-        
-        <Label Text="Team Info" Style="{StaticResource CategoryHeader}" Margin="0,30,0,0"/>
-        <BoxView Style="{StaticResource HorizontalLineBreak}"/>
-        <!-- Entry frame for the team number, offers an existing team picker -->
-        <Frame Style="{StaticResource FrameEditorBG}" Margin="5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.3*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <converter:DetermineFrameVisibility x:Key="DetermineFrameVisibility"/>
+
+            <Style x:Key="MarginedFrame" TargetType="Frame" BasedOn="{StaticResource FrameEditorBG}">
+                <Setter Property="Margin" Value="5,0,5,0"/>
+            </Style>
+            <Style x:Key="RobotFrame" TargetType="Frame" BasedOn="{StaticResource MarginedFrame}">
+                <Setter Property="IsVisible" Value="False"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
 
-                <Label Text="New:" Style="{StaticResource InsideFrameLabel}" Grid.Column="0"/>
-                <Entry Placeholder="#" WidthRequest="100" x:Name="TeamNumberEntry" x:FieldModifier="public" Grid.Column="1"/>
-                <Label Text="Existing:" Style="{StaticResource InsideFrameLabel}" Grid.Row="1"/>
-                <Picker x:Name="TeamPicker" x:FieldModifier="public" Grid.Row="1" Grid.Column="1"/>
-            </Grid>
-        </Frame>
+    <!--<DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference TeamId}, Path=Text.Length, Converter={StaticResource HasDataBeenEnteredConverter}}" Value="true">
+        <Setter Property="IsEnabled" Value="True"/>
+        <Setter Property="Command" Value="{Binding SaveEditingCMD}"/>
+    </DataTrigger>-->
 
-        <StackLayout VerticalOptions="EndAndExpand" Margin="0,0,0,20">
-            <Button Text="Start" Style="{StaticResource ButtonBase}" Command="{Binding StartRecordingCMD}"/>
-            <Button Text="Clear" Style="{StaticResource ButtonBase}" Command="{Binding ClearCMD}"/>
+    <ScrollView>
+        <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+
+            <Label Text="Match Info" Style="{StaticResource CategoryHeader}" Margin="0,10,0,0"/>
+            <BoxView Style="{StaticResource HorizontalLineBreak}"/>
+            <!-- Entry frame for the match number (identifier) -->
+            <Frame Style="{StaticResource MarginedFrame}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Match:" Style="{StaticResource InsideFrameLabelHeader}"/>
+                    <Entry Placeholder="#" WidthRequest="100" x:Name="MatchNumberEntry" x:FieldModifier="public" Grid.Column="1"/>
+                </Grid>
+            </Frame>
+            <!-- Entry frame that allows the user to give the match a title -->
+            <Frame Style="{StaticResource MarginedFrame}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Title" Style="{StaticResource InsideFrameLabelHeader}"/>
+                    <Entry HorizontalOptions="FillAndExpand" x:Name="TitleEntry" x:FieldModifier="public" Grid.Column="1"/>
+                </Grid>
+            </Frame>
+
+            <Label Text="Team Info" Style="{StaticResource CategoryHeader}" Margin="0,30,0,0"/>
+            <BoxView Style="{StaticResource HorizontalLineBreak}"/>
+            <!-- Entry frame for the team number, offers an existing team picker -->
+            <Frame Style="{StaticResource MarginedFrame}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Text="New:" Style="{StaticResource InsideFrameLabel}" Grid.Column="0"/>
+                    <Entry Placeholder="#" WidthRequest="100" x:Name="TeamNumberEntry" x:FieldModifier="public" Grid.Column="1"/>
+                    <Label Text="Existing:" Style="{StaticResource InsideFrameLabel}" Grid.Row="1"/>
+                    <Picker x:Name="TeamPicker" x:FieldModifier="public" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+            </Frame>
+
+            <Label Text="Robots" Style="{StaticResource CategoryHeader}" Margin="0,30,0,0"/>
+            <BoxView Style="{StaticResource HorizontalLineBreak}"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Remove" Style="{StaticResource CyanBtnStyle}" Command="{Binding HideRobotCMD}"/>
+                <Button Text="Add" Style="{StaticResource CyanBtnStyle}" Command="{Binding RevealARobotCMD}"/>
+            </StackLayout>
+
+            <Frame Style="{StaticResource RobotFrame}">
+                <Entry Placeholder="Robot #"/>
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=1}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            <Frame Style="{StaticResource RobotFrame}">
+                <Entry Placeholder="Robot #"/>
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=2}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            <Frame Style="{StaticResource RobotFrame}">
+                <Entry Placeholder="Robot #"/>
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=3}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            <Frame Style="{StaticResource RobotFrame}">
+                <Entry Placeholder="Robot #"/>
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=4}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            <Frame Style="{StaticResource RobotFrame}">
+                <Entry Placeholder="Robot #"/>
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=5}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            <Frame Style="{StaticResource RobotFrame}">
+                <Entry Placeholder="Robot #"/>
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding DisplayRobotFrameAmount, Converter={StaticResource DetermineFrameVisibility}, ConverterParameter=6}" Value="true">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+
+            <StackLayout VerticalOptions="EndAndExpand" Margin="0,0,0,20">
+                <Button Text="Start" Style="{StaticResource ButtonBase}" Command="{Binding StartRecordingCMD}"/>
+                <Button Text="Clear" Style="{StaticResource ButtonBase}" Command="{Binding ClearCMD}"/>
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
+    </ScrollView>
 </ContentPage>

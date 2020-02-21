@@ -143,9 +143,14 @@ namespace InfiniteRechargeMetrics.Data
             SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
             await cn.CreateTableAsync<Point>();
 
-            throw new Exception(); // Need to fix the many to many query
+            List<Point> points = new List<Point>();
 
-            return await cn.QueryAsync<Point>("SELECT * FROM Point WHERE match_id = ?", _matches);            
+            foreach (var match in _matches)
+            {
+                points.AddRange(await cn.QueryAsync<Point>("SELECT * FROM Point WHERE match_id = ?", match.Id));
+            }
+
+            return points;          
         }
     }
 

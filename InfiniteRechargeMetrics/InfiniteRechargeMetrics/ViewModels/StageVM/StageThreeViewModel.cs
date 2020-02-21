@@ -1,7 +1,9 @@
-﻿using InfiniteRechargeMetrics.Models;
-using InfiniteRechargeMetrics.Pages.MatchPages;
+﻿using Point = InfiniteRechargeMetrics.Models.Point;
+using InfiniteRechargeMetrics.Models;
+using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
@@ -17,21 +19,70 @@ namespace InfiniteRechargeMetrics.ViewModels
             get => Match.StageThreePortPoints;
             set => Match.StageThreePortPoints = value;
         }
-        #endregion
 
-        public StageThreeViewModel(StageThreePage _stageThreePage, Match _performance, StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager) 
+        /// <summary>
+        ///     Boolean representing whether the team has completed the control panel step.
+        /// </summary>
+        public bool IsControlPanelFinished
         {
-            _stageThreePage.DroidOneRandevuSwitch.Toggled   += (e, a) => Match.DroidOneRandevu   = a.Value;
-            _stageThreePage.DroidTwoRandevuSwitch.Toggled   += (e, a) => Match.DroidTwoRandevu   = a.Value;
-            _stageThreePage.DroidThreeRandevuSwitch.Toggled += (e, a) => Match.DroidThreeRandevu = a.Value;
-            _stageThreePage.IsRandevuBarLevelSwitch.Toggled += (e, a) => Match.IsRandevuLevel    = a.Value;
+            get => Match.IsStageThreeControlPanelFinished;
+            set
+            {
+                Match.IsStageThreeControlPanelFinished = value;
+                CheckIfStageIsComplete();
+            }
         }
+        public bool DroidOneRandevu { 
+            get => Match.DroidOneRandevu; 
+            set
+            {
+                Match.DroidOneRandevu = value;
+                CheckIfStageIsComplete();
+            } 
+        }
+        public bool DroidTwoRandevu
+        {
+            get => Match.DroidTwoRandevu;
+            set
+            {
+                Match.DroidTwoRandevu = value;
+                CheckIfStageIsComplete();
+            }
+        }
+        public bool DroidThreeRandevu
+        {
+            get => Match.DroidThreeRandevu;
+            set
+            {
+                Match.DroidThreeRandevu = value;
+                CheckIfStageIsComplete();
+            }
+        }
+        public bool IsRandevuLevel
+        {
+            get => Match.IsRandevuLevel;
+            set
+            {
+                Match.IsRandevuLevel = value;
+            }
+        }
+        #endregion
+       
+
+       
+
+        public StageThreeViewModel(Match _performance, StageCompletionManager _stageCompletionManager) : base(_performance, _stageCompletionManager) 
+        {
+            
+        }
+
+      
 
         public override void CheckIfStageIsComplete()
         {
-            if (!(base.AddTotalValues(StageLowPortTotalValue +
-                                      StageUpperPortTotalValue +
-                                      StageSmallPortTotalValue) >= StageConstants.MIN_VALUE_FOR_COMPLETED_STAGE_TWO))
+            if (!IsControlPanelFinished || !(base.AddTotalValues(StageLowPortTotalValue +
+                                                                 StageUpperPortTotalValue +
+                                                                 StageSmallPortTotalValue) >= StageConstants.MIN_VALUE_FOR_COMPLETED_STAGE_TWO))
             {
                 base.StageCompletionManager.IsStageThreeComplete = false;
                 return;
@@ -41,5 +92,6 @@ namespace InfiniteRechargeMetrics.ViewModels
                 base.StageCompletionManager.IsStageThreeComplete = true;
             }
         }
+
     }
 }

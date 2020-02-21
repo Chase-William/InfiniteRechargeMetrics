@@ -74,19 +74,7 @@ namespace InfiniteRechargeMetrics.ViewModels
                 Match.RobotsMovedFromSpawnPoints = value;
                 NotifyPropertyChanged(nameof(RobotsMovedFromSpawnPoints));
             }
-        }
-
-        /// <summary>
-        ///     Boolean representing whether the team has completed the control panel step.
-        /// </summary>
-        public bool IsControlPanelFinished { 
-            get => Match.IsStageOneControlPanelFinished; 
-            set 
-            {
-                Match.IsStageOneControlPanelFinished = value;
-                CheckIfStageIsComplete();
-            } 
-        }
+        }        
 
         #endregion
 
@@ -113,9 +101,7 @@ namespace InfiniteRechargeMetrics.ViewModels
             StartTimerCMD = new Command(StartAutonomousTimer);
             MasterPerformancePage = _stageOnePage.MasterMatchPage;
             // Getting a reference to the masterPerforance to make calls on it's timer
-            //MasterPerformanceVMO = _stageOnePage.MasterRecordPerformanceVMO;
-            // Handles the switch being updated for control panel
-            _stageOnePage.ControlPanelSwitch.Toggled += ControlPanelSwitch_Toggled;
+            //MasterPerformanceVMO = _stageOnePage.MasterRecordPerformanceVMO;            
             RobotsMovedFromSpawnPoints = StageConstants.ROBOTS_MOVED_FROM_SPAWN_DEFAULT_VALUE;
             // Preparing the timer
             MainTimer.Elapsed += AutononmousState_TimerElapsed;            
@@ -175,7 +161,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// </summary>
         public override void CheckIfStageIsComplete()
         {
-            if (!IsControlPanelFinished || !(AddTotalValues(AutoStageLowPortTotalValue +
+            if (!(AddTotalValues(AutoStageLowPortTotalValue +
                                                             AutoStageUpperPortTotalValue +
                                                             AutoStageSmallPortTotalValue +
                                                             ManualStageLowPortTotalValue +
@@ -229,16 +215,7 @@ namespace InfiniteRechargeMetrics.ViewModels
             Stopwatch.Stop();
             MainTimer.Stop();
             MasterPerformancePage.StopClockTimer();          
-        }
-
-        /// <summary>
-        ///     Handler for the control switch being toggled.
-        ///     Updates the Performance's control panel value based off the switch.
-        /// </summary>
-        private void ControlPanelSwitch_Toggled(object sender, ToggledEventArgs e)
-        {
-            IsControlPanelFinished = e.Value;
-        }
+        }       
 
         /// <summary>
         ///     Notifies the properties needing to be updated

@@ -16,15 +16,22 @@
                 <Label Text="{Binding StageCompletionManager.IsStageThreeComplete, Converter={StaticResource IsStageCompleteConverter}}" Style="{DynamicResource BaseLabel}" TextColor="{Binding StageCompletionManager.IsStageThreeComplete, Converter={StaticResource BoolToColorConverter}}"/>
             </StackLayout>
 
-            <Grid IsEnabled="{Binding StageCompletionManager.IsStageTwoComplete}" Style="{StaticResource StageGrid}">
+            <Grid IsEnabled="{Binding StageCompletionManager.IsStageTwoComplete}" Style="{StaticResource StageGrid}" Margin="0,0,0,20">
                 <Grid.RowDefinitions>
+                    <!-- Points template -->
                     <RowDefinition Height="300"/>
-                    <RowDefinition Height="40"/>
+                    
+                    <!-- Control Panel -->
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
+                                        
+                    <!-- Droid Ranevu -->
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -35,20 +42,24 @@
                 <!-- The UI template for changing the points for a performance -->
                 <local_templates:ChangePointsTemplate Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
 
-                <Label Text="Droid Randevu" Style="{StaticResource CategoryHeader}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1"/>
-                <BoxView Grid.Row="2" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
+                <BoxView Grid.Row="1" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
+                <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" VerticalOptions="Start" Grid.Row="2"/>
+                <Switch IsToggled="{Binding IsControlPanelFinished}" Style="{StaticResource StageSwitch}" VerticalOptions="Start" Grid.Row="2"/>
                 
-                <Label Text="Droid One (25pt):" Style="{StaticResource SwitchLabel}" Grid.Row="3"/>
-                <Switch x:Name="DroidOneRandevuSwitch" x:FieldModifier="public" Style="{StaticResource StageSwitch}" Grid.Row="3"/>
+                <Label Text="Droid Randevu" Style="{StaticResource CategoryHeader}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3"/>
+                <BoxView Grid.Row="4" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
+                
+                <Label Text="Droid One (25pt):" Style="{StaticResource SwitchLabel}" Grid.Row="5"/>
+                <Switch IsToggled="{Binding DroidOneRandevu}" Style="{StaticResource StageSwitch}" Grid.Row="5"/>
 
-                <Label Text="Droid Two (25pt):" Style="{StaticResource SwitchLabel}" Grid.Row="4"/>
-                <Switch x:Name="DroidTwoRandevuSwitch" x:FieldModifier="public" Style="{StaticResource StageSwitch}" Grid.Row="4"/>
+                <Label Text="Droid Two (25pt):" Style="{StaticResource SwitchLabel}" Grid.Row="6"/>
+                <Switch IsToggled="{Binding DroidTwoRandevu}" Style="{StaticResource StageSwitch}" Grid.Row="6"/>
 
-                <Label Text="Droid Three (5pt):" Style="{StaticResource SwitchLabel}" Grid.Row="5"/>
-                <Switch x:Name="DroidThreeRandevuSwitch" x:FieldModifier="public" Style="{StaticResource StageSwitch}" Grid.Row="5"/>
+                <Label Text="Droid Three (5pt):" Style="{StaticResource SwitchLabel}" Grid.Row="7"/>
+                <Switch IsToggled="{Binding DroidThreeRandevu}" Style="{StaticResource StageSwitch}" Grid.Row="7"/>
 
-                <Label Text="Is Randevu Bar Level:" Style="{StaticResource SwitchLabel}" Grid.Row="6"/>
-                <Switch x:Name="IsRandevuBarLevelSwitch" x:FieldModifier="public" Style="{StaticResource StageSwitch}" Grid.Row="6"/>
+                <Label Text="Is Randevu Bar Level:" Style="{StaticResource SwitchLabel}" Grid.Row="8"/>
+                <Switch IsToggled="{Binding IsRandevuLevel}" Style="{StaticResource StageSwitch}" Grid.Row="8"/>
             </Grid>
         </StackLayout>
     </ScrollView>

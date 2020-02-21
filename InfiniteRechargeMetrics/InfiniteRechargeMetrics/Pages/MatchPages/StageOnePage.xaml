@@ -49,8 +49,6 @@
                     <!-- ChangePointTemplate -->
                     <RowDefinition Height="10"/>
                     <!-- line break -->
-                    <RowDefinition Height="40"/>
-                    <!-- control panel spun? -->
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -77,10 +75,6 @@
 
                 <!-- The UI template for changing the points for a performance -->
                 <local_templates:ChangePointsTemplate Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"/>
-
-                <BoxView Grid.Row="5" Style="{StaticResource GridBasedHorizontalLineBreak}"/>
-                <Label Text="Control Panel Completed:" Style="{StaticResource SwitchLabel}" Grid.Row="6"/>
-                <Switch x:Name="ControlPanelSwitch" x:FieldModifier="public" Style="{StaticResource StageSwitch}" Grid.Row="6"/>
 
             </Grid>
         </StackLayout>

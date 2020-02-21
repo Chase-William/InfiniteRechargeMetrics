@@ -22,7 +22,7 @@ namespace InfiniteRechargeMetrics.Pages.MatchPages
             Match = _match;
             stageCompletionManager = _stageCompletionManager;
 
-            BindingContext =  new StageThreeViewModel(this, Match, stageCompletionManager);
+            BindingContext =  new StageThreeViewModel(Match, stageCompletionManager);
         }
     }
 }

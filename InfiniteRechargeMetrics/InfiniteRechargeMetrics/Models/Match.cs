@@ -51,17 +51,7 @@ namespace InfiniteRechargeMetrics.Models
         ///     Each robot that moves off spawn earns 5 points.
         /// </summary>
         [Column("robots_moved_from_spawn_points")]
-        public int RobotsMovedFromSpawnPoints { get; set; }
-        /// <summary>
-        ///     Records whether the stage one control panel was finished or not        
-        /// </summary>
-        [Column("stage_one_control_panel")]
-        public bool IsStageOneControlPanelFinished { get; set; }
-        /// <summary>
-        ///     Records the miliseconds from the round start at which the control panel was finished
-        /// </summary>
-        [Column("control_panel_time")]
-        public bool TimeControlPanelFinished { get; set; }
+        public int RobotsMovedFromSpawnPoints { get; set; }        
         #endregion
 
         #region Stage Two
@@ -83,6 +73,15 @@ namespace InfiniteRechargeMetrics.Models
         /// </summary>
         [Ignore]
         public ObservableCollection<Point> StageThreePortPoints { get; set; } = new ObservableCollection<Point>();
+
+        /// <summary>
+        ///     Records whether the stage one control panel was finished or not        
+        /// </summary>
+        [Column("stage_three_control_panel")]
+        public bool IsStageThreeControlPanelFinished { get; set; }
+        /// <summary>
+        ///     Records the miliseconds from the round start at which the control panel was finished
+        /// </summary>
 
         [Column("droid_one_randevu")]
         public bool DroidOneRandevu { get; set; }
