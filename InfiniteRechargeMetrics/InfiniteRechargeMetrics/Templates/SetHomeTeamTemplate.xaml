@@ -5,15 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:InfiniteRechargeMetrics.Pages.Converters"
              mc:Ignorable="d"
-             x:Class="InfiniteRechargeMetrics.Templates.SetHomeTeamTemplate">
+             x:Class="InfiniteRechargeMetrics.Templates.SetHomeTeamTemplate" BackgroundColor="{StaticResource BackgroundColor}">
 
-    <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="50,100,50,50">
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}" VerticalOptions="Center" Padding="70,0">
         <Label Text="Set Your Home Team" Style="{StaticResource CategoryHeader}"/>
-        <Button Text="New" Style="{StaticResource HighLightButton}" Command="{Binding CreateNewTeamCMD}"/>
-        <Button Text="Existing" Style="{StaticResource HighLightButton}" Command="{Binding UseExistingTeamCMD}"/>
+        <Button Text="New" Style="{StaticResource ButtonBase}" Command="{Binding CreateNewTeamCMD}"/>
+        <Button Text="Existing" Style="{StaticResource ButtonBase}" Command="{Binding UseExistingTeamCMD}"/>
         <Picker x:Name="TeamPicker" Title="Select A Team" SelectedIndexChanged="Picker_SelectedIndexChanged" IsVisible="{Binding IsUsingExisting}" TextColor="White"/>
 
-        <Button Text="Save" IsVisible="{Binding IsUsingExisting}" IsEnabled="{Binding IsTeamSelected}" Style="{StaticResource HighLightButton}"/>
+        <Button Text="Save" IsVisible="{Binding IsUsingExisting}" IsEnabled="{Binding IsTeamSelected}" Style="{StaticResource ButtonBase}"/>
     </StackLayout>
     
 </ContentView>

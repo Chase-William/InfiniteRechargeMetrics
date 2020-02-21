@@ -5,5 +5,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.HomeTeamPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit"
+                     Order="Primary"
+                     Priority="0"
+                     IsEnabled="{Binding IsTeamEdittingPossible}"
+                     Command="{Binding EditThisTeamCMD}"/>
+    </ContentPage.ToolbarItems>
     
 </ContentPage>

@@ -1,10 +1,5 @@
-﻿using InfiniteRechargeMetrics.ViewModels;
+﻿using InfiniteRechargeMetrics.ViewModels.HomeVM;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,7 +21,7 @@ namespace InfiniteRechargeMetrics.Templates
         protected async override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-            TeamPicker.ItemsSource = await Data.DatabaseService.Provider.GetAllTeamsIdPlusName();
+            TeamPicker.ItemsSource = await Data.DatabaseService.Provider.GetAllTeamsIdPlusNameAsync();
             var test = TeamPicker.SelectedItem;
         }
 

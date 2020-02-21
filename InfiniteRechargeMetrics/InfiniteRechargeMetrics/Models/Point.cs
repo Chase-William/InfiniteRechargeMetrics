@@ -33,13 +33,13 @@ namespace InfiniteRechargeMetrics.Models
 
         #endregion Stage Codes End
 
-        [Column("id")]
+        [Column("point_id")]
         public int Id { get; set; }
         /// <summary>
         ///     The id that matches the performance this click belonged to
         /// </summary>
-        [Column("performance_id")]
-        public int PerformanceId { get; set; }
+        [Column("match_id")]
+        public int MatchId { get; set; }
         [Column("point_type")]
         public string PointType { get; set; }
         /// <summary>

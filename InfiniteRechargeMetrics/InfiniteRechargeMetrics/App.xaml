@@ -14,7 +14,8 @@
             <converter:IntToStringConverter x:Key="IntToStringConverter"/>
             <converter:BoolToColorConverter x:Key="BoolToColorConverter"/>
             <converter:IsStageCompleteConverter x:Key="IsStageCompleteConverter"/>
-            
+            <converter:HasDataBeenEnteredConverter x:Key="HasDataBeenEnteredConverter"/>
+
             <!-- Custom color codes -->
             <Color x:Key="BackgroundColor">#175878</Color>
             <Color x:Key="HighLightColor">#EFE170</Color>

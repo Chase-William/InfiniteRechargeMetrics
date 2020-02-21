@@ -31,7 +31,7 @@ namespace InfiniteRechargeMetrics.Pages.MatchPages
         {
             try
             {
-                var queriedTeamIds = await DatabaseService.Provider.GetAllTeamsIdPlusName();
+                var queriedTeamIds = await DatabaseService.Provider.GetAllTeamsIdPlusNameAsync();
                 
                 if (queriedTeamIds == null) return;
                 else TeamPicker.ItemsSource = queriedTeamIds;

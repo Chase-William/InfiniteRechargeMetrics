@@ -3,16 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:InfiniteRechargeMetrics.Pages.Converters"
              mc:Ignorable="d"
-             x:Class="InfiniteRechargeMetrics.Pages.EditTeamPage">
-
-    <!--<ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="Entry">
-                <Setter Property="Triggers" Value=""
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>-->
+             x:Class="InfiniteRechargeMetrics.Pages.EditTeamPage" BackgroundColor="{StaticResource BackgroundColor}">
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Finished"
@@ -22,73 +15,61 @@
                      Command="{Binding FinishedEditingCMD}"/>
     </ContentPage.ToolbarItems>
     
-    <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="5,50,5,0">
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="5,50,5,0" VerticalOptions="Center">
 
         <Frame Style="{StaticResource FrameImageWrapper}" HorizontalOptions="Center">
             <ImageButton Command="{Binding SetTeamImageCMD}" Source="red_rebel_icon.png" BackgroundColor="Transparent" WidthRequest="80"/>
         </Frame>
 
-        <Frame Style="{StaticResource FrameEditorBG}">
-            <Entry Placeholder="Id Number"/>
+        <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
+            <Label Text="Set As Home Team:" Style="{StaticResource CategoryHeader}"/>
+            <Switch Style="{StaticResource StageSwitch}" HorizontalOptions="EndAndExpand" Margin="0,0,9,0" IsToggled="{Binding IsSetToBeHomeTeam}"/>
+        </StackLayout>          
+        
+        <Frame Style="{StaticResource FrameEditorBG}" Margin="0,10,0,0">
+            <Entry Placeholder="Id Number" x:Name="TeamId" Text="{Binding TeamId}"/>
         </Frame>
-        <!--<Frame Style="{StaticResource FrameEditorBG}">
-            <Frame.Triggers>
-                <Trigger TargetType="Frame" Property="IsFocused" Value="True">
-                    <Setter Property="Scale" Value="1.1" />
-                    --><!-- multiple Setters elements are allowed --><!--
-                </Trigger>
-            </Frame.Triggers>
-            <Entry Placeholder="Alias">
-                --><!-- Using a trigger to make the entry larger on focus --><!--
-                <Entry.Triggers>
-                    <Trigger TargetType="Entry" Property="IsFocused" Value="True">
-                        <Setter Property="Scale" Value="1.1" />
-                        --><!-- multiple Setters elements are allowed --><!--
-                    </Trigger>
-                </Entry.Triggers>
-            </Entry>
-        </Frame>-->
-        
-        
-        <ContentPresenter>
-            <ContentPresenter.Content>
-                <Frame Style="{StaticResource FrameEditorBG}">
-                    <Entry Placeholder="Alias"/>
-                </Frame>
-            </ContentPresenter.Content>
-            <ContentPresenter.Triggers>
-                <Trigger TargetType="Frame">
-                    <Setter Property="Scale" Value="1.1"/>
-                </Trigger>
-                <Trigger TargetType="Entry">
-                    <Setter Property="Scale" Value="1.1"/>
-                </Trigger>
-            </ContentPresenter.Triggers>
-        </ContentPresenter>
-        
-        <!--<Frame>
-            <ControlTemplate TargetType="ToggleButton">
-                <Image Name="ExpanderImage" Height="24" Width="24" Source="..\Images\Icons\32x32\Blue\Open.png" />
-                <ControlTemplate.Triggers>
-                    <Trigger Property="IsChecked" Value="True">
-                        <Setter TargetName="ExpanderImage" Property="Source" Value="..\Images\Icons\32x32\Blue\Close.png" />
-                    </Trigger>
-                    <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
-                        <Setter TargetName="ExpanderImage" Property="Source" Value="..\Images\Icons\32x32\Green\Open.png" />
-                    </DataTrigger>
-                    <MultiDataTrigger>
-                        <MultiDataTrigger.Conditions>
-                            <Condition Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}" Value="True" />
-                            <Condition Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True" />
-                        </MultiDataTrigger.Conditions>
-                        <Setter TargetName="ExpanderImage" Property="Source" Value="..\Images\Icons\32x32\Green\Close.png" />
-                    </MultiDataTrigger>
-                </ControlTemplate.Triggers>
-            </ControlTemplate>
-        </Frame>-->
-        
-        
-        <Button Text="Cancel" Command="{Binding CancelEditingCMD}" Style="{StaticResource HighLightButton}"/>
+
+        <Frame Style="{StaticResource FrameEditorBG}">
+            <Entry Placeholder="Alias" Text="{Binding TeamAlias}"/>
+        </Frame>
+
+        <Button Text="Save" IsEnabled="False" Style="{StaticResource ButtonBase}" Margin="0,80,0,0">
+            <!--
+                The user must enter their code which has to atleast be 1 character
+            
+                https://forums.xamarin.com/discussion/47857/setting-buttons-isenabled-to-false-does-not-disable-button
+                https://github.com/xamarin/Xamarin.Forms/issues/2758    
+                https://stackoverflow.com/questions/53946227/view-isenabled-property-is-not-working-on-xamarin-forms    
+            
+                Xamarin Devs need to fix the Command and IsEnabled properties when used together cause jeeze this was a headache... 
+                
+                Notes: 
+                    The default "IsEnabled = false" only matters when the page is first loaded.
+                        After something is typed in it will not longer work. Meaning after the user removes all text; the UI will remain active.
+                        Lucky the Command is unbound but the button is clickable.. leading to poor user experience.
+                        You must set a alternative option inside the trigger I did for false to act as the default.
+                    
+                IMPORTANT: The target type for false will not set the button to "IsEnable = false" on initialization... So you need both the default and the (default off) triggers... HEADACHE
+            -->
+            <Button.Triggers>
+                <!-- 
+                    Referencing our XAML object from inside the binding and getting the path to the property... 
+                    Then we use a converter to check for more (Length > 1) for true.. otherwise false..
+                    
+                    Intellsence never recommends Length and idk why... Furthermore I wish there was more options for the <value=""> property of the trigger then needing to make a converter...
+                -->
+                <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference TeamId}, Path=Text.Length, Converter={StaticResource HasDataBeenEnteredConverter}}" Value="true">
+                    <Setter Property="IsEnabled" Value="True"/>
+                    <Setter Property="Command" Value="{Binding SaveEditingCMD}"/>
+                </DataTrigger>
+                <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference TeamId}, Path=Text.Length, Converter={StaticResource HasDataBeenEnteredConverter}}" Value="false">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+
+        <Button Text="Cancel" Command="{Binding CancelEditingCMD}" Style="{StaticResource ButtonBase}"/>
 
     </StackLayout>
 </ContentPage>

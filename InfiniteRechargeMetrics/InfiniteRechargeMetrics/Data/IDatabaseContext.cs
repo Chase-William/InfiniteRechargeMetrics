@@ -11,7 +11,11 @@ namespace InfiniteRechargeMetrics.Data
         Task SaveTeamToLocalDBAsync(Team _team);
         Task SaveMatchToLocalDBAsync(Match _performance);
         Task<List<Match>> GetAllMatchesForTeamAsync(string _teamName);
-        Task<string[]> GetAllTeamsIdPlusName();
+        Task<string[]> GetAllTeamsIdPlusNameAsync();
+        Task<List<Point>> GetPointsFromMatches(List<Match> _matches);
+        Task<Team> GetHomeTeamAsync();
         Team GetHomeTeam();
+        Task<Team> GetTeamAsync(string _teamId);
+        Task RemoveHomeStatusFromTeamAsync(string _teamId);        
     }
 }
