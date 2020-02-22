@@ -82,24 +82,12 @@ namespace InfiniteRechargeMetrics.ViewModels
         /// </summary>
         private async void FinishRecording()
         {         
+
+
+
+
             await App.Current.MainPage.Navigation.PopModalAsync();
             await Data.DatabaseService.Provider.SaveMatchToLocalDBAsync(Match);
-        }
-       
-       
-        /// <summary>
-        ///     Changes the position of the add / remove button in the UI.
-        /// </summary>
-        private void DeterminePosChange(bool _value)
-        {
-            if (_value)
-            {
-                RobotsRecordingUIInsertPos += INSERT_POS_CHANGE_AMT;
-            }
-            else
-            {
-                RobotsRecordingUIInsertPos -= INSERT_POS_CHANGE_AMT;
-            }
-        }
+        }              
     }
 }

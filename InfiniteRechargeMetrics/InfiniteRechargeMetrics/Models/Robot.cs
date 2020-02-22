@@ -10,9 +10,11 @@ namespace InfiniteRechargeMetrics.Models
     {
         [Column("robot_id"), PrimaryKey, Unique]
         public string RobotId { get; set; }
+        [Column("robot_alias")]
+        public string RobotAlias { get; set; }
         [Column("robot_info")]  
         public string RobotInfo { get; set; }
         [Column("image_path")]
-        public string ImagePath { get; set; }
+        public string ImagePath { get; set; }        
     }
 }

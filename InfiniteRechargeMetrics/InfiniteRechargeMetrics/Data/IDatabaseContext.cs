@@ -9,13 +9,21 @@ namespace InfiniteRechargeMetrics.Data
     interface IDatabaseContext
     {
         Task SaveTeamToLocalDBAsync(Team _team);
-        Task SaveMatchToLocalDBAsync(Match _performance);
+        Task SaveMatchToLocalDBAsync(Match _performance);        
+
         Task<List<Match>> GetAllMatchesForTeamAsync(string _teamName);
-        Task<string[]> GetAllTeamsIdPlusNameAsync();
-        Task<List<Point>> GetPointsFromMatches(List<Match> _matches);
+        Task<List<Point>> GetPointsFromMatchesAsync(List<Match> _matches);
+
+        Task<string[]> GetAllTeamsIdAndAliasConcatenatedAsync();
+        Task<string[]> GetAllRobotIdAndAliasConcatenatedAsync();
+        
         Task<Team> GetHomeTeamAsync();
         Team GetHomeTeam();
         Task<Team> GetTeamAsync(string _teamId);
-        Task RemoveHomeStatusFromTeamAsync(string _teamId);        
+        Task RemoveHomeStatusFromTeamAsync(string _teamId);
+
+        Task<bool> DoesMatchExistAsync(string _matchId);
+        Task<bool> DoesTeamExistAsync(string _teamId);        
+        Task<Tuple<bool, string>> DoesRobotExistAsync(params string[] _robotId);
     }
 }

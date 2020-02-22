@@ -26,7 +26,7 @@ namespace InfiniteRechargeMetrics.ViewModels.HomeVM
             try
             {
                 Matches = new ObservableCollection<Match>(await DatabaseService.Provider.GetAllMatchesForTeamAsync(CurrentTeam.TeamId));
-                Points = new ObservableCollection<Point>(await DatabaseService.Provider.GetPointsFromMatches(Matches.ToList()));
+                Points = new ObservableCollection<Point>(await DatabaseService.Provider.GetPointsFromMatchesAsync(Matches.ToList()));
             }
             catch { }
         }

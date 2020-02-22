@@ -32,7 +32,7 @@ namespace InfiniteRechargeMetrics.Pages.MatchPages
         {
             try
             {
-                var queriedTeamIds = await DatabaseService.Provider.GetAllTeamsIdPlusNameAsync();
+                var queriedTeamIds = await DatabaseService.Provider.GetAllTeamsIdAndAliasConcatenatedAsync();
                 
                 if (queriedTeamIds == null) return;
                 else TeamPicker.ItemsSource = queriedTeamIds;
@@ -46,10 +46,10 @@ namespace InfiniteRechargeMetrics.Pages.MatchPages
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            MatchIdEntry.Text = null;
-            MatchName.Text = null;
-            TeamId.Text = null;
-            TeamPicker.SelectedItem = null;
+            //MatchIdEntry.Text = null;
+            //MatchName.Text = null;
+            //TeamId.Text = null;
+            //TeamPicker.SelectedItem = null;
         }
     }
 }

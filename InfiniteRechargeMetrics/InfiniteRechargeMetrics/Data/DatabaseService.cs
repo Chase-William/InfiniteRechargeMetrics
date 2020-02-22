@@ -34,14 +34,14 @@ namespace InfiniteRechargeMetrics.Data
         /// <summary>
         ///     Gets all the identifiers for each team in the localdb
         /// </summary>
-        public async Task<string[]> GetAllTeamsIdPlusNameAsync()
+        public async Task<string[]> GetAllTeamsIdAndAliasConcatenatedAsync()
         {            
             SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
             await cn.CreateTableAsync<Team>();
             // Getting the instance without await, therefore we store it wrapped in the Task
-            Task<List<Team>> teams = cn.Table<Team>().ToListAsync();
+            Task<Team[]> teams = cn.Table<Team>().ToArrayAsync();
             // Getting there result and returning it as an string array
-            return teams.Result.Select(x => $"Id: {x.TeamId} || Alias: {x.Alias}").ToArray();
+            return teams.Result.Select(team => $"Id: {team.TeamId} || Alias: {team.TeamAlias}").ToArray();
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace InfiniteRechargeMetrics.Data
         /// <summary>
         ///     Gets all the points for all the matches provided.
         /// </summary>
-        public async Task<List<Point>> GetPointsFromMatches(List<Match> _matches)
+        public async Task<List<Point>> GetPointsFromMatchesAsync(List<Match> _matches)
         {
             SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
             await cn.CreateTableAsync<Point>();
@@ -141,6 +141,78 @@ namespace InfiniteRechargeMetrics.Data
             }
 
             return points;          
+        }
+
+        /// <summary>
+        ///     Returns a boolean indicating whether the match alreayd exist or not
+        ///     <br/>true == does exist
+        ///     <br/>false == doesn't exist
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> DoesMatchExistAsync(string _matchId)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Match>();
+            var match = cn.QueryAsync<Match>("SELECT * FROM Match WHERE match_id = ?", _matchId).Result.FirstOrDefault();
+            if (match != null)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        ///     Returns a boolean indicating if the team exist or not.
+        ///     <br/>true == does exist
+        ///     <br/>false == doesn't exist
+        /// </summary>
+        public async Task<bool> DoesTeamExistAsync(string _teamId)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Team>();
+            var team = cn.QueryAsync<Team>("SELECT * FROM Team WHERE team_id = ?", _teamId).Result.FirstOrDefault();
+            if (team != null)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        ///     Gets all the robot ids and alias and joins them together into one string each
+        /// </summary>
+        public async Task<string[]> GetAllRobotIdAndAliasConcatenatedAsync()
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Robot>();
+            // Getting all the robot instances
+            Task<Robot[]> teams = cn.Table<Robot>().ToArrayAsync();
+            // Getting there result and returning it as an string array
+            return teams.Result.Select(robot => $"Id: {robot.RobotId} || Alias: {robot.RobotAlias}").ToArray();
+        }
+
+        /// <summary>
+        ///     Returns a tuple with a bool indicating wether any of the robots already exist.
+        ///     If one does exist it will return a string of the Id.
+        ///     <br/>true == exist
+        ///     <br/>false == doesn't exist
+        /// </summary>
+        public async Task<Tuple<bool, string>> DoesRobotExistAsync(params string[] _robotId)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Robot>();
+
+            List<Robot> tempRobots = new List<Robot>();
+            foreach (var id in _robotId)
+            {
+                var robots = await cn.QueryAsync<Robot>("SELECT * FROM Robot WHERE robot_id = ?", id);
+                // Checking each robot id for a matching robot id
+                // If we find one we return and tell the user
+                if (robots.Count != 0)
+                {
+                    return Tuple.Create(true, robots.FirstOrDefault().RobotId);
+                }
+            }
+            // I get this, need to specify since null doesn't define a type.. all references can be null (or value types marked nullable)
+            return Tuple.Create<bool, string>(false, null);
         }
     }
 

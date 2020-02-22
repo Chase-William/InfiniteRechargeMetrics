@@ -3,7 +3,7 @@ using InfiniteRechargeMetrics.Pages.MatchPages;
 using System.Windows.Input;
 using Xamarin.Forms;
 using InfiniteRechargeMetrics.Data;
-using InfiniteRechargeMetrics.Pages;
+using System.Linq;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
@@ -58,10 +58,6 @@ namespace InfiniteRechargeMetrics.ViewModels
             StartRecordingCMD = new Command(ValidateStartRecording);
             // Adding a func for validation to make sure the user has entered the required information.
             ClearCMD = new Command(ClearFields);
-            
-            
-            //Match.RobotOneId
-            //Match.RobotOneInfo
         }
 
         /// <summary>
@@ -73,23 +69,46 @@ namespace InfiniteRechargeMetrics.ViewModels
         ///         TeamPicker
         ///         
         /// </summary>
-        private void ValidateStartRecording()
+        private async void ValidateStartRecording()
         {
-            // No match number was provided
+            // No match number was provided:
             if (string.IsNullOrWhiteSpace(Match.MatchId))
             {
-                App.Current.MainPage.DisplayAlert("Error", "You must provide a match number.", "OK");                
+                await App.Current.MainPage.DisplayAlert("Error", "You must provide a match number.", "OK");
+                return;
             }
+            // If a team with the same id exist:
+            if (await DatabaseService.Provider.DoesMatchExistAsync(Match.MatchId))
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "A match already exist with the same id", "OK");
+                return;
+            }
+
             // No team name was provided in either fields
-            else if (TeamPickerSelectedItem == null && string.IsNullOrWhiteSpace(Match.TeamId_FK))
+            if (TeamPickerSelectedItem == null && string.IsNullOrWhiteSpace(Match.TeamId_FK))
             {
-                App.Current.MainPage.DisplayAlert("Error", "You must provide a team name.", "OK");              
+                await App.Current.MainPage.DisplayAlert("Error", "You must provide a team name.", "OK");
+                return;
             }
-            // Everything require has been furfilled
-            else
+
+            // If a robot has data put into its fields and doesnt have a pk set warn the user
+            if (Match.Robots.Any(robot => string.IsNullOrEmpty(robot.RobotId) && !string.IsNullOrEmpty(robot.RobotInfo)))
             {
-                StartRecording();
+                await App.Current.MainPage.DisplayAlert("Warning", "You have put information into a robot entry and not given it an id. The robot will not be saved.", "OK");
             }
+
+            // First if the Id is null or empty just return false and iterate to next
+            // If not then compare robot id to all id inside robots collection for a match
+            // If a match exist then return true for duplicate robot keys
+            // If not then return false, not duplicate robot keys found
+            if (Match.Robots.Any(robot => { return string.IsNullOrEmpty(robot.RobotId) ? false : robot.RobotId == (string)Match.Robots.SelectMany(x => x.RobotId) ? true : false; }))
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Two robots have the same id.", "OK");
+                return;
+            }
+
+            // If all those checkout, run
+            StartRecording();            
         }
 
         /// <summary>

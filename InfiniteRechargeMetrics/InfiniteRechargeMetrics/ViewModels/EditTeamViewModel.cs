@@ -94,7 +94,7 @@ namespace InfiniteRechargeMetrics.ViewModels
                         await DatabaseService.Provider.SaveTeamToLocalDBAsync(new Models.Team()
                         {
                             TeamId = TeamId,
-                            Alias = TeamAlias
+                            TeamAlias = TeamAlias
                         });
 
                         await App.Current.MainPage.Navigation.PopModalAsync();
@@ -122,7 +122,7 @@ namespace InfiniteRechargeMetrics.ViewModels
                 await DatabaseService.Provider.SaveTeamToLocalDBAsync(new Models.Team()
                 {
                     TeamId = TeamId,
-                    Alias = TeamAlias,
+                    TeamAlias = TeamAlias,
                     IsHomeTeam = true
                 });
             }

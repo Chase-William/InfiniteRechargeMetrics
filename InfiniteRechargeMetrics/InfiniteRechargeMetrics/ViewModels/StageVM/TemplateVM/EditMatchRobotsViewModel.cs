@@ -3,13 +3,22 @@ using System.Windows.Input;
 using InfiniteRechargeMetrics.Models;
 using System;
 using Plugin.Media;
+using System.Collections.Generic;
 
 namespace InfiniteRechargeMetrics.ViewModels.StageVM.TemplateVM
 {
     public class EditMatchRobotsViewModel : NotifyClass
     {
         public Match Match { get; set; }
-
+        private string[] robotNameAndIds;
+        public string[] RobotNameAndIds { 
+            get => robotNameAndIds;
+            set
+            {
+                robotNameAndIds = value;
+                NotifyPropertyChanged();
+            }
+        }
         private byte displayRobotFrameAmount;
         public byte DisplayRobotFrameAmount
         {
@@ -24,17 +33,8 @@ namespace InfiniteRechargeMetrics.ViewModels.StageVM.TemplateVM
                 }
             }
         }
-        
-        public Image image = new Image();
 
-        public Robot[] Robots { 
-            get => Match.Robots;
-            set
-            {
-                Match.Robots = value;
-            }
-        }
-
+        #region Robot Id Intermediate Props
         public string RobotOneId { 
             get => Match.Robots[0].RobotId;
             set
@@ -83,7 +83,7 @@ namespace InfiniteRechargeMetrics.ViewModels.StageVM.TemplateVM
                 NotifyPropertyChanged();
             }
         }
-
+        #endregion
         public string RobotOneImagePath { 
             get => Match.Robots[0].ImagePath;
             set
@@ -102,16 +102,28 @@ namespace InfiniteRechargeMetrics.ViewModels.StageVM.TemplateVM
             Match = _match;            
             RevealARobotCMD = new Command(() => DisplayRobotFrameAmount++);
             HideRobotCMD = new Command(() => DisplayRobotFrameAmount--);
-            GetPictureCMD = new Command(GetPicture);            
+            GetPictureCMD = new Command(GetPicture);
+            LoadRobotPicker();
         }
 
+        private async void LoadRobotPicker()
+        {
+            RobotNameAndIds = await Data.DatabaseService.Provider.GetAllRobotIdAndAliasConcatenatedAsync();
+        }
+
+        /// <summary>
+        ///     Validates that the user can store an image at runtime and generates required UI.
+        ///     Retreives that picture using CrossMedia and saves the path into the corresponding robot's 
+        ///         ImagePath property.
+        /// </summary>
+        /// <param name="_index"> Index passed to know which robot the request was called upon </param>
         private async void GetPicture(object _index)
         {
             int index  = int.Parse((string)_index);
 
             if (string.IsNullOrEmpty(Match.Robots[index].RobotId))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "In order to save a picture of the robot you must enter a valid Id first.", "OK");
+                await App.Current.MainPage.DisplayAlert("Error", "In order to save a picture of the robot you must enter a valid Id first (New or Existing).", "OK");
                 return;
             }
 
@@ -134,19 +146,15 @@ namespace InfiniteRechargeMetrics.ViewModels.StageVM.TemplateVM
             if (file == null)
                 return;
 
-            Robots[0].ImagePath = file.Path;
-
-            await App.Current.MainPage.DisplayAlert("File Location", file.Path, "OK");
-
-            var meow = new Image();
-                
+            RobotOneImagePath = file.Path;
             
-                
-            meow.Source = ImageSource.FromStream(() =>
-            {
-                var stream = file.GetStream();
-                return stream;
-            });
+            await App.Current.MainPage.DisplayAlert("File Location", file.Path, "OK");
+                            
+            //meow.Source = ImageSource.FromStream(() =>
+            //{
+            //    var stream = file.GetStream();
+            //    return stream;
+            //});
         }
     }
 }

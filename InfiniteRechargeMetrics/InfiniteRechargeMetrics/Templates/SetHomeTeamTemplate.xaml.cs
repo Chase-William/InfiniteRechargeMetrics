@@ -21,7 +21,7 @@ namespace InfiniteRechargeMetrics.Templates
         protected async override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-            TeamPicker.ItemsSource = await Data.DatabaseService.Provider.GetAllTeamsIdPlusNameAsync();
+            TeamPicker.ItemsSource = await Data.DatabaseService.Provider.GetAllTeamsIdAndAliasConcatenatedAsync();
             var test = TeamPicker.SelectedItem;
         }
 

@@ -12,32 +12,44 @@
         <ResourceDictionary>
             <converter:DetermineFrameVisibility x:Key="DetermineFrameVisibility"/>
             <converter:ImagePathConverter x:Key="ImagePathConverter"/>
+            <converter:ImagePathToImageSourceConverter x:Key="ImagePathToImageSourceConverter"/>
 
             <Style x:Key="RobotFrame" TargetType="Frame" BasedOn="{StaticResource MarginedFrame}">
                 <Setter Property="IsVisible" Value="False"/>
             </Style>
 
             <Style x:Key="RobotImageFrame" TargetType="Frame" BasedOn="{StaticResource FrameImageWrapper}">
-                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="WidthRequest" Value="80"/>
+                <Setter Property="Grid.RowSpan" Value="2"/>
             </Style>
+            
             <Style TargetType="ImageButton">
                 <Setter Property="Command" Value="{Binding GetPictureCMD}"/>
                 <Setter Property="WidthRequest" Value="90"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="Aspect" Value="AspectFill"/>
             </Style>
             <Style TargetType="Entry">
-                <Setter Property="WidthRequest" Value="100"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="Grid.Column" Value="1"/>
-                <Setter Property="Placeholder" Value="Robot #"/>
+                <Setter Property="Placeholder" Value="New Robot #"/>
             </Style>
+            
             <Style TargetType="local:CustomEditor">
                 <Setter Property="Placeholder" Value="Write comments here."/>
-                <Setter Property="Grid.Row" Value="1"/>
+                <Setter Property="Grid.Row" Value="2"/>
                 <Setter Property="HeightRequest" Value="50"/>
                 <Setter Property="Grid.Column" Value="0"/>
                 <Setter Property="Grid.ColumnSpan" Value="2"/>
+            </Style>
+            
+            <Style TargetType="Picker">
+                <Setter Property="Grid.Row" Value="1"/>
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="Title" Value="Select Existing Robot"/>
+                <Setter Property="ItemsSource" Value="{Binding RobotNameAndId}"/>
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -55,7 +67,8 @@
             <Frame Style="{StaticResource RobotFrame}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.5*"/>
                         <RowDefinition Height="0.5*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -63,19 +76,21 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Frame Style="{StaticResource FrameImageWrapper}">
-                        <ImageButton Source="{Binding RobotOneImagePath, Converter={asdfasdfadsf d6f875dsa8f5a87df98a7sf9a8sd}}" CommandParameter="0">
+                    <Frame Style="{StaticResource RobotImageFrame}">
+                        <ImageButton Source="{Binding RobotOneImagePath, Converter={StaticResource ImagePathToImageSourceConverter}}" CommandParameter="0">
                             <ImageButton.Triggers>
                                 <DataTrigger TargetType="ImageButton" Binding="{Binding RobotOneImagePath, Converter={StaticResource ImagePathConverter}}" Value="true">
                                     <Setter Property="Source" Value="default_robot_icon"/>
                                 </DataTrigger>
                                 <DataTrigger TargetType="ImageButton" Binding="{Binding RobotOneImagePath, Converter={StaticResource ImagePathConverter}}" Value="false">
-                                    <Setter Property="Source" Value="{Binding Match.Robots[0].ImagePath}"/>
+                                    <Setter Property="Source" Value="{Binding RobotOneImagePath, Converter={StaticResource ImagePathToImageSourceConverter}}"/>
                                 </DataTrigger>
                             </ImageButton.Triggers>
                         </ImageButton>
                     </Frame>
+
                     <Entry Text="{Binding RobotOneId}"/>
+                    <Picker/>
                     <local:CustomEditor Text="{Binding Match.Robots[0].RobotInfo}"/>
                 </Grid>
                 

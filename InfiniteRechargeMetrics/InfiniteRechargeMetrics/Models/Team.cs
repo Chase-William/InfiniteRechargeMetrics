@@ -13,8 +13,8 @@ namespace InfiniteRechargeMetrics.Models
         /// <summary>
         ///     The name or title of the team.
         /// </summary>
-        [Column("alias")]
-        public string Alias { get; set; }        
+        [Column("team_alias")]
+        public string TeamAlias { get; set; }        
         [Column("is_home_team")]
         public bool IsHomeTeam { get; set; }
         [Column("image_path")]

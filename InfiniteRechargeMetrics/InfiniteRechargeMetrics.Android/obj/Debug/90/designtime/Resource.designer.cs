@@ -7784,7 +7784,7 @@ namespace InfiniteRechargeMetrics.Droid
 			public const int decrement_icon = 2131165292;
 			
 			// aapt resource value: 0x7F07006D
-			public const int default_robot = 2131165293;
+			public const int default_robot_icon = 2131165293;
 			
 			// aapt resource value: 0x7F07006E
 			public const int design_bottom_navigation_item_background = 2131165294;
