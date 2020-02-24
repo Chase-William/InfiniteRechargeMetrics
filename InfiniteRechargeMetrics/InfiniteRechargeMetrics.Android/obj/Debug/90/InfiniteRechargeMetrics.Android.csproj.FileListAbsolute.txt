@@ -1185,3 +1185,5 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.A
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\android\assets\Newtonsoft.Json.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\logo_icon.png
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\delete_icon.png
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\edit_icon.png
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.Android\obj\Debug\90\res\drawable\new_icon.png

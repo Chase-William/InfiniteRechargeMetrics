@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.RobotDetailsPage" BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="WidthRequest" Value="80"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="5,50,5,0" VerticalOptions="Center">
+
+        <Frame Style="{StaticResource FrameImageWrapper}" IsClippedToBounds="True">
+            <ImageButton Command="{Binding SetRobotImageCMD}" Source="{Binding Robot.ImagePath,Converter={StaticResource ImagePathToImageSourceConverter}}" BackgroundColor="Transparent" WidthRequest="80" Aspect="AspectFill" HeightRequest="80"/>
+        </Frame>
+
+        <Label Text="{Binding Robot.RobotId}" Style="{StaticResource CategoryHeader}" FontSize="Large"/>
+
+        <Button Text="Email Data" Command="{Binding EmailDataCMD}" Style="{StaticResource CyanBtnStyle}" HorizontalOptions="End"/>
+
+        <Label Text="Comments" Style="{StaticResource DarkBGLabel}"/>
+        <Frame Style="{StaticResource FrameEditorBG}">
+            <Label x:Name="CommentLabel" Text="{Binding Robot.RobotInfo}">
+                <!--<Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference CommentLabel}, Path=Text.Length}" Value="0">
+                        <Setter Property="Text" Value="No Comment"/>
+                    </DataTrigger>
+                </Label.Triggers>-->
+            </Label>
+        </Frame>
+
+        <Button Text="Return" Command="{Binding ReturnCMD}" Style="{StaticResource ButtonBase}" Margin="0,100,0,0"/>
+
+    </StackLayout>
+
+</ContentPage>

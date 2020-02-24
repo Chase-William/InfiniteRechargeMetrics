@@ -353,14 +353,14 @@ namespace InfiniteRechargeMetrics.ViewModels.StageVM.TemplateVM
 
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                 {
-                    await App.Current.MainPage.DisplayAlert("No Camera", ":( No camera available.", "OK");
+                    await App.Current.MainPage.DisplayAlert("Error", "No camera available.", "OK");
                     return;
                 }
 
                 var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 {
                     // We dont need a massive image when inside the app.. make this changable at some point
-                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
+                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Full,
                     Directory = "Robots",
                     Name = $"{Match.Robots[index].RobotId}.jpg"
                 });

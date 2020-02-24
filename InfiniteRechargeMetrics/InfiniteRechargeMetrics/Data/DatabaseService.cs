@@ -76,6 +76,13 @@ namespace InfiniteRechargeMetrics.Data
             return cn.QueryAsync<Team>("SELECT * FROM Team WHERE team_id = ?", _teamId).Result.FirstOrDefault();
         }
 
+        public async Task<Robot> GetRobotAsync(string _robotId)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Robot>();
+            return cn.QueryAsync<Robot>("SELECT * FROM Robot WHERE robot_id = ?", _robotId).Result.FirstOrDefault();
+        }
+
         /// <summary>
         ///     Saves the past instance of a Match and its various properties to the local database.
         /// </summary>
@@ -260,6 +267,14 @@ namespace InfiniteRechargeMetrics.Data
             await cn.QueryAsync<Team>("DELETE FROM Team WHERE team_id = ?", _teamId);
         }
 
+        public async Task RemoveRobotFromLocalDBAsync(string _robotId)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Robot>();
+
+            await cn.QueryAsync<Robot>("DELETE FROM Robot WHERE robot_id = ?", _robotId);
+        }
+
         /// <summary>
         ///     Overwrites a team but keeps all its attached. Meaning that all matches associated with the old team will now be 
         ///         associated with the new team. This is done by changing the primary key in all associated matches with the old 
@@ -294,6 +309,13 @@ namespace InfiniteRechargeMetrics.Data
                 // Secondly now assign the new passed team as the home team
                 await cn.QueryAsync<Team>("UPDATE Team SET is_home_team = true WHERE team_id = ?", _newTeam.TeamId);
             }           
+        }
+
+        public async Task OverwriteRobotDataWithNewRobotAsync(Robot _toBeOverwrittenRobot, Robot _newRobot)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Robot>();
+            await cn.QueryAsync<Team>("UPDATE Robot SET robot_id = ?, robot_info = ?, image_path = ? WHERE robot_id = ?", _newRobot.RobotId, _newRobot.RobotInfo, _newRobot.ImagePath, _toBeOverwrittenRobot.RobotId);
         }
 
         /// <summary>

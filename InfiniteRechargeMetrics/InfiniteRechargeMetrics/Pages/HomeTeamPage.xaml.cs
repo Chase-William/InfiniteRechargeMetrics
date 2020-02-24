@@ -15,7 +15,7 @@ namespace InfiniteRechargeMetrics.Pages
 
         public HomeTeamPage() 
         { 
-            InitializeComponent();            
+            InitializeComponent();                 
         }
         /// <summary>
         ///     Parameterized Contructor used by the APP on startup based off if a hometeam is set in the local database.
@@ -23,7 +23,7 @@ namespace InfiniteRechargeMetrics.Pages
         public HomeTeamPage(Team _homeTeam) 
         { 
             InitializeComponent();
-            HomeTeam = _homeTeam;
+            HomeTeam = _homeTeam;            
         }
 
         protected override void OnAppearing()

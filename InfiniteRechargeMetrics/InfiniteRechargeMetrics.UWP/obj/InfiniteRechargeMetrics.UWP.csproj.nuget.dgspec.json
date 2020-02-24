@@ -144,10 +144,6 @@
               "target": "Package",
               "version": "[1.4.0, )"
             },
-            "Syncfusion.Xamarin.SfChart": {
-              "target": "Package",
-              "version": "[17.4.0.50, )"
-            },
             "Xam.Plugin.Media": {
               "target": "Package",
               "version": "[4.0.1.5, )"

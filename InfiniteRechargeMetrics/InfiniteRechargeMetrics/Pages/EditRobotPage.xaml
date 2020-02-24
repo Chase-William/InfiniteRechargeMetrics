@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:InfiniteRechargeMetrics.SharedCustomViews"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.EditRobotPage" BackgroundColor="{StaticResource BackgroundColor}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Finished"
+                     Order="Primary"
+                     Priority="0"
+                     IconImageSource="finish_icon.png"
+                     Command="{Binding FinishedEditingCMD}"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="5,50,5,0" VerticalOptions="Center">
+
+        <Frame Style="{StaticResource FrameImageWrapper}" HorizontalOptions="Center" IsClippedToBounds="True">
+            <ImageButton Command="{Binding SetRobotImageCMD}" Source="{Binding RobotImagePath,Converter={StaticResource ImagePathToImageSourceConverter}}" BackgroundColor="Transparent" WidthRequest="80" Aspect="AspectFill" HeightRequest="80"/>
+        </Frame>
+
+        <Frame Style="{StaticResource FrameEditorBG}" Margin="0,10,0,0">
+            <Entry Placeholder="Id Number" x:Name="RobotId" Text="{Binding RobotId}"/>
+        </Frame>
+
+        <Frame Style="{StaticResource FrameEditorBG}">
+            <local:CustomEditor Placeholder="Comments" Text="{Binding RobotComments}"/>
+        </Frame>
+
+        <Button Text="Save" IsEnabled="False" Style="{StaticResource ButtonBase}" Margin="0,80,0,0">
+            <Button.Triggers>
+               
+                <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference RobotId}, Path=Text.Length, Converter={StaticResource HasDataBeenEnteredConverter}}" Value="true">
+                    <Setter Property="IsEnabled" Value="True"/>
+                    <Setter Property="Command" Value="{Binding FinishedEditingCMD}"/>
+                </DataTrigger>
+                <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference RobotId}, Path=Text.Length, Converter={StaticResource HasDataBeenEnteredConverter}}" Value="false">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+
+        <Button Text="Cancel" Command="{Binding CancelEditingCMD}" Style="{StaticResource ButtonBase}"/>
+
+    </StackLayout>
+</ContentPage>

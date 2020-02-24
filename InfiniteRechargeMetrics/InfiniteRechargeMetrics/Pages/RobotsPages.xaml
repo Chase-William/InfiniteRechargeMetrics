@@ -15,6 +15,26 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete"
+                     IconImageSource="delete_icon.png"
+                     Priority="0"
+                     Command="{Binding DeleteRobotsCMD}"
+                     Order="Default"/>
+
+        <ToolbarItem Text="Edit"
+                     IconImageSource="edit_icon.png"
+                     Priority="1"
+                     Command="{Binding EditRobotCMD}"
+                     Order="Primary"/>
+
+        <ToolbarItem Text="New"
+                     IconImageSource="new_icon.png"
+                     Priority="2"
+                     Command="{Binding CreateNewRobotCMD}"
+                     Order="Primary"/>
+    </ContentPage.ToolbarItems>
+
     <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
         <Frame Style="{StaticResource FrameEditorBG}" Margin="5">
             <SearchBar x:Name="searchBar"                         
@@ -24,32 +44,35 @@
                        Placeholder="Search Robots"/>
 
         </Frame>
-        <ListView x:Name="TeamsListView"
+        <Frame Padding="5" CornerRadius="0" BorderColor="{Binding FrameListViewBorderColor}" BackgroundColor="{StaticResource BackgroundColor}">
+            <ListView x:Name="TeamsListView"
                   IsPullToRefreshEnabled="True"
                   IsRefreshing="{Binding IsRefreshing}"
                   RefreshCommand="{Binding RefreshResultsCMD}"
                   ItemsSource="{Binding RobotsSearchResults}"
                   SelectedItem="{Binding SelectedRobot}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <!--Cell that models Team (class, table)-->
-                        <StackLayout Orientation="Horizontal" HeightRequest="80">
-                            <Frame Style="{StaticResource VerticalListViewFrameSeperator}"/>
-                            <Frame Style="{StaticResource VerticalListViewFrameSeperator}">
-                                <Image Source="{Binding ImagePath}"/>
-                            </Frame>
-                            <StackLayout>
-                                <Label Text="testing" Margin="0,10,0,0" FontSize="Large"/>
-                                <StackLayout Orientation="Horizontal" WidthRequest="255">
-                                    <Label Text="{Binding RobotId}" HorizontalOptions="StartAndExpand" FontSize="Small"/>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <!--Cell that models Team (class, table)-->
+                            <StackLayout Orientation="Horizontal" HeightRequest="80">
+                                <Frame Style="{StaticResource VerticalListViewFrameSeperator}"/>
+                                <Frame Style="{StaticResource VerticalListViewFrameSeperator}" IsClippedToBounds="True">
+                                    <Image Source="{Binding ImagePath, Converter={StaticResource ImagePathToImageSourceConverter}}" Aspect="AspectFill" WidthRequest="50"/>
+                                </Frame>
+                                <StackLayout>
+                                    <Label Text="testing" Margin="0,10,0,0" FontSize="Large"/>
+                                    <StackLayout Orientation="Horizontal" WidthRequest="255">
+                                        <Label Text="{Binding RobotId}" HorizontalOptions="StartAndExpand" FontSize="Small"/>
+                                    </StackLayout>
                                 </StackLayout>
                             </StackLayout>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
+        
     </StackLayout>
 
 </ContentPage>

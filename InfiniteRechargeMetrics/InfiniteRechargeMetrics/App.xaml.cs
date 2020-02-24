@@ -40,7 +40,7 @@ namespace InfiniteRechargeMetrics
         {
             InitializeComponent();
             DatabaseFilePath = _filePath;            
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjE1MDg5QDMxMzcyZTM0MmUzMEFvaWJYdzFIeFoxMDE5SEZWQ3FlRmF1VUgxelFvdklNaXNxZUFva25DYkU9");
+            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjE1MDg5QDMxMzcyZTM0MmUzMEFvaWJYdzFIeFoxMDE5SEZWQ3FlRmF1VUgxelFvdklNaXNxZUFva25DYkU9");
             MainPage = InitMainMasterPage();            
         }
 

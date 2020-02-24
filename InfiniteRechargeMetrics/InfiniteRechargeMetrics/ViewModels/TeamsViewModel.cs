@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
+    public enum SelectionState { ViewDetails, Delete, Edit }
+
     public class TeamsViewModel : NotifyClass
     {
         private ObservableCollection<Team> teamsSearchResults = new ObservableCollection<Team>();
@@ -51,15 +53,12 @@ namespace InfiniteRechargeMetrics.ViewModels
                 NotifyPropertyChanged();
             } 
         } 
-        public ICommand RefreshResultsCMD => new Command(async () =>
-        {
-            RefreshCollection();
-        });
+        public ICommand RefreshResultsCMD => new Command(RefreshCollection);
 
         // Determines what should be done when an item is selected
-        public SelectionState SelectedState { get; set; } = SelectionState.ViewDetails;
+        public SelectionState SelectedState { get; set; }
 
-        public ICommand DeleteTeams => new Command(() =>
+        public ICommand DeleteTeamsCMD => new Command(() =>
         {
             if (SelectedState == SelectionState.Delete)
             {
@@ -73,16 +72,28 @@ namespace InfiniteRechargeMetrics.ViewModels
             }
         });
 
+        public ICommand EditTeamCMD => new Command(() =>
+        {
+            if (SelectedState == SelectionState.Edit)
+            {
+                FrameListViewBorderColor = Color.Transparent;
+                SelectedState = SelectionState.ViewDetails;
+            }
+            else
+            {
+                FrameListViewBorderColor = Color.Yellow;
+                SelectedState = SelectionState.Edit;
+            }
+        });
 
+        public ICommand CreateNewTeamCMD => new Command(() =>
+        {
+            SelectedState = SelectionState.ViewDetails;
+            App.Current.MainPage.Navigation.PushModalAsync(new EditTeamPage(new Team()));
+        });
+        
         public TeamsViewModel()
         {
-            LoadAllTeams();
-            TeamsSearchResults.CollectionChanged += TeamsSearchResults_CollectionChanged;
-        }
-
-        private void TeamsSearchResults_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            var test = e.Action;
         }
 
 
@@ -102,22 +113,26 @@ namespace InfiniteRechargeMetrics.ViewModels
                     DeleteSelectedItem();
                     break;
                 case SelectionState.Edit:
-
+                    EditSelectedItem();
                     break;
                 default:
                     break;
             }   
         }
 
+        private void EditSelectedItem()
+        {
+            if (SelectedTeam == null) return;
+            App.Current.MainPage.Navigation.PushModalAsync(new EditTeamPage(SelectedTeam));           
+        }
+
         private async void DeleteSelectedItem()
         {
             await DatabaseService.Provider.RemoveTeamFromLocalDBAsync(SelectedTeam.TeamId);
             RefreshCollection();
-
-
         }
 
-        private async void RefreshCollection()
+        public async void RefreshCollection()
         {
             try
             {
@@ -131,14 +146,5 @@ namespace InfiniteRechargeMetrics.ViewModels
             catch { }
         }
 
-        /// <summary>
-        ///     Loads all the teams for the Teams listview/
-        /// </summary>
-        private async void LoadAllTeams()
-        {
-            TeamsSearchResults = new ObservableCollection<Team>(await DatabaseService.Provider.GetAllTeamsAsync());
-        }
-
-        public enum SelectionState { Delete, ViewDetails, Edit }
     }
 }

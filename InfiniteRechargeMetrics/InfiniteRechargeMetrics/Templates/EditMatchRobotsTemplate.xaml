@@ -12,7 +12,6 @@
         <ResourceDictionary>
             <converter:DetermineFrameVisibility x:Key="DetermineFrameVisibility"/>
             <converter:ImagePathConverter x:Key="ImagePathConverter"/>
-            <converter:ImagePathToImageSourceConverter x:Key="ImagePathToImageSourceConverter"/>
 
             <Style x:Key="RobotFrame" TargetType="Frame" BasedOn="{StaticResource MarginedFrame}">
                 <Setter Property="IsVisible" Value="False"/>

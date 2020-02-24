@@ -19,7 +19,7 @@
         <Label Text="Choose a Match"/>
         <Picker SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding Matches, Converter={StaticResource MatchesToPickerStringConverter}}"/>
 
-        <chart:SfChart>
+        <!--<chart:SfChart>
 
             <chart:SfChart.PrimaryAxis>
                 <chart:CategoryAxis/>
@@ -35,7 +35,7 @@
                                 Label="Test Label"/>
 
 
-        </chart:SfChart>
+        </chart:SfChart>-->
     </StackLayout>
 
 </ContentPage>

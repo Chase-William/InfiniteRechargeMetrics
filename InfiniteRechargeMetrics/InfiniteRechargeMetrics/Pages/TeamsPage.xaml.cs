@@ -36,13 +36,12 @@ namespace InfiniteRechargeMetrics.Pages
         {
             ((ListView)sender).SelectedItem = null;
         }
-        //protected async override void OnAppearing()
-        //{
-        //    TeamsListView.IsEnabled = true;
-        //    base.OnAppearing();
-        //    //Teams = new ObservableCollection<Team>(await DatabaseService.GetAllTeamsAsync());
-        //    TeamsListView.ItemsSource = Teams;
-        //}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            TeamsViewModel.RefreshCollection();
+        }
 
         /// <summary>
         ///     Handles the text inside the searchbar being changed, then request a query to the databaseservice.

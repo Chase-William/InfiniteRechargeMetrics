@@ -14,6 +14,7 @@ namespace InfiniteRechargeMetrics.ViewModels
         public ICommand CancelEditingCMD { get; set; }
 
         public Team NewTeam { get; set; } = new Team();
+        public Team OldTeam { get; set; }
         /// <summary>
         ///     Determines whether this should be set as the home team
         /// </summary>
@@ -42,6 +43,14 @@ namespace InfiniteRechargeMetrics.ViewModels
 
         public EditTeamViewModel(Team _team)
         {
+            OldTeam = new Team
+            {
+                TeamId = _team.TeamId,
+                TeamAlias = _team.TeamAlias,
+                DateCreated = _team.DateCreated,
+                ImagePath = _team.ImagePath,
+                IsHomeTeam = _team.IsHomeTeam
+            };
             NewTeam = _team;
 
             // Picking a random avatar for this team, if the id isn't set..then this team is new
@@ -52,7 +61,6 @@ namespace InfiniteRechargeMetrics.ViewModels
             }
 
             SaveEditingCMD = new Command(SaveAndFinishEditting);
-            SetTeamImageCMD = new Command(SetTeamImage);
             CancelEditingCMD = new Command(() => App.Current.MainPage.Navigation.PopModalAsync());
         }
 
@@ -155,8 +163,18 @@ namespace InfiniteRechargeMetrics.ViewModels
                     // If there is not pre-existing team then just save the team and send the user back a page
                     else
                     {
-                        await DatabaseService.Provider.SaveTeamToLocalDBAsync(NewTeam);
-                        await App.Current.MainPage.Navigation.PopModalAsync();
+                        // Replace the clicked team
+                        if (!string.IsNullOrEmpty(OldTeam.TeamId))
+                        {
+                            await DatabaseService.Provider.OverwriteTeamDataWithNewTeamAsync(OldTeam, NewTeam);
+                            await App.Current.MainPage.Navigation.PopModalAsync();
+                        }
+                        // Save a new instance
+                        else
+                        {
+                            await DatabaseService.Provider.SaveTeamToLocalDBAsync(NewTeam);
+                            await App.Current.MainPage.Navigation.PopModalAsync();
+                        }
                     }                    
                 }
             }
@@ -173,14 +191,6 @@ namespace InfiniteRechargeMetrics.ViewModels
         {
             App.Current.MainPage.Navigation.PopModalAsync();
             //App.Current.MainPage.Navigation.PushAsync(new HomeTeamPage());
-        }
-
-        /// <summary>
-        ///     Pulls up the UI required for the user to choose a way to set the image of their team.
-        /// </summary>
-        private void SetTeamImage()
-        {
-
         }
     }
 }

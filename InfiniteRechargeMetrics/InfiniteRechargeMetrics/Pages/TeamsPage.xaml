@@ -24,8 +24,20 @@
         <ToolbarItem Text="Delete"
                      IconImageSource="delete_icon.png"
                      Priority="0"
-                     Command="{Binding DeleteTeams}"
+                     Command="{Binding DeleteTeamsCMD}"
                      Order="Default"/>
+
+        <ToolbarItem Text="Edit"
+                     IconImageSource="edit_icon.png"
+                     Priority="1"
+                     Command="{Binding EditTeamCMD}"
+                     Order="Primary"/>
+
+        <ToolbarItem Text="New"
+                     IconImageSource="new_icon.png"
+                     Priority="2"
+                     Command="{Binding CreateNewTeamCMD}"
+                     Order="Primary"/>
     </ContentPage.ToolbarItems>    
     
     <StackLayout BackgroundColor="{StaticResource BackgroundColor}">

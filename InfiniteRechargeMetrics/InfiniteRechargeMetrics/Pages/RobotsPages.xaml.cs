@@ -13,10 +13,18 @@ namespace InfiniteRechargeMetrics.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RobotsPages : ContentPage
     {
+        public RobotsViewModel RobotsViewModel { get; set; }
         public RobotsPages()
         {
             InitializeComponent();
-            BindingContext = new RobotsViewModel();
+            RobotsViewModel = new RobotsViewModel();
+            BindingContext = RobotsViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            RobotsViewModel.RefreshCollection();
         }
     }
 }

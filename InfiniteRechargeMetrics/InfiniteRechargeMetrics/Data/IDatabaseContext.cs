@@ -13,7 +13,7 @@ namespace InfiniteRechargeMetrics.Data
         Task SaveRobotToLocalDbASync(Robot _robot);
         Task RemoveTeamFromLocalDBAsync(string _teamId);
         Task OverwriteTeamDataWithNewTeamAsync(Team _toBeOverwrittenTeam, Team _newTeam, bool _setAsHomeTeam = false);
-
+        Task OverwriteRobotDataWithNewRobotAsync(Robot _toBeOverwrittenRobot, Robot _newRobot);
         Task<List<Match>> GetMatchesFromTeamAsync(string _teamName);
         Task<List<Point>> GetPointsFromMatchesAsync(List<Match> _matches);
         List<Point> GetPointsFromMatch(string _matchId);
@@ -22,7 +22,7 @@ namespace InfiniteRechargeMetrics.Data
 
         Task<string[]> GetAllTeamsIdAndAliasConcatenatedAsync();
         Task<string[]> GetAllRobotIdAsync();
-
+        Task<Robot> GetRobotAsync(string _robotId);
         Task<List<Team>> GetAllTeamsAsync();
         Task<List<Robot>> GetAllRobotsAsync();
         
@@ -31,7 +31,7 @@ namespace InfiniteRechargeMetrics.Data
         Task<Team> GetTeamAsync(string _teamId);
         Task RemoveHomeStatusFromTeamAsync(string _teamId);
         Task SetHomeStatusForTeamAsync(string _teamId);
-
+        Task RemoveRobotFromLocalDBAsync(string _robotId);
 
         Task<bool> DoesMatchExistAsync(string _matchId);
         Task<bool> DoesTeamExistAsync(string _teamId);        
@@ -39,6 +39,7 @@ namespace InfiniteRechargeMetrics.Data
 
         Task<List<Team>> GetSearchResultsForTeamAliasAsync(string _query);
         Task<List<Robot>> GetSearchResultsForRobotIdAsync(string _query);
+       
 
         int GetTeamMatchCount(string _teamId);
     }
