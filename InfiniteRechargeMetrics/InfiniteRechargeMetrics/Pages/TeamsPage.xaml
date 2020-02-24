@@ -4,42 +4,70 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:InfiniteRechargeMetrics.ViewModels"
+             xmlns:converters="clr-namespace:InfiniteRechargeMetrics.Pages.Converters"
+             xmlns:homeTeamConverters="clr-namespace:InfiniteRechargeMetrics.ViewModels.HomeVM.TemplateVM.Converters"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.TeamsPage">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New Team" Priority="0" Clicked="OnNewTeam"/>
-    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DateTimeToDateStringConverter x:Key="DateTimeToDateStringConverter"/>
+            <homeTeamConverters:TeamTitleConverter x:Key="TeamTitleConverter"/>
 
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete"
+                     IconImageSource="delete_icon.png"
+                     Priority="0"
+                     Command="{Binding DeleteTeams}"
+                     Order="Default"/>
+    </ContentPage.ToolbarItems>    
+    
     <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
-        <Frame CornerRadius="10" Margin="5" Padding="5">
-            <SearchBar x:Name="SearchBar"                       
+        <Frame Style="{StaticResource FrameEditorBG}" Margin="5">
+            <SearchBar x:Name="searchBar"                         
+                       SearchCommand="{Binding PerformSearchCMD}"                       
+                       Text="{Binding QueryString}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                        Placeholder="Search Teams"/>
-            <!--<SearchBar.Behaviors>
-                    <local:SearchBarViewModel/>
-                </SearchBar.Behaviors>
-            </SearchBar>-->
+            
         </Frame>
-        <ListView x:Name     ="TeamsListView"
-                  ItemTapped ="OnTeamTapped">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <!-- Cell that models Team (class, table) --> 
-                        <StackLayout Orientation="Horizontal" HeightRequest="80">
-                            <Frame Padding="5"
-                                   Margin="10"
-                                   HasShadow="True"
-                                   CornerRadius="50">
-                                <Image Source="{Binding ImagePath}"/>
-                            </Frame>
-                            <Label Text="{Binding Name}"
-                                   VerticalOptions="Center" TextColor="White" FontSize="Large"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Frame Padding="5" CornerRadius="0" BorderColor="{Binding FrameListViewBorderColor}" BackgroundColor="{StaticResource BackgroundColor}">
+            <ListView x:Name="TeamsListView"
+                  IsPullToRefreshEnabled="True"
+                  
+                  IsRefreshing="{Binding IsRefreshing}"
+                  RefreshCommand="{Binding RefreshResultsCMD}"
+                  ItemsSource="{Binding TeamsSearchResults}"
+                  ItemTapped="TeamsListView_ItemTapped"
+                  SelectedItem="{Binding SelectedTeam}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <!--Cell that models Team (class, table)-->
+                            <StackLayout Orientation="Horizontal" HeightRequest="80">
+                                <Frame Style="{StaticResource VerticalListViewFrameSeperator}"/>
+                                <Frame Style="{StaticResource VerticalListViewFrameSeperator}">
+                                    <Image Source="{Binding ImagePath}"/>
+                                </Frame>
+                                <StackLayout>
+                                    <Label Text="{Binding TeamAlias,Converter={StaticResource TeamTitleConverter}}" Margin="0,10,0,0" FontSize="Large"/>
+                                    <StackLayout Orientation="Horizontal" WidthRequest="255">
+                                        <Label Text="{Binding TeamId}" HorizontalOptions="StartAndExpand" FontSize="Small"/>
+                                        <Label Text="{Binding DateCreated, Converter={StaticResource DateTimeToDateStringConverter}}" HorizontalOptions="EndAndExpand" FontSize="Small"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
     </StackLayout>
     
 </ContentPage>

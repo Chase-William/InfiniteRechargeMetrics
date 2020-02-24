@@ -3,6 +3,7 @@ using InfiniteRechargeMetrics.Models;
 using InfiniteRechargeMetrics.Pages;
 using InfiniteRechargeMetrics.Pages.MatchPages;
 using InfiniteRechargeMetrics.ViewModels;
+using Plugin.GoogleClient.Shared;
 using Xamarin.Forms;
 
 /// <summary>
@@ -32,12 +33,14 @@ namespace InfiniteRechargeMetrics
         /// </summary>
         public static string DatabaseFilePath;
 
+        public static GoogleUser GoogleUser;
         public static LoginPageViewModel LoginPageViewModel { get; set; } = new LoginPageViewModel();       
 
         public App(string _filePath)
         {
             InitializeComponent();
-            DatabaseFilePath = _filePath;
+            DatabaseFilePath = _filePath;            
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjE1MDg5QDMxMzcyZTM0MmUzMEFvaWJYdzFIeFoxMDE5SEZWQ3FlRmF1VUgxelFvdklNaXNxZUFva25DYkU9");
             MainPage = InitMainMasterPage();            
         }
 

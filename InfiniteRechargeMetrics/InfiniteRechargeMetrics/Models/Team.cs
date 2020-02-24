@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace InfiniteRechargeMetrics.Models
 {
@@ -19,5 +20,11 @@ namespace InfiniteRechargeMetrics.Models
         public bool IsHomeTeam { get; set; }
         [Column("image_path")]
         public string ImagePath { get; set; }
+        [Column("date_created")]
+        public DateTime DateCreated { get; set; }
+        public Team()
+        {
+            DateCreated = DateTime.Now;
+        }
     }
 }

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:converters="clr-namespace:InfiniteRechargeMetrics.Pages.MetricsPages.Converters"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.MetricsPages.BarChartPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:MatchesToPickerStringConverter x:Key="MatchesToPickerStringConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+        <Label Text="Choose a Match"/>
+        <Picker SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding Matches, Converter={StaticResource MatchesToPickerStringConverter}}"/>
+
+        <chart:SfChart>
+
+            <chart:SfChart.PrimaryAxis>
+                <chart:CategoryAxis/>
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis/>
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:ColumnSeries ItemsSource="{Binding Points}"
+                            XBindingPath="{Binding TimeClickedFromStart}"
+                            YBindingPath="{Binding Id}"
+                                Label="Test Label"/>
+
+
+        </chart:SfChart>
+    </StackLayout>
+
+</ContentPage>

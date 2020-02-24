@@ -4,27 +4,29 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using InfiniteRechargeMetrics.Data;
 using System.Linq;
+using System.Threading.Tasks;
+using InfiniteRechargeMetrics.Pages;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {
     /// <summary>
     ///     MVVM that handles the setup required for recording a team's performance.
     /// </summary>
-    public class MatchSetupViewModel : NotifyClass
+    public class MatchSetupViewModel : StageEditRobotBase
     {
-        public Match Match { get; set; }
+        public MatchSetupPage MatchSetupPage { get; set; }
         public ICommand StartRecordingCMD { get; private set; }
-        public ICommand ClearCMD { get; private set; }
         private object teamPickerSelectedItem;
         public object TeamPickerSelectedItem { 
             get => teamPickerSelectedItem; 
             set
             {
                 teamPickerSelectedItem = value;
+                if (value != null)
+                    Match.TeamId_FK = ((string)value).Split(' ')[1];
                 NotifyPropertyChanged();
             }
         }
-
         public string MatchId { 
             get => Match.MatchId;
             set
@@ -44,71 +46,58 @@ namespace InfiniteRechargeMetrics.ViewModels
         }
         public string MatchName
         {
-            get => Match.MatchName;
+            get => Match.MatchName;   
             set
             {
                 Match.MatchName = value;
                 NotifyPropertyChanged();
             }
-        }
+        }      
 
-        public MatchSetupViewModel(Match _match)
+        public MatchSetupViewModel(MatchSetupPage _matchSetupPage, Match _match) : base(_match)
         {
-            Match = _match;            
+            MatchSetupPage = _matchSetupPage;
             StartRecordingCMD = new Command(ValidateStartRecording);
-            // Adding a func for validation to make sure the user has entered the required information.
-            ClearCMD = new Command(ClearFields);
         }
 
         /// <summary>
-        ///     Validates the starting of recording the match
-        ///     
-        ///     To Check:
-        ///         MatchNumberEntry
-        ///         TeamNumberEntry
-        ///         TeamPicker
-        ///         
+        ///     Validates the recording to start and then proceeds to run
         /// </summary>
         private async void ValidateStartRecording()
+        {
+            // if all validiations pass save
+            if (await ValidateMatchInputs() && ValidateRobotsInputs())
+            {
+                StartRecording();
+            }           
+        }
+        
+        /// <summary>
+        ///     Validates the match specific data
+        /// </summary>
+        private async Task<bool> ValidateMatchInputs()
         {
             // No match number was provided:
             if (string.IsNullOrWhiteSpace(Match.MatchId))
             {
                 await App.Current.MainPage.DisplayAlert("Error", "You must provide a match number.", "OK");
-                return;
+                return false;
             }
             // If a team with the same id exist:
             if (await DatabaseService.Provider.DoesMatchExistAsync(Match.MatchId))
             {
                 await App.Current.MainPage.DisplayAlert("Error", "A match already exist with the same id", "OK");
-                return;
+                return false;
             }
 
             // No team name was provided in either fields
             if (TeamPickerSelectedItem == null && string.IsNullOrWhiteSpace(Match.TeamId_FK))
             {
                 await App.Current.MainPage.DisplayAlert("Error", "You must provide a team name.", "OK");
-                return;
+                return false;
             }
 
-            // If a robot has data put into its fields and doesnt have a pk set warn the user
-            if (Match.Robots.Any(robot => string.IsNullOrEmpty(robot.RobotId) && !string.IsNullOrEmpty(robot.RobotInfo)))
-            {
-                await App.Current.MainPage.DisplayAlert("Warning", "You have put information into a robot entry and not given it an id. The robot will not be saved.", "OK");
-            }
-
-            // First if the Id is null or empty just return false and iterate to next
-            // If not then compare robot id to all id inside robots collection for a match
-            // If a match exist then return true for duplicate robot keys
-            // If not then return false, not duplicate robot keys found
-            if (Match.Robots.Any(robot => { return string.IsNullOrEmpty(robot.RobotId) ? false : robot.RobotId == (string)Match.Robots.SelectMany(x => x.RobotId) ? true : false; }))
-            {
-                await App.Current.MainPage.DisplayAlert("Error", "Two robots have the same id.", "OK");
-                return;
-            }
-
-            // If all those checkout, run
-            StartRecording();            
+            return true;
         }
 
         /// <summary>
@@ -118,19 +107,9 @@ namespace InfiniteRechargeMetrics.ViewModels
         {
             // Disabling the drawer from sliding out
             //((MainMasterPage)App.Current.MainPage).IsGestureEnabled = false;
-            // To use PushAsync we need to stack the page onto this pages own stack navigation            
+            // To use PushAsync we need to stack the page onto this pages own stack navigation    
+            MatchSetupPage.EditRobotCtx.ShouldFieldsReset = true;
             App.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new MasterRecordMatchPage(Match)));            
-        }
-
-        /// <summary>
-        ///     Sets the data for this page back to default values
-        /// </summary>
-        private void ClearFields()
-        {
-            MatchId = null;
-            MatchName = null;
-            TeamId = null;
-            TeamPickerSelectedItem = null;
         }
     }
 }

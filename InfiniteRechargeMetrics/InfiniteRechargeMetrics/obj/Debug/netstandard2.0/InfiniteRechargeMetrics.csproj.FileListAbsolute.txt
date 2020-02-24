@@ -13,7 +13,6 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\b
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\InfiniteRechargeMetrics.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\ref\InfiniteRechargeMetrics.dll
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\InfiniteRechargeMetrics.pdb
-C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\InfiniteRechargeMetrics.csprojAssemblyReference.cache
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\InfiniteRechargeMetrics.deps.json
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\bin\Debug\netstandard2.0\InfiniteRechargeMetrics.dll
@@ -54,3 +53,7 @@ C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\o
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Templates\ChangePointsTemplate.xaml.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Templates\EditMatchRobotsTemplate.xaml.g.cs
 C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Templates\SetHomeTeamTemplate.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\ViewTeamDetailsPage.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\MetricsPages\BarChartPage.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\Pages\RobotsPages.xaml.g.cs
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics\obj\Debug\netstandard2.0\XamlC.stamp

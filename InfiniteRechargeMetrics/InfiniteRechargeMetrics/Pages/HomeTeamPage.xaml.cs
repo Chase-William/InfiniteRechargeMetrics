@@ -15,8 +15,7 @@ namespace InfiniteRechargeMetrics.Pages
 
         public HomeTeamPage() 
         { 
-            InitializeComponent();
-            HomeTeam = DatabaseService.Provider.GetHomeTeam();
+            InitializeComponent();            
         }
         /// <summary>
         ///     Parameterized Contructor used by the APP on startup based off if a hometeam is set in the local database.
@@ -30,14 +29,14 @@ namespace InfiniteRechargeMetrics.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            HomeTeam = DatabaseService.Provider.GetHomeTeam();
 
-
-            // if their is a home team set, display the UI for the team
+            // if their is no home team set, provide the ui to do so
             if (HomeTeam == null)
             {
-                Content = new SetHomeTeamTemplate();                
+                Content = new SetHomeTeamTemplate(Content);                
             }
-            // otherwise there is no home team set, therefore display the set home team view
+            // there is a home team set so show their hometeams stats
             else
             {
                 Content = new TeamStatsTemplate(HomeTeam);

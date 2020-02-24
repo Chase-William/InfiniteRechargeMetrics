@@ -65,7 +65,7 @@
                     <Label Text="New:" Style="{StaticResource InsideFrameLabel}" Grid.Column="0"/>
                     <Entry x:Name="TeamId" Placeholder="#" WidthRequest="100" Text="{Binding TeamId}" Grid.Column="1"/>
                     <Label Text="Existing:" Style="{StaticResource InsideFrameLabel}" Grid.Row="1"/>
-                    <Picker x:Name="TeamPicker" Grid.Row="1" Grid.Column="1" SelectedItem="{Binding TeamPickerSelectedItem}"/>
+                    <Picker x:Name="TeamPicker" Title="Select A Team" Grid.Row="1" Grid.Column="1" SelectedItem="{Binding TeamPickerSelectedItem}"/>
                 </Grid>
             </Frame>
 
@@ -73,7 +73,7 @@
 
             <StackLayout VerticalOptions="EndAndExpand" Margin="0,0,0,20">
                 <Button Text="Start" Style="{StaticResource ButtonBase}" Command="{Binding StartRecordingCMD}"/>
-                <Button Text="Clear" Style="{StaticResource ButtonBase}" Command="{Binding ClearCMD}"/>
+                <Button Text="Clear" Style="{StaticResource ButtonBase}" Clicked="HandleClearBtnClicked"/>
             </StackLayout>
         </StackLayout>
     </ScrollView>

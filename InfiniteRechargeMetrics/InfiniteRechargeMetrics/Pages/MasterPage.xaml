@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="using:InfiniteRechargeMetrics"             
              xmlns:local_pages="clr-namespace:InfiniteRechargeMetrics.Pages"
+             xmlns:metrics_pages="clr-namespace:InfiniteRechargeMetrics.Pages.MetricsPages"
              xmlns:local_match_pages="clr-namespace:InfiniteRechargeMetrics.Pages.MatchPages"
              mc:Ignorable="d"
              x:Class="InfiniteRechargeMetrics.Pages.MasterPage"
@@ -59,6 +60,7 @@
                 <x:Array Type="{x:Type local:MasterPageImageItem}">
                     <local:MasterPageImageItem Title="Home" Source="home_icon.png" TargetType="{x:Type local_pages:HomeTeamPage}"/>
                     <local:MasterPageImageItem Title="Teams" Source="teams_icon.png" TargetType="{x:Type local_pages:TeamsPage}"/>
+                    <local:MasterPageImageItem Title="Robots" Source="robot_icon.png" TargetType="{x:Type local_pages:RobotsPages}"/>
                 </x:Array>
             </ListView.ItemsSource>
 
@@ -85,7 +87,8 @@
             <!-- Our item source is static and therefore we can define the array here of our MasterPageImageItem type -->
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type local:MasterPageImageItem}">
-                    <local:MasterPageImageItem Title="Record New Match" Source="record_performance_icon.png" TargetType="{x:Type local_match_pages:MatchSetupPage}"/>
+                    <local:MasterPageImageItem Title="Record New Match" Source="record_match_icon.png" TargetType="{x:Type local_match_pages:MatchSetupPage}"/>
+                    <local:MasterPageImageItem Title="View Metrics" Source="record_performance_icon.png" TargetType="{x:Type metrics_pages:BarChartPage}"/>
                 </x:Array>
             </ListView.ItemsSource>
 

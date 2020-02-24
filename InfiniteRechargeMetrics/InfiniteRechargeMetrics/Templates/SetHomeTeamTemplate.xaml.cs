@@ -8,22 +8,22 @@ namespace InfiniteRechargeMetrics.Templates
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SetHomeTeamTemplate : ContentView
     {
-        public SetHomeTeamTemplate()
+        public SetHomeTeamTemplate(View _content)
         {
             InitializeComponent();
-            BindingContext = new SetHomeTeamViewModel();            
+            BindingContext = new SetHomeTeamViewModel(_content);            
         }
 
         /// <summary>
         ///     Once the binding context is being changed this is called.
         ///     Basically using this since we can't have async modifier on a contructor.
         /// </summary>
-        protected async override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
-            TeamPicker.ItemsSource = await Data.DatabaseService.Provider.GetAllTeamsIdAndAliasConcatenatedAsync();
-            var test = TeamPicker.SelectedItem;
-        }
+        //protected async override void OnBindingContextChanged()
+        //{
+        //    base.OnBindingContextChanged();
+        //    TeamPicker.ItemsSource = await Data.DatabaseService.Provider.GetAllTeamsIdAndAliasConcatenatedAsync();
+        //    var test = TeamPicker.SelectedItem;
+        //}        
 
         /// <summary>
         ///     Assigns the selected item to a property in our binding context class.

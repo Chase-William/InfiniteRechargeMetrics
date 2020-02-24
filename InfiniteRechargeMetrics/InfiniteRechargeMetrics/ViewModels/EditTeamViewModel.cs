@@ -2,45 +2,55 @@
 using System.Windows.Input;
 using InfiniteRechargeMetrics.Data;
 using InfiniteRechargeMetrics.Models;
-using System.Collections.Generic;
+using System;
+using InfiniteRechargeMetrics.Pages;
 
 namespace InfiniteRechargeMetrics.ViewModels
 {  
     public class EditTeamViewModel : NotifyClass
-    {
+    {        
         public ICommand SaveEditingCMD { get; set; }
         public ICommand SetTeamImageCMD { get; set; }
         public ICommand CancelEditingCMD { get; set; }
 
-        public Team CurrentTeam { get; set; }
-
+        public Team NewTeam { get; set; } = new Team();
         /// <summary>
         ///     Determines whether this should be set as the home team
         /// </summary>
-        public bool IsSetToBeHomeTeam { get; set; }
-
-        private string teamId;
+        public bool IsSetToBeHomeTeam { 
+            get => NewTeam.IsHomeTeam;
+            set => NewTeam.IsHomeTeam = value;
+        }
+        
         public string TeamId { 
-            get => teamId;
+            get => NewTeam.TeamId;
             set
             {
-                teamId = value;
+                NewTeam.TeamId = value;
                 NotifyPropertyChanged();
             } 
         }
-        private string teamAlias;
+
         public string TeamAlias { 
-            get => teamAlias;
+            get => NewTeam.TeamAlias;
             set
             {
-                teamAlias = value;
+                NewTeam.TeamAlias = value;
                 NotifyPropertyChanged();
             } 
         }
 
         public EditTeamViewModel(Team _team)
         {
-            CurrentTeam = _team;
+            NewTeam = _team;
+
+            // Picking a random avatar for this team, if the id isn't set..then this team is new
+            if (string.IsNullOrEmpty(NewTeam.TeamId))
+            {
+                Random rnJesus = new Random();
+                NewTeam.ImagePath = rnJesus.Next(0, 2) == 0 ? StageConstants.RED_REBEL : StageConstants.BLUE_REBEL;
+            }
+
             SaveEditingCMD = new Command(SaveAndFinishEditting);
             SetTeamImageCMD = new Command(SetTeamImage);
             CancelEditingCMD = new Command(() => App.Current.MainPage.Navigation.PopModalAsync());
@@ -54,79 +64,116 @@ namespace InfiniteRechargeMetrics.ViewModels
             try
             {
                 // Does a team with the same name exist
-                Team teamExist = await DatabaseService.Provider.GetTeamAsync(TeamId);
-                
-                // If there isnt a team that already exist do:
-                if (teamExist == null)
+                Team preExistingTeam = await DatabaseService.Provider.GetTeamAsync(TeamId);
+
+                // Set to being home team:
+                if (IsSetToBeHomeTeam)
                 {
-                    // Is the current team being set as the home team?
-                    if (IsSetToBeHomeTeam)
+                    // Check if home team already exist
+                    // Check if team exist
+                    //      Overwrite and set as home
+                    //      New and set as home
+                    if (await DatabaseService.Provider.GetHomeTeamAsync() == null)
                     {
-                        Team currentHomeTeam = await DatabaseService.Provider.GetHomeTeamAsync();
-
-                        // Does a home team already exist?
-                        if (currentHomeTeam == null)
+                        // If a team with the same Id matches the current team, offer a overwrite option
+                        if (preExistingTeam != null)
                         {
-                            // Save Team as home team
-                            SaveToDatabase();
-
-                            await App.Current.MainPage.Navigation.PopModalAsync();                            
-                        }   
-                        // There was no team set as the home team so:
-                        else
-                        {
-                            // A team with the same home team already exist so:
-                            if (await App.Current.MainPage.DisplayAlert("Warning", $"The Team Id: {TeamId} already exist. Would you like to set this team as your new home team?", "Yes", "No"))
+                            // Overwrite the the existing team with the new team and make sure to set it as the home
+                            if (await App.Current.MainPage.DisplayAlert("Warning", "A team already exist with the Id you have entered. Do you wish to overwrite it? (All the data connected to the old team will transfer to your new team.)", "Yes", "No"))
                             {
-                                // Removing the home status from the current home team
-                                await DatabaseService.Provider.RemoveHomeStatusFromTeamAsync(currentHomeTeam.TeamId);
-                                // Save Team as home team
-                                SaveToDatabase();
-
-                                await App.Current.MainPage.Navigation.PopModalAsync();
+                                await DatabaseService.Provider.OverwriteTeamDataWithNewTeamAsync(preExistingTeam, NewTeam, true);
+                                LoadNewHomePage();
+                            }
+                            // The user didn't want to overwrite so therefore just exit this method
+                            else
+                            {
+                                return;
                             }
                         }
+                        // there is not pre-Existing team therefore just save and set as home as normal
+                        else
+                        {
+                            await DatabaseService.Provider.SaveTeamToLocalDBAsync(NewTeam);
+                            LoadNewHomePage();
+                        }
                     }
-                    // The current team is not being set as the home team so:
                     else
                     {
-                        // save team not as home team
-                        await DatabaseService.Provider.SaveTeamToLocalDBAsync(new Models.Team()
+                        if (await App.Current.MainPage.DisplayAlert("Warning", "A team is already set as the home team. Assigning this to be your home team will uncheck the other team as your home team. Is that okay?", "Yes", "No"))
                         {
-                            TeamId = TeamId,
-                            TeamAlias = TeamAlias
-                        });
-
-                        await App.Current.MainPage.Navigation.PopModalAsync();
-                    }                                       
+                            // If a team with the same Id matches the current team, offer a overwrite option
+                            if (preExistingTeam != null)
+                            {
+                                // Overwrite the the existing team with the new team and make sure to set it as the home
+                                if (await App.Current.MainPage.DisplayAlert("Warning", "A team already exist with the Id you have entered. Do you wish to overwrite it? (All the data connected to the old team will transfer to your new team.)", "Yes", "No"))
+                                {
+                                    await DatabaseService.Provider.OverwriteTeamDataWithNewTeamAsync(preExistingTeam, NewTeam, true);
+                                    LoadNewHomePage();
+                                }
+                                // The user didn't want to overwrite so therefore just exit this method
+                                else
+                                {
+                                    return;
+                                }
+                            }
+                            // there is not pre-Existing team therefore just save and set as home as normal
+                            else
+                            {
+                                await DatabaseService.Provider.SaveTeamToLocalDBAsync(NewTeam, true);
+                                LoadNewHomePage();
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }                        
+                    }
+                                                           
                 }
-                // A team with that the inputted Id already exist.. Overwrite or change                
+                // Not set to be home team:
                 else
                 {
-                    // Overwrite
-                    if(await App.Current.MainPage.DisplayAlert("Display", "A team with the Id: {} already exist. Would you like to override it?", "Yes", "No"))
+                    // Check if team exist
+                    //      Overwrite not as home
+                    //      New
+
+                    // If a pre-existing team exist give the user an option to overwrite
+                    if (preExistingTeam != null)
                     {
-                        // Overrwite with new Team.. check for performances and points linked to this
+                        // Overrwrite the old team:
+                        if (await App.Current.MainPage.DisplayAlert("Warning", "A team already exist with the Id you have entered. Do you wish to overwrite it? (All the data connected to the old team will transfer to your new team.)", "Yes", "No"))
+                        {
+                            await DatabaseService.Provider.OverwriteTeamDataWithNewTeamAsync(preExistingTeam, NewTeam);
+                            await App.Current.MainPage.Navigation.PopModalAsync();                            
+                        }
+                        // Return the user
+                        else
+                        {
+                            return;
+                        }
                     }
+                    // If there is not pre-existing team then just save the team and send the user back a page
+                    else
+                    {
+                        await DatabaseService.Provider.SaveTeamToLocalDBAsync(NewTeam);
+                        await App.Current.MainPage.Navigation.PopModalAsync();
+                    }                    
                 }
             }
             catch 
             {
                 await App.Current.MainPage.DisplayAlert("Error", "Was unable to successfully save your team.", "OK");
-            }            
-
-            // Helper function for saving to the database as the home
-            async void SaveToDatabase()
-            {
-                // Save Team as home team
-                await DatabaseService.Provider.SaveTeamToLocalDBAsync(new Models.Team()
-                {
-                    TeamId = TeamId,
-                    TeamAlias = TeamAlias,
-                    IsHomeTeam = true
-                });
-            }
+            }           
         }        
+
+        /// <summary>
+        ///     Loads the home page to display their newly created team.
+        /// </summary>
+        private void LoadNewHomePage()
+        {
+            App.Current.MainPage.Navigation.PopModalAsync();
+            //App.Current.MainPage.Navigation.PushAsync(new HomeTeamPage());
+        }
 
         /// <summary>
         ///     Pulls up the UI required for the user to choose a way to set the image of their team.

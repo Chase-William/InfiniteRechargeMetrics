@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="InfiniteRechargeMetrics.Pages.RobotsPages">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
+        <Frame Style="{StaticResource FrameEditorBG}" Margin="5">
+            <SearchBar x:Name="searchBar"                         
+                       SearchCommand="{Binding PerformSearchCMD}"                       
+                       Text="{Binding QueryString}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                       Placeholder="Search Robots"/>
+
+        </Frame>
+        <ListView x:Name="TeamsListView"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  RefreshCommand="{Binding RefreshResultsCMD}"
+                  ItemsSource="{Binding RobotsSearchResults}"
+                  SelectedItem="{Binding SelectedRobot}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!--Cell that models Team (class, table)-->
+                        <StackLayout Orientation="Horizontal" HeightRequest="80">
+                            <Frame Style="{StaticResource VerticalListViewFrameSeperator}"/>
+                            <Frame Style="{StaticResource VerticalListViewFrameSeperator}">
+                                <Image Source="{Binding ImagePath}"/>
+                            </Frame>
+                            <StackLayout>
+                                <Label Text="testing" Margin="0,10,0,0" FontSize="Large"/>
+                                <StackLayout Orientation="Horizontal" WidthRequest="255">
+                                    <Label Text="{Binding RobotId}" HorizontalOptions="StartAndExpand" FontSize="Small"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

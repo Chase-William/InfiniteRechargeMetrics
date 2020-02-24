@@ -24,11 +24,11 @@ namespace InfiniteRechargeMetrics.Data
         /// <summary>
         ///     Returns a list of performances.
         /// </summary>
-        public async Task<List<Match>> GetAllMatchesForTeamAsync(string _teamId)
+        public async Task<List<Match>> GetMatchesFromTeamAsync(string _teamId)
         {                              
             SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
             await cn.CreateTableAsync<Match>();            
-            return await cn.QueryAsync<Match>("SELECT * FROM Team WHERE team_id = ?", _teamId);
+            return await cn.QueryAsync<Match>("SELECT * FROM Match WHERE team_id_fk = ?", _teamId);
         }
 
         /// <summary>
@@ -88,31 +88,45 @@ namespace InfiniteRechargeMetrics.Data
             await cn.CreateTablesAsync<Match, Point>();
 
             // Inserting our performance and gettings it identifier
-            int Id = await cn.InsertAsync(_match);
+            await cn.InsertAsync(_match);
+            var test = _match.MatchId;
 
             // In the following loops we attach the matchId
 
             // Autonomous Points
-            foreach (var point in _match.AutonomousPortPoints) { point.MatchId = Id; }
+            foreach (var point in _match.AutonomousPortPoints) { point.MatchId = _match.MatchId; }
             await cn.InsertAllAsync(_match.AutonomousPortPoints);
 
             // Normal Stage Points
-            foreach (var point in _match.StageOnePortPoints) { point.MatchId = Id; }
+            foreach (var point in _match.StageOnePortPoints) { point.MatchId = _match.MatchId; }
             await cn.InsertAllAsync(_match.StageOnePortPoints);
-            foreach (var point in _match.StageTwoPortPoints) { point.MatchId = Id; }
+            foreach (var point in _match.StageTwoPortPoints) { point.MatchId = _match.MatchId; }
             await cn.InsertAllAsync(_match.StageTwoPortPoints);
-            foreach (var point in _match.StageThreePortPoints) { point.MatchId = Id; }
+            foreach (var point in _match.StageThreePortPoints) { point.MatchId = _match.MatchId; }
             await cn.InsertAllAsync(_match.StageThreePortPoints);                       
         }
 
         /// <summary>
-        ///     Saves a team instance to the local sqlite database.
+        ///     Inserts a new team into the local database.
+        ///     <br/>If choosen to insert as home team, the current home team be unassigned as the home team.
+        ///     <br/>If choosen not to insert as the home team.
         /// </summary>
-        public async Task SaveTeamToLocalDBAsync(Team _team)
+        public async Task SaveTeamToLocalDBAsync(Team _newTeam, bool _setAsHomeTeam = false)
         {
             SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);            
-            await cn.CreateTableAsync<Team>();
-            await cn.InsertAsync(_team);                                       
+            await cn.CreateTableAsync<Team>();  
+            
+            // Set the new team as the home team
+            if (_setAsHomeTeam)
+            {
+                await cn.QueryAsync<Team>("UPDATE Team SET is_home_team = false WHERE is_home_team = true");
+                await cn.InsertAsync(_newTeam);
+            }
+            // Do not set the new team as the home team
+            else
+            {
+                await cn.InsertAsync(_newTeam);
+            }
         }
 
         /// <summary>
@@ -133,14 +147,14 @@ namespace InfiniteRechargeMetrics.Data
             SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
             await cn.CreateTableAsync<Point>();
 
-            List<Point> points = new List<Point>();
+            List<Point> tempList = new List<Point>();
 
             foreach (var match in _matches)
             {
-                points.AddRange(await cn.QueryAsync<Point>("SELECT * FROM Point WHERE match_id = ?", match.MatchId));
+                tempList.AddRange(await cn.QueryAsync<Point>("SELECT * FROM Point WHERE match_id = ?", match.MatchId));
             }
 
-            return points;          
+            return tempList;       
         }
 
         /// <summary>
@@ -179,14 +193,14 @@ namespace InfiniteRechargeMetrics.Data
         /// <summary>
         ///     Gets all the robot ids and alias and joins them together into one string each
         /// </summary>
-        public async Task<string[]> GetAllRobotIdAndAliasConcatenatedAsync()
+        public async Task<string[]> GetAllRobotIdAsync()
         {
             SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
             await cn.CreateTableAsync<Robot>();
             // Getting all the robot instances
             Task<Robot[]> teams = cn.Table<Robot>().ToArrayAsync();
             // Getting there result and returning it as an string array
-            return teams.Result.Select(robot => $"Id: {robot.RobotId} || Alias: {robot.RobotAlias}").ToArray();
+            return teams.Result.Select(robot => $"Id: {robot.RobotId}").ToArray();
         }
 
         /// <summary>
@@ -200,7 +214,6 @@ namespace InfiniteRechargeMetrics.Data
             SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
             await cn.CreateTableAsync<Robot>();
 
-            List<Robot> tempRobots = new List<Robot>();
             foreach (var id in _robotId)
             {
                 var robots = await cn.QueryAsync<Robot>("SELECT * FROM Robot WHERE robot_id = ?", id);
@@ -214,6 +227,152 @@ namespace InfiniteRechargeMetrics.Data
             // I get this, need to specify since null doesn't define a type.. all references can be null (or value types marked nullable)
             return Tuple.Create<bool, string>(false, null);
         }
+
+        /// <summary>
+        ///     Sets the team's is_home column to true for the given team id
+        /// </summary>
+        public async Task SetHomeStatusForTeamAsync(string _newHomeTeamId)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Team>();
+            // First we unassign the last home team.
+            await cn.QueryAsync<Team>("UPDATE Team SET is_home_team = false WHERE is_home_team = true");
+            // Then we assign the new team as the home team.
+            await cn.QueryAsync<Team>("UPDATE Team SET is_home_team = true WHERE team_id = ? ", _newHomeTeamId);            
+        }
+
+        public async Task RemoveTeamFromLocalDBAsync(string _teamId)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTablesAsync<Team, Match, Point>();
+
+            // Getting all the matchs
+            List<Match> matches = await cn.QueryAsync<Match>("SELECT * FROM Match WHERE team_id_fk = ?", _teamId);
+
+            // deleteing all the points to each match
+            foreach (var match in matches)
+            {
+                await cn.QueryAsync<Point>("DELETE FROM Point WHERE match_id", match.MatchId);
+            }
+            // deleting all the matchs
+            await cn.QueryAsync<Match>("DELETE FROM Match WHERE team_id_fk = ?", _teamId);
+            // deleting all the teams
+            await cn.QueryAsync<Team>("DELETE FROM Team WHERE team_id = ?", _teamId);
+        }
+
+        /// <summary>
+        ///     Overwrites a team but keeps all its attached. Meaning that all matches associated with the old team will now be 
+        ///         associated with the new team. This is done by changing the primary key in all associated matches with the old 
+        ///         primary key. They will be assigned to the new foreign key for the team and then them old team record's id is updated
+        ///         to the new team's id.
+        ///         <br/>
+        ///         <br/>
+        ///     If the set as home team is marked true; the new team will be also be mark as the home team. Along with this, the old home team
+        ///         is no longer marked as the home team.
+        /// </summary>
+        public async Task OverwriteTeamDataWithNewTeamAsync(Team _toBeOverwrittenTeam, Team _newTeam, bool _setAsHomeTeam = false)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTablesAsync<Match, Team>();
+            // Updating all matches
+            await cn.QueryAsync<Match>("UPDATE Match SET team_id_fk = ? WHERE team_id_fk = ?", _newTeam.TeamId, _toBeOverwrittenTeam.TeamId);
+            // Updating values of table
+            await cn.QueryAsync<Team>("UPDATE Team SET team_id = ? WHERE team_id = ?", _newTeam.TeamId, _toBeOverwrittenTeam.TeamId);
+
+            // If the teams alias are different and the new team alias isnt null then replace the alias with the new one
+            if (_toBeOverwrittenTeam.TeamAlias != _newTeam.TeamAlias && !string.IsNullOrEmpty(_newTeam.TeamAlias))
+            {
+                // Updating the alias based off the new set id
+                await cn.QueryAsync<Team>("UPDATE Team SET team_alias = ? WHERE team_id = ?", _newTeam.TeamAlias, _newTeam.TeamId);
+            }
+
+            // If the team is not set to be the home team
+            if (_setAsHomeTeam)
+            {
+                // First set any team that is already the home team to not be anymore.
+                await cn.QueryAsync<Team>("UPDATE Team SET is_home_team = false WHERE is_home_team = true");
+                // Secondly now assign the new passed team as the home team
+                await cn.QueryAsync<Team>("UPDATE Team SET is_home_team = true WHERE team_id = ?", _newTeam.TeamId);
+            }           
+        }
+
+        /// <summary>
+        ///     Queries the database for 
+        /// </summary>
+        public async Task<List<Team>> GetSearchResultsForTeamAliasAsync(string _query)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Team>();
+            return await cn.QueryAsync<Team>("SELECT * FROM Team WHERE team_alias Like ?", "%" + _query + "%");
+        }
+
+        /// <summary>
+        ///     Gets all the teams from the database.
+        /// </summary>
+        public async Task<List<Team>> GetAllTeamsAsync()
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Team>();
+            return await cn.Table<Team>().ToListAsync();
+        }
+
+        /// <summary>
+        ///     Gets the number of matches a team has.
+        /// </summary>
+        public int GetTeamMatchCount(string _teamId)
+        {
+            SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath);
+            cn.CreateTable<Match>();
+            return cn.Query<int>("SELECT COUNT(*) FROM Match").FirstOrDefault();
+        }
+
+        public List<Match> GetAllMatches()
+        {
+            SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath);
+            cn.CreateTable<Match>();
+            return cn.Table<Match>().ToList();
+        }
+
+        public List<Point> GetPointsFromMatch(string _matchId)
+        {
+            SQLiteConnection cn = new SQLiteConnection(App.DatabaseFilePath);
+            cn.CreateTable<Point>();
+            return cn.Query<Point>("SELECT * FROM Point WHERE match_id = ?", _matchId);
+        }
+
+        public async Task<List<Robot>> GetSearchResultsForRobotIdAsync(string _query)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Robot>();
+            return await cn.QueryAsync<Robot>("SELECT * FROM Robot WHERE robot_id Like ?", "%" + _query + "%");
+        }
+
+        public async Task<List<Robot>> GetAllRobotsAsync()
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Robot>();
+            return await cn.Table<Robot>().ToListAsync();
+        }
+
+        public async Task SaveRobotToLocalDbASync(Robot _robot)
+        {
+            SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+            await cn.CreateTableAsync<Robot>();
+            await cn.InsertAsync(_robot);
+        }
+
+        /// <summary>
+        ///     Removes a specified team from the database.
+        /// </summary>
+        //public async Task RemoveTeamFromLocalDBAsync(string _teamId)
+        //{
+        //    SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
+        //    await cn.CreateTableAsync<Team>();
+        //    await cn.QueryAsync<Team>("DELETE FROM Team WHERE team_id = ?", _teamId);
+        //}
+
+
+
     }
 
     //public async Task<List<Team>> GetAllTeamsAsync()

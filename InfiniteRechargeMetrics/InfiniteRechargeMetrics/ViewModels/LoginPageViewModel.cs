@@ -143,6 +143,7 @@ namespace InfiniteRechargeMetrics.ViewModels
                 Name = googleUser.Name;
                 Email = googleUser.Email;
 
+                App.GoogleUser = googleUser;
                 // The default size image the URI has is a 96x96.. which is too small
                 // Here we modify the query URI to return a 512x512 which is better
                 string absoluteURI = googleUser.Picture.AbsoluteUri;
@@ -184,6 +185,7 @@ namespace InfiniteRechargeMetrics.ViewModels
             IsLoggedIn = false;
             User.Email = "Offline";
             googleClientManager.OnLogout -= OnLogoutCompleted;
+            App.GoogleUser = null;
             UpdateUI();
         }
 

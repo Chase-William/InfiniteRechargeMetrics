@@ -13,6 +13,8 @@
 
             <!-- Provides a default name if one isn't given -->
             <converters:TeamTitleConverter x:Key="TeamTitleConverter"/>
+            <converters:PointsFromSpawnToCountConverter x:Key="PointsFromSpawnToCountConverter"/>
+            <converters:RandevuValueConverter x:Key="RandevuValueConverter"/>
 
             <!-- The title for autonomous and manual modes for performances -->
             <Style x:Key="PeformanceTitleLabel" TargetType="Label">
@@ -53,7 +55,7 @@
         <ScrollView>
             <StackLayout BackgroundColor="{StaticResource BackgroundColor}">
 
-                <RelativeLayout HeightRequest="50">
+                <RelativeLayout HeightRequest="420">
                     <!-- The banner at the top of the page -->
                     <Image x:Name="MainBanner" Source="banner_2020.jpg" HeightRequest="140"/>
 
@@ -66,9 +68,9 @@
                             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.3}"
                             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=140}">
 
-                        <Label Text="{Binding CurrentTeam.Alias, Converter={StaticResource TeamTitleConverter}}" Margin="5,45,0,0" TextColor="White" FontSize="Large"/>
-                    </Frame>                                               
-                        
+                        <Label Text="{Binding CurrentTeam.TeamAlias, Converter={StaticResource TeamTitleConverter}}" Margin="5,55,0,0" TextColor="White" FontSize="35"/>
+                    </Frame>
+
                     <!-- The icon for the team, place below the stacklayout so this will easily render on top, without needing to using z-index or anything -->
                     <Frame Style="{StaticResource FrameImageWrapper}"              
                             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0, Constant=40}"
@@ -76,8 +78,14 @@
                         <Image Source="blue_rebel_icon.png" WidthRequest="80"/>
                     </Frame>
 
+                    <Button Text="Email Data"
+                            Style="{StaticResource CyanBtnStyle}"
+                            Command="{Binding SendEmailCMD}"
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0, Constant=290}"
+                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=150}"/>
+
                     <!-- Layout that holds all our data -->
-                    <StackLayout VerticalOptions="StartAndExpand"
+                    <StackLayout 
                                  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=270}">
                         <Label Text="Generic Stats" Style="{StaticResource CategoryHeader}"/>
                         <BoxView Style="{StaticResource HorizontalLineBreak}"/>
@@ -96,38 +104,37 @@
                             <Label Text="{Binding CurrentTeam.TeamId}" Style="{StaticResource OverallDataLabel}"/>
 
                             <Label Text="Matches:" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="1"/>
-                            <Label Text="{Binding }" Style="{StaticResource OverallDataLabel}" Grid.Row="1"/>
+                            <Label Text="{Binding Matches.Count}" Style="{StaticResource OverallDataLabel}" Grid.Row="1"/>
 
                         </Grid>
                     </StackLayout>
                 </RelativeLayout>
 
-               
-                           
-                
-                
-                
-                <!--<StackLayout Margin="0,20,0,0">
+                <StackLayout>
 
-                    <Label Text="Team's Performances" Style="{StaticResource CategoryHeader}"/>
+                    <Label Text="Team's Matches" Style="{StaticResource CategoryHeader}"/>
                     <BoxView Style="{StaticResource HorizontalLineBreak}"/>
 
-                    <renderedViews:HorizontalListView x:Name="PerformanceHorizontalListView" 
+                    <renderedViews:HorizontalListView x:Name="MatchesHorizontalListView" 
                                                         VerticalOptions="StartAndExpand"                                          
                                                         CollectionPadding="8"
                                                         ItemSpacing="8"
                                                         ListLayout="Linear"
-                                                        ItemHeight="320"
-                                                        ItemWidth="200"
+                                                        ItemHeight="520"
+                                                        ItemWidth="300"
                                                         SnapStyle="Center"                                          
-                                                        HeightRequest="335">
+                                                        HeightRequest="540"
+                                                        ItemsSource="{Binding Matches}">
                         <renderedViews:HorizontalListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    --><!-- Cell that models Performance (class, table) --><!--
-                                    <Frame Padding="5">
-                                        <Grid>
+                                    <!--Cell that models Matches (class, table)-->
+
+                                    <Frame Padding="5" BackgroundColor="{StaticResource BackgroundColor}" BorderColor="White">
+                                        <Grid Padding="10" RowSpacing="10">
                                             <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
@@ -138,44 +145,98 @@
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="2*"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
+                                                                                        
+                                            <Label Text="Match Id:" Style="{StaticResource OverallDataTitleLabel}"/>
+                                            <Label Text="{Binding MatchId}" Style="{StaticResource OverallDataLabel}"/>
 
-                                            --><!-- Data fields for points -->
+                                            <Label Text="Robots Moved from Spawn" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="1"/>
+                                            <Label Text="{Binding RobotsMovedFromSpawnPoints, Converter={StaticResource PointsFromSpawnToCountConverter}}" Style="{StaticResource OverallDataLabel}" Grid.Row="1"/>
 
-                                            <!-- Autonomous Mode Header --><!--
-                                            <Frame Style="{StaticResource FrameHeader}" Grid.Row="0" >
-                                                <Label Text="- Automonous Mode -" Style="{StaticResource FrameHeaderLabel}"/>
-                                            </Frame>
+                                            <Label Text="Autonomous Points" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="2"/>
+                                            <Label Text="{Binding AutonomousPortPoints.Count}" Style="{StaticResource OverallDataLabel}" Grid.Row="2"/>
 
-                                            --><!-- Autonomous Mode data fields --><!--
-                                            <Label Text="Lower Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="1"/>
-                                            <Label Text="{Binding AutoLowPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="1"/>
-                                            <Label Text="Upper Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="2"/>
-                                            <Label Text="{Binding AutoMedPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="2"/>
-                                            <Label Text="Small Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="3"/>
-                                            <Label Text="{Binding AutoHighPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="3"/>
+                                            <Label Text="Stage One Manual Points" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="3"/>
+                                            <Label Text="{Binding StageOnePortPoints.Count}" Style="{StaticResource OverallDataLabel}" Grid.Row="3"/>
 
-                                            --><!-- Manual Mode Header --><!--
-                                            <Frame Style="{StaticResource FrameHeader}" Grid.Row="4" >
-                                                <Label Text="- Manual Mode -" Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource FrameHeaderLabel}"/>
-                                            </Frame>
-                                            --><!-- Manual Mode data fields --><!--
-                                            <Label Text="Lower Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="5"/>
-                                            <Label Text="{Binding ManualLowPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="5"/>
-                                            <Label Text="Upper Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="6"/>
-                                            <Label Text="{Binding ManualMedPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="6"/>
-                                            <Label Text="Small Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="7"/>
-                                            <Label Text="{Binding ManualHighPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="7"/>
+                                            <Label Text="Stage Two Points" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="4"/>
+                                            <Label Text="{Binding StageTwoPortPoints.Count}" Style="{StaticResource OverallDataLabel}" Grid.Row="4"/>
+
+                                            <Label Text="Stage Three Points" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="5"/>
+                                            <Label Text="{Binding StageThreePortPoints.Count}" Style="{StaticResource OverallDataLabel}" Grid.Row="5"/>
+
+                                            
+                                            <Label Text="Droid One Randevu Points" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="6"/>
+                                            <Label Text="{Binding DroidOneRandevu, Converter={StaticResource RandevuValueConverter}, ConverterParameter=droid_one}" Style="{StaticResource OverallDataLabel}" Grid.Row="6"/>
+
+                                            <Label Text="Droid Two Randevu Points" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="7"/>
+                                            <Label Text="{Binding DroidTwoRandevu, Converter={StaticResource RandevuValueConverter}, ConverterParameter=droid_two}" Style="{StaticResource OverallDataLabel}" Grid.Row="7"/>
+
+                                            <Label Text="Droid Three Randevu Points" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="8"/>
+                                            <Label Text="{Binding DroidThreeRandevu, Converter={StaticResource RandevuValueConverter}, ConverterParameter=droid_three}" Style="{StaticResource OverallDataLabel}" Grid.Row="8"/>
+
+                                            <Label Text="Level Randevu Bar Points" Style="{StaticResource OverallDataTitleLabel}" Grid.Row="9"/>
+                                            <Label Text="{Binding IsRandevuLevel, Converter={StaticResource RandevuValueConverter}, ConverterParameter=is_randevu_level}" Style="{StaticResource OverallDataLabel}" Grid.Row="9"/>
                                         </Grid>
+                                        <!--<Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                -->
+                                        <!--Data fields for points 
+
+                                             Autonomous Mode Header-->
+                                        <!--
+                                                <Frame Style="{StaticResource FrameHeader}" Grid.Row="0" >
+                                                    <Label Text="- Automonous Mode -" Style="{StaticResource FrameHeaderLabel}"/>
+                                                </Frame>
+
+                                                -->
+                                        <!--Autonomous Mode data fields-->
+                                        <!--
+                                                <Label Text="Lower Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="1"/>
+                                                <Label Text="{Binding AutoLowPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="1"/>
+                                                <Label Text="Upper Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="2"/>
+                                                <Label Text="{Binding AutoMedPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="2"/>
+                                                <Label Text="Small Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="3"/>
+                                                <Label Text="{Binding AutoHighPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="3"/>
+
+                                                -->
+                                        <!--Manual Mode Header-->
+                                        <!--
+                                                <Frame Style="{StaticResource FrameHeader}" Grid.Row="4" >
+                                                    <Label Text="- Manual Mode -" Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource FrameHeaderLabel}"/>
+                                                </Frame>
+                                                -->
+                                        <!--Manual Mode data fields-->
+                                        <!--
+                                                <Label Text="Lower Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="5"/>
+                                                <Label Text="{Binding ManualLowPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="5"/>
+                                                <Label Text="Upper Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="6"/>
+                                                <Label Text="{Binding ManualMedPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="6"/>
+                                                <Label Text="Small Port" Style="{StaticResource PeformanceTitleLabel}" Grid.Row="7"/>
+                                                <Label Text="{Binding ManualHighPoint}" Style="{StaticResource PeformanceDataLabel}" Grid.Row="7"/>
+                                            </Grid>-->
                                     </Frame>
                                 </ViewCell>
                             </DataTemplate>
                         </renderedViews:HorizontalListView.ItemTemplate>
                     </renderedViews:HorizontalListView>
-                </StackLayout>-->
-               
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentView.Content>

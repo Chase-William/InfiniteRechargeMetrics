@@ -20,9 +20,13 @@ namespace InfiniteRechargeMetrics.Templates {
         private global::Xamarin.Forms.Image MainBanner;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        private global::Sharpnado.Presentation.Forms.RenderedViews.HorizontalListView MatchesHorizontalListView;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(TeamStatsTemplate));
             MainBanner = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Image>(this, "MainBanner");
+            MatchesHorizontalListView = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Sharpnado.Presentation.Forms.RenderedViews.HorizontalListView>(this, "MatchesHorizontalListView");
         }
     }
 }

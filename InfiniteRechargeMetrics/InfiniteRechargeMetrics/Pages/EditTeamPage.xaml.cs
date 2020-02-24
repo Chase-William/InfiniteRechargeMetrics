@@ -14,23 +14,10 @@ namespace InfiniteRechargeMetrics.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditTeamPage : ContentPage
     {
-        public Team CurrentTeam { get; set; }
-
-        public EditTeamPage()
-        {
-            InitializeComponent();           
-        }
-
         public EditTeamPage(Team _team)
         {
             InitializeComponent();
-            CurrentTeam = _team;
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            BindingContext = new EditTeamViewModel(CurrentTeam);
+            BindingContext = new EditTeamViewModel(_team);
         }
     }
 }

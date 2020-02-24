@@ -86,5 +86,18 @@
         ///     The mai value of points required to complete stage three.
         /// </summary>
         public const int MIN_VALUE_FOR_COMPLETED_STAGE_THREE = 20;
+
+        public const string RED_REBEL = "red_rebel_icon.png";
+        public const string BLUE_REBEL = "blue_rebel_icon.png";
+        public const string DEFAULT_ROBOT_IMAGEPATH = "default_robot_icon.png";
+
+        #region Index Const
+        public const int ROBOT_ONE_INDEX = 0;
+        public const int ROBOT_TWO_INDEX = 1;
+        public const int ROBOT_THREE_INDEX = 2;
+        public const int ROBOT_FOUR_INDEX = 3;
+        public const int ROBOT_FIVE_INDEX = 4;
+        public const int ROBOT_SIX_INDEX = 5;
+        #endregion
     }
 }

@@ -19,7 +19,7 @@ namespace InfiniteRechargeMetrics.Templates
                 throw new Exception("Was unable to retrieve the calling class for the bindingcontext of EditMatchRobotsTemplate");
             }
             // Depending on the caller we will be assigning a different context to give different functionality
-            BindingContext = _senderPage == nameof(FinalizeRecordingPage) ? new EditMatchRobotsFinalizeViewModel(DataLayout ,_match) : new EditMatchRobotsViewModel(_match);  
+            BindingContext = new EditMatchRobotsViewModel(this, _match);
         }
     }
 }

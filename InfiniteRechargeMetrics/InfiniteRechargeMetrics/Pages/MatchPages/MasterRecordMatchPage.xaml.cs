@@ -19,10 +19,10 @@ namespace InfiniteRechargeMetrics.Pages.MatchPages
         private Timer clockTimer = new Timer();
 
 
-        public MasterRecordMatchPage(Match _performance)
+        public MasterRecordMatchPage(Match _match)
         {
             InitializeComponent();
-            Match = _performance;
+            Match = _match;
             clockTimer.Interval = UPDATE_CLOCK_INTERVAL;
             clockTimer.Elapsed += delegate
             {
