@@ -333,3 +333,5 @@ C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\Infi
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\ProjectArchitectures.txt
 C:\Users\Chase Roth\Desktop\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\.winmd_cache\$Microsoft.Graphics.Canvas.winmd_636160895180000000.json
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\InfiniteRechargeMetrics.UWP.exe
+C:\Dev\InfiniteRechargeMetrics\InfiniteRechargeMetrics\InfiniteRechargeMetrics.UWP\obj\x86\Debug\InfiniteRechargeMetrics.UWP.pdb

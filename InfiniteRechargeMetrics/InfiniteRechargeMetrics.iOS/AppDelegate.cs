@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using Foundation;
+using Plugin.GoogleClient;
+using Sharpnado.Presentation.Forms.iOS;
 using UIKit;
 
 namespace InfiniteRechargeMetrics.iOS
@@ -23,7 +26,18 @@ namespace InfiniteRechargeMetrics.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+
+            // Initializing the GoogleClient plugin
+            GoogleClientManager.Initialize(null, "205430491915-fotkdlnd7tn6e0m52as34782hb4cq9se.apps.googleusercontent.com");
+
+            SharpnadoInitializer.Initialize();
+
+            // Getting the folder path that already exist on the device and will be used to map a location to our database.
+            string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            // Combining the two paths to create a completed path
+            string completedPath = Path.Combine(folderPath, Data.Config.DATABASE_NAME);
+
+            LoadApplication(new App(completedPath));
 
             return base.FinishedLaunching(app, options);
         }

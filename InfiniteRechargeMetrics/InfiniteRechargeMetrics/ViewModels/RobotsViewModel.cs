@@ -61,6 +61,8 @@ namespace InfiniteRechargeMetrics.ViewModels
             }
         }
 
+        public ICommand PerformSearchCMD => new Command(RefreshCollection);
+
         public SelectionState SelectedState { get; set; }
 
         public ICommand RefreshResultsCMD => new Command(async () =>

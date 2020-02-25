@@ -21,7 +21,8 @@ namespace InfiniteRechargeMetrics.UWP
         {
             this.InitializeComponent();
 
-            LoadApplication(new InfiniteRechargeMetrics.App());
+            throw new NotSupportedException();
+            //LoadApplication(new InfiniteRechargeMetrics.App());
         }
     }
 }

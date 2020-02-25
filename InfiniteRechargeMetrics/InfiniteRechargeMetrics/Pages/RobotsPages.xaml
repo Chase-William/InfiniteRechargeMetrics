@@ -60,12 +60,7 @@
                                 <Frame Style="{StaticResource VerticalListViewFrameSeperator}" IsClippedToBounds="True">
                                     <Image Source="{Binding ImagePath, Converter={StaticResource ImagePathToImageSourceConverter}}" Aspect="AspectFill" WidthRequest="50"/>
                                 </Frame>
-                                <StackLayout>
-                                    <Label Text="testing" Margin="0,10,0,0" FontSize="Large"/>
-                                    <StackLayout Orientation="Horizontal" WidthRequest="255">
-                                        <Label Text="{Binding RobotId}" HorizontalOptions="StartAndExpand" FontSize="Small"/>
-                                    </StackLayout>
-                                </StackLayout>
+                                <Label Text="{Binding RobotId}" FontSize="Large" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
