@@ -30,7 +30,7 @@ namespace InfiniteRechargeMetrics.Data
         Team GetHomeTeam();
         Task<Team> GetTeamAsync(string _teamId);
         Task RemoveHomeStatusFromTeamAsync(string _teamId);
-        Task SetHomeStatusForTeamAsync(string _teamId);
+        Task<Team> SetHomeStatusForTeamAsync(string _newHomeTeamId);
         Task RemoveRobotFromLocalDBAsync(string _robotId);
 
         Task<bool> DoesMatchExistAsync(string _matchId);

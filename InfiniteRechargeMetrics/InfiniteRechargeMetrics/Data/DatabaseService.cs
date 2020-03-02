@@ -238,14 +238,16 @@ namespace InfiniteRechargeMetrics.Data
         /// <summary>
         ///     Sets the team's is_home column to true for the given team id
         /// </summary>
-        public async Task SetHomeStatusForTeamAsync(string _newHomeTeamId)
+        public async Task<Team> SetHomeStatusForTeamAsync(string _newHomeTeamId)
         {
             SQLiteAsyncConnection cn = new SQLiteAsyncConnection(App.DatabaseFilePath);
             await cn.CreateTableAsync<Team>();
             // First we unassign the last home team.
             await cn.QueryAsync<Team>("UPDATE Team SET is_home_team = false WHERE is_home_team = true");
             // Then we assign the new team as the home team.
-            await cn.QueryAsync<Team>("UPDATE Team SET is_home_team = true WHERE team_id = ? ", _newHomeTeamId);            
+            await cn.QueryAsync<Team>("UPDATE Team SET is_home_team = true WHERE team_id = ? ", _newHomeTeamId);
+
+            return cn.QueryAsync<Team>("SELECT * FROM Team WHERE is_home_team = ?", true).Result.FirstOrDefault();
         }
 
         public async Task RemoveTeamFromLocalDBAsync(string _teamId)

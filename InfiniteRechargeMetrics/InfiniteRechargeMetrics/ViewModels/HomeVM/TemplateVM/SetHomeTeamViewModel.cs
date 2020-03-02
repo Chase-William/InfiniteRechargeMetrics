@@ -61,13 +61,13 @@ namespace InfiniteRechargeMetrics.ViewModels.HomeVM
         }
         #endregion
 
-        public View Content { get; set; }
+        public HomeTeamPage Content { get; set; }
 
         public ICommand SetExistHomeTeamCMD { get; set; }
         public ICommand CreateNewTeamCMD { get; set; }
         public ICommand UseExistingTeamCMD { get; set; }
 
-        public SetHomeTeamViewModel(View _content)
+        public SetHomeTeamViewModel(HomeTeamPage _content)
         {
             Content = _content;
             CreateNewTeamCMD = new Command(() => App.Current.MainPage.Navigation.PushModalAsync(new EditTeamPage(new Team())));
@@ -101,15 +101,14 @@ namespace InfiniteRechargeMetrics.ViewModels.HomeVM
             try
             {
                 var test = selectItemId.Split(' ')[1];
-                await Data.DatabaseService.Provider.SetHomeStatusForTeamAsync(selectItemId.Split(' ')[1]);
+                var team = await Data.DatabaseService.Provider.SetHomeStatusForTeamAsync(selectItemId.Split(' ')[1]);
+
+                Content.Content = new TeamStatsTemplate(team);
             }
             catch
             {
                 await App.Current.MainPage.DisplayAlert("Error", "Unable to save as home team.", "OK");
             }
-            await App.Current.MainPage.Navigation.PopAsync();
-            await App.Current.MainPage.Navigation.PushAsync(new HomeTeamPage());
-            //Content = new TeamStatsTemplate(Data.DatabaseService.Provider.GetHomeTeam());
         }
     }
 }

@@ -11,7 +11,7 @@
         <Label Text="Set Your Home Team" Style="{StaticResource CategoryHeader}"/>
         <Button Text="New" Style="{StaticResource ButtonBase}" Command="{Binding CreateNewTeamCMD}"/>
         <Button Text="Existing" Style="{StaticResource ButtonBase}" Command="{Binding UseExistingTeamCMD}"/>
-        <Picker x:Name="TeamPicker" ItemsSource="{Binding TeamIdsAndAlias}" Title="Select A Team" SelectedIndexChanged="Picker_SelectedIndexChanged" IsVisible="{Binding IsUsingExisting}" TextColor="White"/>
+        <Picker x:Name="TeamPicker" ItemsSource="{Binding TeamIdsAndAlias}" Title="Select A Team" SelectedIndexChanged="Picker_SelectedIndexChanged" IsVisible="{Binding IsUsingExisting}" TextColor="White" TitleColor="Black"/>
 
         <Button Text="Save" Command="{Binding SetExistHomeTeamCMD}" IsVisible="{Binding IsUsingExisting}" IsEnabled="{Binding IsTeamSelected}" Style="{StaticResource ButtonBase}"/>
     </StackLayout>

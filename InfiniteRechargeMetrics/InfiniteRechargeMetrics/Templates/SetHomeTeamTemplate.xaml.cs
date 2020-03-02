@@ -1,4 +1,5 @@
-﻿using InfiniteRechargeMetrics.ViewModels.HomeVM;
+﻿using InfiniteRechargeMetrics.Pages;
+using InfiniteRechargeMetrics.ViewModels.HomeVM;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,7 +9,7 @@ namespace InfiniteRechargeMetrics.Templates
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SetHomeTeamTemplate : ContentView
     {
-        public SetHomeTeamTemplate(View _content)
+        public SetHomeTeamTemplate(HomeTeamPage _content)
         {
             InitializeComponent();
             BindingContext = new SetHomeTeamViewModel(_content);            

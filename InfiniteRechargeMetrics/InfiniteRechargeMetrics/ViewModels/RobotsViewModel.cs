@@ -107,12 +107,9 @@ namespace InfiniteRechargeMetrics.ViewModels
         {
             SelectedState = SelectionState.ViewDetails;
             App.Current.MainPage.Navigation.PushModalAsync(new EditRobotPage(new Robot()));
-        });      
+        });
 
-        public RobotsViewModel()
-        {
-        }
-
+        public RobotsViewModel() { }
 
         /// <summary>
         ///     When a team is selected this will load a page to show all the details about that team.

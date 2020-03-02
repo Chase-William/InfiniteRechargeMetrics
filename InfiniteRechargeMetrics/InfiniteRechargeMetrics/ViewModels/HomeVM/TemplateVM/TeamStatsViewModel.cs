@@ -63,9 +63,6 @@ namespace InfiniteRechargeMetrics.ViewModels.HomeVM
                 Matches = new ObservableCollection<Match>(await DatabaseService.Provider.GetMatchesFromTeamAsync(CurrentTeam.TeamId));                
                 Points = new ObservableCollection<Point>(await DatabaseService.Provider.GetPointsFromMatchesAsync(Matches.ToList()));
 
-
-
-
                 // populating our matches with data
                 foreach (Match match in Matches)
                 {

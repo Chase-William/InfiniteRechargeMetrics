@@ -34,7 +34,8 @@ namespace InfiniteRechargeMetrics.Pages
             // if their is no home team set, provide the ui to do so
             if (HomeTeam == null)
             {
-                Content = new SetHomeTeamTemplate(Content);                
+                // Passing in the page because depending on the user's actions we might set the content to a different template
+                Content = new SetHomeTeamTemplate(this);                
             }
             // there is a home team set so show their hometeams stats
             else
