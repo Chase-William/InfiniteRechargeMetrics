@@ -1,3 +1,0 @@
-values/strings.xml;values/strings.xml
-drawable/bottom_shadow.xml;drawable/bottom_shadow.xml
-drawable/top_shadow.xml;drawable/top_shadow.xml
